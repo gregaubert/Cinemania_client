@@ -43,7 +43,8 @@ public class MainMenuScene extends MenuScene implements IOnMenuItemClickListener
 	public boolean onMenuItemClicked(MenuScene pMenuScene, IMenuItem pMenuItem,	float pMenuItemLocalX, float pMenuItemLocalY) {
 	    switch (pMenuItem.getID()) {
 	        case MENU_START:
-	            return true;
+	        	mActivity.setCurrentScene(new GameScene());
+	        	return true;
 	        default:
 	            break;
 	    }
