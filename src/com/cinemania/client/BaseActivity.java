@@ -7,10 +7,24 @@ import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.util.FPSLogger;
+import org.andengine.opengl.font.Font;
+import org.andengine.opengl.font.FontFactory;
+import org.andengine.opengl.texture.ITexture;
+import org.andengine.opengl.texture.TextureManager;
+import org.andengine.opengl.texture.TextureOptions;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
+import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.ui.activity.BaseGameActivity;
 
-public class main extends BaseGameActivity {
+import com.cinemania.client.scenes.SplashScene;
+
+import android.graphics.Color;
+import android.graphics.Typeface;
+
+public class BaseActivity extends BaseGameActivity {
 	
 	// ===========================================================
     // Constants
@@ -24,7 +38,12 @@ public class main extends BaseGameActivity {
     // ===========================================================
 
 	private Camera mCamera;
-	private Scene mMainScene;
+	private Font mTitleFont;
+	private Font mMenuFont;
+
+	private static BaseActivity mInstance;
+	public Scene mCurrentScene;
+
 	
 	// ===========================================================
     // Constructors
@@ -34,12 +53,25 @@ public class main extends BaseGameActivity {
     // Getter & Setter
     // ===========================================================
 
+	public Font getTitleFont() {
+		return mTitleFont;
+	}
+	
+	public Font getMenuFont() {
+		return mMenuFont;
+	}
+	
+	public Camera getCamera() {
+		return mCamera;
+	}
+	
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
 	
 	@Override
 	public EngineOptions onCreateEngineOptions() {
+		mInstance = this;
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
         EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
         return engineOptions;
@@ -47,6 +79,14 @@ public class main extends BaseGameActivity {
 
 	@Override
 	public void onCreateResources(OnCreateResourcesCallback pOnCreateResourcesCallback)	throws Exception {
+		
+		
+		mTitleFont = FontFactory.createFromAsset(this.getFontManager(), new BitmapTextureAtlas(this.getTextureManager(),256,256), this.getAssets(), "GunslingerDEMO-KCFonts.ttf", 48f, true, Color.BLACK);
+		mMenuFont = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
+		
+	    mTitleFont.load();
+	    mMenuFont.load();
+	    
 		pOnCreateResourcesCallback.onCreateResourcesFinished();
 	}
 
@@ -54,9 +94,9 @@ public class main extends BaseGameActivity {
 	public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback)	throws Exception {
 		
 		mEngine.registerUpdateHandler(new FPSLogger());
-	    mMainScene = new Scene();
-	    mMainScene.setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
-	    pOnCreateSceneCallback.onCreateSceneFinished(mMainScene);
+		mCurrentScene = new SplashScene();
+	    
+	    pOnCreateSceneCallback.onCreateSceneFinished(mCurrentScene);
 	}
 
 	@Override
@@ -68,8 +108,15 @@ public class main extends BaseGameActivity {
     // Methods
     // ===========================================================
 
+	public static BaseActivity getSharedInstance() {
+	    return mInstance;
+	}
 
-	
+	// to change the current main scene
+	public void setCurrentScene(Scene scene) {
+	    mCurrentScene = scene;
+	    getEngine().setScene(mCurrentScene);
+	}
 	
     // ===========================================================
     // Inner and Anonymous Classes
