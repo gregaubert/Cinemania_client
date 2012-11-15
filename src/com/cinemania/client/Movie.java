@@ -1,13 +1,10 @@
 package com.cinemania.client;
 public abstract class Movie implements Constantes {
+	
   private int id;
-
   private int baseId =  1;
-
   private String title;
-
   private int year;
-
   private int turn =  0;
 
   /**

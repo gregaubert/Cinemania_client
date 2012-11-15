@@ -1,8 +1,7 @@
 package com.cinemania.client;
 public abstract class Case implements Constantes {
+	
 	private Player owner;
-
-	Building building;
 
 	private int baseValue;
 
@@ -21,10 +20,6 @@ public abstract class Case implements Constantes {
 		p.setAmount(p.getAmount()-totalValue());
 	}
 
-	public void buyBuilding(Building b) {
-		this.building = b;
-	}
-
 	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
@@ -34,7 +29,6 @@ public abstract class Case implements Constantes {
 	}
 
 	public abstract int totalValue();
-	public abstract int turnProfit();
 	
 
 	public boolean hasOwner() {

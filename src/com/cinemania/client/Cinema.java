@@ -1,21 +1,23 @@
 package com.cinemania.client;
-public class Cinema extends Building {
-  private Room[] rooms =  new Room[MAX_ROOMS];
+
+public class Cinema extends Case {
+
+private Room[] rooms =  new Room[MAX_ROOMS];
 
   int nbRoom =  0;
 
-  public Cinema(Case theCase) {
-		super(theCase);
-  }
+  public Cinema(Player owner, int value) {
+		super(owner, value);
+	}
 
   @Override
   public int totalValue() {
 		return BASEVALUE_OF_CINEMA + PRICE_ROOM * nbRoom;
   }
 
-  @Override
-  public int profit() {
-		return 0;
+  // TODO: maybe accordint to a int turn
+  public int turnProfit() {
+		return 0;//TODO: compute the profit
   }
 
   public void buyRoom() {
