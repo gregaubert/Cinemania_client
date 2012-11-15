@@ -11,6 +11,7 @@ import org.andengine.util.modifier.IModifier;
 
 import com.cinemania.client.BaseActivity;
 import com.cinemania.client.R;
+import com.cinemania.client.ResourcesManager;
 
 public class SplashScene extends Scene {
 	
@@ -69,6 +70,10 @@ public class SplashScene extends Scene {
 				mActivity.setCurrentScene(new MainMenuScene());
 			}
 		};
+		
+		// Load resources
+		ResourcesManager.getInstance().LoadBoardGame(mActivity, mActivity.getEngine());
+		
 		
 		// Attend 2 secondes
 		DelayModifier dMod = new DelayModifier(2f, pEntityModifierListener);
