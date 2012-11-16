@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">Cinemania_client</string>
-    <string name="title1">[ Cine</string>
-    <string name="title2">mania ]</string>
-    <string name="start">Start</string>
+    <string name="app_name">CineMania</string>
+    <string name="title_activity_main">CineMania</string>
+    <string name="start">Démarrer</string>
+    <string name="option">Options</string>
+    <string name="quit">Quitter</string>
+	<string name="titre1">Cine</string>
+	<string name="titre2">Mania</string>
+	<string name="option1">Option 1</string>
+	<string name="option2">Option 2</string>
+	<string name="retour">Retour</string>
 </resources>
