@@ -7,9 +7,12 @@ public abstract class Case implements Constantes {
 
   private int baseValue;
 
+  public Case(){}
+  
   public Case(Player owner, int value) {
-		this.owner = owner;
-		this.baseValue = value;
+	  this();
+	  this.setOwner(owner);
+	  this.setBaseValue(value);		
   }
 
   /**
@@ -18,12 +21,13 @@ public abstract class Case implements Constantes {
    * @param p : the player
    */
   public void buy(Player p) {
-		p.addProperty(this);
-		p.setAmount(p.getAmount()-totalValue());
+	  p.addProperty(this);
+	  this.setOwner(p);
+	  p.setAmount(p.getAmount()-totalValue());
   }
 
   public void buyBuilding(Building b) {
-		this.building = b;
+	  this.building = b;
   }
 
   /**
@@ -33,25 +37,29 @@ public abstract class Case implements Constantes {
    * @return
    */
   public int turnProfit() {
-		return building.profit();
+	  return building.profit();
   }
 
   public void setOwner(Player owner) {
-this.owner = owner;
+	  this.owner = owner;
   }
 
   public Player getOwner() {
-return owner;
+	  return owner;
   }
 
   public abstract int totalValue() ;
 
   public boolean hasOwner() {
-return owner != null;
+	  return owner != null;
   }
 
   public int getBaseValue() {
-return baseValue;
+	  return baseValue;
+  }
+  
+  public void setBaseValue(int value){
+	  this.baseValue = value;
   }
 
 }

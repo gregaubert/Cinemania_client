@@ -32,5 +32,7 @@ public interface Constantes {
   final int ACTOR_VALUE =  300;
 
   final double SELLINGPRICE_RATIO =  0.25;
+  
+  final int BOARD_SIZE = 32;
 
 }
