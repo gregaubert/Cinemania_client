@@ -8,8 +8,8 @@ public class School extends Resource {
 	private boolean disguiseExtension =  false;
 	
 	
-	public School(Player p, int value) {
-		super(p, value);
+	public School() {
+		super();
 	}
 
 	@Override

@@ -6,8 +6,8 @@ public class LogisticFactory extends Resource {
 	private boolean hairdressingExtension =  false;
 	private boolean fxExtension =  false;
 
-	public LogisticFactory(Player p, int value) {
-		super(p, value);
+	public LogisticFactory() {
+		super();
 	}
 
 	@Override
