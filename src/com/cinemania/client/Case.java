@@ -7,6 +7,7 @@ import org.andengine.util.color.Color;
 
 import com.cinemania.activity.Base;
 
+
 public abstract class Case implements Constantes {
 
 	private Player owner;

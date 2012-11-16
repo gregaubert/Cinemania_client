@@ -41,7 +41,7 @@ public class GameMenu extends MenuScene implements IOnMenuItemClickListener, Loa
     	menu.setPosition((mCamera.getWidth() - menu.getWidth()) * 0.5f, 0);
     	this.attachChild(menu);
 		
-		//Récupération des ressources
+		//Rï¿½cupï¿½ration des ressources
 		Font font = manager.mMenuFont;
 		//Boutton quitter
 		IMenuItem quitterButton = new TextMenuItem(MENU_QUIT, font, activity.getString(R.string.quit), activity.getVertexBufferObjectManager());

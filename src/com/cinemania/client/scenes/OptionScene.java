@@ -55,7 +55,7 @@ public class OptionScene extends MenuScene implements IOnMenuItemClickListener, 
 
 	@Override
 	public void Load() {
-		//Récupération des ressources
+		//Rï¿½cupï¿½ration des ressources
 		Font font = manager.mMenuFont;
 		//Boutton option1
 		IMenuItem option1 = new TextMenuItem(MENU_OPTION1, font, activity.getString(R.string.option1), activity.getVertexBufferObjectManager());

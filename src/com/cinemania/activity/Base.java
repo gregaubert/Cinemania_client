@@ -15,6 +15,7 @@ import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 
 import com.cinemania.client.R;
+import com.cinemania.client.R.string;
 import com.cinemania.client.scenes.BoardScene;
 import com.cinemania.client.scenes.GameMenu;
 import com.cinemania.client.scenes.OptionScene;
