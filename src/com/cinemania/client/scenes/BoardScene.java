@@ -27,7 +27,7 @@ public class BoardScene extends Scene implements Loader{
 
 	private final int caseMargin = 5;
 	private final int side = (int) Constantes.BOARD_SIZE / 4;
-	private final float caseSize = (BaseActivity.CAMERA_HEIGHT-caseMargin*(side+2)) / (side+1);
+	private final float caseSize = (Base.CAMERA_HEIGHT-caseMargin*(side+2)) / (side+1);
 
 	private float maxCoord = side*(caseSize + caseMargin) + caseMargin;
 	private float minCoord = caseMargin;
@@ -109,8 +109,6 @@ public class BoardScene extends Scene implements Loader{
 			position[0] = minCoord;
 			position[1] = maxCoord - j * (caseSize + caseMargin);
 		}
-		
-		Log.w(this.getClass().getName(), new Float(position[0]).toString() + " " + new Float(position[1]).toString());
 		
 		return position;
 	}

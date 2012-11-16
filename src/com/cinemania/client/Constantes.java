@@ -32,6 +32,6 @@ public interface Constantes {
 
   final double SELLINGPRICE_RATIO =  0.25;
   
-  final int BOARD_SIZE = 20;
+  final int BOARD_SIZE = 32;
 
 }
