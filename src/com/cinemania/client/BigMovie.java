@@ -1,3 +1,4 @@
+package com.cinemania.client;
 
 public class BigMovie extends Movie {
   private int logistic;

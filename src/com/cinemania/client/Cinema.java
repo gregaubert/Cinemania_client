@@ -1,3 +1,4 @@
+package com.cinemania.client;
 
 public class Cinema extends Building {
   private Room[] rooms =  new Room[MAX_ROOMS];

@@ -1,3 +1,4 @@
+package com.cinemania.client;
 
 public class LogisticFactory extends Building {
   private boolean fxExtension =  false;
