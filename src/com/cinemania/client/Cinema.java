@@ -11,8 +11,8 @@ private Room[] rooms =  new Room[MAX_ROOMS];
   int nbRoom =  0;
 
   public Cinema() {
-		super();
-	}
+	super(ResourcesManager.getInstance().mCaseCinema);	
+  }
 
   @Override
   public int totalValue() {
@@ -28,9 +28,5 @@ private Room[] rooms =  new Room[MAX_ROOMS];
 		if(nbRoom < MAX_ROOMS)
 			rooms[nbRoom++] = new Room(this);
   }
-  
-  public ITextureRegion getTextureRegion(){
-		return ResourcesManager.getInstance().mCaseCinema;
-  }
-
+    
 }

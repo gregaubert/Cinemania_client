@@ -4,7 +4,6 @@ import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.opengl.texture.region.ITextureRegion;
 
 import com.cinemania.activity.Base;
 import com.cinemania.client.Board;
@@ -54,18 +53,17 @@ public class BoardScene extends Scene implements Loader{
 	private void displayCases() {
 		Case[] mCases = mBoard.getCases();
 
-		ITextureRegion texture;
-
-		for (int i = 0; i < mCases.length; i++) {
-			texture = mCases[i].getTextureRegion();
-
+		Sprite sprite;
+		
+		for (int i = 0; i < mCases.length; i++) {			
 			float[] position = calculateCasePosition(i);
+			
+			sprite = mCases[i].getSprite();			
+			sprite.setPosition(position[0], position[1]);
+			sprite.setSize(caseSize, caseSize);
+			
+			this.attachChild(sprite);
 
-			Sprite sprit = new Sprite(position[0], position[1], texture,
-					mActivity.getVertexBufferObjectManager());
-			sprit.setSize(caseSize, caseSize);
-			this.attachChild(sprit);
-			mCases[i].setSprite(sprit);
 		}
 	}
 

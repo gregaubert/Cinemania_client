@@ -1,7 +1,10 @@
 package com.cinemania.client;
 
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.opengl.texture.Texture;
 import org.andengine.opengl.texture.region.ITextureRegion;
+
+import com.cinemania.activity.Base;
 
 public abstract class Case implements Constantes {
 
@@ -9,9 +12,14 @@ public abstract class Case implements Constantes {
 
 	private int baseValue;
 	
-	private Sprite sprite;
+	private Sprite sprite;	
 
-	public Case() {
+	public Case(ITextureRegion texture) {
+		sprite = new Sprite(0, 0, texture, Base.getSharedInstance().getVertexBufferObjectManager());
+	}
+	
+	public Sprite getSprite(){
+		return sprite;
 	}
 
 	/**
@@ -47,12 +55,6 @@ public abstract class Case implements Constantes {
 
 	public void setBaseValue(int value) {
 		baseValue = value;
-	}
-	
-	public abstract ITextureRegion getTextureRegion();
-	
-	public void setSprite(Sprite sprit){
-		sprite = sprit;
 	}
 
 }

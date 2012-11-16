@@ -14,7 +14,7 @@ public class School extends Resource {
 	
 	
 	public School() {
-		super();
+		super(ResourcesManager.getInstance().mCaseActor);
 	}
 
 	@Override
@@ -75,10 +75,6 @@ public class School extends Resource {
 
 	public void setDisguiseExtension(boolean disguiseExtension) {
 		this.disguiseExtension = disguiseExtension;
-	}
-	
-	public ITextureRegion getTextureRegion(){
-		return ResourcesManager.getInstance().mCaseActor;
 	}
 
 }

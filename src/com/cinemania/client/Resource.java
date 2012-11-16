@@ -8,8 +8,8 @@ public class Resource extends Case {
 
 	private int level = 0;
 
-	public Resource() {
-		super();
+	public Resource(ITextureRegion texture) {
+		super(texture);
 	}
 
 	@Override
@@ -34,8 +34,4 @@ public class Resource extends Case {
 		return 0;
 	}
 	
-	public ITextureRegion getTextureRegion(){
-		return ResourcesManager.getInstance().mCaseResource;
-	}
-
 }

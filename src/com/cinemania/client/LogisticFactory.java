@@ -1,4 +1,7 @@
 package com.cinemania.client;
+
+import com.cinemania.ressource.ResourcesManager;
+
 public class LogisticFactory extends Resource {
 
 	private boolean sceneryExtension =  false;
@@ -7,7 +10,7 @@ public class LogisticFactory extends Resource {
 	private boolean fxExtension =  false;
 
 	public LogisticFactory() {
-		super();
+		super(ResourcesManager.getInstance().mCaseLogistic);
 	}
 
 	@Override
