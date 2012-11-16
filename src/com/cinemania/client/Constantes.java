@@ -1,4 +1,8 @@
 package com.cinemania.client;
+
+import org.andengine.util.color.Color;
+
+
 public interface Constantes {
   final int DEFAULT_AMOUNT =  2000;
 
@@ -33,5 +37,7 @@ public interface Constantes {
   final double SELLINGPRICE_RATIO =  0.25;
   
   final int BOARD_SIZE = 32;
+  
+  final Color[] PLAYER_COLOR = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
 
 }

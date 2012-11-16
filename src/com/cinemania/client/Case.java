@@ -3,6 +3,7 @@ package com.cinemania.client;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.texture.Texture;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.util.color.Color;
 
 import com.cinemania.activity.Base;
 
@@ -37,6 +38,8 @@ public abstract class Case implements Constantes {
 
 	public void setOwner(Player owner) {
 		this.owner = owner;
+		
+		sprite.setColor(owner.getColor());
 	}
 
 	public Player getOwner() {

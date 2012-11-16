@@ -1,5 +1,8 @@
 package com.cinemania.client;
 import java.util.ArrayList;
+
+import org.andengine.util.color.Color;
+
 public class Player implements Constantes {
   private static int generalId =  1;
 
@@ -14,6 +17,8 @@ public class Player implements Constantes {
   private Case position;
 
   private ArrayList<Case> properties;
+  
+  private Color color;
 
   public Player() {
 		id = generalId++;
@@ -21,6 +26,7 @@ public class Player implements Constantes {
 		setLogistic(DEFAULT_LOGISTIC);
 		setActors(DEFAULT_ACTORS);	
 		properties = new ArrayList<Case>();
+		color = Constantes.PLAYER_COLOR[id-1];
   }
 
   public int getId() {
@@ -69,6 +75,10 @@ public class Player implements Constantes {
 
   public int shootOneDice() {
 		return (int)(Math.random()*6)+1;
+  }
+  
+  public Color getColor(){
+	  return color;
   }
 
 }
