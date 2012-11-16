@@ -30,8 +30,8 @@ public class BaseActivity extends BaseGameActivity {
     // Constants
     // ===========================================================
 
-	private static final int CAMERA_WIDTH = 800;
-	private static final int CAMERA_HEIGHT = 480;
+	public static final int CAMERA_WIDTH = 800;
+	public static final int CAMERA_HEIGHT = 480;
 	
 	// ===========================================================
     // Fields

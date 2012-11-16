@@ -9,69 +9,127 @@ import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegion;
 
+import android.util.Log;
+
 import com.cinemania.client.BaseActivity;
 import com.cinemania.client.ResourcesManager;
 import com.cinemania.client.Board;
 import com.cinemania.client.Case;
+import com.cinemania.client.Constantes;
 
 public class BoardScene extends Scene {
-	
+
 	// ===========================================================
-    // Constants
-    // ===========================================================
-	
+	// Constants
 	// ===========================================================
-    // Fields
-    // ===========================================================
+
+	// ===========================================================
+	// Fields
+	// ===========================================================
 
 	private BaseActivity mActivity;
 	private Camera mCamera;
-	
+
 	private Board mBoard;
 
+	private final int caseMargin = 5;
+	private final int side = (int) Constantes.BOARD_SIZE / 4;
+	private final float caseSize = (BaseActivity.CAMERA_HEIGHT-caseMargin*(side+2)) / (side+1);
+
+	private float maxCoord = side*(caseSize + caseMargin) + caseMargin;
+	private float minCoord = caseMargin;
+
 	// ===========================================================
-    // Constructors
-    // ===========================================================
-	
+	// Constructors
+	// ===========================================================
+
 	public BoardScene() {
-	    setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
-	    mCamera = BaseActivity.getSharedInstance().getCamera();
-	    mActivity = BaseActivity.getSharedInstance();
-	    mBoard = new Board();
-	    
-	    displayCases();
+		setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
+		mCamera = BaseActivity.getSharedInstance().getCamera();
+		mActivity = BaseActivity.getSharedInstance();
+		mBoard = new Board();
+
+		displayCases();
 	}
-	
-	private void displayCases(){
+
+	private void displayCases() {
 		Case[] mCases = mBoard.getCases();
-		
+
 		ITextureRegion texture;
-		
-		for (int i = 0; i < mCases.length; i++){
+
+		for (int i = 0; i < mCases.length; i++) {
 			texture = mCases[i].getTextureRegion();
-			
-			float x = 5 + i*texture.getWidth();
-			float y = 5;
-			Sprite sprit = new Sprite(x, y, texture, mActivity.getVertexBufferObjectManager());
-		    this.attachChild(sprit);
-		    mCases[i].setSprite(sprit);
+
+			float[] position = calculateCasePosition(i);
+
+			Sprite sprit = new Sprite(position[0], position[1], texture,
+					mActivity.getVertexBufferObjectManager());
+			sprit.setSize(caseSize, caseSize);
+			this.attachChild(sprit);
+			mCases[i].setSprite(sprit);
 		}
 	}
 
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
+	/**
+	 * For every index, depending on screen size, it detects the orientation to
+	 * continue drawing, then calculates the x,y position
+	 * 
+	 * @param i
+	 * @return
+	 */
+	private float[] calculateCasePosition(int i) {
+		
+		float[] position = {minCoord,minCoord};
+		
+		int j = 0;
+		
+		// to the right (side+1)
+		if (i < side){
+			j = i;
+			position[0] = minCoord + j * (caseSize + caseMargin);
+			position[1] = minCoord;	
+		}
+		
+		// downwards (side)
+		else if (i >= side && i < 2*side){
+			j = i-side;
+			position[0] = maxCoord;
+			position[1] = minCoord + j * (caseSize + caseMargin);
+		}
+		
+		// to the left (side)
+		else if (i >= 2*side && i < 3*side){
+			j = i-2*side;
+			position[0] = maxCoord - j * (caseSize + caseMargin);
+			position[1] = maxCoord;
+		}
+		
+		// upwards (side-1)
+		else {
+			j = i-3*side;
+			position[0] = minCoord;
+			position[1] = maxCoord - j * (caseSize + caseMargin);
+		}
+		
+		Log.w(this.getClass().getName(), new Float(position[0]).toString() + " " + new Float(position[1]).toString());
+		
+		return position;
+	}
 
-    // ===========================================================
-    // Methods for/from SuperClass/Interfaces
-    // ===========================================================
-	
 	// ===========================================================
-    // Methods
-    // ===========================================================
-	
+	// Getter & Setter
 	// ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
-	
+
+	// ===========================================================
+	// Methods for/from SuperClass/Interfaces
+	// ===========================================================
+
+	// ===========================================================
+	// Methods
+	// ===========================================================
+
+	// ===========================================================
+	// Inner and Anonymous Classes
+	// ===========================================================
+
 }
