@@ -1,56 +1,42 @@
-
+package com.cinemania.client;
 public abstract class Case implements Constantes {
-  private Player owner;
+	
+	private Player owner;
 
-  Building building;
+	private int baseValue;
 
-  private int baseValue;
-
-  public Case(Player owner, int value) {
+	public Case(Player owner, int value) {
 		this.owner = owner;
 		this.baseValue = value;
-  }
+	}
 
-  /**
-   * Buy the case. The player become the owner and this method decrease the amount
-   * of the player.
-   * @param p : the player
-   */
-  public void buy(Player p) {
+	/**
+	 * Buy the case. The player become the owner and this method decrease the amount
+	 * of the player.
+	 * @param p : the player
+	 */
+	public void buy(Player p) {
 		p.addProperty(this);
 		p.setAmount(p.getAmount()-totalValue());
-  }
+	}
 
-  public void buyBuilding(Building b) {
-		this.building = b;
-  }
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
 
-  /**
-   * Return the profit. Depending on the building or the case. By example
-   * a logistic factory returns number of their own resource while a cinema returns
-   * an amount of cash
-   * @return
-   */
-  public int turnProfit() {
-		return building.profit();
-  }
+	public Player getOwner() {
+		return owner;
+	}
 
-  public void setOwner(Player owner) {
-this.owner = owner;
-  }
+	public abstract int totalValue();
+	
 
-  public Player getOwner() {
-return owner;
-  }
+	public boolean hasOwner() {
+		return owner != null;
+	}
 
-  public abstract int totalValue() ;
-
-  public boolean hasOwner() {
-return owner != null;
-  }
-
-  public int getBaseValue() {
-return baseValue;
-  }
+	public int getBaseValue() {
+		return baseValue;
+	}
 
 }
