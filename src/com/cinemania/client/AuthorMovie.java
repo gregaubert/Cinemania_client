@@ -1,4 +1,3 @@
-package com.cinemania.client;
 
 public class AuthorMovie extends Movie {
   private int sellingPrice;
