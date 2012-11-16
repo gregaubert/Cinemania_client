@@ -14,8 +14,6 @@ import com.cinemania.client.Constantes;
 public class BoardScene extends Scene implements Loader{
 
 	// ===========================================================
-
-	// ===========================================================
 	// Fields
 	// ===========================================================
 
