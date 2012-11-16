@@ -1,7 +1,5 @@
 package com.cinemania.client;
 
-import org.andengine.entity.sprite.Sprite;
-
 public class Board implements Constantes {
 
 	private Case[] mCases = new Case[Constantes.BOARD_SIZE];

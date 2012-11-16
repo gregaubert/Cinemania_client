@@ -2,6 +2,8 @@ package com.cinemania.client;
 
 import org.andengine.opengl.texture.region.ITextureRegion;
 
+import com.cinemania.ressource.ResourcesManager;
+
 public class Resource extends Case {
 
 	private int level = 0;
