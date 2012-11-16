@@ -29,8 +29,8 @@ public class Base extends BaseGameActivity
 	// ===========================================================
     // Constants
     // ===========================================================
-    private final int CAMERA_WIDTH = 720;
-    private final int CAMERA_HEIGHT = 480;
+    public final int CAMERA_WIDTH = 720;
+    public final int CAMERA_HEIGHT = 480;
     
     // ===========================================================
     // Fields
@@ -49,12 +49,12 @@ public class Base extends BaseGameActivity
     public static Base instance;
     private ResourcesManager manager;
     
-    //Scène courrante
+    //Scï¿½ne courrante
     private Scene mCurrentScene;
-    //Type de scène
+    //Type de scï¿½ne
     private SceneType mSceneType = SceneType.LOADING;
     
-    //Gestion multiscène
+    //Gestion multiscï¿½ne
     public enum SceneType
     {
           LOADING,
@@ -63,7 +63,7 @@ public class Base extends BaseGameActivity
           GAME,
     }
 
-    //Liste des scènes.
+    //Liste des scï¿½nes.
     //Menu principal du jeu.
     private GameMenu mMenu;
     //Liste des options.
@@ -87,7 +87,7 @@ public class Base extends BaseGameActivity
     {
     	//Singleton
     	instance = this;
-    	//Récupère instance manager ressources
+    	//Rï¿½cupï¿½re instance manager ressources
     	manager = ResourcesManager.getInstance();
         mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
         EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new FillResolutionPolicy(), mCamera);
@@ -125,14 +125,14 @@ public class Base extends BaseGameActivity
     @Override
     public void onPopulateScene(Scene pScene, OnPopulateSceneCallback pOnPopulateSceneCallback) throws Exception
     {
-    	//Après 3 secondes, on appel la méthode onTimePassed
+    	//Aprï¿½s 3 secondes, on appel la mï¿½thode onTimePassed
     	mEngine.registerUpdateHandler(new TimerHandler(3f, new ITimerCallback() 
     	{
     		public void onTimePassed(final TimerHandler pTimerHandler) 
     	    {
-    			//Désincription du handler
+    			//Dï¿½sincription du handler
     			mEngine.unregisterUpdateHandler(pTimerHandler);
-    	        //Chargement des ressources et scènes.
+    	        //Chargement des ressources et scï¿½nes.
     			loadScenes();
     			loadResources();
     	        mCurrentScene.detachChildren();
@@ -146,7 +146,7 @@ public class Base extends BaseGameActivity
 
     }
     
-    //Créer la scène affiché à l'ecran.
+    //Crï¿½er la scï¿½ne affichï¿½ ï¿½ l'ecran.
     private void initSplashScene()
     {
             mCurrentScene = new Scene();
@@ -161,7 +161,7 @@ public class Base extends BaseGameActivity
 			    }
             };
             
-            //Ajoute le sprite splash à la scène.
+            //Ajoute le sprite splash ï¿½ la scï¿½ne.
             splash.setPosition((CAMERA_WIDTH - splash.getWidth()) * 0.5f, (CAMERA_HEIGHT-splash.getHeight()) * 0.5f);
             mCurrentScene.attachChild(splash);
     
