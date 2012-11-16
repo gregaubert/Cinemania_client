@@ -94,8 +94,9 @@ public class BaseActivity extends BaseGameActivity {
 	public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback)	throws Exception {
 		
 		mEngine.registerUpdateHandler(new FPSLogger());
-		mCurrentScene = new SplashScene();
-	    
+		
+		setCurrentScene(new SplashScene());
+			    
 	    pOnCreateSceneCallback.onCreateSceneFinished(mCurrentScene);
 	}
 
