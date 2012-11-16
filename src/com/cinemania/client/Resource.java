@@ -30,7 +30,11 @@ public class Resource extends Case {
 		return level;
 	}
 
-	int getResource() {
+	/**
+	 * Return the resource according to the kind of building. The compute is the actual depend on
+	 * the level and number of extensions. 
+	 */
+	int profit() {
 		return 0;
 	}
 	
