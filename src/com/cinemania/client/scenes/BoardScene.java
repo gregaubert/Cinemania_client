@@ -28,6 +28,11 @@ public class BoardScene extends Scene implements Loader{
 
 	private float maxCoord = side*(caseSize + caseMargin) + caseMargin;
 	private float minCoord = caseMargin;
+	
+	private static final int ORIENTATION_RIGHT = 0;
+	private static final int ORIENTATION_DOWN = 1;
+	private static final int ORIENTATION_LEFT = 2;
+	private static final int ORIENTATION_UP = 3;
 
 	// ===========================================================
 	// Constructors
@@ -60,6 +65,9 @@ public class BoardScene extends Scene implements Loader{
 			sprite.setPosition(position[0], position[1]);
 			sprite.setSize(caseSize, caseSize);
 			
+			sprite.setRotationCenter(sprite.getWidth()/2, sprite.getHeight()/2);
+			sprite.setRotation(getRotation(i));
+			
 			this.attachChild(sprite);
 
 		}
@@ -77,36 +85,60 @@ public class BoardScene extends Scene implements Loader{
 		float[] position = {minCoord,minCoord};
 		
 		int j = 0;
+		int orientation = getOrientation(i);
 		
-		// to the right (side+1)
-		if (i < side){
+		switch(orientation){
+		case ORIENTATION_RIGHT:
 			j = i;
 			position[0] = minCoord + j * (caseSize + caseMargin);
 			position[1] = minCoord;	
-		}
-		
-		// downwards (side)
-		else if (i >= side && i < 2*side){
+			break;
+		case ORIENTATION_DOWN:
 			j = i-side;
 			position[0] = maxCoord;
 			position[1] = minCoord + j * (caseSize + caseMargin);
-		}
-		
-		// to the left (side)
-		else if (i >= 2*side && i < 3*side){
+			break;		
+		case ORIENTATION_LEFT:
 			j = i-2*side;
 			position[0] = maxCoord - j * (caseSize + caseMargin);
 			position[1] = maxCoord;
-		}
-		
-		// upwards (side-1)
-		else {
+			break;
+		case ORIENTATION_UP:
+		default:
 			j = i-3*side;
 			position[0] = minCoord;
 			position[1] = maxCoord - j * (caseSize + caseMargin);
+			
+		}
+			
+		return position;
+	}
+	
+	private int getOrientation(int i){
+		if (i < side){
+			return ORIENTATION_RIGHT;
+		}
+		else if (i >= side && i < 2*side){
+			return ORIENTATION_DOWN;
+		}		
+		else if (i >= 2*side && i < 3*side){
+			return ORIENTATION_LEFT;
 		}
 		
-		return position;
+		return ORIENTATION_UP;
+	}
+	
+	private float getRotation(int i){
+		switch (getOrientation(i)){
+		case ORIENTATION_LEFT:
+			return 180f;
+		case ORIENTATION_DOWN:
+			return 90f;
+		case ORIENTATION_UP:
+			return -90f;
+		}
+		
+		return 0;
 	}
 
 }
