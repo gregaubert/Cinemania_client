@@ -14,12 +14,6 @@ public abstract class Case implements Constantes {
 	public Case() {
 	}
 
-	public Case(Player owner, int value) {
-		this();
-		this.setOwner(owner);
-		this.setBaseValue(value);
-	}
-
 	/**
 	 * Buy the case. The player become the owner and this method decrease the
 	 * amount of the player.
