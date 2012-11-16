@@ -1,5 +1,4 @@
 package com.cinemania.client;
-
 public class Room {
   Cinema cinema;
 

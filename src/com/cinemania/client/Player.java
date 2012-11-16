@@ -1,5 +1,4 @@
 package com.cinemania.client;
-
 import java.util.ArrayList;
 public class Player implements Constantes {
   private static int generalId =  1;
