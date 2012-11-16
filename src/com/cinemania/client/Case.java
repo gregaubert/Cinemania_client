@@ -1,10 +1,15 @@
 package com.cinemania.client;
 
+import org.andengine.entity.sprite.Sprite;
+import org.andengine.opengl.texture.region.ITextureRegion;
+
 public abstract class Case implements Constantes {
 
 	private Player owner;
 
 	private int baseValue;
+	
+	private Sprite sprite;
 
 	public Case() {
 	}
@@ -48,6 +53,12 @@ public abstract class Case implements Constantes {
 
 	public void setBaseValue(int value) {
 		baseValue = value;
+	}
+	
+	public abstract ITextureRegion getTextureRegion();
+	
+	public void setSprite(Sprite sprit){
+		sprite = sprit;
 	}
 
 }

@@ -13,11 +13,11 @@ public class ResourcesManager {
 	private static final ResourcesManager instance = new ResourcesManager();
 	
 	public ITextureRegion mCaseCinema;
-	private ITextureRegion mCaseHQ;
-	private ITextureRegion mCaseResource;
-	private ITextureRegion mCaseScript;
-	private ITextureRegion mCaseActor;
-	private ITextureRegion mCaseLogistic;
+	public ITextureRegion mCaseHQ;
+	public ITextureRegion mCaseResource;
+	public ITextureRegion mCaseScript;
+	public ITextureRegion mCaseActor;
+	public ITextureRegion mCaseLogistic;
 
 	private ResourcesManager(){
 		

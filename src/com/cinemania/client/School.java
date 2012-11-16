@@ -1,4 +1,7 @@
 package com.cinemania.client;
+
+import org.andengine.opengl.texture.region.ITextureRegion;
+
 public class School extends Resource {
 
 	private boolean danceExtension =  false;
@@ -70,6 +73,10 @@ public class School extends Resource {
 
 	public void setDisguiseExtension(boolean disguiseExtension) {
 		this.disguiseExtension = disguiseExtension;
+	}
+	
+	public ITextureRegion getTextureRegion(){
+		return ResourcesManager.getInstance().mCaseActor;
 	}
 
 }

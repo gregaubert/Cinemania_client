@@ -1,13 +1,15 @@
 package com.cinemania.client;
 
+import org.andengine.opengl.texture.region.ITextureRegion;
+
 public class Cinema extends Case {
 
 private Room[] rooms =  new Room[MAX_ROOMS];
 
   int nbRoom =  0;
 
-  public Cinema(Player owner, int value) {
-		super(owner, value);
+  public Cinema() {
+		super();
 	}
 
   @Override
@@ -23,6 +25,10 @@ private Room[] rooms =  new Room[MAX_ROOMS];
   public void buyRoom() {
 		if(nbRoom < MAX_ROOMS)
 			rooms[nbRoom++] = new Room(this);
+  }
+  
+  public ITextureRegion getTextureRegion(){
+		return ResourcesManager.getInstance().mCaseCinema;
   }
 
 }

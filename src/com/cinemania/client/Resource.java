@@ -1,5 +1,7 @@
 package com.cinemania.client;
 
+import org.andengine.opengl.texture.region.ITextureRegion;
+
 public class Resource extends Case {
 
 	private int level = 0;
@@ -28,6 +30,10 @@ public class Resource extends Case {
 
 	int getResource() {
 		return 0;
+	}
+	
+	public ITextureRegion getTextureRegion(){
+		return ResourcesManager.getInstance().mCaseResource;
 	}
 
 }
