@@ -4,6 +4,23 @@ import org.andengine.util.color.Color;
 
 
 public interface Constantes {
+	
+  final int INITIAL_YEAR = 1930;
+  
+  final int INITIAL_SPECTATORS_BIGMOVIE = 100;
+  
+  final int INITIAL_SPECTATORS_AUTHORMOVIE = 50;
+  
+  final double GROWING_RATE_SPECTATORS = 1.02;
+  
+  final double RATE_MARKETING = 0.2;
+  
+  final double DECREASING_MOVIE_RATE_MIN_BM = 0.14;
+  final double DECREASING_MOVIE_RATE_MAX_BM = 0.22;
+  
+  final double DECREASING_MOVIE_RATE_MIN_AM = 0.2;
+  final double DECREASING_MOVIE_RATE_MAX_AM = 0.25;
+
   final int DEFAULT_AMOUNT =  2000;
 
   final int DEFAULT_ACTORS =  0;
@@ -37,6 +54,12 @@ public interface Constantes {
   final double SELLINGPRICE_RATIO =  0.25;
   
   final int BOARD_SIZE = 32;
+  
+  /**
+   * Costs by turn depending on the case
+   */
+  final int COSTS_PER_ROOM = 50;
+  final int COSTS_PER_CINEMA = 200;
   
   final Color[] PLAYER_COLOR = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
 

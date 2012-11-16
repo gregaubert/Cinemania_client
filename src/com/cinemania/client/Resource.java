@@ -4,7 +4,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 
 import com.cinemania.ressource.ResourcesManager;
 
-public class Resource extends Case {
+public class Resource extends Case implements Profitable {
 
 	private int level = 0;
 
@@ -32,9 +32,10 @@ public class Resource extends Case {
 
 	/**
 	 * Return the resource according to the kind of building. The compute is the actual depend on
-	 * the level and number of extensions. 
+	 * the level, number of extensions, the start and stop turn.
 	 */
-	int profit() {
+	@Override
+	public int profit(int startTurn, int stopTurn) {
 		return 0;
 	}
 	

@@ -22,12 +22,8 @@ public class School extends Resource {
 		return BASEVALUE_OF_SCHOOL * getLevel() + nbExtensions() * PRICE_SCHOOL_EXTENSION;
 	}
 	
-	/**
-	 * Return the resource according to the kind of building. The compute is the actual depend on
-	 * the level and number of extensions
-	 */
 	@Override
-	public int profit(){
+	public int profit(int startTurn, int stopTurn){
 		return getLevel() + nbExtensions();
 	}
 

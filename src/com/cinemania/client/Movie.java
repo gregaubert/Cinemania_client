@@ -1,12 +1,11 @@
 package com.cinemania.client;
-public abstract class Movie implements Constantes {
+public abstract class Movie implements Constantes, Profitable {
 	
   private int id;
   private int baseId =  1;
   private String title;
   private int year;
-  private int turn =  0;
-
+  private int beginingTurn;
 
 
 /**
@@ -44,16 +43,28 @@ public abstract class Movie implements Constantes {
 		this.decreasingRate = decreasingRate;
   }
   
-  public int getTurn() {
-	  return turn;
+  @Override
+  public int profit(int startTurn, int stopTurn) {
+	  int profit = 0;
+	  int s = startTurn;
+	  while(startTurn++ < stopTurn)
+		  profit += getPeopleInit() * Math.pow(getDecreasingRate(), startTurn - getBeginingTurn());
+	  
+	  return profit;
   }
 
-  public void setTurn(int turn) {
-	  this.turn = turn;
+
+  public int getBeginingTurn() {
+	  return beginingTurn;
   }
 
-  public void incrementsTurn() {
-		turn += 1;
+  /**
+   * The first time the movie appear on a cinema we must to initialize the beginingTurn
+   */
+  public void setBeginingTurn(int beginingTurn) {
+	  this.beginingTurn = beginingTurn;
   }
+
+  
 
 }
