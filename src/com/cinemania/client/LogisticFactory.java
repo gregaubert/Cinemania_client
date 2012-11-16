@@ -10,7 +10,7 @@ public class LogisticFactory extends Resource {
 	private boolean fxExtension =  false;
 
 	public LogisticFactory() {
-		super(ResourcesManager.getInstance().mCaseLogistic);
+		super(ResourcesManager.getInstance().mCaseLogistics);
 	}
 
 	@Override

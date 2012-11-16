@@ -14,7 +14,7 @@ public class School extends Resource {
 	
 	
 	public School() {
-		super(ResourcesManager.getInstance().mCaseActor);
+		super(ResourcesManager.getInstance().mCaseActors);
 	}
 
 	@Override
