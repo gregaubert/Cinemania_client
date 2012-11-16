@@ -18,9 +18,13 @@ public class LogisticFactory extends Resource {
 		return BASEVALUE_OF_LOGISTIC * getLevel() + nbExtensions() * PRICE_LOGISTIC_EXTENSION;
 	}
 
+	/**
+	 * Return the resource according to the kind of building. The compute is the actual depend on
+	 * the level and number of extensions
+	 */
 	@Override
-	public int getResource(){
-		return 1; // TODO: define the number of resource according to the level, extensions, ...
+	public int profit(){
+		return getLevel() + nbExtensions();
 	}
 
 	private int nbExtensions() {

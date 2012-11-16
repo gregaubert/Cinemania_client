@@ -2,7 +2,7 @@ package com.cinemania.client;
 public class Room {
   Cinema cinema;
 
-  BigMovie movie;
+  Movie movie;
 
   private int turn =  0;
 

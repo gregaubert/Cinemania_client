@@ -7,7 +7,9 @@ public abstract class Movie implements Constantes {
   private int year;
   private int turn =  0;
 
-  /**
+
+
+/**
    *  This factor is influenced by the context of the game :
    *  according to the city, the success (and possibly the pub)
    */
@@ -40,6 +42,14 @@ public abstract class Movie implements Constantes {
 
   public void setDecreasingRate(double decreasingRate) {
 		this.decreasingRate = decreasingRate;
+  }
+  
+  public int getTurn() {
+	  return turn;
+  }
+
+  public void setTurn(int turn) {
+	  this.turn = turn;
   }
 
   public void incrementsTurn() {
