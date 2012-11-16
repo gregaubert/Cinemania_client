@@ -1,4 +1,3 @@
-package com.cinemania.client;
 
 public interface Constantes {
   final int DEFAULT_AMOUNT =  2000;

@@ -1,4 +1,3 @@
-package com.cinemania.client;
 
 public abstract class Case implements Constantes {
   private Player owner;

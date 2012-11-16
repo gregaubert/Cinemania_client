@@ -1,4 +1,3 @@
-package com.cinemania.client;
 
 public class Resource extends Case {
   public Resource(Player p, int value) {

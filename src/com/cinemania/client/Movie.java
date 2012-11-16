@@ -1,4 +1,3 @@
-package com.cinemania.client;
 
 public abstract class Movie implements Constantes {
   private int id;

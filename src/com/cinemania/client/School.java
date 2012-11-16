@@ -1,4 +1,3 @@
-package com.cinemania.client;
 
 public class School extends Building {
   private boolean danceExtension =  false;
