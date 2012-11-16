@@ -1,4 +1,4 @@
-package com.cinemania.client;
+
 public abstract class Building implements Constantes {
   private int level =  DEFAULT_LEVEL;
 
