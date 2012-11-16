@@ -6,7 +6,13 @@ import org.andengine.opengl.font.FontFactory;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
+import org.andengine.opengl.texture.atlas.bitmap.BuildableBitmapTextureAtlas;
+import org.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSource;
+import org.andengine.opengl.texture.atlas.buildable.builder.BlackPawnTextureAtlasBuilder;
+import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder.TextureAtlasBuilderException;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.util.debug.Debug;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,8 +26,10 @@ public class ResourcesManager {
 	public ITextureRegion mCaseHQ;
 	public ITextureRegion mCaseResource;
 	public ITextureRegion mCaseScript;
-	public ITextureRegion mCaseActor;
-	public ITextureRegion mCaseLogistic;
+	public ITextureRegion mCaseActors;
+	public ITextureRegion mCaseLogistics;
+	public ITextureRegion mCaseLuck;
+	public ITextureRegion mCaseEmpty;
 	
 	public ITextureRegion mSplashLogo;
 	public ITextureRegion mMenuLogo;
@@ -39,7 +47,8 @@ public class ResourcesManager {
 	
 	public void LoadSplash(Context context, Engine engine){
 		//Gestion des polices d'écritures
-		mSplashFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
+		mSplashFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "GunslingerDEMO-KCFonts.ttf", 32f, true, Color.WHITE);
+		//mSplashFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
 		mSplashFont.load();
 		
 		//Indique le dossier contenant les textures.
@@ -65,11 +74,22 @@ public class ResourcesManager {
 	
 	public void LoadBoardGame(Context context, Engine engine) {
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-
-        BitmapTextureAtlas boardBitmapTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 380, 380);
-
-        mCaseCinema = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_cinema.png", 0, 0);
-        boardBitmapTextureAtlas.load();
+        BuildableBitmapTextureAtlas boardBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 1024);
+        
+        mCaseCinema = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_cinema.png");
+        mCaseResource = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_resources.png");
+        mCaseScript = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_script.png");
+        mCaseActors = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_actors.png");
+        mCaseLogistics = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_logistics.png");
+        mCaseLuck = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_luck.png");
+        mCaseEmpty = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_empty1.png");
+        
+        try {
+			boardBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+			boardBitmapTextureAtlas.load();
+		} catch (final TextureAtlasBuilderException e) {
+			Debug.e(e);
+		}
       
 	}
 }

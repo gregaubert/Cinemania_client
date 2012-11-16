@@ -78,7 +78,7 @@ public class School extends Resource {
 	}
 	
 	public ITextureRegion getTextureRegion(){
-		return ResourcesManager.getInstance().mCaseActor;
+		return ResourcesManager.getInstance().mCaseActors;
 	}
 
 }
