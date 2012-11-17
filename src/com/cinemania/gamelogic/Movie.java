@@ -1,4 +1,7 @@
-package com.cinemania.client;
+package com.cinemania.gamelogic;
+
+import com.cinemania.constants.Constantes;
+
 public abstract class Movie implements Constantes, Profitable {
 	
   private int id;

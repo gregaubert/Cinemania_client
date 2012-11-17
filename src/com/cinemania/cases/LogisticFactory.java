@@ -1,6 +1,6 @@
-package com.cinemania.client;
+package com.cinemania.cases;
 
-import com.cinemania.ressource.ResourcesManager;
+import com.cinemania.resources.ResourcesManager;
 
 public class LogisticFactory extends Resource {
 

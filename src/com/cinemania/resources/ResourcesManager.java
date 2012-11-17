@@ -1,4 +1,4 @@
-package com.cinemania.ressource;
+package com.cinemania.resources;
 
 import org.andengine.engine.Engine;
 import org.andengine.opengl.font.Font;

@@ -1,7 +1,10 @@
-package com.cinemania.client;
+package com.cinemania.gamelogic;
 import java.util.ArrayList;
 
 import org.andengine.util.color.Color;
+
+import com.cinemania.cases.Case;
+import com.cinemania.constants.Constantes;
 
 public class Player implements Constantes {
   private static int generalId =  1;

@@ -1,4 +1,8 @@
-package com.cinemania.client;
+package com.cinemania.gamelogic;
+
+import com.cinemania.cases.Case;
+import com.cinemania.constants.Constantes;
+
 public abstract class Building implements Constantes {
   private int level =  DEFAULT_LEVEL;
 

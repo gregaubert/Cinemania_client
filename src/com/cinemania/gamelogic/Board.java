@@ -1,4 +1,8 @@
-package com.cinemania.client;
+package com.cinemania.gamelogic;
+
+import com.cinemania.cases.Case;
+import com.cinemania.cases.Cinema;
+import com.cinemania.constants.Constantes;
 
 public class Board implements Constantes {
 

@@ -16,10 +16,10 @@ import org.andengine.ui.activity.BaseGameActivity;
 
 import com.cinemania.client.R;
 import com.cinemania.client.R.string;
-import com.cinemania.client.scenes.BoardScene;
-import com.cinemania.client.scenes.GameMenu;
-import com.cinemania.client.scenes.OptionScene;
-import com.cinemania.ressource.ResourcesManager;
+import com.cinemania.resources.ResourcesManager;
+import com.cinemania.scenes.BoardScene;
+import com.cinemania.scenes.GameMenu;
+import com.cinemania.scenes.OptionScene;
 
 import android.util.Log;
 import android.view.KeyEvent;

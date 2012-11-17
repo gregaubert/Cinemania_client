@@ -1,4 +1,4 @@
-package com.cinemania.client.scenes;
+package com.cinemania.scenes;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.menu.MenuScene;
@@ -10,7 +10,7 @@ import org.andengine.opengl.font.Font;
 import com.cinemania.activity.Base;
 import com.cinemania.activity.Base.SceneType;
 import com.cinemania.client.R;
-import com.cinemania.ressource.ResourcesManager;
+import com.cinemania.resources.ResourcesManager;
 
 import android.util.Log;
 

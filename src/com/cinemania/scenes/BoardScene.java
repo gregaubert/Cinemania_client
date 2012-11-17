@@ -1,4 +1,4 @@
-package com.cinemania.client.scenes;
+package com.cinemania.scenes;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.scene.Scene;
@@ -6,9 +6,9 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 
 import com.cinemania.activity.Base;
-import com.cinemania.client.Board;
-import com.cinemania.client.Case;
-import com.cinemania.client.Constantes;
+import com.cinemania.cases.Case;
+import com.cinemania.constants.Constantes;
+import com.cinemania.gamelogic.Board;
 
 
 public class BoardScene extends Scene implements Loader{

@@ -1,8 +1,9 @@
-package com.cinemania.client;
+package com.cinemania.cases;
 
 import org.andengine.opengl.texture.region.ITextureRegion;
 
-import com.cinemania.ressource.ResourcesManager;
+import com.cinemania.gamelogic.Profitable;
+import com.cinemania.resources.ResourcesManager;
 
 public class Resource extends Case implements Profitable {
 

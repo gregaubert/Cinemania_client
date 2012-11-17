@@ -1,4 +1,4 @@
-package com.cinemania.client;
+package com.cinemania.constants;
 
 import org.andengine.util.color.Color;
 
