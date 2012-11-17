@@ -1,4 +1,4 @@
-package com.cinemania.client;
+package com.cinemania.cases;
 
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.texture.Texture;
@@ -6,6 +6,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.color.Color;
 
 import com.cinemania.activity.Base;
+import com.cinemania.constants.Constantes;
+import com.cinemania.gamelogic.Player;
 
 
 public abstract class Case implements Constantes {

@@ -14,17 +14,17 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 
-import com.cinemania.client.BigMovie;
-import com.cinemania.client.Case;
-import com.cinemania.client.Cinema;
-import com.cinemania.client.Player;
+import com.cinemania.gamelogic.BigMovie;
+import com.cinemania.cases.Case;
+import com.cinemania.cases.Cinema;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.client.R;
-import com.cinemania.client.Room;
+import com.cinemania.gamelogic.Room;
 import com.cinemania.client.R.string;
-import com.cinemania.client.scenes.BoardScene;
-import com.cinemania.client.scenes.GameMenu;
-import com.cinemania.client.scenes.OptionScene;
-import com.cinemania.ressource.ResourcesManager;
+import com.cinemania.resources.ResourcesManager;
+import com.cinemania.scenes.BoardScene;
+import com.cinemania.scenes.GameMenu;
+import com.cinemania.scenes.OptionScene;
 
 import android.util.Log;
 import android.view.KeyEvent;
@@ -55,12 +55,12 @@ public class Base extends BaseGameActivity
     public static Base instance;
     private ResourcesManager manager;
     
-    //Sc�ne courrante
+    //Scene courrante
     private Scene mCurrentScene;
-    //Type de sc�ne
+    //Type de scene
     private SceneType mSceneType = SceneType.LOADING;
     
-    //Gestion multisc�ne
+    //Gestion multiscene
     public enum SceneType
     {
           LOADING,
@@ -69,7 +69,7 @@ public class Base extends BaseGameActivity
           GAME,
     }
 
-    //Liste des sc�nes.
+    //Liste des scenes.
     //Menu principal du jeu.
     private GameMenu mMenu;
     //Liste des options.
@@ -93,7 +93,7 @@ public class Base extends BaseGameActivity
     {
     	//Singleton
     	instance = this;
-    	//R�cup�re instance manager ressources
+    	//Recupere instance manager ressources
     	manager = ResourcesManager.getInstance();
         mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
         EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new FillResolutionPolicy(), mCamera);
@@ -132,14 +132,14 @@ public class Base extends BaseGameActivity
     @Override
     public void onPopulateScene(Scene pScene, OnPopulateSceneCallback pOnPopulateSceneCallback) throws Exception
     {
-    	//Apr�s 3 secondes, on appel la m�thode onTimePassed
+    	//Apres 3 secondes, on appel la methode onTimePassed
     	mEngine.registerUpdateHandler(new TimerHandler(3f, new ITimerCallback() 
     	{
     		public void onTimePassed(final TimerHandler pTimerHandler) 
     	    {
-    			//D�sincription du handler
+    			//Desincription du handler
     			mEngine.unregisterUpdateHandler(pTimerHandler);
-    	        //Chargement des ressources et sc�nes.
+    	        //Chargement des ressources et scenes.
     			loadScenes();
     			loadResources();
     	        mCurrentScene.detachChildren();
@@ -153,7 +153,7 @@ public class Base extends BaseGameActivity
 
     }
     
-    //Cr�er la sc�ne affich� � l'ecran.
+    //Creer la scene affiche e l'ecran.
     private void initSplashScene()
     {
             mCurrentScene = new Scene();
@@ -168,7 +168,7 @@ public class Base extends BaseGameActivity
 			    }
             };
             
-            //Ajoute le sprite splash � la sc�ne.
+            //Ajoute le sprite splash e la scene.
             splash.setPosition((CAMERA_WIDTH - splash.getWidth()) * 0.5f, (CAMERA_HEIGHT-splash.getHeight()) * 0.5f);
             mCurrentScene.attachChild(splash);
     

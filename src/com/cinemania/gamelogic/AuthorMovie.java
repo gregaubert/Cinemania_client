@@ -1,4 +1,4 @@
-package com.cinemania.client;
+package com.cinemania.gamelogic;
 public class AuthorMovie extends Movie {
   private int sellingPrice;
 
