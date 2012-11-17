@@ -33,5 +33,13 @@ private Room[] rooms =  new Room[MAX_ROOMS];
 
 	  return profit - COSTS_PER_CINEMA;
   }
+  
+  public Room[] getRooms(){
+	  return rooms;
+  }
+  
+  public int getNbRoom(){
+	  return nbRoom;
+  }
     
 }

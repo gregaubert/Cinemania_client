@@ -14,7 +14,12 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 
+import com.cinemania.client.BigMovie;
+import com.cinemania.client.Case;
+import com.cinemania.client.Cinema;
+import com.cinemania.client.Player;
 import com.cinemania.client.R;
+import com.cinemania.client.Room;
 import com.cinemania.client.R.string;
 import com.cinemania.client.scenes.BoardScene;
 import com.cinemania.client.scenes.GameMenu;
@@ -114,6 +119,7 @@ public class Base extends BaseGameActivity
 		mTitle2.registerEntityModifier(new MoveXModifier(1, mTitle2.getX(), mCamera.getWidth() / 2));
     	
     	pOnCreateResourcesCallback.onCreateResourcesFinished();
+  		
     }
 
     @Override
