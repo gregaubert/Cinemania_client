@@ -21,6 +21,7 @@ import com.cinemania.gamelogic.Player;
 import com.cinemania.client.R;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.client.R.string;
+import com.cinemania.constants.Test;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.scenes.GameMenu;
@@ -186,6 +187,10 @@ public class Base extends BaseGameActivity
 		mMenu.Load();
 		mOption.Load();
 		mGame.Load();
+		
+		// Test JCA
+		Test.test();
+
 	}
 	
 	private void loadScenes()

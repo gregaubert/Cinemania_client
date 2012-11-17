@@ -30,8 +30,11 @@ public class Cinema extends Case implements Profitable {
 	  @Override
 	  public int profit(int startTurn, int stopTurn) {
 		  int profit = 0;
-		  for(Room r : rooms)
-			  profit += r.profit(startTurn, stopTurn);
+		  for(int i = 0; i < nbRoom; i++){
+			  profit += rooms [i].profit(startTurn, stopTurn);			  
+		  }
+		  
+		  
 
 		  return profit - COSTS_PER_CINEMA;
 	  }

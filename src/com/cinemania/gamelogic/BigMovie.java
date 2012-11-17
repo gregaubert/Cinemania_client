@@ -23,7 +23,7 @@ public class BigMovie extends Movie {
 		this.actors = actors;
 		this.initPrice = initPrice;
 		this.year = year;
-		this.maxMarketing = marketing;
+		this.maxMarketing = maxMarketing;
   }
 
   public void produceThisMovie(Player player, int budgetMarketing) {

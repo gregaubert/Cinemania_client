@@ -51,7 +51,7 @@ public abstract class Movie implements Constantes, Profitable {
 	  int profit = 0;
 	  int s = startTurn;
 	  while(startTurn++ < stopTurn)
-		  profit += getPeopleInit() * Math.pow(getDecreasingRate(), startTurn - getBeginingTurn());
+		  profit += COSTS_CINEMA_TICKET * getPeopleInit() * Math.pow(getDecreasingRate(), startTurn - getBeginingTurn());
 	  
 	  return profit;
   }

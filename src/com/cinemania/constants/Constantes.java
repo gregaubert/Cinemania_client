@@ -68,6 +68,8 @@ public interface Constantes {
   final int COSTS_PER_ROOM = 50;
   final int COSTS_PER_CINEMA = 200;
   
+  final int COSTS_CINEMA_TICKET = 15;
+  
   final Color[] PLAYER_COLOR = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
 
 }
