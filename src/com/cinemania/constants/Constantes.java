@@ -53,7 +53,7 @@ public interface Constantes {
 
   final double SELLINGPRICE_RATIO =  0.25;
   
-  final int BOARD_SIZE = 32;
+  final int BOARD_SIZE = 40;
   
   final int BOARD_NB_CINEMA_LINE = 2;
   final int BOARD_NB_RESOURCE_LINE = 4;

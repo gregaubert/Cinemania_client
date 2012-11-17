@@ -1,6 +1,7 @@
 package com.cinemania.scenes;
 
 import org.andengine.engine.camera.Camera;
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -22,7 +23,7 @@ public class BoardScene extends Scene implements Loader{
 
 	private Board mBoard;
 
-	private final int caseMargin = 5;
+	private final int caseMargin = 1;
 	private final int side = (int) Constantes.BOARD_SIZE / 4;
 	private final float caseSize = (Base.CAMERA_HEIGHT-caseMargin*(side+2)) / (side+1);
 
@@ -56,12 +57,12 @@ public class BoardScene extends Scene implements Loader{
 	private void displayCases() {
 		Case[] mCases = mBoard.getCases();
 
-		Sprite sprite;
+		Rectangle sprite;
 		
 		for (int i = 0; i < mCases.length; i++) {			
 			float[] position = calculateCasePosition(i);
 			
-			sprite = mCases[i].getSprite();			
+			sprite = mCases[i];			
 			sprite.setPosition(position[0], position[1]);
 			sprite.setSize(caseSize, caseSize);
 			

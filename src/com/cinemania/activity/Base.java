@@ -14,21 +14,14 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 
-import com.cinemania.gamelogic.BigMovie;
-import com.cinemania.cases.Case;
-import com.cinemania.cases.Cinema;
-import com.cinemania.gamelogic.Player;
+import android.util.Log;
+import android.view.KeyEvent;
+
 import com.cinemania.client.R;
-import com.cinemania.gamelogic.Room;
-import com.cinemania.client.R.string;
-import com.cinemania.constants.Test;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.scenes.GameMenu;
 import com.cinemania.scenes.OptionScene;
-
-import android.util.Log;
-import android.view.KeyEvent;
 
 public class Base extends BaseGameActivity
 {
@@ -120,7 +113,6 @@ public class Base extends BaseGameActivity
 		mTitle2.registerEntityModifier(new MoveXModifier(1, mTitle2.getX(), mCamera.getWidth() / 2));
     	
     	pOnCreateResourcesCallback.onCreateResourcesFinished();
-  		
     }
 
     @Override
@@ -187,10 +179,6 @@ public class Base extends BaseGameActivity
 		mMenu.Load();
 		mOption.Load();
 		mGame.Load();
-		
-		// Test JCA
-		Test.test();
-
 	}
 	
 	private void loadScenes()

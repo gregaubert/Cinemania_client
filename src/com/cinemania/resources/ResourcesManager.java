@@ -83,6 +83,7 @@ public class ResourcesManager {
         mCaseLogistics = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_logistics.png");
         mCaseLuck = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_luck.png");
         mCaseEmpty = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_empty1.png");
+        mCaseHQ = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_hq.png");
         
         try {
 			boardBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
@@ -90,6 +91,5 @@ public class ResourcesManager {
 		} catch (final TextureAtlasBuilderException e) {
 			Debug.e(e);
 		}
-      
 	}
 }

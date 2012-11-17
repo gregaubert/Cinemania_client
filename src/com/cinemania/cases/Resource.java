@@ -5,10 +5,14 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import com.cinemania.gamelogic.Profitable;
 import com.cinemania.resources.ResourcesManager;
 
-public class Resource extends Case implements Profitable {
+public class Resource extends BuyableCase implements Profitable {
 
 	private int level = 0;
 
+	public Resource() {
+		super(ResourcesManager.getInstance().mCaseResource);
+	}
+	
 	public Resource(ITextureRegion texture) {
 		super(texture);
 	}

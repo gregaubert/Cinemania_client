@@ -1,66 +1,38 @@
 package com.cinemania.cases;
 
+import org.andengine.entity.IEntity;
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.opengl.texture.Texture;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.color.Color;
 
 import com.cinemania.activity.Base;
 import com.cinemania.constants.Constantes;
-import com.cinemania.gamelogic.Player;
 
-
-public abstract class Case implements Constantes {
-
-	private Player owner;
-
-	private int baseValue;
+public class Case extends Rectangle implements Constantes {
 	
-	private Sprite sprite;	
+	private Sprite textureSprite;
+	private final int TEXTURELAYER = 0;
+	private final int LEVELLAYER = 1;
 
 	public Case(ITextureRegion texture) {
-		sprite = new Sprite(0, 0, texture, Base.getSharedInstance().getVertexBufferObjectManager());
+		super(0, 0, texture.getWidth(), texture.getHeight(), Base.getSharedInstance().getVertexBufferObjectManager());
+		setBackgroundColor(Color.WHITE);
+		textureSprite = new Sprite(0, 0, texture, Base.getSharedInstance().getVertexBufferObjectManager());
+		attachChild(textureSprite);
 	}
 	
-	public Sprite getSprite(){
-		return sprite;
+	public void setBackgroundColor(Color color){
+		setColor(color);
 	}
-
-	/**
-	 * Buy the case. The player become the owner and this method decrease the
-	 * amount of the player.
-	 * 
-	 * @param p
-	 *            : the player
-	 */
-	public void buy(Player p) {
-		p.addProperty(this);
-		this.setOwner(p);
-		p.setAmount(p.getAmount() - totalValue());
-	}
-
-	public void setOwner(Player owner) {
-		this.owner = owner;
+	
+	@Override
+	public void setSize(float pWidth, float pHeight) {
+		for(IEntity ie : mChildren)
+			if(ie.getClass() == Sprite.class)
+				((Sprite)ie).setSize(pWidth, pHeight);
 		
-		sprite.setColor(owner.getColor());
+		super.setSize(pWidth, pHeight);
 	}
-
-	public Player getOwner() {
-		return owner;
-	}
-
-	public abstract int totalValue();
-
-	public boolean hasOwner() {
-		return owner != null;
-	}
-
-	public int getBaseValue() {
-		return baseValue;
-	}
-
-	public void setBaseValue(int value) {
-		baseValue = value;
-	}
-
 }
