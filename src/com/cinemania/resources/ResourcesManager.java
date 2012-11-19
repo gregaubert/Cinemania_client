@@ -49,7 +49,7 @@ public class ResourcesManager {
 	
 	public void LoadSplash(Context context, Engine engine){
 		//Gestion des polices d'écritures
-		mSplashFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/GunslingerDEMO-KCFonts.ttf", 32f, true, Color.WHITE);
+		mSplashFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/GunslingerDEMO-KCFonts.ttf", 48f, true, Color.WHITE);
 		//mSplashFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
 		mSplashFont.load();
 		

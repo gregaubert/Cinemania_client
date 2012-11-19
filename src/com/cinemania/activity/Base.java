@@ -105,8 +105,8 @@ public class Base extends BaseGameActivity
 		mTitle1 = new Text(0, 0, font, this.getString(R.string.titre1), this.getVertexBufferObjectManager());
 		mTitle2 = new Text(0, 0, font, this.getString(R.string.titre2), this.getVertexBufferObjectManager());
 		
-		mTitle1.setPosition(-mTitle1.getWidth(), mCamera.getHeight() - 60);
-		mTitle2.setPosition(mCamera.getWidth(), mCamera.getHeight() - 60);
+		mTitle1.setPosition(-mTitle1.getWidth(), mCamera.getHeight() - 125);
+		mTitle2.setPosition(mCamera.getWidth(), mCamera.getHeight() - 125);
 		
 		//Ajout de la modification du titre
 		mTitle1.registerEntityModifier(new MoveXModifier(1, mTitle1.getX(), mCamera.getWidth() / 2 - mTitle1.getWidth()));
@@ -160,9 +160,9 @@ public class Base extends BaseGameActivity
 			        pGLState.enableDither();
 			    }
             };
-            
+            splash.setScale(0.8f);
             //Ajoute le sprite splash e la scene.
-            splash.setPosition((CAMERA_WIDTH - splash.getWidth()) * 0.5f, (CAMERA_HEIGHT-splash.getHeight()) * 0.5f);
+            splash.setPosition((CAMERA_WIDTH - splash.getWidth()) * 0.5f, (CAMERA_HEIGHT-splash.getHeight() - 150f) * 0.5f);
             mCurrentScene.attachChild(splash);
     
             //Attache le titre
