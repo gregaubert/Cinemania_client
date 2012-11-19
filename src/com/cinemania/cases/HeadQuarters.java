@@ -1,6 +1,6 @@
 package com.cinemania.cases;
 
-import com.cinemania.constants.Constantes;
+import com.cinemania.constants.Constants;
 import com.cinemania.resources.ResourcesManager;
 
 public class HeadQuarters extends Case {
@@ -9,7 +9,7 @@ public class HeadQuarters extends Case {
 	
 	public HeadQuarters(int playerId) {
 		super(ResourcesManager.getInstance().mCaseHQ);
-		super.setColor(Constantes.PLAYER_COLOR[playerId]);
+		super.setColor(Constants.PLAYER_COLOR[playerId]);
 	}
 
 	public int getLevel() {

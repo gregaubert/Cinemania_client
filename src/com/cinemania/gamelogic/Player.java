@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import org.andengine.util.color.Color;
 
 import com.cinemania.cases.Case;
-import com.cinemania.constants.Constantes;
+import com.cinemania.constants.Constants;
 
-public class Player implements Constantes {
+public class Player implements Constants {
   private static int generalId =  1;
 
   private int id;
@@ -29,7 +29,7 @@ public class Player implements Constantes {
 		setLogistic(DEFAULT_LOGISTIC);
 		setActors(DEFAULT_ACTORS);	
 		properties = new ArrayList<Case>();
-		color = Constantes.PLAYER_COLOR[id-1];
+		color = Constants.PLAYER_COLOR[id-1];
   }
 
   public int getId() {

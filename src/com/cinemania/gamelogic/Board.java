@@ -7,22 +7,22 @@ import com.cinemania.cases.LuckyCase;
 import com.cinemania.cases.School;
 import com.cinemania.cases.LogisticFactory;
 import com.cinemania.cases.Script;
-import com.cinemania.constants.Constantes;
+import com.cinemania.constants.Constants;
 import com.cinemania.resources.ResourcesManager;
 
-public class Board implements Constantes {
+public class Board implements Constants {
 
-	private Case[] mCases = new Case[Constantes.BOARD_SIZE];
+	private Case[] mCases = new Case[Constants.BOARD_SIZE];
 
-	private int size = Constantes.BOARD_SIZE;
+	private int size = Constants.BOARD_SIZE;
 	
 	private int currentHQ = 0;
 	private int currentScript;
 	private int currentCinema;
 	private int currentActor;
 	private int currentLogistic;
-	private int currentEmpty = Constantes.BOARD_NB_EMPTY_TOT;
-	private int currentLuck = Constantes.BOARD_NB_LUCK_TOT;
+	private int currentEmpty = Constants.BOARD_NB_EMPTY_TOT;
+	private int currentLuck = Constants.BOARD_NB_LUCK_TOT;
 	private int currentTotLine;
 
 	public Board() {
@@ -37,11 +37,11 @@ public class Board implements Constantes {
 	
 	private Case randomCase(int i){
 		if(i % (size/4) == 0){
-			currentScript = Constantes.BOARD_NB_SCRIPT_LINE;
-			currentCinema = Constantes.BOARD_NB_CINEMA_LINE;
-			currentActor = Constantes.BOARD_NB_ACTOR_LINE;
-			currentLogistic = Constantes.BOARD_NB_LOGISTIC_LINE;
-			currentTotLine = Constantes.BOARD_NB_TOT_LINE;
+			currentScript = Constants.BOARD_NB_SCRIPT_LINE;
+			currentCinema = Constants.BOARD_NB_CINEMA_LINE;
+			currentActor = Constants.BOARD_NB_ACTOR_LINE;
+			currentLogistic = Constants.BOARD_NB_LOGISTIC_LINE;
+			currentTotLine = Constants.BOARD_NB_TOT_LINE;
 			return new HeadQuarters(currentHQ++);
 		}
 		

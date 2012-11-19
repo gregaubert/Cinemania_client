@@ -3,7 +3,7 @@ package com.cinemania.constants;
 import org.andengine.util.color.Color;
 
 
-public interface Constantes {
+public interface Constants {
 	
   final int INITIAL_YEAR = 1930;
   

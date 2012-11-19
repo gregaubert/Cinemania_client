@@ -1,8 +1,8 @@
 package com.cinemania.gamelogic;
 
-import com.cinemania.constants.Constantes;
+import com.cinemania.constants.Constants;
 
-public abstract class Movie implements Constantes, Profitable {
+public abstract class Movie implements Constants, Profitable {
 	
   private int id;
   private int baseId =  1;

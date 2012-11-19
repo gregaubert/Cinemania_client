@@ -9,7 +9,7 @@ import org.andengine.entity.sprite.Sprite;
 
 import com.cinemania.activity.Base;
 import com.cinemania.cases.Case;
-import com.cinemania.constants.Constantes;
+import com.cinemania.constants.Constants;
 import com.cinemania.gamelogic.Board;
 import com.cinemania.resources.ResourcesManager;
 
@@ -25,7 +25,7 @@ public class BoardScene extends Scene implements Loader{
 
 	private Board mBoard;
 
-	private final int side = (int) Constantes.BOARD_SIZE / 4;
+	private final int side = (int) Constants.BOARD_SIZE / 4;
 	private final float caseSize = Base.CAMERA_HEIGHT / (side+1);
 	
 	private float offset = (Base.CAMERA_WIDTH-(side+1)*caseSize)/2; 
@@ -65,6 +65,11 @@ public class BoardScene extends Scene implements Loader{
 		
 		this.setBackgroundEnabled(false);
 		this.getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, ResourcesManager.getInstance().mBoardBackground, mActivity.getVertexBufferObjectManager()));
+		
+		Sprite boardCenter = new Sprite(0, 0, ResourcesManager.getInstance().mBoardCenter, mActivity.getVertexBufferObjectManager());
+		boardCenter.setSize(caseSize * (side - 1), caseSize * (side - 1));
+		boardCenter.setPosition(caseSize + offset, caseSize);
+		this.getChildByIndex(LAYER_BOARD).attachChild(boardCenter);
 		
 		displayCases();
 	}
