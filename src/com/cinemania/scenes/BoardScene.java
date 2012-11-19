@@ -23,12 +23,11 @@ public class BoardScene extends Scene implements Loader{
 
 	private Board mBoard;
 
-	private final int caseMargin = 5;
 	private final int side = (int) Constantes.BOARD_SIZE / 4;
-	private final float caseSize = (Base.CAMERA_HEIGHT-caseMargin*(side+2)) / (side+1);
+	private final float caseSize = Base.CAMERA_HEIGHT / (side+1);
 
-	private float maxCoord = side*(caseSize + caseMargin) + caseMargin;
-	private float minCoord = caseMargin;
+	private float maxCoord = side*caseSize;
+	private float minCoord = 0;
 	
 	private static final int ORIENTATION_RIGHT = 0;
 	private static final int ORIENTATION_DOWN = 1;
@@ -88,24 +87,24 @@ public class BoardScene extends Scene implements Loader{
 		switch(orientation){
 		case ORIENTATION_RIGHT:
 			j = i;
-			position[0] = minCoord + j * (caseSize + caseMargin);
+			position[0] = minCoord + j * caseSize;
 			position[1] = minCoord;	
 			break;
 		case ORIENTATION_DOWN:
 			j = i-side;
 			position[0] = maxCoord;
-			position[1] = minCoord + j * (caseSize + caseMargin);
+			position[1] = minCoord + j * caseSize;
 			break;		
 		case ORIENTATION_LEFT:
 			j = i-2*side;
-			position[0] = maxCoord - j * (caseSize + caseMargin);
+			position[0] = maxCoord - j * caseSize;
 			position[1] = maxCoord;
 			break;
 		case ORIENTATION_UP:
 		default:
 			j = i-3*side;
 			position[0] = minCoord;
-			position[1] = maxCoord - j * (caseSize + caseMargin);
+			position[1] = maxCoord - j * caseSize;
 			
 		}
 			
