@@ -1,6 +1,7 @@
 package com.cinemania.scenes;
 
 import org.andengine.engine.camera.Camera;
+import org.andengine.entity.Entity;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
@@ -10,6 +11,7 @@ import com.cinemania.activity.Base;
 import com.cinemania.cases.Case;
 import com.cinemania.constants.Constantes;
 import com.cinemania.gamelogic.Board;
+import com.cinemania.resources.ResourcesManager;
 
 
 public class BoardScene extends Scene implements Loader{
@@ -34,6 +36,12 @@ public class BoardScene extends Scene implements Loader{
 	private static final int ORIENTATION_DOWN = 1;
 	private static final int ORIENTATION_LEFT = 2;
 	private static final int ORIENTATION_UP = 3;
+	
+	private static final int LAYER_COUNT = 3;
+
+	private static final int LAYER_BACKGROUND = 0;
+	private static final int LAYER_BOARD = 1;
+	private static final int LAYER_PAWN = 2;
 
 	// ===========================================================
 	// Constructors
@@ -42,7 +50,10 @@ public class BoardScene extends Scene implements Loader{
 	public BoardScene() {
 	    setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
 	    mCamera = Base.getSharedInstance().getCamera();
-	    mActivity = Base.getSharedInstance();	
+	    mActivity = Base.getSharedInstance();
+	    
+	    for(int i = 0; i < LAYER_COUNT; i++)
+			this.attachChild(new Entity());
 	}
 
     // ===========================================================
@@ -51,6 +62,10 @@ public class BoardScene extends Scene implements Loader{
 	@Override
 	public void Load() {
 		mBoard = new Board();
+		
+		this.setBackgroundEnabled(false);
+		this.getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, ResourcesManager.getInstance().mBoardBackground, mActivity.getVertexBufferObjectManager()));
+		
 		displayCases();
 	}
 	
@@ -66,8 +81,7 @@ public class BoardScene extends Scene implements Loader{
 			sprite.setPosition(position[0], position[1]);
 			sprite.setSize(caseSize, caseSize);
 			
-			this.attachChild(sprite);
-
+			this.getChildByIndex(LAYER_BOARD).attachChild(sprite);
 		}
 	}
 

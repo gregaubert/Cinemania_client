@@ -30,6 +30,7 @@ public class ResourcesManager {
 	public ITextureRegion mCaseLogistics;
 	public ITextureRegion mCaseLuck;
 	public ITextureRegion mCaseEmpty;
+	public ITextureRegion mBoardBackground;
 	
 	public ITextureRegion mSplashLogo;
 	public ITextureRegion mMenuLogo;
@@ -85,9 +86,14 @@ public class ResourcesManager {
         mCaseEmpty = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_empty1.png");
         mCaseHQ = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_hq.png");
         
+        BuildableBitmapTextureAtlas backgroundBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 2048);
+        mBoardBackground = BitmapTextureAtlasTextureRegionFactory.createFromAsset(backgroundBitmapTextureAtlas, context, "background.png");
+        
         try {
-			boardBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
-			boardBitmapTextureAtlas.load();
+        	boardBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+        	backgroundBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+        	boardBitmapTextureAtlas.load();
+        	backgroundBitmapTextureAtlas.load();
 		} catch (final TextureAtlasBuilderException e) {
 			Debug.e(e);
 		}
