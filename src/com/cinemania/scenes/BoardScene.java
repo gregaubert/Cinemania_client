@@ -25,7 +25,8 @@ public class BoardScene extends Scene implements Loader{
 
 	private final int side = (int) Constantes.BOARD_SIZE / 4;
 	private final float caseSize = Base.CAMERA_HEIGHT / (side+1);
-
+	
+	private float offset = (Base.CAMERA_WIDTH-(side+1)*caseSize)/2; 
 	private float maxCoord = side*caseSize;
 	private float minCoord = 0;
 	
@@ -107,6 +108,8 @@ public class BoardScene extends Scene implements Loader{
 			position[1] = maxCoord - j * caseSize;
 			
 		}
+		
+		position[0] += offset;
 			
 		return position;
 	}
