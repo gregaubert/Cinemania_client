@@ -18,13 +18,8 @@ public class Case extends Rectangle implements Constantes {
 
 	public Case(ITextureRegion texture) {
 		super(0, 0, texture.getWidth(), texture.getHeight(), Base.getSharedInstance().getVertexBufferObjectManager());
-		setBackgroundColor(Color.WHITE);
 		textureSprite = new Sprite(0, 0, texture, Base.getSharedInstance().getVertexBufferObjectManager());
 		attachChild(textureSprite);
-	}
-	
-	public void setBackgroundColor(Color color){
-		setColor(color);
 	}
 	
 	@Override
