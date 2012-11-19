@@ -3,6 +3,7 @@
 	<name>Cinemania_client</name>
 	<comment></comment>
 	<projects>
+		<project>AndEngine</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

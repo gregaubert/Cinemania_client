@@ -23,7 +23,7 @@ public class BoardScene extends Scene implements Loader{
 
 	private Board mBoard;
 
-	private final int caseMargin = 1;
+	private final int caseMargin = 5;
 	private final int side = (int) Constantes.BOARD_SIZE / 4;
 	private final float caseSize = (Base.CAMERA_HEIGHT-caseMargin*(side+2)) / (side+1);
 
@@ -65,9 +65,6 @@ public class BoardScene extends Scene implements Loader{
 			sprite = mCases[i];			
 			sprite.setPosition(position[0], position[1]);
 			sprite.setSize(caseSize, caseSize);
-			
-			sprite.setRotationCenter(sprite.getWidth()/2, sprite.getHeight()/2);
-			sprite.setRotation(getRotation(i));
 			
 			this.attachChild(sprite);
 
@@ -116,30 +113,8 @@ public class BoardScene extends Scene implements Loader{
 	}
 	
 	private int getOrientation(int i){
-		if (i < side){
-			return ORIENTATION_RIGHT;
-		}
-		else if (i >= side && i < 2*side){
-			return ORIENTATION_DOWN;
-		}		
-		else if (i >= 2*side && i < 3*side){
-			return ORIENTATION_LEFT;
-		}
-		
-		return ORIENTATION_UP;
-	}
-	
-	private float getRotation(int i){
-		switch (getOrientation(i)){
-		case ORIENTATION_LEFT:
-			return 180f;
-		case ORIENTATION_DOWN:
-			return 90f;
-		case ORIENTATION_UP:
-			return -90f;
-		}
-		
-		return 0;
+		// 0 => right, 1 => down, 2 => left, 3 => up
+		return (int) i / side;
 	}
 
 }
