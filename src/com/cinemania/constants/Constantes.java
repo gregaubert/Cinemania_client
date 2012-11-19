@@ -55,12 +55,13 @@ public interface Constantes {
   
   final int BOARD_SIZE = 40;
   
-  final int BOARD_NB_CINEMA_LINE = 2;
-  final int BOARD_NB_RESOURCE_LINE = 4;
+  final int BOARD_NB_CINEMA_LINE = 3;
+  final int BOARD_NB_ACTOR_LINE = 2;
+  final int BOARD_NB_LOGISTIC_LINE = 2;
   final int BOARD_NB_SCRIPT_LINE = 1;
-  final int BOARD_NB_TOT_LINE = 2; 
-  final int BOARD_NB_EMPTY_TOT = 6;
-  final int BOARD_NB_LUCK_TOT = 2;
+  final int BOARD_NB_TOT_LINE = 1; 
+  final int BOARD_NB_EMPTY_TOT = 0;
+  final int BOARD_NB_LUCK_TOT = 4;
   
   /**
    * Costs by turn depending on the case

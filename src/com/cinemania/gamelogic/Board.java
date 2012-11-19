@@ -4,7 +4,8 @@ import com.cinemania.cases.Case;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.LuckyCase;
-import com.cinemania.cases.Resource;
+import com.cinemania.cases.School;
+import com.cinemania.cases.LogisticFactory;
 import com.cinemania.cases.Script;
 import com.cinemania.constants.Constantes;
 import com.cinemania.resources.ResourcesManager;
@@ -18,7 +19,8 @@ public class Board implements Constantes {
 	private int currentHQ = 0;
 	private int currentScript;
 	private int currentCinema;
-	private int currentResource;
+	private int currentActor;
+	private int currentLogistic;
 	private int currentEmpty = Constantes.BOARD_NB_EMPTY_TOT;
 	private int currentLuck = Constantes.BOARD_NB_LUCK_TOT;
 	private int currentTotLine;
@@ -37,22 +39,27 @@ public class Board implements Constantes {
 		if(i % (size/4) == 0){
 			currentScript = Constantes.BOARD_NB_SCRIPT_LINE;
 			currentCinema = Constantes.BOARD_NB_CINEMA_LINE;
-			currentResource = Constantes.BOARD_NB_RESOURCE_LINE;
+			currentActor = Constantes.BOARD_NB_ACTOR_LINE;
+			currentLogistic = Constantes.BOARD_NB_LOGISTIC_LINE;
 			currentTotLine = Constantes.BOARD_NB_TOT_LINE;
 			return new HeadQuarters(currentHQ++);
 		}
 		
-		int random = Math.round((float)Math.random() * (currentResource  + currentCinema + currentTotLine + currentScript - 1));
+		int random = Math.round((float)Math.random() * (currentActor + currentLogistic  + currentCinema + currentTotLine + currentScript - 1));
 		
-		if(random < currentResource){
-			currentResource--;
-			return new Resource();
+		if(random < currentActor){
+			currentActor--;
+			return new School();
 		}
-		else if(random < currentResource + currentCinema){
+		else if (random < currentActor + currentLogistic){
+			currentLogistic--;
+			return new LogisticFactory();
+		}
+		else if(random < currentActor + currentLogistic + currentCinema){
 			currentCinema--;
 			return new Cinema();
 		}
-		else if(random < currentResource + currentCinema + currentScript){
+		else if(random < currentActor + currentLogistic + currentCinema + currentScript){
 			currentScript--;
 			return new Script();
 		}
