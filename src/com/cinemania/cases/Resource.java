@@ -4,6 +4,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 
 import com.cinemania.gamelogic.Profitable;
 import com.cinemania.resources.ResourcesManager;
+import static com.cinemania.constants.AllConstants.*;
 
 public class Resource extends BuyableCase implements Profitable {
 

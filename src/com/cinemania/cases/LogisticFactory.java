@@ -1,6 +1,7 @@
 package com.cinemania.cases;
 
 import com.cinemania.resources.ResourcesManager;
+import static com.cinemania.constants.AllConstants.*;
 
 public class LogisticFactory extends Resource {
 

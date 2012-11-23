@@ -1,6 +1,7 @@
 package com.cinemania.scenes;
 
 import org.andengine.engine.camera.Camera;
+import static com.cinemania.constants.AllConstants.*;
 import org.andengine.entity.Entity;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
@@ -9,7 +10,6 @@ import org.andengine.entity.sprite.Sprite;
 
 import com.cinemania.activity.Base;
 import com.cinemania.cases.Case;
-import com.cinemania.constants.Constants;
 import com.cinemania.gamelogic.Board;
 import com.cinemania.resources.ResourcesManager;
 
@@ -25,7 +25,7 @@ public class BoardScene extends Scene implements Loader{
 
 	private Board mBoard;
 
-	private final int side = (int) Constants.BOARD_SIZE / 4;
+	private final int side = (int) BOARD_SIZE / 4;
 	private final float caseSize = Base.CAMERA_HEIGHT / (side+1);
 	
 	private float offset = (Base.CAMERA_WIDTH-(side+1)*caseSize)/2; 

@@ -1,6 +1,8 @@
 package com.cinemania.cases;
 
 import com.cinemania.gamelogic.Profitable;
+import static com.cinemania.constants.AllConstants.*;
+
 import com.cinemania.gamelogic.Room;
 import com.cinemania.resources.ResourcesManager;
 

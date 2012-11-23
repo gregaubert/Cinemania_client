@@ -1,6 +1,7 @@
 package com.cinemania.cases;
 
 import org.andengine.opengl.texture.region.ITextureRegion;
+import static com.cinemania.constants.AllConstants.*;
 
 import com.cinemania.resources.ResourcesManager;
 

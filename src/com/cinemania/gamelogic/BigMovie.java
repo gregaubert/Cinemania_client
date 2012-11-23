@@ -1,4 +1,6 @@
 package com.cinemania.gamelogic;
+import static com.cinemania.constants.AllConstants.*;
+
 public class BigMovie extends Movie {
   private int logistic;
 

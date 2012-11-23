@@ -8,9 +8,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.color.Color;
 
 import com.cinemania.activity.Base;
-import com.cinemania.constants.Constants;
 
-public class Case extends Rectangle implements Constants {
+public class Case extends Rectangle {
 	
 	private Sprite textureSprite;
 	private final int TEXTURELAYER = 0;

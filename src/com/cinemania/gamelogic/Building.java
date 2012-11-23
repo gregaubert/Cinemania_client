@@ -1,9 +1,9 @@
 package com.cinemania.gamelogic;
 
 import com.cinemania.cases.Case;
-import com.cinemania.constants.Constants;
+import static com.cinemania.constants.AllConstants.*;
 
-public abstract class Building implements Constants {
+public abstract class Building {
   private int level =  DEFAULT_LEVEL;
 
   private Case theCase;
@@ -44,7 +44,7 @@ public abstract class Building implements Constants {
 
 }
 @SuppressWarnings("serial")
-class IncreaseLevelImpossible extends Exception implements Constants {
+class IncreaseLevelImpossible extends Exception {
   public IncreaseLevelImpossible(String string) {
 		super(string);
   }

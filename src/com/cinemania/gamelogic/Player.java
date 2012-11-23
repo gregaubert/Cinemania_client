@@ -1,12 +1,12 @@
 package com.cinemania.gamelogic;
 import java.util.ArrayList;
+import static com.cinemania.constants.AllConstants.*;
 
 import org.andengine.util.color.Color;
 
 import com.cinemania.cases.Case;
-import com.cinemania.constants.Constants;
 
-public class Player implements Constants {
+public class Player {
   private static int generalId =  1;
 
   private int id;
@@ -29,7 +29,7 @@ public class Player implements Constants {
 		setLogistic(DEFAULT_LOGISTIC);
 		setActors(DEFAULT_ACTORS);	
 		properties = new ArrayList<Case>();
-		color = Constants.PLAYER_COLOR[id-1];
+		color = PLAYER_COLOR[id-1];
   }
 
   public int getId() {

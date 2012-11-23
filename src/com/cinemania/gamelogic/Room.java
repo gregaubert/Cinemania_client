@@ -1,9 +1,9 @@
 package com.cinemania.gamelogic;
 
 import com.cinemania.cases.Cinema;
-import com.cinemania.constants.Constants;
+import static com.cinemania.constants.AllConstants.*;
 
-public class Room implements Profitable, Constants{
+public class Room implements Profitable {
 	  Cinema cinema;
 
 	  Movie movie;
