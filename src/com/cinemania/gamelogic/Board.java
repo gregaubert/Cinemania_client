@@ -111,9 +111,11 @@ public class Board {
 		return mCases[idPlayer*(size/4)];
 	}
 	
+	private int shootOneDice() {
+		return (int)(Math.random()*6)+1;
+	}
+	
 	public int rollDice(){
-		Random r = new Random();
-		
-		return r.nextInt(13)+1;
+		return shootOneDice() + shootOneDice();
 	}
 }

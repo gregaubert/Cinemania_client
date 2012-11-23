@@ -32,7 +32,8 @@ public class Player {
   
 	private ArrayList<Case> properties;
   
-	private Color color;
+  	private Color colorCase;
+  	private Color colorPawn;
 
 	private Sprite view;
   
@@ -44,7 +45,9 @@ public class Player {
 		setLogistic(DEFAULT_LOGISTIC);
 		setActors(DEFAULT_ACTORS);	
 		properties = new ArrayList<Case>();
-		color = PLAYER_COLOR[id-1];
+		
+		colorCase = PLAYER_COLOR[1][id-1];
+		colorPawn = PLAYER_COLOR[0][id-1];
 		
 		this.board = board;
 		
@@ -54,9 +57,10 @@ public class Player {
 		
 		view = new Sprite(position.getX()+bordure, position.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
 		view.setSize(caseSize-2*bordure, caseSize - 2*bordure);
-		view.setColor(this.color);	
+		view.setColor(this.colorPawn);	
+		
 	}
-
+	
 	public void Move(int nb){
 	  
 		int pos = board.findCaseIndex(position);
@@ -131,13 +135,13 @@ public class Player {
   public void removeProperty(Case c) {
 		properties.remove(c);
   }
-
-  public int shootOneDice() {
-		return (int)(Math.random()*6)+1;
+  
+  public Color getColorCase(){
+	  return colorCase;
   }
   
-  public Color getColor(){
-	  return color;
+  public Color getColorPawn(){
+	  return colorPawn;
   }
 
 }
