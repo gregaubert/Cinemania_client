@@ -21,7 +21,8 @@ public class Player {
 
   private ArrayList<Case> properties;
   
-  private Color color;
+  private Color colorCase;
+  private Color colorPawn;
 
   public Player() {
 		id = generalId++;
@@ -29,7 +30,8 @@ public class Player {
 		setLogistic(DEFAULT_LOGISTIC);
 		setActors(DEFAULT_ACTORS);	
 		properties = new ArrayList<Case>();
-		color = PLAYER_COLOR[id-1];
+		colorCase = PLAYER_COLOR[1][id-1];
+		colorPawn = PLAYER_COLOR[0][id-1];
   }
 
   public int getId() {
@@ -80,8 +82,12 @@ public class Player {
 		return (int)(Math.random()*6)+1;
   }
   
-  public Color getColor(){
-	  return color;
+  public Color getColorCase(){
+	  return colorCase;
+  }
+  
+  public Color getColorPawn(){
+	  return colorPawn;
   }
 
 }

@@ -29,7 +29,7 @@ public abstract class BuyableCase extends Case{
 
 	public void setOwner(Player owner) {
 		this.owner = owner;
-		setColor(owner.getColor());
+		setColor(owner.getColorCase());
 	}
 
 	public Player getOwner() {
