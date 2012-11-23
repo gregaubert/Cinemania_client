@@ -9,7 +9,7 @@ public class HeadQuarters extends Case {
 	
 	public HeadQuarters(int playerId) {
 		super(ResourcesManager.getInstance().mCaseHQ);
-		super.setColor(PLAYER_COLOR[playerId]);
+		super.setColor(PLAYER_COLOR[1][playerId]);
 	}
 
 	public int getLevel() {
