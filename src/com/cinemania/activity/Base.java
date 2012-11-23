@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.cinemania.client.R;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.scenes.GameMenu;
@@ -175,6 +176,7 @@ public class Base extends BaseGameActivity
     	//Chargement des ressources
 		manager.LoadMenu(this, this.mEngine);
 		manager.LoadBoardGame(this,this.mEngine);
+		manager.LoadPlayer(this, this.mEngine);
 		//Initialisation des ressources
 		mMenu.Load();
 		mOption.Load();

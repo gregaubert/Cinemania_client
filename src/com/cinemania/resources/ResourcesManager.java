@@ -33,8 +33,12 @@ public class ResourcesManager {
 	public ITextureRegion mBoardBackground;
 	public ITextureRegion mBoardCenter;
 	
+	public ITextureRegion mDice;
+	
 	public ITextureRegion mSplashLogo;
 	public ITextureRegion mMenuLogo;
+	
+	public ITextureRegion mPlayer;
 	//**************************** FONT ****************************
 	public Font mSplashFont;
 	public Font mMenuFont;
@@ -74,9 +78,20 @@ public class ResourcesManager {
     	splashTextureAtlas.load();
 	}
 	
+	public void LoadPlayer(Context context, Engine engine){
+		//Récupère la bonne texture.
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+    	BitmapTextureAtlas PlayerTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 200, 200, TextureOptions.DEFAULT);
+    	//Récupère la bonne texture.
+    	mPlayer = BitmapTextureAtlasTextureRegionFactory.createFromAsset(PlayerTextureAtlas,context,"player.png", 0, 0);
+    	PlayerTextureAtlas.load();
+	}
+	
 	public void LoadBoardGame(Context context, Engine engine) {
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
         BuildableBitmapTextureAtlas boardBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 1024);
+        
+        mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "dice.png");
         
         mCaseCinema = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_cinema.png");
         mCaseResource = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_resources.png");

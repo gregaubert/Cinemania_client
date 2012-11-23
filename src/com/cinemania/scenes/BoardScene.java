@@ -7,10 +7,14 @@ import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.input.touch.TouchEvent;
+
+import android.util.Log;
 
 import com.cinemania.activity.Base;
 import com.cinemania.cases.Case;
 import com.cinemania.gamelogic.Board;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
 
@@ -42,7 +46,14 @@ public class BoardScene extends Scene implements Loader{
 	private static final int LAYER_BACKGROUND = 0;
 	private static final int LAYER_BOARD = 1;
 	private static final int LAYER_PAWN = 2;
-
+	
+	//FIXME
+    public static final int NB_PLAYER = 4;
+    private int ID_PLAYER = 0;
+    
+    //Liste des joueurs.
+    private Player mPlayer[] = new Player[NB_PLAYER];
+    
 	// ===========================================================
 	// Constructors
 	// ===========================================================
@@ -69,9 +80,40 @@ public class BoardScene extends Scene implements Loader{
 		Sprite boardCenter = new Sprite(0, 0, ResourcesManager.getInstance().mBoardCenter, mActivity.getVertexBufferObjectManager());
 		boardCenter.setSize(caseSize * (side - 1), caseSize * (side - 1));
 		boardCenter.setPosition(caseSize + offset, caseSize);
-		this.getChildByIndex(LAYER_BOARD).attachChild(boardCenter);
+		this.getChildByIndex(LAYER_PAWN).attachChild(boardCenter);
 		
 		displayCases();
+		
+		//Instancie les players.
+		for(int i = 0; i < NB_PLAYER; i++){
+			mPlayer[i] = new Player(mBoard, mBoard.getQG(i),i+1);
+			this.getChildByIndex(LAYER_PAWN).attachChild(mPlayer[i].getView());
+		}
+		
+		//TODO Modifié le -50
+		Sprite dice = new Sprite(0,mCamera.getHeight()-50,ResourcesManager.getInstance().mDice, mActivity.getVertexBufferObjectManager()){
+			@Override
+		    public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				
+				switch (pSceneTouchEvent.getAction())
+				{
+
+	                case TouchEvent.ACTION_DOWN: {
+	                	
+	                	Log.i("GAME","Déplacement du joueur : " + ID_PLAYER);
+	                	
+	                	int move = mBoard.rollDice();
+	    				mPlayer[ID_PLAYER].Move(move);
+	    				ID_PLAYER = (ID_PLAYER + 1) % NB_PLAYER;
+	    		        return true;
+	                }
+                }
+                return false;
+		    }
+		};
+		dice.setSize(caseSize, caseSize);
+		this.registerTouchArea(dice);
+		this.getChildByIndex(LAYER_BOARD).attachChild(dice);
 	}
 	
 	private void displayCases() {

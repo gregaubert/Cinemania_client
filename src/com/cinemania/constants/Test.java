@@ -11,7 +11,7 @@ public class Test {
 		Log.d("coucou1", "merde");
 		Cinema cin1 = new Cinema();
 		Log.d("coucou2", "merde");
-		Player p = new Player();
+		/*Player p = new Player();
 		cin1.buy(p);
 		cin1.buyRoom();
 		cin1.buyRoom();
@@ -33,6 +33,6 @@ public class Test {
 		
 		Log.v("coucou", "Benefice du cinéma : " + i);
 		
-		Log.d("coucou", "cucu");
+		Log.d("coucou", "cucu");*/
 	}
 }

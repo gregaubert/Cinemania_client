@@ -1,5 +1,8 @@
 package com.cinemania.gamelogic;
 import static com.cinemania.constants.AllConstants.*;
+
+import java.util.Random;
+
 import com.cinemania.cases.Case;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
@@ -14,8 +17,8 @@ public class Board {
 	private Case[] mCases = new Case[BOARD_SIZE];
 
 	private int size = BOARD_SIZE;
-	
-	private int currentHQ = 0;
+
+	private int currentHQ;
 	private int currentScript;
 	private int currentCinema;
 	private int currentActor;
@@ -23,7 +26,7 @@ public class Board {
 	private int currentEmpty = BOARD_NB_EMPTY_TOT;
 	private int currentLuck = BOARD_NB_LUCK_TOT;
 	private int currentTotLine;
-
+	
 	public Board() {
 		populate();
 	}
@@ -35,6 +38,7 @@ public class Board {
 	}
 	
 	private Case randomCase(int i){
+		
 		if(i % (size/4) == 0){
 			currentScript = BOARD_NB_SCRIPT_LINE;
 			currentCinema = BOARD_NB_CINEMA_LINE;
@@ -76,7 +80,6 @@ public class Board {
 		}
 	}
 	
-	
 	public Case getCaseAtIndex(int index){
 		try{
 			return mCases[index];
@@ -88,5 +91,29 @@ public class Board {
 	
 	public Case[] getCases(){
 		return mCases;
+	}
+	
+	public int getSize(){
+		return this.size;
+	}
+
+	public int findCaseIndex(Case toFind) {
+		
+		for(int i = 0; i < this.size; i++){
+			if(mCases[i] == toFind)
+				return i;
+		}
+		
+		return -1;
+	}
+	
+	public Case getQG(int idPlayer){
+		return mCases[idPlayer*(size/4)];
+	}
+	
+	public int rollDice(){
+		Random r = new Random();
+		
+		return r.nextInt(13)+1;
 	}
 }
