@@ -33,15 +33,21 @@ public class ResourcesManager {
 	public ITextureRegion mBoardBackground;
 	public ITextureRegion mBoardCenter;
 	
+	public ITextureRegion mMoneyLogo;
+	public ITextureRegion mScriptsLogo;
+	public ITextureRegion mActorsLogo;
+	public ITextureRegion mLogisticsLogo;
+	
 	public ITextureRegion mDice;
+	public ITextureRegion mPlayer;
 	
 	public ITextureRegion mSplashLogo;
 	public ITextureRegion mMenuLogo;
-	
-	public ITextureRegion mPlayer;
 	//**************************** FONT ****************************
 	public Font mSplashFont;
 	public Font mMenuFont;
+	public Font mYearFont;
+	public Font mResourcesFont;
 	
 	private ResourcesManager(){
 		
@@ -78,10 +84,35 @@ public class ResourcesManager {
     	splashTextureAtlas.load();
 	}
 	
+	public void LoadHUD(Context context, Engine engine){
+		// Gestion des polices d'écritures
+		mYearFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
+		mYearFont.load();
+		mResourcesFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
+		mResourcesFont.load();
+		
+		// Gestion des textures
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+		BuildableBitmapTextureAtlas HUDBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 512, 512);
+		
+		mMoneyLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "logo_money.png");
+		mScriptsLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "logo_scripts.png");
+		mLogisticsLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "logo_logistics.png");
+		mActorsLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "logo_actors.png");
+		mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "dice.png");
+	    
+		try {
+			HUDBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+			HUDBitmapTextureAtlas.load();
+		} catch (final TextureAtlasBuilderException e) {
+			Debug.e(e);
+		}
+	}
+	
 	public void LoadPlayer(Context context, Engine engine){
 		//Récupère la bonne texture.
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-    	BitmapTextureAtlas PlayerTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 200, 200, TextureOptions.DEFAULT);
+    	BitmapTextureAtlas PlayerTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 80, 80, TextureOptions.DEFAULT);
     	//Récupère la bonne texture.
     	mPlayer = BitmapTextureAtlasTextureRegionFactory.createFromAsset(PlayerTextureAtlas,context,"player.png", 0, 0);
     	PlayerTextureAtlas.load();
@@ -90,8 +121,6 @@ public class ResourcesManager {
 	public void LoadBoardGame(Context context, Engine engine) {
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
         BuildableBitmapTextureAtlas boardBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 1024);
-        
-        mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "dice.png");
         
         mCaseCinema = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_cinema.png");
         mCaseResource = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_resources.png");
@@ -102,9 +131,9 @@ public class ResourcesManager {
         mCaseEmpty = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_empty1.png");
         mCaseHQ = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_hq.png");
         
-        BuildableBitmapTextureAtlas backgroundBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 1024, 1024);
+        BuildableBitmapTextureAtlas backgroundBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 1024);
         mBoardBackground = BitmapTextureAtlasTextureRegionFactory.createFromAsset(backgroundBitmapTextureAtlas, context, "background.png");
-        BuildableBitmapTextureAtlas boardCenterBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 2048);
+        BuildableBitmapTextureAtlas boardCenterBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 1024, 1024);
         mBoardCenter = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardCenterBitmapTextureAtlas, context, "boardcenter.png");
         
         try {
