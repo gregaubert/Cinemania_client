@@ -14,7 +14,7 @@ import com.cinemania.resources.ResourcesManager;
 
 public class Player {
 	
-	private final float caseSize = Base.CAMERA_HEIGHT / (((int) BOARD_SIZE / 4)+1);
+	//private final float caseSize = Base.CAMERA_HEIGHT / (((int) BOARD_SIZE / 4)+1);
 	
 	private final int bordure = 10;
 	
@@ -56,7 +56,7 @@ public class Player {
 		this.QG = initial;
 		
 		view = new Sprite(position.getX()+bordure, position.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
-		view.setSize(caseSize-2*bordure, caseSize - 2*bordure);
+		view.setSize(view.getWidth()-2*bordure, view.getHeight() - 2*bordure);
 		view.setColor(this.colorPawn);	
 		
 	}
