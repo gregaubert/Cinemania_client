@@ -6,6 +6,7 @@ import com.cinemania.gamelogic.Room;
 
 import android.util.Log;
 public class Test {
+	/*
 	public static void test(){
 		int turn = 3;
 		Log.d("coucou1", "merde");
@@ -35,4 +36,5 @@ public class Test {
 		
 		Log.d("coucou", "cucu");
 	}
+	*/
 }

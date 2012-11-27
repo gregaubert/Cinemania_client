@@ -1,24 +1,41 @@
 package com.cinemania.cases;
 
-import static com.cinemania.constants.AllConstants.*;
+import com.cinemania.constants.AllConstants;
 import com.cinemania.resources.ResourcesManager;
 
-public class HeadQuarters extends Case {
-
-	private int level = 0;
+public class HeadQuarters extends OwnableCell {
 	
-	public HeadQuarters(int playerId) {
+	public static final int TYPE = 1;
+
+	private int mLevel = 0;
+	
+	
+	public HeadQuarters(int level) {
+		super(ResourcesManager.getInstance().mCaseHQ);
+		mLevel = level;
+	}
+	
+	// FIXME: A supprimer
+	/*public HeadQuarters(int playerId) {
 		super(ResourcesManager.getInstance().mCaseHQ);
 		super.setColor(PLAYER_COLOR[playerId]);
-	}
+	}*/
 
-	public int getLevel() {
-		return level;
+	
+	@Override
+	public void upgrade() {
+		assert mLevel < AllConstants.LEVEL_MAX_BUILDING;
+		mLevel++;
 	}
 	
-	public void increaseLevel() {
-		if (level < LEVEL_MAX_BUILDING)
-			level++;
+	@Override
+	public int getLevel() {
+		return mLevel;
+	}
+
+	@Override
+	public boolean updateAvailable() {
+		return mLevel < AllConstants.LEVEL_MAX_BUILDING;
 	}
 
 }

@@ -1,87 +1,107 @@
 package com.cinemania.gamelogic;
+
 import java.util.ArrayList;
 import static com.cinemania.constants.AllConstants.*;
 
 import org.andengine.util.color.Color;
 
 import com.cinemania.cases.Case;
+import com.cinemania.cases.HeadQuarters;
+import com.cinemania.cases.OwnableCell;
 
 public class Player {
-  private static int generalId =  1;
 
-  private int id;
+	private ArrayList<OwnableCell> mProperties = new ArrayList<OwnableCell>();
+	private HeadQuarters mHeadQuarters;
+	private Case mCurrentPosition;
+	private long mIdentifier;
+	private int mOrder;
+	private String mName;
+	private Color mColor;
+	private int mMoney;
+	private int mActors;
+	private int mLogistics;
+	
+	
+	public Player(long identifier, int order, String name, int money, int actors, int logistics, HeadQuarters headQuarters, Case currentPosition) {
+		mIdentifier = identifier;
+		mOrder = order;
+		mName = name;
+		mColor = PLAYER_COLOR[order];
+		mMoney = money;
+		mActors = actors;
+		mLogistics = logistics;
+		mHeadQuarters = headQuarters;
+		mCurrentPosition = currentPosition;
+	}
 
-  private int amount;
-
-  private int logistic;
-
-  private int actors;
-
-  private Case position;
-
-  private ArrayList<Case> properties;
-  
-  private Color color;
-
-  public Player() {
-		id = generalId++;
+	// FIXME: A supprimer
+	/*
+	public Player() {
+		mIdentifier = generalId++;
 		setAmount(DEFAULT_AMOUNT);
 		setLogistic(DEFAULT_LOGISTIC);
-		setActors(DEFAULT_ACTORS);	
+		setActors(DEFAULT_ACTORS);
 		properties = new ArrayList<Case>();
-		color = PLAYER_COLOR[id-1];
-  }
+		mColor = PLAYER_COLOR[(int) (mIdentifier - 1)];
+	}
+	*/
+	
+	public HeadQuarters getHeadQuarters() {
+		return mHeadQuarters;
+	}
+	
+	public long getId() {
+		return mIdentifier;
+	}
 
-  public int getId() {
-		return id;
-  }
+	public void setAmount(int amount) {
+		this.mMoney = amount;
+	}
 
-  public void setAmount(int amount) {
-		this.amount = amount;
-  }
+	public int getAmount() {
+		return mMoney;
+	}
 
-  public int getAmount() {
-		return amount;
-  }
+	public void setLogistic(int logistic) {
+		this.mLogistics = logistic;
+	}
 
-  public void setLogistic(int logistic) {
-		this.logistic = logistic;
-  }
+	public int getLogistic() {
+		return mLogistics;
+	}
 
-  public int getLogistic() {
-		return logistic;
-  }
+	public void setActors(int actors) {
+		this.mActors = actors;
+	}
 
-  public void setActors(int actors) {
-		this.actors = actors;
-  }
+	public int getActors() {
+		return mActors;
+	}
 
-  public int getActors() {
-		return actors;
-  }
+	public void setPosition(Case currentPosition) {
+		this.mCurrentPosition = currentPosition;
+	}
 
-  public void setPosition(Case position) {
-		this.position = position;
-  }
+	public Case getPosition() {
+		return mCurrentPosition;
+	}
 
-  public Case getPosition() {
-		return position;
-  }
+	public void addProperty(OwnableCell cell) {
+		mProperties.add(cell);
+		cell.setOwner(this);
+	}
 
-  public void addProperty(Case c) {
-		properties.add(c);
-  }
+	public void removeProperty(OwnableCell cell) {
+		mProperties.remove(cell);
+	}
 
-  public void removeProperty(Case c) {
-		properties.remove(c);
-  }
+	public int shootOneDice() {
+		return (int) (Math.random() * 6) + 1;
+	}
 
-  public int shootOneDice() {
-		return (int)(Math.random()*6)+1;
-  }
-  
-  public Color getColor(){
-	  return color;
-  }
+	public Color getColor() {
+		return mColor;
+	}
 
 }

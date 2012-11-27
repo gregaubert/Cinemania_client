@@ -7,14 +7,16 @@ import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
+import org.json.JSONException;
 
 import com.cinemania.activity.Base;
 import com.cinemania.cases.Case;
 import com.cinemania.gamelogic.Board;
+import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 
 
-public class BoardScene extends Scene implements Loader{
+public class BoardScene extends Scene implements Loader {
 
 	// ===========================================================
 	// Fields
@@ -23,6 +25,8 @@ public class BoardScene extends Scene implements Loader{
 	private Base mActivity;
 	private Camera mCamera;
 
+	private GameContext mGameContext;
+	
 	private Board mBoard;
 
 	private final int side = (int) BOARD_SIZE / 4;
@@ -61,7 +65,14 @@ public class BoardScene extends Scene implements Loader{
     // ===========================================================
 	@Override
 	public void Load() {
-		mBoard = new Board();
+		// FIXME: Remove me
+		// mBoard = new Board();
+		
+		try {
+			mGameContext = GameContext.deserialize(GameContext.test2());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		
 		this.setBackgroundEnabled(false);
 		this.getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, ResourcesManager.getInstance().mBoardBackground, mActivity.getVertexBufferObjectManager()));
@@ -75,7 +86,7 @@ public class BoardScene extends Scene implements Loader{
 	}
 	
 	private void displayCases() {
-		Case[] mCases = mBoard.getCases();
+		Case[] mCases = mGameContext.getBoard().getCases();
 
 		Rectangle sprite;
 		

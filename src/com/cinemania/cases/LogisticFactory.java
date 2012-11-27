@@ -4,14 +4,16 @@ import com.cinemania.resources.ResourcesManager;
 import static com.cinemania.constants.AllConstants.*;
 
 public class LogisticFactory extends Resource {
+	
+	public static final int TYPE = 6;
 
 	private boolean sceneryExtension =  false;
 	private boolean costumeExtension =  false;
 	private boolean hairdressingExtension =  false;
 	private boolean fxExtension =  false;
 
-	public LogisticFactory() {
-		super(ResourcesManager.getInstance().mCaseLogistics);
+	public LogisticFactory(int level) {
+		super(ResourcesManager.getInstance().mCaseLogistics, level);
 	}
 
 	@Override

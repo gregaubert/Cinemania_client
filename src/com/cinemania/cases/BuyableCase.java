@@ -4,9 +4,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 
 import com.cinemania.gamelogic.Player;
 
-public abstract class BuyableCase extends Case{
-
-	private Player owner;
+public abstract class BuyableCase extends OwnableCell {
 
 	private int baseValue;
 	
@@ -27,20 +25,7 @@ public abstract class BuyableCase extends Case{
 		p.setAmount(p.getAmount() - totalValue());
 	}
 
-	public void setOwner(Player owner) {
-		this.owner = owner;
-		setColor(owner.getColor());
-	}
-
-	public Player getOwner() {
-		return owner;
-	}
-
 	public abstract int totalValue();
-
-	public boolean hasOwner() {
-		return owner != null;
-	}
 
 	public int getBaseValue() {
 		return baseValue;
