@@ -1,11 +1,12 @@
 package com.cinemania.activity;
 
 import org.andengine.engine.camera.Camera;
+import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
-import org.andengine.engine.options.resolutionpolicy.FillResolutionPolicy;
+import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.modifier.MoveXModifier;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.Sprite;
@@ -17,6 +18,7 @@ import org.andengine.ui.activity.BaseGameActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import com.cinemania.camera.BoardHUD;
 import com.cinemania.client.R;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
@@ -29,13 +31,13 @@ public class Base extends BaseGameActivity
 	// ===========================================================
     // Constants
     // ===========================================================
-    public static final int CAMERA_WIDTH = 720;
+    public static final int CAMERA_WIDTH = 800;
     public static final int CAMERA_HEIGHT = 480;
     
     // ===========================================================
     // Fields
     // ===========================================================
-    private Camera mCamera;
+    private ZoomCamera mCamera;
    
     // ===========================================================
     // Ressources
@@ -70,6 +72,8 @@ public class Base extends BaseGameActivity
     private OptionScene mOption;
     //Scene du jeu
     private BoardScene mGame;
+    // HUD
+    private BoardHUD mHUD;
     
     // ===========================================================
     // Constructors
@@ -89,8 +93,8 @@ public class Base extends BaseGameActivity
     	instance = this;
     	//Recupere instance manager ressources
     	manager = ResourcesManager.getInstance();
-        mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
-        EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new FillResolutionPolicy(), mCamera);
+    	mCamera = new ZoomCamera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+        EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
         return engineOptions;
     }
     
@@ -109,8 +113,8 @@ public class Base extends BaseGameActivity
 		mTitle2.setPosition(mCamera.getWidth(), mCamera.getHeight() - 125);
 		
 		//Ajout de la modification du titre
-		mTitle1.registerEntityModifier(new MoveXModifier(1, mTitle1.getX(), mCamera.getWidth() / 2 - mTitle1.getWidth()));
-		mTitle2.registerEntityModifier(new MoveXModifier(1, mTitle2.getX(), mCamera.getWidth() / 2));
+		mTitle1.registerEntityModifier(new MoveXModifier(1.5f, mTitle1.getX(), mCamera.getWidth() / 2 - mTitle1.getWidth() - 18));
+		mTitle2.registerEntityModifier(new MoveXModifier(1.5f, mTitle2.getX(), mCamera.getWidth() / 2 - 18));
     	
     	pOnCreateResourcesCallback.onCreateResourcesFinished();
     }
@@ -135,10 +139,10 @@ public class Base extends BaseGameActivity
     	        //Chargement des ressources et scenes.
     			loadScenes();
     			loadResources();
+    			mCamera.setHUD(mHUD);
     	        mCurrentScene.detachChildren();
     	        setSceneType(SceneType.MENU);
     	        setCurrentScene(mMenu);
-    	        
     	    }
     	}));
     	  
@@ -175,10 +179,13 @@ public class Base extends BaseGameActivity
     	//Chargement des ressources
 		manager.LoadMenu(this, this.mEngine);
 		manager.LoadBoardGame(this,this.mEngine);
+		manager.LoadPlayer(this, this.mEngine);
+		manager.LoadHUD(this, this.mEngine);
 		//Initialisation des ressources
 		mMenu.Load();
 		mOption.Load();
 		mGame.Load();
+		mHUD.Load();		
 	}
 	
 	private void loadScenes()
@@ -187,6 +194,7 @@ public class Base extends BaseGameActivity
 		mMenu = new GameMenu(); 
     	mOption = new OptionScene();
     	mGame = new BoardScene();
+    	mHUD = new BoardHUD();
 	}
 	
 	@Override
@@ -204,12 +212,12 @@ public class Base extends BaseGameActivity
                 	System.exit(0);
                     break;
                 case OPTIONS:
-                    mEngine.setScene(mMenu);
                     mSceneType = SceneType.MENU;
+                    mEngine.setScene(mMenu);
                     break;
                 case GAME:
-                    mEngine.setScene(mMenu);
                     mSceneType = SceneType.MENU;
+                    mEngine.setScene(mMenu);
                     break; 
               }
          }
@@ -240,6 +248,16 @@ public class Base extends BaseGameActivity
     // to change the current main scene
     public void setCurrentScene(Scene scene) {
     	Log.i("GAME","Scene : " + scene.getClass());
+    	
+    	if(mSceneType == SceneType.GAME){
+    		mHUD.setVisible(true);
+    		mCamera.setZoomFactor(0.5f);
+    	}
+    	else{
+    		mHUD.setVisible(false);
+    		mCamera.setZoomFactor(1f);
+    	}
+    	
     	mCurrentScene = scene;
         getEngine().setScene(mCurrentScene);
     }

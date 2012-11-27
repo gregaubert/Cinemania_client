@@ -1,5 +1,8 @@
 package com.cinemania.gamelogic;
 import static com.cinemania.constants.AllConstants.*;
+
+import java.util.Random;
+
 import com.cinemania.cases.Case;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
@@ -11,15 +14,15 @@ import com.cinemania.resources.ResourcesManager;
 
 public class Board {
 
-	private Case[] mCases = new Case[BOARD_SIZE];
+	private Case[] mCases;
 	
 	public Board(Case[] cases) {
 		mCases = cases;
 	}
 	
-	
+
 	public static int[] generate() {
-		
+
 		int[] identifiers = new int[BOARD_SIZE];
 		int scriptCount = 0;
 		int cinemaCount = 0;
@@ -80,7 +83,35 @@ public class Board {
 		}		
 	}
 	
-	public Case[] getCases(){
+	public Case[] getCases() {
 		return mCases;
+	}
+	
+	public int getSize(){
+		return mCases.length;
+	}
+
+	public int findCaseIndex(Case toFind) {
+		
+		for (int i = 0; i < mCases.length; i++){
+			if (mCases[i] == toFind)
+				return i;
+		}
+		
+		return -1;
+	}
+	
+	private int shootOneDice() {
+		return (int)(Math.random()*6)+1;
+	}
+	
+	public int rollDice(){
+		return shootOneDice() + shootOneDice();
+	}
+	
+	public Case nextCellOf(Case source) {
+		int offset = findCaseIndex(source);
+		offset = (offset + 1) % mCases.length;
+		return mCases[offset];
 	}
 }

@@ -15,12 +15,6 @@ public class HeadQuarters extends OwnableCell {
 		mLevel = level;
 	}
 	
-	// FIXME: A supprimer
-	/*public HeadQuarters(int playerId) {
-		super(ResourcesManager.getInstance().mCaseHQ);
-		super.setColor(PLAYER_COLOR[playerId]);
-	}*/
-
 	
 	@Override
 	public void upgrade() {

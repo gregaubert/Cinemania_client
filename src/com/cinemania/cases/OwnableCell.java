@@ -27,7 +27,7 @@ public abstract class OwnableCell extends Case {
 	
 	public void setOwner(Player owner) {
 		mOwner = owner;
-		setColor(owner.getColor());
+		setColor(owner.getColorCase());
 	}
 	
 	public Player getOwner() {

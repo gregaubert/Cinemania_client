@@ -1,8 +1,5 @@
 package com.cinemania.network;
 
-import java.util.Arrays;
-
-import org.andengine.util.adt.array.ArrayUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +20,7 @@ import com.cinemania.constants.AllConstants;
 public final class GameContext {
 	
 	// FIXME: These data have to be saved localy
-	private static long localIdentifier = 1001;
+	private static long LOCAL_IDENTIFIER = 1001;
 	
 	private Player[] mPlayers;
 	private Player mPlayer;
@@ -40,10 +37,6 @@ public final class GameContext {
 	public static GameContext deserialize(String jsonString) throws JSONException {
 		// Extact each JSON object from serialized data
 		JSONObject json = new JSONObject(jsonString);
-		
-		System.out.println(json.toString(3));
-		
-		
 		JSONObject jsonGame = json.getJSONObject("game");
 		JSONArray jsonPlayers = json.getJSONArray("players");
 		JSONArray jsonBoard = json.getJSONArray("board");
@@ -128,7 +121,7 @@ public final class GameContext {
 			player.getHeadQuarters().setOwner(player);
 			c.mPlayers[i] = player;
 			// Define local user
-			if (player.getId() == localIdentifier) {
+			if (player.getId() == LOCAL_IDENTIFIER) {
 				c.mPlayer = player;
 			}
 			// Define who is playing
@@ -150,6 +143,10 @@ public final class GameContext {
 		return mPlayer == mCurrentPlayer;
 	}
 	
+	
+	public long getLocalIdentifier() {
+		return GameContext.LOCAL_IDENTIFIER;
+	}
 	
 	public Player[] getPlayers() {
 		return mPlayers;
@@ -291,7 +288,6 @@ public final class GameContext {
 	}
 	private static int next(int[] identifiers, int offset) {
 		for (int i = offset; i < identifiers.length; i++) {
-			System.out.println(identifiers[i]);
 			if (identifiers[i] == HeadQuarters.TYPE) {
 				return i;
 			}
