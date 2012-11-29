@@ -98,11 +98,9 @@ public class BoardScene extends Scene implements Loader{
 				switch (pSceneTouchEvent.getAction())
 				{
 
-	                case TouchEvent.ACTION_DOWN: {
-	                	
-	                	Log.i("GAME","Déplacement du joueur : " + ID_PLAYER);
-	                	
+	                case TouchEvent.ACTION_DOWN: {	                	
 	                	int move = mBoard.rollDice();
+	                	Log.i("GAME","Déplacement du joueur : " + ID_PLAYER + " de " + move);
 	    				mPlayer[ID_PLAYER].Move(move);
 	    				ID_PLAYER = (ID_PLAYER + 1) % NB_PLAYER;
 	    		        return true;

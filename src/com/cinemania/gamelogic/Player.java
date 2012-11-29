@@ -2,9 +2,14 @@ package com.cinemania.gamelogic;
 import java.util.ArrayList;
 import static com.cinemania.constants.AllConstants.*;
 
+import org.andengine.entity.IEntity;
+import org.andengine.entity.modifier.IEntityModifier;
 import org.andengine.entity.modifier.MoveModifier;
+import org.andengine.entity.modifier.SequenceEntityModifier;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.util.color.Color;
+import org.andengine.util.modifier.ModifierList;
+import org.andengine.util.modifier.IModifier.IModifierListener;
 
 import android.util.Log;
 
@@ -64,21 +69,32 @@ public class Player {
 	public void Move(int nb){
 	  
 		int pos = board.findCaseIndex(position);
-	  
-		while(nb != 0){
+
+		IEntityModifier [] entity = new IEntityModifier[nb];
+		
+		int i = 0;
+		
+		while(i < nb){
 			pos = (pos+1)%board.getSize();
 			Case temp = board.getCaseAtIndex(pos);
-			//TODO trouvé technique pour attendre que le mouvement soit finit.
-			view.registerEntityModifier(new MoveModifier(0.2f, position.getX(), temp.getX()+bordure, position.getY(), temp.getY()+bordure));
-			  
+			//Mouvement de la case courante, à la case suivante
+			MoveModifier mm = new MoveModifier(0.2f, position.getX()+bordure, temp.getX()+bordure, position.getY()+bordure, temp.getY()+bordure);
+		    mm.setAutoUnregisterWhenFinished(true);
+		    
+		    entity[i] = mm;
+		    
 			//Test si on passe au QG
 			if(temp == this.QG)
 				this.encaisser();
 		  
 			position = temp;
 			
-			nb -= 1;		
+			i++;		
 		}
+		
+		SequenceEntityModifier sem = new SequenceEntityModifier(entity);
+		
+		view.registerEntityModifier(sem);
 	  
 	}
 	  
