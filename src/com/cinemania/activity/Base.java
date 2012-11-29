@@ -218,6 +218,7 @@ public class Base extends BaseGameActivity
                 case GAME:
                     mSceneType = SceneType.MENU;
                     mEngine.setScene(mMenu);
+                    mHUD.setVisible(false);
                     break; 
               }
          }

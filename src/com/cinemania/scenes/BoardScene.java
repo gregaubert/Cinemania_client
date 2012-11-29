@@ -108,12 +108,6 @@ public class BoardScene extends Scene implements Loader {
     	Log.i("GAME","Déplacement du joueur  de " + move);
     	mGameContext.getPlayer().Move(move, this.mGameContext.getBoard());
     	
-    	/*
-    	while (move != 0) {
-    		mGameContext.getPlayer().MoveTo(mGameContext.getBoard().nextCellOf(mGameContext.getPlayer().getPosition()));
-    		move--;
-    	}
-    	*/
         return true;
 	}
 	
