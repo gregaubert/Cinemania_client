@@ -1,4 +1,5 @@
 package com.cinemania.gamelogic;
+
 import java.util.ArrayList;
 import static com.cinemania.constants.AllConstants.*;
 
@@ -15,149 +16,146 @@ import android.util.Log;
 
 import com.cinemania.activity.Base;
 import com.cinemania.cases.Case;
+import com.cinemania.cases.HeadQuarters;
+import com.cinemania.cases.OwnableCell;
 import com.cinemania.resources.ResourcesManager;
 
 public class Player {
-	
-	private final float caseSize = Base.CAMERA_HEIGHT / (((int) BOARD_SIZE / 4)+1);
-	
+
 	private final int bordure = 10;
+
+	private ArrayList<OwnableCell> mProperties = new ArrayList<OwnableCell>();
+	private HeadQuarters mHeadQuarters;
+	private Case mCurrentPosition;
+	private long mIdentifier;
+	private int mOrder;
+	private String mName;
+	private Color mColorCell;
+	private Color mColorPawn;
+	private int mMoney;
+	private int mActors;
+	private int mLogistics;
+	private Sprite mView;	
 	
-	private int id;
-
-	private int amount;
-
-	private int logistic;
-
-	private int actors;
-
-	private Case position;
-
-	private Case QG;
-  
-	private ArrayList<Case> properties;
-  
-  	private Color colorCase;
-  	private Color colorPawn;
-
-	private Sprite view;
-  
-	private Board board;
-  
-	public Player(Board board, Case initial, int anId) {
-		id = anId;
-		setAmount(DEFAULT_AMOUNT);
-		setLogistic(DEFAULT_LOGISTIC);
-		setActors(DEFAULT_ACTORS);	
-		properties = new ArrayList<Case>();
-		
-		colorCase = PLAYER_COLOR[1][id-1];
-		colorPawn = PLAYER_COLOR[0][id-1];
-		
-		this.board = board;
-		
-		//Case de départ du joueur.
-		this.position = initial;
-		this.QG = initial;
-		
-		view = new Sprite(position.getX()+bordure, position.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
-		view.setSize(caseSize-2*bordure, caseSize - 2*bordure);
-		view.setColor(this.colorPawn);	
-		
+	public Player(long identifier, int order, String name, int money, int actors, int logistics, HeadQuarters headQuarters, Case currentPosition) {
+		mIdentifier = identifier;
+		mOrder = order;
+		mName = name;
+		mColorCell = PLAYER_COLOR[1][order];
+		mColorPawn = PLAYER_COLOR[0][order];
+		mMoney = money;
+		mActors = actors;
+		mLogistics = logistics;
+		mHeadQuarters = headQuarters;
+		mCurrentPosition = currentPosition;
+		mView = new Sprite(mCurrentPosition.getX()+bordure, mCurrentPosition.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
+		mView.setSize(mView.getWidth()-2*bordure, mView.getHeight() - 2*bordure);
+		mView.setColor(this.mColorPawn);
 	}
-	
-	public void Move(int nb){
-	  
-		int pos = board.findCaseIndex(position);
 
+	
+	public void Move(int nb, Board board){
+	  
+		//int pos = mBoard.findCaseIndex(mCurrentPosition);
+	
 		IEntityModifier [] entity = new IEntityModifier[nb];
 		
 		int i = 0;
 		
 		while(i < nb){
-			pos = (pos+1)%board.getSize();
-			Case temp = board.getCaseAtIndex(pos);
+			//pos = (pos+1)%mBoard.getSize();
+			Case temp = board.nextCellOf(mCurrentPosition);
 			//Mouvement de la case courante, à la case suivante
-			MoveModifier mm = new MoveModifier(0.2f, position.getX()+bordure, temp.getX()+bordure, position.getY()+bordure, temp.getY()+bordure);
+			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure, temp.getX()+bordure, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
 		    
 		    entity[i] = mm;
 		    
 			//Test si on passe au QG
-			if(temp == this.QG)
+			if(temp == this.mHeadQuarters)
 				this.encaisser();
 		  
-			position = temp;
+			mCurrentPosition = temp;
 			
 			i++;		
 		}
 		
 		SequenceEntityModifier sem = new SequenceEntityModifier(entity);
 		
-		view.registerEntityModifier(sem);
+		mView.registerEntityModifier(sem);
 	  
 	}
-	  
+	
+	public void MoveTo(Case target) {
+		mView.registerEntityModifier(new MoveModifier(0.2f, mCurrentPosition.getX(), target.getX()+bordure, mCurrentPosition.getY(), target.getY()+bordure));
+		mCurrentPosition = target;
+	}
+	
 	//Méthode appelée lorsque l'on passe par notre QG
 	public void encaisser(){
 		//TODO
 		Log.i("GAME","ENCAISSER!!!");
 	}
-  
+
 	public Sprite getView(){
-		return this.view;
+		return this.mView;
+	}
+	
+	public HeadQuarters getHeadQuarters() {
+		return mHeadQuarters;
+	}
+	
+	public long getId() {
+		return mIdentifier;
+	}
+
+	public void setAmount(int amount) {
+		this.mMoney = amount;
+	}
+
+	public int getAmount() {
+		return mMoney;
+	}
+
+	public void setLogistic(int logistic) {
+		this.mLogistics = logistic;
+	}
+
+	public int getLogistic() {
+		return mLogistics;
+	}
+
+	public void setActors(int actors) {
+		this.mActors = actors;
+	}
+
+	public int getActors() {
+		return mActors;
+	}
+
+	public void setPosition(Case currentPosition) {
+		this.mCurrentPosition = currentPosition;
+	}
+
+	public Case getPosition() {
+		return mCurrentPosition;
+	}
+
+	public void addProperty(OwnableCell cell) {
+		mProperties.add(cell);
+		cell.setOwner(this);
+	}
+
+	public void removeProperty(OwnableCell cell) {
+		mProperties.remove(cell);
 	}
   
-  public int getId() {
-		return id;
-  }
-
-  public void setAmount(int amount) {
-		this.amount = amount;
-  }
-
-  public int getAmount() {
-		return amount;
-  }
-
-  public void setLogistic(int logistic) {
-		this.logistic = logistic;
-  }
-
-  public int getLogistic() {
-		return logistic;
-  }
-
-  public void setActors(int actors) {
-		this.actors = actors;
-  }
-
-  public int getActors() {
-		return actors;
-  }
-
-  public void setPosition(Case position) {
-		this.position = position;
-  }
-
-  public Case getPosition() {
-		return position;
-  }
-
-  public void addProperty(Case c) {
-		properties.add(c);
-  }
-
-  public void removeProperty(Case c) {
-		properties.remove(c);
-  }
+	public Color getColorCase() {
+		return mColorCell;
+	}
   
-  public Color getColorCase(){
-	  return colorCase;
-  }
-  
-  public Color getColorPawn(){
-	  return colorPawn;
-  }
+	public Color getColorPawn() {
+		return mColorPawn;
+  	}
 
 }

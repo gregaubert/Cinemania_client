@@ -9,10 +9,17 @@ public class Room implements Profitable {
 	  Movie movie;
 
 	  private int turn =  0;
+	  
+	  public Room() {
+		  
+	  }
 
+	  // FIXME: à supprimer, une salle n'a pas besoin d'avoir une référence de son cinéma
+	  /*
 	  public Room(Cinema cinema) {
 			this.cinema = cinema;
 	  }
+	  */
 
 	  @Override
 	  public int profit(int startTurn, int stopTurn) {

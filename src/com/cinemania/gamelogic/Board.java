@@ -14,101 +14,82 @@ import com.cinemania.resources.ResourcesManager;
 
 public class Board {
 
-	private Case[] mCases = new Case[BOARD_SIZE];
-
-	private int size = BOARD_SIZE;
-
-	private int currentHQ;
-	private int currentScript;
-	private int currentCinema;
-	private int currentActor;
-	private int currentLogistic;
-	private int currentEmpty = BOARD_NB_EMPTY_TOT;
-	private int currentLuck = BOARD_NB_LUCK_TOT;
-	private int currentTotLine;
+	private Case[] mCases;
 	
-	public Board() {
-		populate();
-	}
-
-	private void populate() {
-		for (int i = 0; i < size; i++) {
-			mCases[i] = randomCase(i);
-		}
+	public Board(Case[] cases) {
+		mCases = cases;
 	}
 	
-	private Case randomCase(int i){
+
+	public static int[] generate() {
+
+		int[] identifiers = new int[BOARD_SIZE];
+		int scriptCount = 0;
+		int cinemaCount = 0;
+		int actorsCount = 0;
+		int logisticsCount = 0;
+		int currentLineOffset = 0;
 		
-		if(i % (size/4) == 0){
-			currentScript = BOARD_NB_SCRIPT_LINE;
-			currentCinema = BOARD_NB_CINEMA_LINE;
-			currentActor = BOARD_NB_ACTOR_LINE;
-			currentLogistic = BOARD_NB_LOGISTIC_LINE;
-			currentTotLine = BOARD_NB_TOT_LINE;
-			return new HeadQuarters(currentHQ++);
-		}
-		
-		int random = Math.round((float)Math.random() * (currentActor + currentLogistic  + currentCinema + currentTotLine + currentScript - 1));
-		
-		if(random < currentActor){
-			currentActor--;
-			return new School();
-		}
-		else if (random < currentActor + currentLogistic){
-			currentLogistic--;
-			return new LogisticFactory();
-		}
-		else if(random < currentActor + currentLogistic + currentCinema){
-			currentCinema--;
-			return new Cinema();
-		}
-		else if(random < currentActor + currentLogistic + currentCinema + currentScript){
-			currentScript--;
-			return new Script();
-		}
-		else {
-			currentTotLine--;
-			random = Math.round((float)Math.random() * (currentEmpty  + currentLuck - 1));
-			if(random < currentEmpty){
-				currentEmpty--;
-				return new Case(ResourcesManager.getInstance().mCaseEmpty);
-			}
-			else{
-				currentLuck--;
-				return new LuckyCase();
+		for (int i = 0; i < identifiers.length; i++) {
+			if (i % (identifiers.length/4) == 0){
+				scriptCount = BOARD_NB_SCRIPT_LINE;
+				cinemaCount = BOARD_NB_CINEMA_LINE;
+				actorsCount = BOARD_NB_ACTOR_LINE;
+				logisticsCount = BOARD_NB_LOGISTIC_LINE;
+				currentLineOffset = BOARD_NB_TOT_LINE;
+				identifiers[i] = HeadQuarters.TYPE;
+			} else {
+			
+				int random = Math.round((float)Math.random() * (actorsCount + logisticsCount  + cinemaCount + currentLineOffset + scriptCount - 1));
+				
+				if (random < actorsCount){
+					actorsCount--;
+					identifiers[i] = School.TYPE;
+				} else if (random < actorsCount + logisticsCount) {
+					logisticsCount--;
+					identifiers[i] = LogisticFactory.TYPE;
+				} else if(random < actorsCount + logisticsCount + cinemaCount) {
+					cinemaCount--;
+					identifiers[i] = Cinema.TYPE;
+				} else if(random < actorsCount + logisticsCount + cinemaCount + scriptCount) {
+					scriptCount--;
+					identifiers[i] = Script.TYPE;
+				} else {
+					currentLineOffset--;
+					identifiers[i] = LuckyCase.TYPE;
+					/*
+					random = Math.round((float)Math.random() * (currentEmpty  + currentLuck - 1));
+					if (random < currentEmpty){
+						currentEmpty--;
+						return new Case(ResourcesManager.getInstance().mCaseEmpty);
+					} else{
+						currentLuck--;
+						return new LuckyCase();
+					}
+					*/
+				}
 			}
 		}
+		
+		return identifiers;
 	}
 	
-	public Case getCaseAtIndex(int index){
-		try{
-			return mCases[index];
-		}
-		catch (IndexOutOfBoundsException e){
-			return null;
-		}		
-	}
-	
-	public Case[] getCases(){
+	public Case[] getCases() {
 		return mCases;
 	}
 	
 	public int getSize(){
-		return this.size;
+		return mCases.length;
 	}
 
 	public int findCaseIndex(Case toFind) {
 		
-		for(int i = 0; i < this.size; i++){
-			if(mCases[i] == toFind)
+		for (int i = 0; i < mCases.length; i++){
+			if (mCases[i] == toFind)
 				return i;
 		}
 		
 		return -1;
-	}
-	
-	public Case getQG(int idPlayer){
-		return mCases[idPlayer*(size/4)];
 	}
 	
 	private int shootOneDice() {
@@ -117,5 +98,11 @@ public class Board {
 	
 	public int rollDice(){
 		return shootOneDice() + shootOneDice();
+	}
+	
+	public Case nextCellOf(Case source) {
+		int offset = findCaseIndex(source);
+		offset = (offset + 1) % mCases.length;
+		return mCases[offset];
 	}
 }

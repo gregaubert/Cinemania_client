@@ -6,6 +6,8 @@ import static com.cinemania.constants.AllConstants.*;
 import com.cinemania.resources.ResourcesManager;
 
 public class School extends Resource {
+	
+	public static final int TYPE = 5;
 
 	private boolean danceExtension =  false;
 	private boolean theatreExtension =  false;
@@ -14,8 +16,8 @@ public class School extends Resource {
 	private boolean disguiseExtension =  false;
 	
 	
-	public School() {
-		super(ResourcesManager.getInstance().mCaseActors);
+	public School(int level) {
+		super(ResourcesManager.getInstance().mCaseActors, level);
 	}
 
 	@Override
