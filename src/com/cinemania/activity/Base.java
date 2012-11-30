@@ -214,13 +214,12 @@ public class Base extends BaseGameActivity
                 	System.exit(0);
                     break;
                 case OPTIONS:
-                    mSceneType = SceneType.MENU;
-                    mEngine.setScene(mMenu);
+                    this.setSceneType(SceneType.MENU);
+                	this.setCurrentScene(mMenu);
                     break;
                 case GAME:
-                    mSceneType = SceneType.MENU;
-                    mEngine.setScene(mMenu);
-                    mHUD.setVisible(false);
+                	this.setSceneType(SceneType.MENU);
+                	this.setCurrentScene(mMenu);
                     break; 
               }
          }
@@ -264,5 +263,4 @@ public class Base extends BaseGameActivity
     	mCurrentScene = scene;
         getEngine().setScene(mCurrentScene);
     }
-
 }
