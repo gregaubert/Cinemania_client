@@ -65,8 +65,8 @@ public class Player {
 		while(i < nb){
 			//pos = (pos+1)%mBoard.getSize();
 			Case temp = board.nextCellOf(mCurrentPosition);
-			//Mouvement de la case courante, à la case suivante
-			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure, temp.getX()+bordure, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
+			//Mouvement de la case courante, ï¿½ la case suivant. Le pion est dÃ©callÃ©
+			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure+mOrder*OFFSET, temp.getX()+bordure+mOrder*OFFSET, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
 		    
 		    entity[i] = mm;
@@ -91,7 +91,7 @@ public class Player {
 		mCurrentPosition = target;
 	}
 	
-	//Méthode appelée lorsque l'on passe par notre QG
+	//Mï¿½thode appelï¿½e lorsque l'on passe par notre QG
 	public void encaisser(){
 		//TODO
 		Log.i("GAME","ENCAISSER!!!");
