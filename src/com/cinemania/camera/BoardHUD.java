@@ -1,5 +1,6 @@
 package com.cinemania.camera;
 
+import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
@@ -69,7 +70,8 @@ public class BoardHUD extends HUD implements Loader {
 		Sprite scriptsSprite = new Sprite(500, 5, 32, 32, mResourcesManager.mScriptsLogo, mActivity.getVertexBufferObjectManager());
 		
 		/* A changer / modifier / supprimer / renommer / verifier */
-		Sprite diceSprite = new Sprite(10, mActivity.CAMERA_HEIGHT - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
+		float cameraHeight = ((ZoomCamera)mActivity.getCamera()).getHeight();
+		Sprite diceSprite = new Sprite(10, cameraHeight - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
 			@Override
 		    public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
