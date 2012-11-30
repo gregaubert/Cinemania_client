@@ -5,8 +5,6 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
-import android.util.Log;
-
 import com.cinemania.activity.Base;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.Loader;
@@ -16,12 +14,12 @@ public class BoardHUD extends HUD implements Loader {
 	private ResourcesManager mResourcesManager;
 	private Base mActivity;
 	
-	private Text txtYear;
-	private Text txtActors; 
-	private Text txtMoney;
-	private Text txtLogistics;
-	private Text txtScripts;
-
+	private Text mTxtYear;
+	private Text mTxtActors; 
+	private Text mTxtMoney;
+	private Text mTxtLogistics;
+	private Text mTxtScripts;
+	
 	public BoardHUD() {
 		mResourcesManager = ResourcesManager.getInstance();
 		mActivity = Base.getSharedInstance();
@@ -29,33 +27,33 @@ public class BoardHUD extends HUD implements Loader {
 	}
 	
 	public void setYear(int year){
-		txtYear.setText("Annee: " + Integer.toString(year));
+		mTxtYear.setText("Annee: " + Integer.toString(year));
 	}
 	
 	public void setActors(int actors){
-		txtActors.setText(Integer.toString(actors));
+		mTxtActors.setText(Integer.toString(actors));
 	}
 	
 	public void setMoney(int money){
-		txtMoney.setText(Integer.toString(money));
+		mTxtMoney.setText(Integer.toString(money));
 	}
 	
 	public void setLogistics(int logistics){
-		txtLogistics.setText(Integer.toString(logistics));
+		mTxtLogistics.setText(Integer.toString(logistics));
 	}
 	
 	public void setScripts(int scripts){
-		txtScripts.setText(Integer.toString(scripts));
+		mTxtScripts.setText(Integer.toString(scripts));
 	}
-
+	
 	@Override
 	public void Load() {
 
-		txtYear = new Text(10, 8, mResourcesManager.mYearFont, "Annee: 0123456789", mActivity.getVertexBufferObjectManager());
-		txtMoney = new Text(235, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		txtActors = new Text(335, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		txtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		txtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		mTxtYear = new Text(10, 8, mResourcesManager.mYearFont, "Annee: 0123456789", mActivity.getVertexBufferObjectManager());
+		mTxtMoney = new Text(235, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		mTxtActors = new Text(335, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		mTxtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		mTxtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
 		
 		setYear(1930);
 		setMoney(0);
@@ -86,11 +84,11 @@ public class BoardHUD extends HUD implements Loader {
 		
 		registerTouchArea(diceSprite);
 		
-		attachChild(txtYear);
-		attachChild(txtActors);
-		attachChild(txtMoney);
-		attachChild(txtScripts);
-		attachChild(txtLogistics);
+		attachChild(mTxtYear);
+		attachChild(mTxtActors);
+		attachChild(mTxtMoney);
+		attachChild(mTxtScripts);
+		attachChild(mTxtLogistics);
 		
 		attachChild(actorsSprite);
 		attachChild(moneySprite);
