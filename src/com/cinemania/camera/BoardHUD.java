@@ -1,5 +1,6 @@
 package com.cinemania.camera;
 
+import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
@@ -14,12 +15,12 @@ public class BoardHUD extends HUD implements Loader {
 	private ResourcesManager mResourcesManager;
 	private Base mActivity;
 	
-	private Text mTxtYear;
-	private Text mTxtActors; 
-	private Text mTxtMoney;
-	private Text mTxtLogistics;
-	private Text mTxtScripts;
-	
+	private Text txtYear;
+	private Text txtActors; 
+	private Text txtMoney;
+	private Text txtLogistics;
+	private Text txtScripts;
+
 	public BoardHUD() {
 		mResourcesManager = ResourcesManager.getInstance();
 		mActivity = Base.getSharedInstance();
@@ -27,33 +28,33 @@ public class BoardHUD extends HUD implements Loader {
 	}
 	
 	public void setYear(int year){
-		mTxtYear.setText("Annee: " + Integer.toString(year));
+		txtYear.setText("Annee: " + Integer.toString(year));
 	}
 	
 	public void setActors(int actors){
-		mTxtActors.setText(Integer.toString(actors));
+		txtActors.setText(Integer.toString(actors));
 	}
 	
 	public void setMoney(int money){
-		mTxtMoney.setText(Integer.toString(money));
+		txtMoney.setText(Integer.toString(money));
 	}
 	
 	public void setLogistics(int logistics){
-		mTxtLogistics.setText(Integer.toString(logistics));
+		txtLogistics.setText(Integer.toString(logistics));
 	}
 	
 	public void setScripts(int scripts){
-		mTxtScripts.setText(Integer.toString(scripts));
+		txtScripts.setText(Integer.toString(scripts));
 	}
-	
+
 	@Override
 	public void Load() {
 
-		mTxtYear = new Text(10, 8, mResourcesManager.mYearFont, "Annee: 0123456789", mActivity.getVertexBufferObjectManager());
-		mTxtMoney = new Text(235, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		mTxtActors = new Text(335, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		mTxtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		mTxtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		txtYear = new Text(10, 8, mResourcesManager.mYearFont, "Annee: 0123456789", mActivity.getVertexBufferObjectManager());
+		txtMoney = new Text(235, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		txtActors = new Text(335, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		txtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		txtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
 		
 		setYear(1930);
 		setMoney(0);
@@ -67,7 +68,8 @@ public class BoardHUD extends HUD implements Loader {
 		Sprite scriptsSprite = new Sprite(500, 5, 32, 32, mResourcesManager.mScriptsLogo, mActivity.getVertexBufferObjectManager());
 		
 		/* A changer / modifier / supprimer / renommer / verifier */
-		Sprite diceSprite = new Sprite(10, mActivity.CAMERA_HEIGHT - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
+		float cameraHeight = ((ZoomCamera)mActivity.getCamera()).getHeight();
+		Sprite diceSprite = new Sprite(10, cameraHeight - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
 			@Override
 		    public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
@@ -84,11 +86,11 @@ public class BoardHUD extends HUD implements Loader {
 		
 		registerTouchArea(diceSprite);
 		
-		attachChild(mTxtYear);
-		attachChild(mTxtActors);
-		attachChild(mTxtMoney);
-		attachChild(mTxtScripts);
-		attachChild(mTxtLogistics);
+		attachChild(txtYear);
+		attachChild(txtActors);
+		attachChild(txtMoney);
+		attachChild(txtScripts);
+		attachChild(txtLogistics);
 		
 		attachChild(actorsSprite);
 		attachChild(moneySprite);

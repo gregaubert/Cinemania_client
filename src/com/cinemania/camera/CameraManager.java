@@ -42,7 +42,7 @@ public class CameraManager implements IOnSceneTouchListener, IScrollDetectorList
 		mScrollDetector = new SurfaceScrollDetector(this);
 		mPinchZoomDetector = new PinchZoomDetector(this);
 		
-		mZoomCamera.setBounds(0, 0, Base.CAMERA_WIDTH * 2, Base.CAMERA_HEIGHT * 2);
+		mZoomCamera.setBounds(0, 0, zoomCamera.getWidth() * 2, zoomCamera.getHeight() * 2);
 		mZoomCamera.setBoundsEnabled(true);
 		mZoomCamera.setZoomFactor(1f);
 	}
