@@ -53,76 +53,23 @@ public final class GameContext {
 	}
 	
 	private static void deserializeBoard(GameContext c, JSONArray jsonBoard) throws JSONException {
-		// FIXME: Need to be discussed
-		// Case[] boardCases = new Case[AllConstants.BOARD_SIZE];
-		Case[] boardCases = new Case[jsonBoard.length()];
-		// Generate board's cells
-		for (int i = 0; i < jsonBoard.length(); i++) {
-			JSONObject jsonCell = jsonBoard.getJSONObject(i);
-			Case cell = null;
-			switch (jsonCell.getInt("type")) {
-				case HeadQuarters.TYPE:
-					cell = new HeadQuarters(jsonCell.getInt("level"));
-					break;
-				case Script.TYPE:
-					cell = new Script();
-					break;
-				case LuckyCase.TYPE:
-					cell = new LuckyCase();
-					break;
-				case Cinema.TYPE:
-					// Generate cinema's rooms
-					JSONArray jsonRooms = jsonCell.getJSONArray("rooms");
-					Room[] rooms = new Room[jsonRooms.length()];
-					for (int j = 0; j < jsonRooms.length(); j++) {
-						// TODO: Define movie from identifier
-						jsonRooms.getInt(j);
-						rooms[j] = new Room();
-					}
-					cell = new Cinema(rooms);
-					break;
-				case School.TYPE:
-					cell = new School(jsonCell.getInt("level"));
-					break;
-				case LogisticFactory.TYPE:
-					cell = new LogisticFactory(jsonCell.getInt("level"));
-					break;
-				default:
-					assert false;
-			}
-			boardCases[i] = cell;
-		}
-		c.mBoard = new Board(boardCases);
+		c.mBoard = BoardDeserializer.deserialize(jsonBoard);
 	}
 	
 	private static void deserializePlayers(GameContext c, JSONArray jsonPlayers, JSONObject jsonGame) throws JSONException {
 		Case[] board = c.mBoard.getCases();
 		c.mPlayers = new Player[jsonPlayers.length()];
+		
 		for (int i = 0; i < jsonPlayers.length(); i++) {
-			JSONObject jsonPlayer = jsonPlayers.getJSONObject(i);
-			assert board[jsonPlayer.getInt("hq")] instanceof HeadQuarters;
-			Player player = new Player(
-					jsonPlayer.getLong("id"),
-					i,
-					jsonPlayer.getString("name"),
-					jsonPlayer.getInt("money"),
-					jsonPlayer.getInt("actors"),
-					jsonPlayer.getInt("logistics"),
-					(HeadQuarters)board[jsonPlayer.getInt("hq")],
-					board[jsonPlayer.getInt("position")]);
-			// Because the board game and all related cells are generated before without any reference to any player,
-			// we have to link the player and his properties afterward
-			JSONArray jsonProperties = jsonPlayer.getJSONArray("properties");
-			for (int j = 0; j < jsonProperties.length(); j++) {
-				assert board[jsonProperties.getInt(i)] instanceof OwnableCell;
-				player.addProperty((OwnableCell)board[jsonProperties.getInt(i)]);
-			}
-			player.getHeadQuarters().setOwner(player);
+			// deserialize
+			Player player = PlayerDeserializer.deserialize(jsonPlayers.getJSONObject(i),board,i);
 			c.mPlayers[i] = player;
+			
 			// Define local user
 			if (player.getId() == LOCAL_IDENTIFIER) {
 				c.mPlayer = player;
 			}
+			
 			// Define who is playing
 			if (player.getId() == jsonGame.getLong("player")) {
 				c.mCurrentPlayer = player;
@@ -136,7 +83,7 @@ public final class GameContext {
 	
 	
 	/**
-	 * Détermine si le tour est au joueur local
+	 * Dï¿½termine si le tour est au joueur local
 	 */
 	public boolean isLocalTurn() {
 		return mPlayer == mCurrentPlayer;
