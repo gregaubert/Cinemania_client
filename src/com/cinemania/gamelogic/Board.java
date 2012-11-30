@@ -1,8 +1,6 @@
 package com.cinemania.gamelogic;
 import static com.cinemania.constants.AllConstants.*;
 
-import java.util.Random;
-
 import com.cinemania.cases.Case;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
@@ -10,7 +8,6 @@ import com.cinemania.cases.LuckyCase;
 import com.cinemania.cases.School;
 import com.cinemania.cases.LogisticFactory;
 import com.cinemania.cases.Script;
-import com.cinemania.resources.ResourcesManager;
 
 public class Board {
 

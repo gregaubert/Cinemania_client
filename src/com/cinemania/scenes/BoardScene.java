@@ -11,6 +11,7 @@ import org.json.JSONException;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
+import com.cinemania.camera.BoardHUD;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.cases.Case;
 import com.cinemania.network.GameContext;
@@ -36,6 +37,7 @@ public class BoardScene extends Scene implements Loader {
 	
 	private float offsetWidth = 0;
 	private float offsetHeight = 0;
+
 	private float maxCoord = side*caseSize;
 	private float minCoord = 0;
 	
@@ -58,7 +60,7 @@ public class BoardScene extends Scene implements Loader {
 	    setBackground(new Background(0f, 0f, 0f));
 	    mActivity = Base.getSharedInstance();
 	    mCamera = (ZoomCamera)mActivity.getCamera();
-	    
+
 	    // compute margin according to size!
 	    offsetWidth = (mCamera.getWidth() * 2-(side+1)*caseSize)/2;
 		offsetHeight = (mCamera.getHeight() * 2-(side+1)*caseSize)/2;
@@ -84,6 +86,9 @@ public class BoardScene extends Scene implements Loader {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	
+		//TODO Modifier la constante
+	    this.offsetHeight += 32;
 		
 		this.setBackgroundEnabled(true);
 		this.getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));

@@ -6,8 +6,6 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
-import android.util.Log;
-
 import com.cinemania.activity.Base;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.Loader;
