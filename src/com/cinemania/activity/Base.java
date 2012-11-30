@@ -6,7 +6,6 @@ import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
-import org.andengine.engine.options.resolutionpolicy.FillResolutionPolicy;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.modifier.MoveXModifier;
 import org.andengine.entity.scene.Scene;
@@ -17,6 +16,7 @@ import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
@@ -28,12 +28,6 @@ import com.cinemania.scenes.OptionScene;
 
 public class Base extends BaseGameActivity
 {
-	
-	// ===========================================================
-    // Constants
-    // ===========================================================
-    public static final int CAMERA_WIDTH = 800;
-    public static final int CAMERA_HEIGHT = 480;
     
     // ===========================================================
     // Fields
@@ -87,15 +81,22 @@ public class Base extends BaseGameActivity
     // Methods
     // ===========================================================
     
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public EngineOptions onCreateEngineOptions()
     {
     	//Singleton
     	instance = this;
+    	
+    	// get device size
+    	final Display display = getWindowManager().getDefaultDisplay();
+        float cameraWidth = display.getWidth();
+        float cameraHeight = display.getHeight();
+    	
     	//Recupere instance manager ressources
     	manager = ResourcesManager.getInstance();
-    	mCamera = new ZoomCamera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
-        EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new FillResolutionPolicy(), mCamera);
+    	mCamera = new ZoomCamera(0, 0, cameraWidth, cameraHeight);
+        EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(cameraWidth, cameraHeight), mCamera);
         return engineOptions;
     }
     
@@ -167,7 +168,7 @@ public class Base extends BaseGameActivity
             };
             splash.setScale(0.8f);
             //Ajoute le sprite splash e la scene.
-            splash.setPosition((CAMERA_WIDTH - splash.getWidth()) * 0.5f, (CAMERA_HEIGHT-splash.getHeight() - 150f) * 0.5f);
+            splash.setPosition((mCamera.getWidth() - splash.getWidth()) * 0.5f, (mCamera.getHeight()-splash.getHeight() - 150f) * 0.5f);
             mCurrentScene.attachChild(splash);
     
             //Attache le titre
@@ -263,4 +264,5 @@ public class Base extends BaseGameActivity
     	mCurrentScene = scene;
         getEngine().setScene(mCurrentScene);
     }
+
 }
