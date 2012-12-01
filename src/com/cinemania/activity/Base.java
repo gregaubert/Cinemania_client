@@ -15,12 +15,15 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 
+import android.content.Context;
+import android.content.IntentFilter;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
 import com.cinemania.client.R;
+import com.cinemania.network.gcm.Connector;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.scenes.GameMenu;
@@ -69,7 +72,7 @@ public class Base extends BaseGameActivity
     private BoardScene mGame;
     // HUD
     private BoardHUD mHUD;
-    
+       
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -124,8 +127,11 @@ public class Base extends BaseGameActivity
     @Override
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
     {
-    	 initSplashScene();
-         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
+        // ready to receive GCM messages
+    	Connector.registerGCMReceiver();
+    	
+    	initSplashScene();
+        pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
     }
 
     @Override
@@ -151,7 +157,7 @@ public class Base extends BaseGameActivity
     	pOnPopulateSceneCallback.onPopulateSceneFinished();
 
     }
-    
+        
     //Creer la scene affiche e l'ecran.
     private void initSplashScene()
     {
