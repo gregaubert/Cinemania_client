@@ -26,6 +26,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.cinemania.activity.Base;
 import com.google.android.gcm.GCMBaseIntentService;
@@ -70,6 +71,8 @@ public class GCMIntentService extends GCMBaseIntentService {
         displayMessage(context, message);
         // notifies user
         generateNotification(context, message);
+        
+        Toast.makeText(getApplicationContext(),"message received",Toast.LENGTH_LONG).show();
     }
 
     @Override
