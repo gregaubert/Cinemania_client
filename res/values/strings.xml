@@ -9,4 +9,19 @@
 	<string name="option1">Option 1</string>
 	<string name="option2">Option 2</string>
 	<string name="retour">Retour</string>
+	<string name="already_registered">Déjà enregistré</string>
+	<string name="error_config">Erreur de configuration</string>
+	<string name="gcm_registered">GCM enregistré</string>
+	<string name="gcm_unregistered">GCM désenregistré</string>
+	<string name="gcm_message">Message</string>
+	<string name="gcm_deleted">Supression</string>
+	<string name="gcm_error">Erreur</string>
+	<string name="gcm_recoverable_error">Erreur récupérable</string>
+	<string name="server_registering">Serveur en cours d\'enregistrement</string>
+	<string name="server_registered">Serveur enregistré</string>
+	<string name="server_register_error">Erreur d\'enregistrement du serveur</string>
+	<string name="server_unregistered">Désenregistrement du serveur</string>
+	<string name="server_unregister_error">Erreur de désenregistrement du serveur</string>
+	<string name="retour">Retour</string>
+	<string name="retour">Retour</string>
 </resources>

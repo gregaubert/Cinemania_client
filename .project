@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Cinemania_client</name>
+	<name>Cinemania</name>
 	<comment></comment>
 	<projects>
 		<project>AndEngine</project>

@@ -14,6 +14,7 @@ import com.cinemania.activity.Base;
 import com.cinemania.camera.BoardHUD;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.cases.Case;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 
@@ -104,8 +105,9 @@ public class BoardScene extends Scene implements Loader {
 		displayCases();
 		
 		//Instancie les players.
-		for(int i = 0; i < mGameContext.getPlayers().length; i++){
-			this.getChildByIndex(LAYER_PAWN).attachChild(mGameContext.getPlayers()[i].getView());
+		for(Player player : mGameContext.getPlayers()){
+			this.getChildByIndex(LAYER_PAWN).attachChild(player.getView());
+			player.MoveTo(player.getPosition());
 		}
 	}
 	
@@ -114,7 +116,7 @@ public class BoardScene extends Scene implements Loader {
 		
     	int move = mGameContext.getBoard().rollDice();
     	
-    	Log.i("GAME","D�placement du joueur  de " + move);
+    	Log.i("GAME","Deplacement du joueur  de " + move);
     	mGameContext.getPlayer().Move(move, this.mGameContext.getBoard());
     	
         return true;

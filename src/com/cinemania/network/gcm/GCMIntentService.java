@@ -17,9 +17,6 @@ package com.cinemania.network.gcm;
 
 import static com.cinemania.network.gcm.CommonUtilities.SENDER_ID;
 import static com.cinemania.network.gcm.CommonUtilities.displayMessage;
-
-import org.andengine.R;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -28,6 +25,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
+import com.cinemania.client.R;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
 

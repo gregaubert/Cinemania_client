@@ -15,8 +15,6 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 
-import android.content.Context;
-import android.content.IntentFilter;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -128,7 +126,7 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
     {
         // ready to receive GCM messages
-    	Connector.registerGCMReceiver();
+    	//Connector.registerGCMReceiver();
     	
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
@@ -137,8 +135,8 @@ public class Base extends BaseGameActivity
     @Override
     public void onPopulateScene(Scene pScene, OnPopulateSceneCallback pOnPopulateSceneCallback) throws Exception
     {
-    	//Apres 3 secondes, on appel la methode onTimePassed
-    	mEngine.registerUpdateHandler(new TimerHandler(3f, new ITimerCallback() 
+    	//Apres 1 secondes, on appel la methode onTimePassed
+    	mEngine.registerUpdateHandler(new TimerHandler(1f, new ITimerCallback() 
     	{
     		public void onTimePassed(final TimerHandler pTimerHandler) 
     	    {

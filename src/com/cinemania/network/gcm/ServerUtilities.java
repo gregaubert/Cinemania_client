@@ -19,11 +19,6 @@ import static com.cinemania.network.gcm.CommonUtilities.SERVER_URL;
 import static com.cinemania.network.gcm.CommonUtilities.TAG;
 import static com.cinemania.network.gcm.CommonUtilities.displayMessage;
 
-import com.google.android.gcm.GCMRegistrar;
-
-import android.content.Context;
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -35,7 +30,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import org.andengine.R;
+import android.content.Context;
+import android.util.Log;
+
+import com.cinemania.client.R;
+import com.google.android.gcm.GCMRegistrar;
 
 /**
  * Helper class used to communicate with the demo server.
