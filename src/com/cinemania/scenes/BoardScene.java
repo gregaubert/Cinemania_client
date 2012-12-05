@@ -11,6 +11,7 @@ import android.util.Log;
 import com.cinemania.activity.Base;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.cases.Case;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 
@@ -96,8 +97,9 @@ public class BoardScene extends Scene implements Loader {
 		initCases();
 		
 		//Instancie les players.
-		for(int i = 0; i < mGameContext.getPlayers().length; i++){
-			this.getChildByIndex(LAYER_PAWN).attachChild(mGameContext.getPlayers()[i].getView());
+		for(Player player : mGameContext.getPlayers()){
+			this.getChildByIndex(LAYER_PAWN).attachChild(player.getView());
+			//player.MoveTo(player.getPosition());
 		}
 	}
 	

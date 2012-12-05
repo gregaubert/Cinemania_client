@@ -7,8 +7,6 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
-import android.graphics.Color;
-
 import com.cinemania.activity.Base;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
@@ -60,7 +58,7 @@ public class BoardHUD extends HUD implements Loader {
 	}
 
 	public void setCurrentPlayer(Player p){
-		txtCurrentPlayer.setText("Id : " + Long.toString(p.getId()));
+		txtCurrentPlayer.setText("Id : " + p.getName());
 	}
 	
 	public void setCurrentTurn(){

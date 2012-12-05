@@ -21,8 +21,11 @@ import android.view.Display;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
-import com.cinemania.client.R;
+
 import com.cinemania.network.GameContext;
+import com.cinemania.network.gcm.R;
+import com.cinemania.network.gcm.Connector;
+
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.scenes.GameMenu;
@@ -128,15 +131,18 @@ public class Base extends BaseGameActivity
     @Override
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
     {
-    	 initSplashScene();
-         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
+        // ready to receive GCM messages
+    	Connector.registerGCMReceiver();
+    	
+    	initSplashScene();
+        pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
     }
 
     @Override
     public void onPopulateScene(Scene pScene, OnPopulateSceneCallback pOnPopulateSceneCallback) throws Exception
     {
-    	//Apres 3 secondes, on appel la methode onTimePassed
-    	mEngine.registerUpdateHandler(new TimerHandler(3f, new ITimerCallback() 
+    	//Apres 1 secondes, on appel la methode onTimePassed
+    	mEngine.registerUpdateHandler(new TimerHandler(1f, new ITimerCallback() 
     	{
     		public void onTimePassed(final TimerHandler pTimerHandler) 
     	    {
@@ -155,7 +161,7 @@ public class Base extends BaseGameActivity
     	pOnPopulateSceneCallback.onPopulateSceneFinished();
 
     }
-    
+        
     //Creer la scene affiche e l'ecran.
     private void initSplashScene()
     {

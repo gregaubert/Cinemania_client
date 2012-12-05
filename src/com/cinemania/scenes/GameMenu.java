@@ -10,7 +10,7 @@ import org.andengine.opengl.font.Font;
 
 import com.cinemania.activity.Base;
 import com.cinemania.activity.Base.SceneType;
-import com.cinemania.client.R;
+import com.cinemania.network.gcm.R;
 import com.cinemania.resources.ResourcesManager;
 
 public class GameMenu extends MenuScene implements IOnMenuItemClickListener, Loader{

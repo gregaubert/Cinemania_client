@@ -117,7 +117,9 @@ public final class GameContext {
 	public void deserializePlayers() throws JSONException {
 		Case[] board = this.mBoard.getCases();
 		this.mPlayers = new Player[jsonPlayers.length()];
+
 		for (int i = 0; i < jsonPlayers.length(); i++) {
+
 			JSONObject jsonPlayer = jsonPlayers.getJSONObject(i);
 			assert board[jsonPlayer.getInt("hq")] instanceof HeadQuarters;
 			Player player = new Player(
@@ -138,10 +140,12 @@ public final class GameContext {
 			}
 			player.getHeadQuarters().setOwner(player);
 			this.mPlayers[i] = player;
+
 			// Define local user
 			if (player.getId() == LOCAL_IDENTIFIER) {
 				this.mPlayer = player;
 			}
+			
 			// Define who is playing
 			if (player.getId() == jsonGame.getLong("player")) {
 				this.mCurrentPlayer = player;
@@ -181,7 +185,7 @@ public final class GameContext {
 	}
 	
 	/**
-	 * Détermine si le tour est au joueur local
+	 * Dï¿½termine si le tour est au joueur local
 	 */
 	public boolean isLocalTurn() {
 		return mPlayer == mCurrentPlayer;
