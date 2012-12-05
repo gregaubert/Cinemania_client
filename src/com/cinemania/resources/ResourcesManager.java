@@ -48,6 +48,7 @@ public class ResourcesManager {
 	public Font mMenuFont;
 	public Font mYearFont;
 	public Font mResourcesFont;
+	public Font mWindowsFont;
 	
 	private ResourcesManager(){
 		
@@ -86,9 +87,11 @@ public class ResourcesManager {
 	
 	public void LoadHUD(Context context, Engine engine){
 		// Gestion des polices d'écritures
-		mYearFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
+		mYearFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/veteran typewriter.ttf", 24, true, Color.BLACK);
+		//mYearFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
 		mYearFont.load();
-		mResourcesFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
+		mResourcesFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/veteran typewriter.ttf", 24, true, Color.BLACK);
+		//mResourcesFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
 		mResourcesFont.load();
 		
 		// Gestion des textures
@@ -116,6 +119,10 @@ public class ResourcesManager {
     	//Récupère la bonne texture.
     	mPlayer = BitmapTextureAtlasTextureRegionFactory.createFromAsset(PlayerTextureAtlas,context,"player.png", 0, 0);
     	PlayerTextureAtlas.load();
+	}
+	
+	public void LoadWindow(Context context, Engine engine) {
+		
 	}
 	
 	public void LoadBoardGame(Context context, Engine engine) {

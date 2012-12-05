@@ -75,6 +75,7 @@ public final class AllConstants {
 
 	public static final int COSTS_CINEMA_TICKET = 15;
 
+	public static final Color  BOARD_CASE_COLOR = new Color(250/255f, 252/255f, 124/255f);
 	public static final Color[][] PLAYER_COLOR = { {new Color(136/255f, 30/255f, 30/255f), new Color(30/255f, 136/255f, 30/255f), new Color(30/255f, 30/255f, 136/255f), new Color(208/255f, 208/255f, 69/255f)},
 												   {new Color(221/255f, 115/255f, 115/255f), new Color(115/255f, 221/255f, 115/255f), new Color(115/255f, 115/255f, 221/255f), new Color(223/255f, 223/255f, 131/255f)}};
 	public static int OFFSET = 10;
