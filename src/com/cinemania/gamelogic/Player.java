@@ -1,16 +1,15 @@
 package com.cinemania.gamelogic;
 
-import java.util.ArrayList;
-import static com.cinemania.constants.AllConstants.*;
+import static com.cinemania.constants.AllConstants.OFFSET;
+import static com.cinemania.constants.AllConstants.PLAYER_COLOR;
 
-import org.andengine.entity.IEntity;
+import java.util.ArrayList;
+
 import org.andengine.entity.modifier.IEntityModifier;
 import org.andengine.entity.modifier.MoveModifier;
 import org.andengine.entity.modifier.SequenceEntityModifier;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.util.color.Color;
-import org.andengine.util.modifier.ModifierList;
-import org.andengine.util.modifier.IModifier.IModifierListener;
 
 import android.util.Log;
 
@@ -65,7 +64,7 @@ public class Player {
 		while(i < nb){
 			//pos = (pos+1)%mBoard.getSize();
 			Case temp = board.nextCellOf(mCurrentPosition);
-			//Mouvement de la case courante, � la case suivant. Le pion est décallé
+			//Mouvement de la case courante, a la case suivant. Le pion est decalle
 			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure+mOrder*OFFSET, temp.getX()+bordure+mOrder*OFFSET, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
 		    
@@ -91,7 +90,7 @@ public class Player {
 		mCurrentPosition = target;
 	}
 	
-	//M�thode appel�e lorsque l'on passe par notre QG
+	//Methode appelee lorsque l'on passe par notre QG
 	public void encaisser(){
 		//TODO
 		Log.i("GAME","ENCAISSER!!!");
