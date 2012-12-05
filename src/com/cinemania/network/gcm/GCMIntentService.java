@@ -18,8 +18,6 @@ package com.cinemania.network.gcm;
 import static com.cinemania.network.gcm.CommonUtilities.SENDER_ID;
 import static com.cinemania.network.gcm.CommonUtilities.displayMessage;
 
-import org.andengine.R;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -47,14 +45,14 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onRegistered(Context context, String registrationId) {
         Log.i(TAG, "Device registered: regId = " + registrationId);
-        displayMessage(context, getString(R.string.gcm_registered));
+        displayMessage(context, "gcm_registered");
         ServerUtilities.register(context, registrationId);
     }
 
     @Override
     protected void onUnregistered(Context context, String registrationId) {
         Log.i(TAG, "Device unregistered");
-        displayMessage(context, getString(R.string.gcm_unregistered));
+    
         if (GCMRegistrar.isRegisteredOnServer(context)) {
             ServerUtilities.unregister(context, registrationId);
         } else {
@@ -67,10 +65,8 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onMessage(Context context, Intent intent) {
         Log.i(TAG, "Received message");
-        String message = getString(R.string.gcm_message);
+        String message = "gcm_message";
         displayMessage(context, message);
-        // notifies user
-        generateNotification(context, message);
         
         Toast.makeText(getApplicationContext(),"message received",Toast.LENGTH_LONG).show();
     }
@@ -78,46 +74,21 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onDeletedMessages(Context context, int total) {
         Log.i(TAG, "Received deleted messages notification");
-        String message = getString(R.string.gcm_deleted, total);
+        String message = "gcm_deleted";
         displayMessage(context, message);
-        // notifies user
-        generateNotification(context, message);
     }
 
     @Override
     public void onError(Context context, String errorId) {
         Log.i(TAG, "Received error: " + errorId);
-        displayMessage(context, getString(R.string.gcm_error, errorId));
+        displayMessage(context, "gcm_error" + errorId);
     }
 
     @Override
     protected boolean onRecoverableError(Context context, String errorId) {
         // log message
         Log.i(TAG, "Received recoverable error: " + errorId);
-        displayMessage(context, getString(R.string.gcm_recoverable_error,
-                errorId));
+        displayMessage(context, "Received recoverable error: " + errorId);
         return super.onRecoverableError(context, errorId);
     }
-
-    /**
-     * Issues a notification to inform the user that server has sent a message.
-     */
-    private static void generateNotification(Context context, String message) {
-        int icon = R.drawable.ic_launcher;
-        long when = System.currentTimeMillis();
-        NotificationManager notificationManager = (NotificationManager)
-                context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new Notification(icon, message, when);
-        String title = context.getString(R.string.app_name);
-        Intent notificationIntent = new Intent(context, Base.class);
-        // set intent so it does not start a new activity
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent intent =
-                PendingIntent.getActivity(context, 0, notificationIntent, 0);
-        notification.setLatestEventInfo(context, title, message, intent);
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
-        notificationManager.notify(0, notification);
-    }
-
 }

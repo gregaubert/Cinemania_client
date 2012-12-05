@@ -33,7 +33,7 @@ public final class CommonUtilities {
     /**
      * Google API project id registered to use GCM.
      */
-    public static final String SENDER_ID = "AIzaSyA7tWbN7LMNmOOthCFI2TA99X8WTEGEGIA";
+    public static final String SENDER_ID = "253409584595";
 
     /**
      * Tag used on log messages.
@@ -43,7 +43,7 @@ public final class CommonUtilities {
     /**
      * Intent used to display a message in the screen.
      */
-    public static final String DISPLAY_MESSAGE_ACTION = "com.cinemania.DISPLAY_MESSAGE";
+    public static final String DISPLAY_MESSAGE_ACTION = "com.cinemania.network.gcm.DISPLAY_MESSAGE";
 
     /**
      * Intent's extra that contains the message to be displayed.

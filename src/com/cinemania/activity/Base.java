@@ -22,7 +22,7 @@ import android.view.Display;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
-import com.cinemania.client.R;
+import com.cinemania.network.gcm.R;
 import com.cinemania.network.gcm.Connector;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;

@@ -35,8 +35,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import org.andengine.R;
-
 /**
  * Helper class used to communicate with the demo server.
  */
@@ -63,11 +61,10 @@ public final class ServerUtilities {
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
             Log.d(TAG, "Attempt #" + i + " to register");
             try {
-                displayMessage(context, context.getString(
-                        R.string.server_registering, i, MAX_ATTEMPTS));
+                displayMessage(context, "server_registering");
                 post(serverUrl, params);
                 GCMRegistrar.setRegisteredOnServer(context, true);
-                String message = context.getString(R.string.server_registered);
+                String message = "server_registered";
                 CommonUtilities.displayMessage(context, message);
                 return true;
             } catch (IOException e) {
@@ -91,8 +88,7 @@ public final class ServerUtilities {
                 backoff *= 2;
             }
         }
-        String message = context.getString(R.string.server_register_error,
-                MAX_ATTEMPTS);
+        String message = "server_register_error";
         CommonUtilities.displayMessage(context, message);
         return false;
     }
@@ -108,7 +104,7 @@ public final class ServerUtilities {
         try {
             post(serverUrl, params);
             GCMRegistrar.setRegisteredOnServer(context, false);
-            String message = context.getString(R.string.server_unregistered);
+            String message = "server_unregistered";
             CommonUtilities.displayMessage(context, message);
         } catch (IOException e) {
             // At this point the device is unregistered from GCM, but still
@@ -116,8 +112,7 @@ public final class ServerUtilities {
             // We could try to unregister again, but it is not necessary:
             // if the server tries to send a message to the device, it will get
             // a "NotRegistered" error message and should unregister the device.
-            String message = context.getString(R.string.server_unregister_error,
-                    e.getMessage());
+            String message = "server_unregister_error";
             CommonUtilities.displayMessage(context, message);
         }
     }
