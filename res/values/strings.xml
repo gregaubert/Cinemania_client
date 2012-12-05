@@ -24,4 +24,11 @@
 	<string name="server_unregister_error">Erreur de désenregistrement du serveur</string>
 	<string name="retour">Retour</string>
 	<string name="retour">Retour</string>
+	<string name="icon_descriptor">icon</string>
+	<string name="title_cinema">Cinéma</string>
+	<string name="title_hq">QG</string>
+	<string name="title_script">Scriptes</string>
+	
+	<string name="btn_buy">Acheter</string>
+	<string name="btn_close">Fermer</string>
 </resources>

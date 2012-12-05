@@ -15,6 +15,7 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -80,8 +81,7 @@ public class Base extends BaseGameActivity
     
     // ===========================================================
     // Methods
-    // ===========================================================
-    
+    // ===========================================================    
     @SuppressWarnings("deprecation")
 	@Override
     public EngineOptions onCreateEngineOptions()

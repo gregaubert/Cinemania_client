@@ -1,5 +1,6 @@
 package com.cinemania.cases;
 
+import org.andengine.entity.sprite.ButtonSprite.OnClickListener;
 import org.andengine.opengl.texture.region.ITextureRegion;
 
 import com.cinemania.gamelogic.Player;

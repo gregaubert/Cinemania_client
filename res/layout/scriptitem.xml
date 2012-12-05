@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+	<RadioGroup
+        android:id="@+id/radioSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+	    <RadioButton
+	        android:id="@+id/scriptRadioBtn"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="5dp"
+	        android:padding="10dp" />
+	</RadioGroup>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:id="@+id/scriptTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Titre"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+ 
+	    <TextView
+	        android:id="@+id/scriptPrice"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:text="Description" />
+ 
+    </LinearLayout>
+ 
+</LinearLayout>

@@ -12,23 +12,20 @@ import com.cinemania.constants.AllConstants;
 
 public class Case extends Rectangle {
 	
-	private Sprite textureSprite;
+	private ButtonSprite textureSprite;
 	private final int TEXTURELAYER = 0;
 	private final int LEVELLAYER = 1;
 
 	public Case(ITextureRegion texture) {
 		super(0, 0, texture.getWidth(), texture.getHeight(), Base.getSharedInstance().getVertexBufferObjectManager());
 		setColor(AllConstants.BOARD_CASE_COLOR);
-		textureSprite = new Sprite(0, 0, texture, Base.getSharedInstance().getVertexBufferObjectManager());
+		textureSprite = new ButtonSprite(0, 0, texture, Base.getSharedInstance().getVertexBufferObjectManager());
 		attachChild(textureSprite);
 	}
 	
-	public Case(ITextureRegion texture, OnClickListener listener) {
-		super(0, 0, texture.getWidth(), texture.getHeight(), Base.getSharedInstance().getVertexBufferObjectManager());
-		setColor(AllConstants.BOARD_CASE_COLOR);
-		textureSprite = new ButtonSprite(0, 0, texture, Base.getSharedInstance().getVertexBufferObjectManager());
-		((ButtonSprite)textureSprite).setOnClickListener(listener);
-		attachChild(textureSprite);
+	public void setOnClickListener(OnClickListener listener){
+		textureSprite.setOnClickListener(listener);
+		Base.getSharedInstance().getGame().registerTouchArea(textureSprite);
 	}
 	
 	@Override
