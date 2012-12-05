@@ -39,6 +39,9 @@ public class ResourcesManager {
 	public ITextureRegion mLogisticsLogo;
 	
 	public ITextureRegion mDice;
+	public ITextureRegion mNextTurn;
+	public ITextureRegion mWaiting;
+	
 	public ITextureRegion mPlayer;
 	
 	public ITextureRegion mSplashLogo;
@@ -103,7 +106,8 @@ public class ResourcesManager {
 		mLogisticsLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "logo_logistics.png");
 		mActorsLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "logo_actors.png");
 		mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "dice.png");
-	    
+	    mNextTurn = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "next_turn.png");
+	    mWaiting = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "waiting.png");
 		try {
 			HUDBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
 			HUDBitmapTextureAtlas.load();

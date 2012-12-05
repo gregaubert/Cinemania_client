@@ -14,6 +14,7 @@ import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
+import org.json.JSONException;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +22,11 @@ import android.view.Display;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
+
+import com.cinemania.network.GameContext;
 import com.cinemania.client.R;
 import com.cinemania.network.gcm.Connector;
+
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.scenes.GameMenu;
@@ -71,7 +75,9 @@ public class Base extends BaseGameActivity
     private BoardScene mGame;
     // HUD
     private BoardHUD mHUD;
-       
+    //Game context
+    private GameContext mGameContext;
+    
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -126,7 +132,7 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
     {
         // ready to receive GCM messages
-    	//Connector.registerGCMReceiver();
+    	Connector.registerGCMReceiver();
     	
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
@@ -187,11 +193,27 @@ public class Base extends BaseGameActivity
 		manager.LoadBoardGame(this,this.mEngine);
 		manager.LoadPlayer(this, this.mEngine);
 		manager.LoadHUD(this, this.mEngine);
+		
+		//TODO tester si nouvelle partie, si oui deserialie un jSon de base
+		try 
+		{
+			mGameContext = GameContext.getSharedInstance();
+			mGameContext.deserialize(GameContext.initialState());
+			
+			mGameContext.deserializeBoard(this.mGame);
+			mGameContext.deserializePlayers();
+			mGameContext.deserializeGame();
+		}
+		catch (JSONException e)
+		{
+			e.printStackTrace();
+		}
+			
 		//Initialisation des ressources
 		mMenu.Load();
 		mOption.Load();
 		mGame.Load();
-		mHUD.Load();		
+		mHUD.Load();
 	}
 	
 	private void loadScenes()
@@ -245,6 +267,10 @@ public class Base extends BaseGameActivity
     
     public OptionScene getOption(){
     	return this.mOption;
+    }
+    
+    public BoardHUD getHUD(){
+    	return this.mHUD;
     }
     
     public void setSceneType(SceneType aType){

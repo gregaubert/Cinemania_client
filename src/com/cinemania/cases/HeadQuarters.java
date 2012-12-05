@@ -10,8 +10,8 @@ public class HeadQuarters extends OwnableCell {
 	private int mLevel = 0;
 	
 	
-	public HeadQuarters(int level) {
-		super(ResourcesManager.getInstance().mCaseHQ);
+	public HeadQuarters(int level, float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseHQ, posX, posY);
 		mLevel = level;
 	}
 	

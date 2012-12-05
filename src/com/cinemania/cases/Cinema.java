@@ -4,13 +4,12 @@ import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.entity.sprite.ButtonSprite.OnClickListener;
 
 import android.app.AlertDialog;
-import android.util.Log;
 
 import com.cinemania.activity.Base;
-import com.cinemania.client.R;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Profitable;
 import com.cinemania.gamelogic.Room;
+import com.cinemania.client.R;
 import com.cinemania.resources.ResourcesManager;
 
 public class Cinema extends BuyableCase implements Profitable, OnClickListener  {
@@ -20,16 +19,16 @@ public class Cinema extends BuyableCase implements Profitable, OnClickListener  
 	private Room[] mRooms = new Room[AllConstants.MAX_ROOMS];
 	private int mPurchasedRooms = 0;
 
-	public Cinema(Room[] rooms) {
-		super(ResourcesManager.getInstance().mCaseCinema);
+	public Cinema(Room[] rooms, float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseCinema, posX, posY);
 		for (int i = 0; i < rooms.length; i++) {
 			mRooms[i] = rooms[i];
 		}
 		setOnClickListener(this);
 	}
 
-	public Cinema() {
-		super(ResourcesManager.getInstance().mCaseCinema);
+	public Cinema(float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseCinema, posX, posY);
 		setOnClickListener(this);
 	}
 	

@@ -64,11 +64,14 @@ public class Player {
 		while(i < nb){
 			//pos = (pos+1)%mBoard.getSize();
 			Case temp = board.nextCellOf(mCurrentPosition);
+
 			//Mouvement de la case courante, a la case suivant. Le pion est decalle
 			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure+mOrder*OFFSET, temp.getX()+bordure+mOrder*OFFSET, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
 		    
 		    entity[i] = mm;
+		    
+		    Log.i("GAME","Déplacement de : " +(mCurrentPosition.getX()+bordure) + " ," + (temp.getX()+bordure) + " à " + (mCurrentPosition.getY()+bordure) + " ," + (temp.getY()+bordure));
 		    
 			//Test si on passe au QG
 			if(temp == this.mHeadQuarters)
@@ -85,11 +88,6 @@ public class Player {
 	  
 	}
 	
-	public void MoveTo(Case target) {
-		mView.registerEntityModifier(new MoveModifier(0.2f, mCurrentPosition.getX(), target.getX()+bordure, mCurrentPosition.getY(), target.getY()+bordure));
-		mCurrentPosition = target;
-	}
-	
 	//Methode appelee lorsque l'on passe par notre QG
 	public void encaisser(){
 		//TODO
@@ -98,6 +96,10 @@ public class Player {
 
 	public Sprite getView(){
 		return this.mView;
+	}
+
+	public String getName(){
+		return this.mName;
 	}
 	
 	public HeadQuarters getHeadQuarters() {

@@ -20,8 +20,8 @@ public class Script extends Case implements org.andengine.entity.sprite.ButtonSp
 	
 	public static final int TYPE = 2;
 
-	public Script() {
-		super(ResourcesManager.getInstance().mCaseScript);
+	public Script(float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseScript, posX, posY);
 		setOnClickListener(this);
 	}
 

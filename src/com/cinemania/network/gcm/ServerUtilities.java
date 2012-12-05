@@ -17,7 +17,6 @@ package com.cinemania.network.gcm;
 
 import static com.cinemania.network.gcm.CommonUtilities.SERVER_URL;
 import static com.cinemania.network.gcm.CommonUtilities.TAG;
-import static com.cinemania.network.gcm.CommonUtilities.displayMessage;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -30,11 +29,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import com.cinemania.client.R;
+import com.google.android.gcm.GCMRegistrar;
+
 import android.content.Context;
 import android.util.Log;
 
-import com.cinemania.client.R;
-import com.google.android.gcm.GCMRegistrar;
 
 /**
  * Helper class used to communicate with the demo server.
@@ -62,12 +62,9 @@ public final class ServerUtilities {
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
             Log.d(TAG, "Attempt #" + i + " to register");
             try {
-                displayMessage(context, context.getString(
-                        R.string.server_registering, i, MAX_ATTEMPTS));
                 post(serverUrl, params);
                 GCMRegistrar.setRegisteredOnServer(context, true);
-                String message = context.getString(R.string.server_registered);
-                CommonUtilities.displayMessage(context, message);
+                Log.d(TAG,"server registered");
                 return true;
             } catch (IOException e) {
                 // Here we are simplifying and retrying on any error; in a real
@@ -90,9 +87,8 @@ public final class ServerUtilities {
                 backoff *= 2;
             }
         }
-        String message = context.getString(R.string.server_register_error,
-                MAX_ATTEMPTS);
-        CommonUtilities.displayMessage(context, message);
+        Log.d(TAG,"error registering to server");
+        
         return false;
     }
 
@@ -107,17 +103,14 @@ public final class ServerUtilities {
         try {
             post(serverUrl, params);
             GCMRegistrar.setRegisteredOnServer(context, false);
-            String message = context.getString(R.string.server_unregistered);
-            CommonUtilities.displayMessage(context, message);
+            Log.d(TAG,"unregistered from server");
         } catch (IOException e) {
             // At this point the device is unregistered from GCM, but still
             // registered in the server.
             // We could try to unregister again, but it is not necessary:
             // if the server tries to send a message to the device, it will get
             // a "NotRegistered" error message and should unregister the device.
-            String message = context.getString(R.string.server_unregister_error,
-                    e.getMessage());
-            CommonUtilities.displayMessage(context, message);
+            Log.d(TAG,"error unregistering to server");
         }
     }
 

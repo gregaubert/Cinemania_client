@@ -9,8 +9,8 @@ public abstract class BuyableCase extends OwnableCell {
 
 	private int baseValue;
 	
-	public BuyableCase(ITextureRegion texture) {
-		super(texture);
+	public BuyableCase(ITextureRegion texture, float posX, float posY) {
+		super(texture, posX, posY);
 	}
 
 	/**

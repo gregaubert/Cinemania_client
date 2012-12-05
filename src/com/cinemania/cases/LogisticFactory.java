@@ -12,8 +12,8 @@ public class LogisticFactory extends Resource {
 	private boolean hairdressingExtension =  false;
 	private boolean fxExtension =  false;
 
-	public LogisticFactory(int level) {
-		super(ResourcesManager.getInstance().mCaseLogistics, level);
+	public LogisticFactory(int level, float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseLogistics, level, posX, posY);
 	}
 
 	@Override

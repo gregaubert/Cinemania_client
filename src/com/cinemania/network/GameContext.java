@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import com.cinemania.gamelogic.Board;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
+import com.cinemania.scenes.BoardScene;
+import com.cinemania.activity.Base;
 import com.cinemania.cases.Case;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
@@ -22,7 +24,9 @@ public final class GameContext {
 	private static long LOCAL_IDENTIFIER = 1001;
 	
 	private Player[] mPlayers;
+	//Nous-mêmes
 	private Player mPlayer;
+	//Joueu en train de jouer
 	private Player mCurrentPlayer;
 	private Board mBoard;
 	
@@ -30,49 +34,121 @@ public final class GameContext {
 	private int mCurrentTurn;
 	private int mYear;
 	
+	//The different part of the JSON
+	private JSONObject jsonGame;
+	private JSONArray jsonPlayers;
+	private JSONArray jsonBoard;
 	
+	//Singleton
+    public static GameContext instance;
+	
+    // ===========================================================
+    public static GameContext getSharedInstance() {
+    	if(instance == null)
+    		instance = new GameContext();
+        return instance;
+    }
+    
 	private GameContext() { }
 	
-	public static GameContext deserialize(String jsonString) throws JSONException {
+	public void deserialize(String jsonString) throws JSONException {
 		// Extact each JSON object from serialized data
 		JSONObject json = new JSONObject(jsonString);
-		JSONObject jsonGame = json.getJSONObject("game");
-		JSONArray jsonPlayers = json.getJSONArray("players");
-		JSONArray jsonBoard = json.getJSONArray("board");
-		// Generate a game context with all JSON informations
-		GameContext c = new GameContext();
-		deserializeGame(c, jsonGame);
-		deserializeBoard(c, jsonBoard);
-		deserializePlayers(c, jsonPlayers, jsonGame);
-		return c;
-	}
-	
-	private static void deserializeGame(GameContext c, JSONObject jsonGame) throws JSONException {
-		c.mGameIdentifier = jsonGame.getLong("id");
-		c.mCurrentTurn = jsonGame.getInt("turn");
-	}
-	
-	private static void deserializeBoard(GameContext c, JSONArray jsonBoard) throws JSONException {
-		c.mBoard = BoardDeserializer.deserialize(jsonBoard);
-	}
-	
-	private static void deserializePlayers(GameContext c, JSONArray jsonPlayers, JSONObject jsonGame) throws JSONException {
-		Case[] board = c.mBoard.getCases();
-		c.mPlayers = new Player[jsonPlayers.length()];
+		jsonGame = json.getJSONObject("game");
+		jsonPlayers = json.getJSONArray("players");
+		jsonBoard = json.getJSONArray("board");
 		
-		for (int i = 0; i < jsonPlayers.length(); i++) {
-			// deserialize
-			Player player = PlayerDeserializer.deserialize(jsonPlayers.getJSONObject(i),board,i);
-			c.mPlayers[i] = player;
+		/*deserializeGame(c, jsonGame);
+		deserializeBoard(c, jsonBoard);
+		deserializePlayers(c, jsonPlayers, jsonGame);*/
+	}
+	
+	public void deserializeGame() throws JSONException {
+		this.mGameIdentifier = jsonGame.getLong("id");
+		this.mCurrentTurn = jsonGame.getInt("turn");
+	}
+	
+	public void deserializeBoard(BoardScene boardScene) throws JSONException {
+		// FIXME: Need to be discussed
+		// Case[] boardCases = new Case[AllConstants.BOARD_SIZE];
+		Case[] boardCases = new Case[jsonBoard.length()];
+		// Generate board's cells
+		for (int i = 0; i < jsonBoard.length(); i++) {
+			JSONObject jsonCell = jsonBoard.getJSONObject(i);
+			//Récupère l'emplacement de la case
+			float[] position = boardScene.calculateCasePosition(i);
 			
+			Case cell = null;
+			switch (jsonCell.getInt("type")) {
+				case HeadQuarters.TYPE:
+					cell = new HeadQuarters(jsonCell.getInt("level"),position[0], position[1]);
+					break;
+				case Script.TYPE:
+					cell = new Script(position[0], position[1]);
+					break;
+				case LuckyCase.TYPE:
+					cell = new LuckyCase(position[0], position[1]);
+					break;
+				case Cinema.TYPE:
+					// Generate cinema's rooms
+					JSONArray jsonRooms = jsonCell.getJSONArray("rooms");
+					Room[] rooms = new Room[jsonRooms.length()];
+					for (int j = 0; j < jsonRooms.length(); j++) {
+						// TODO: Define movie from identifier
+						jsonRooms.getInt(j);
+						rooms[j] = new Room();
+					}
+					cell = new Cinema(rooms,position[0], position[1]);
+					break;
+				case School.TYPE:
+					cell = new School(jsonCell.getInt("level"),position[0], position[1]);
+					break;
+				case LogisticFactory.TYPE:
+					cell = new LogisticFactory(jsonCell.getInt("level"),position[0], position[1]);
+					break;
+				default:
+					assert false;
+			}
+			boardCases[i] = cell;
+		}
+		this.mBoard = new Board(boardCases);
+	}
+	
+	public void deserializePlayers() throws JSONException {
+		Case[] board = this.mBoard.getCases();
+		this.mPlayers = new Player[jsonPlayers.length()];
+
+		for (int i = 0; i < jsonPlayers.length(); i++) {
+
+			JSONObject jsonPlayer = jsonPlayers.getJSONObject(i);
+			assert board[jsonPlayer.getInt("hq")] instanceof HeadQuarters;
+			Player player = new Player(
+					jsonPlayer.getLong("id"),
+					i,
+					jsonPlayer.getString("name"),
+					jsonPlayer.getInt("money"),
+					jsonPlayer.getInt("actors"),
+					jsonPlayer.getInt("logistics"),
+					(HeadQuarters)board[jsonPlayer.getInt("hq")],
+					board[jsonPlayer.getInt("position")]);
+			// Because the board game and all related cells are generated before without any reference to any player,
+			// we have to link the player and his properties afterward
+			JSONArray jsonProperties = jsonPlayer.getJSONArray("properties");
+			for (int j = 0; j < jsonProperties.length(); j++) {
+				assert board[jsonProperties.getInt(i)] instanceof OwnableCell;
+				player.addProperty((OwnableCell)board[jsonProperties.getInt(i)]);
+			}
+			player.getHeadQuarters().setOwner(player);
+			this.mPlayers[i] = player;
+
 			// Define local user
 			if (player.getId() == LOCAL_IDENTIFIER) {
-				c.mPlayer = player;
+				this.mPlayer = player;
 			}
 			
 			// Define who is playing
 			if (player.getId() == jsonGame.getLong("player")) {
-				c.mCurrentPlayer = player;
+				this.mCurrentPlayer = player;
 			}
 		}
 	}
@@ -81,6 +157,32 @@ public final class GameContext {
 		return "";
 	}
 	
+	/**
+	 * On passe le tour, on envoit les infos au serveur.
+	 */
+	public void nextTurn(){
+		
+		//Si on passe le tour alors que nous ne somme pas le joueur en cours.
+		if(mCurrentPlayer != mPlayer)
+			throw new IllegalStateException("Vous ne pouvez passer votre tour que lorsque c'est à vous.");
+		this.nextPlayer();
+		this.serialize();
+	}
+	
+	/**
+	 * On passe au joueur suivant
+	 */
+	private void nextPlayer(){
+		
+		for(int i = 0; i < mPlayers.length; i++)
+			if(mPlayers[i] == mCurrentPlayer)
+			{
+				mCurrentPlayer = mPlayers[(i+1)%mPlayers.length];
+				Base.getSharedInstance().getHUD().setCurrentPlayer(mCurrentPlayer);
+				return;
+			}
+		
+	}
 	
 	/**
 	 * Dï¿½termine si le tour est au joueur local
@@ -128,8 +230,8 @@ public final class GameContext {
 		return "{ \"version\": 1, \"game\": { \"id\": 123456, \"turn\": 1, \"player\": 0 }, \"board\": [ { \"type\": 1, \"level\": 2 }, { \"type\": 1, \"level\": 3 }, { \"type\": 2 }, { \"type\": 5, \"level\": 0 } ], \"players\": [ { \"id\": 12345, \"name\": \"Mok\",  \"hq\": 0, \"position\": 0, \"properties\": [ 3 ], \"money\": 1000, \"actors\": 2, \"logistics\": 10 }, { \"id\": 4321, \"name\": \"Bof\", \"hq\": 1, \"position\": 1, \"properties\": [], \"money\": 223, \"actors\": 3, \"logistics\": 4 } ] }";
 	}
 	
-	// FIXME: Only for tests
-	public static String test2() {
+	//Etat initial lors d'une nouvelle partie.
+	public static String initialState() {
 		try {
 			int[] cellIdentifiers = Board.generate();
 			int offset = 0;
@@ -218,7 +320,7 @@ public final class GameContext {
 			}
 			// Game
 			JSONObject jsonGame = new JSONObject();
-			jsonGame.put("player", 0);
+			jsonGame.put("player", 1001);
 			jsonGame.put("turn", 1);
 			jsonGame.put("id", 1234567);
 			JSONObject json = new JSONObject();

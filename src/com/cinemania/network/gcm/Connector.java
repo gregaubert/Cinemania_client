@@ -1,6 +1,8 @@
 package com.cinemania.network.gcm;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.provider.Settings.Secure;
@@ -21,9 +23,6 @@ public class Connector {
 	
 	public static void registerGCMReceiver(){
     	
-    	checkNotNull(CommonUtilities.SERVER_URL, "SERVER_URL");
-        checkNotNull(CommonUtilities.SENDER_ID, "SENDER_ID");
-    	
         // Make sure the device has the proper dependencies.
         GCMRegistrar.checkDevice(mActivity);
         
@@ -31,22 +30,32 @@ public class Connector {
         // while developing the app, then uncomment it when it's ready.
         GCMRegistrar.checkManifest(mActivity);
         
-        GCMBroadcastReceiver mHandleMessageReceiver = new GCMBroadcastReceiver();
+        BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String newMessage = intent.getExtras().getString(CommonUtilities.MESSAGE);
+                Log.d("DEBUG", "Message received! " + newMessage);
+            }
+        };
         
         mActivity.registerReceiver(mHandleMessageReceiver,
-                new IntentFilter(com.cinemania.network.gcm.CommonUtilities.DISPLAY_MESSAGE_ACTION));
+                new IntentFilter(CommonUtilities.DISPLAY_MESSAGE_ACTION));
+        
+        
+        final String regId = GCMRegistrar.getRegistrationId(mActivity);
+        
+        Log.d("DEBUG", "RegID: " + regId);
+        
+        if (regId.equals("")) {
+        	GCMRegistrar.register(mActivity, CommonUtilities.SENDER_ID);
+        	
+        	Log.d("DEBUG", "RegID: " + GCMRegistrar.getRegistrationId(mActivity));
+        } else {
+          Log.v(CommonUtilities.TAG, "Already registered: " + regId);
+        }
         
         // Automatically registers application on startup.
-        GCMRegistrar.register(mActivity, CommonUtilities.SENDER_ID);
-        	
-        final String regId=Secure.getString(mActivity.getBaseContext().getContentResolver(), Secure.ANDROID_ID);
-        Log.d("DEBUG", "RegID: " + regId);
+        GCMRegistrar.setRegisteredOnServer(mActivity, true);
 	}
     
-    private static void checkNotNull(Object reference, String name) {
-        if (reference == null) {
-            throw new NullPointerException(
-            		Base.getSharedInstance().getString(R.string.error_config, name));
-        }
-    }
 }
