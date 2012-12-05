@@ -33,13 +33,13 @@ public class Connector {
         BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver(){
             @Override
             public void onReceive(Context context, Intent intent) {
-                String newMessage = intent.getExtras().getString(CommonUtilities.EXTRA_MESSAGE);
+                String newMessage = intent.getExtras().getString(CommonUtilities.MESSAGE);
                 Log.d("DEBUG", "Message received! " + newMessage);
             }
         };
         
         mActivity.registerReceiver(mHandleMessageReceiver,
-                new IntentFilter(com.cinemania.network.gcm.CommonUtilities.DISPLAY_MESSAGE_ACTION));
+                new IntentFilter(CommonUtilities.DISPLAY_MESSAGE_ACTION));
         
         
         final String regId = GCMRegistrar.getRegistrationId(mActivity);
