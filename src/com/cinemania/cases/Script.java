@@ -6,8 +6,8 @@ public class Script extends Case {
 	
 	public static final int TYPE = 2;
 
-	public Script() {
-		super(ResourcesManager.getInstance().mCaseScript);
+	public Script(float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseScript, posX, posY);
 	}
 
 	public String getMovieStory() {

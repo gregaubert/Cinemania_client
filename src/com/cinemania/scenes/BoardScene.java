@@ -3,15 +3,12 @@ package com.cinemania.scenes;
 import org.andengine.engine.camera.ZoomCamera;
 import static com.cinemania.constants.AllConstants.*;
 import org.andengine.entity.Entity;
-import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
-import org.json.JSONException;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
-import com.cinemania.camera.BoardHUD;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.cases.Case;
 import com.cinemania.network.GameContext;
@@ -33,8 +30,7 @@ public class BoardScene extends Scene implements Loader {
 
 	private final int side = (int) BOARD_SIZE / 4;
 	private final float caseSize = 80f;
-	//private final float caseSize = Base.CAMERA_HEIGHT / (side+1);
-	
+
 	private float offsetWidth = 0;
 	private float offsetHeight = 0;
 
@@ -65,6 +61,9 @@ public class BoardScene extends Scene implements Loader {
 	    offsetWidth = (mCamera.getWidth() * 2-(side+1)*caseSize)/2;
 		offsetHeight = (mCamera.getHeight() * 2-(side+1)*caseSize)/2;
 
+		//TODO Modifier la constante
+	    this.offsetHeight += 32;
+		
 	    mResourcesManager = ResourcesManager.getInstance();
 	    mCameraManager = new CameraManager(mCamera);
 	    setOnAreaTouchTraversalFrontToBack();
@@ -80,28 +79,21 @@ public class BoardScene extends Scene implements Loader {
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
 	@Override
-	public void Load() {
-		try {
-			mGameContext = GameContext.deserialize(GameContext.test2());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	
-		//TODO Modifier la constante
-	    this.offsetHeight += 32;
+	public void Load() {		
+		mGameContext = GameContext.getSharedInstance();
 		
 		this.setBackgroundEnabled(true);
 		this.getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
 		
-		Sprite boardCenter = new Sprite(0, 0, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());
+		Sprite boardCenter = new Sprite(caseSize + offsetWidth, caseSize + offsetHeight, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());
 		//boardCenter.setSize(caseSize * (side - 1), caseSize * (side - 1));
-		boardCenter.setPosition(caseSize + offsetWidth, caseSize + offsetHeight);
+		
 		this.getChildByIndex(LAYER_PAWN).attachChild(boardCenter);
 		
 		Log.i("GAME", "offsetWidth : " + offsetWidth);
 		Log.i("GAME", "offsetHeight : " + offsetHeight);
 		
-		displayCases();
+		initCases();
 		
 		//Instancie les players.
 		for(int i = 0; i < mGameContext.getPlayers().length; i++){
@@ -114,25 +106,20 @@ public class BoardScene extends Scene implements Loader {
 		
     	int move = mGameContext.getBoard().rollDice();
     	
-    	Log.i("GAME","Dï¿½placement du joueur  de " + move);
+    	Log.i("GAME","Déplacement du joueur  de " + move);
     	mGameContext.getPlayer().Move(move, this.mGameContext.getBoard());
     	
         return true;
 	}
 	
-	private void displayCases() {
+	private void initCases() {
 		Case[] mCases = mGameContext.getBoard().getCases();
-
-		Rectangle sprite;
 		
 		for (int i = 0; i < mCases.length; i++) {			
-			float[] position = calculateCasePosition(i);
-			
-			sprite = mCases[i];			
-			sprite.setPosition(position[0], position[1]);
-			//sprite.setSize(caseSize, caseSize);
-			
-			this.getChildByIndex(LAYER_BOARD).attachChild(sprite);
+			float[] position = calculateCasePosition(i);	
+			//sprite.setPosition(position[0], position[1]);
+			//mCases[i].setPosition(position[0], position[1]);
+			this.getChildByIndex(LAYER_BOARD).attachChild(mCases[i]);
 		}
 	}
 
@@ -143,7 +130,7 @@ public class BoardScene extends Scene implements Loader {
 	 * @param i
 	 * @return
 	 */
-	private float[] calculateCasePosition(int i) {
+	public float[] calculateCasePosition(int i) {
 		
 		float[] position = {minCoord,minCoord};
 		

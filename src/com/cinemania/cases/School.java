@@ -16,8 +16,8 @@ public class School extends Resource {
 	private boolean disguiseExtension =  false;
 	
 	
-	public School(int level) {
-		super(ResourcesManager.getInstance().mCaseActors, level);
+	public School(int level, float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseActors, level, posX, posY);
 	}
 
 	@Override

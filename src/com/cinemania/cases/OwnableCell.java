@@ -9,8 +9,8 @@ public abstract class OwnableCell extends Case {
 	private Player mOwner;
 
 	
-	public OwnableCell(ITextureRegion texture) {
-		super(texture);
+	public OwnableCell(ITextureRegion texture, float posX, float posY) {
+		super(texture, posX, posY);
 	}
 	
 	

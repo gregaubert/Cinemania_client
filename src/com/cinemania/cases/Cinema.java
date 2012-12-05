@@ -13,15 +13,15 @@ public class Cinema extends BuyableCase implements Profitable {
 	private Room[] mRooms = new Room[AllConstants.MAX_ROOMS];
 	private int mPurchasedRooms = 0;
 
-	public Cinema(Room[] rooms) {
-		super(ResourcesManager.getInstance().mCaseCinema);
+	public Cinema(Room[] rooms, float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseCinema, posX, posY);
 		for (int i = 0; i < rooms.length; i++) {
 			mRooms[i] = rooms[i];
 		}
 	}
 
-	public Cinema() {
-		super(ResourcesManager.getInstance().mCaseCinema);
+	public Cinema(float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseCinema, posX, posY);
 	}
 	
 	

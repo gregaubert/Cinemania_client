@@ -67,9 +67,10 @@ public class Player {
 			Case temp = board.nextCellOf(mCurrentPosition);
 			//Mouvement de la case courante, à la case suivante
 			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure, temp.getX()+bordure, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
-		    mm.setAutoUnregisterWhenFinished(true);
-		    
+			mm.setAutoUnregisterWhenFinished(true);	   
 		    entity[i] = mm;
+		    
+		    Log.i("GAME","Déplacement de : " +(mCurrentPosition.getX()+bordure) + " ," + (temp.getX()+bordure) + " à " + (mCurrentPosition.getY()+bordure) + " ," + (temp.getY()+bordure));
 		    
 			//Test si on passe au QG
 			if(temp == this.mHeadQuarters)
@@ -84,11 +85,6 @@ public class Player {
 		
 		mView.registerEntityModifier(sem);
 	  
-	}
-	
-	public void MoveTo(Case target) {
-		mView.registerEntityModifier(new MoveModifier(0.2f, mCurrentPosition.getX(), target.getX()+bordure, mCurrentPosition.getY(), target.getY()+bordure));
-		mCurrentPosition = target;
 	}
 	
 	//Méthode appelée lorsque l'on passe par notre QG

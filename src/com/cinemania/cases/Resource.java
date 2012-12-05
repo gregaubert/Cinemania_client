@@ -11,13 +11,13 @@ public class Resource extends BuyableCase implements Profitable {
 	private int mLevel = 0;
 
 	// FIXME: Qu'est-ce que c'est ça
-	public Resource() {
-		super(ResourcesManager.getInstance().mCaseResource);
+	public Resource(float posX, float posY) {
+		super(ResourcesManager.getInstance().mCaseResource, posX, posY);
 	}
 	
 	
-	public Resource(ITextureRegion texture, int level) {
-		super(texture);
+	public Resource(ITextureRegion texture, int level, float posX, float posY) {
+		super(texture, posX, posY);
 		mLevel = level;
 	}
 	
