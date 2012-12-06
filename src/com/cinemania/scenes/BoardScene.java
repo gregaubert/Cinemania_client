@@ -99,7 +99,6 @@ public class BoardScene extends Scene implements Loader {
 		//Instancie les players.
 		for(Player player : mGameContext.getPlayers()){
 			this.getChildByIndex(LAYER_PAWN).attachChild(player.getView());
-			//player.MoveTo(player.getPosition());
 		}
 	}
 	
