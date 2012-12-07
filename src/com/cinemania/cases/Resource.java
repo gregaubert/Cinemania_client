@@ -6,11 +6,11 @@ import com.cinemania.gamelogic.Profitable;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.constants.AllConstants;
 
-public class Resource extends BuyableCase implements Profitable {
+public abstract class Resource extends BuyableCase implements Profitable {
 
 	private int mLevel = 0;
 
-	// FIXME: Qu'est-ce que c'est ça
+	// FIXME: Qu'est-ce que c'est ï¿½a
 	public Resource(float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseResource, posX, posY);
 	}
