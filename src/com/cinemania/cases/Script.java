@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.andengine.entity.sprite.ButtonSprite;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -88,5 +90,13 @@ public class Script extends Case {
 				dialogBuilder.create().show();
 			}
 		});
+	}
+
+	@Override
+	public JSONObject toJson() throws JSONException {
+		JSONObject jsonCell = new JSONObject();
+		
+		jsonCell.put("type", HeadQuarters.TYPE);		
+		return jsonCell;
 	}
 }

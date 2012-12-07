@@ -1,6 +1,8 @@
 package com.cinemania.cases;
 
 import org.andengine.entity.sprite.ButtonSprite;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Player;
@@ -48,6 +50,17 @@ public class HeadQuarters extends OwnableCell {
 	public void onTheCell(Player player) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public JSONObject toJson() throws JSONException {
+		JSONObject jsonCell = new JSONObject();
+		
+		jsonCell.put("type", HeadQuarters.TYPE);
+		jsonCell.put("level", this.getLevel());
+		
+		return jsonCell;
 	}
 
 }

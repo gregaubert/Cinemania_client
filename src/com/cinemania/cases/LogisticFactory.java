@@ -1,6 +1,8 @@
 package com.cinemania.cases;
 
 import org.andengine.entity.sprite.ButtonSprite;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
@@ -75,4 +77,13 @@ public class LogisticFactory extends Resource {
 		
 	}
 
+	@Override
+	public JSONObject toJson() throws JSONException {
+		JSONObject jsonCell = new JSONObject();
+		
+		jsonCell.put("type", LogisticFactory.TYPE);
+		jsonCell.put("level", this.getLevel());
+	
+		return jsonCell;
+	}
 }

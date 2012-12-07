@@ -1,7 +1,9 @@
 package com.cinemania.cases;
 
 import org.andengine.entity.sprite.ButtonSprite;
-import org.andengine.entity.sprite.ButtonSprite.OnClickListener;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.AlertDialog;
 
@@ -105,5 +107,22 @@ public class Cinema extends BuyableCase implements Profitable  {
 	public void onTheCell(Player player) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public JSONObject toJson() throws JSONException {
+		JSONObject jsonCell = new JSONObject();
+		
+		jsonCell.put("type", Cinema.TYPE);
+		
+		JSONArray jsonRoom = new JSONArray();
+		
+		for(Room r : this.mRooms)
+			if(r!=null)
+				jsonRoom.put(r.toJson());
+		
+		jsonCell.put("rooms", jsonRoom);
+		
+		return jsonCell;
 	}
 }
