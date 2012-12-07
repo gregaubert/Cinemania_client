@@ -17,7 +17,10 @@ package com.cinemania.network.gcm;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings.Secure;
 import android.util.Log;
+
+import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
 
 /**
@@ -50,5 +53,8 @@ public final class CommonUtilities {
      * Intent's extra that contains the message to be displayed.
      */
     public static final String MESSAGE = "message";
-
+    
+    
+    public static final String DEVICE_ID = Secure.getString(Base.getSharedInstance().getBaseContext().getContentResolver(), Secure.ANDROID_ID);
+    
 }
