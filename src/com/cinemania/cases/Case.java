@@ -10,7 +10,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
 
-public class Case extends Rectangle {
+public abstract class Case extends Rectangle implements org.andengine.entity.sprite.ButtonSprite.OnClickListener{
 	
 	private ButtonSprite textureSprite;
 	private final int TEXTURELAYER = 0;
@@ -40,4 +40,9 @@ public class Case extends Rectangle {
 				((Sprite)ie).setSize(pWidth, pHeight);
 		super.setSize(pWidth, pHeight);
 	}
+
+	@Override
+	public abstract void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX, float pTouchAreaLocalY);
+
+	public abstract void onTheCell();
 }

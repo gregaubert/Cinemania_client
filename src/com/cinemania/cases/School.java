@@ -1,5 +1,6 @@
 package com.cinemania.cases;
 
+import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import static com.cinemania.constants.AllConstants.*;
 
@@ -78,6 +79,19 @@ public class School extends Resource {
 
 	public void setDisguiseExtension(boolean disguiseExtension) {
 		this.disguiseExtension = disguiseExtension;
+	}
+
+	@Override
+	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
+			float pTouchAreaLocalY) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTheCell() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
