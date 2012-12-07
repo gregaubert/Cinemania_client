@@ -4,7 +4,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 
 import com.cinemania.gamelogic.Player;
 
-public abstract class OwnableCell extends Case {
+public abstract class OwnableCell extends Cell {
 	
 	private Player mOwner;
 

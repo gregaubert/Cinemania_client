@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
-public class LuckyCase extends Case {
+public class LuckyCase extends Cell {
 	
 	public static final int TYPE = 3;
 

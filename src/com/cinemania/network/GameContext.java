@@ -4,12 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cinemania.gamelogic.Board;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.activity.Base;
-import com.cinemania.cases.Case;
+import com.cinemania.cases.Cell;
+import com.cinemania.cases.CellGenerator;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.LogisticFactory;
@@ -27,7 +27,7 @@ public final class GameContext {
 	private Player mPlayer;
 	//Joueu en train de jouer
 	private Player mCurrentPlayer;
-	private Board mBoard;
+	private Cell[] mCases;
 	
 	private long mGameIdentifier;
 	private int mCurrentTurn;
@@ -65,14 +65,14 @@ public final class GameContext {
 	
 	public void deserializeBoard(BoardScene boardScene) throws JSONException {
 
-		Case[] boardCases = new Case[jsonBoard.length()];
+		mCases = new Cell[jsonBoard.length()];
 		// Generate board's cells
 		for (int i = 0; i < jsonBoard.length(); i++) {
 			JSONObject jsonCell = jsonBoard.getJSONObject(i);
 			//Récupère l'emplacement de la case
 			float[] position = boardScene.calculateCasePosition(i);
 			
-			Case cell = null;
+			Cell cell = null;
 			switch (jsonCell.getInt("type")) {
 				case HeadQuarters.TYPE:
 					cell = new HeadQuarters(jsonCell.getInt("level"),position[0], position[1]);
@@ -103,20 +103,18 @@ public final class GameContext {
 				default:
 					assert false;
 			}
-			boardCases[i] = cell;
+			mCases[i] = cell;
 		}
-		this.mBoard = new Board(boardCases);
 	}
 	
 	public void deserializePlayers() throws JSONException {
-		Case[] board = this.mBoard.getCases();
 		this.mPlayers = new Player[jsonPlayers.length()];
 
 		for (int i = 0; i < jsonPlayers.length(); i++) {
 
 			JSONObject jsonPlayer = jsonPlayers.getJSONObject(i);
-			assert board[jsonPlayer.getInt("hq")] instanceof HeadQuarters;
-			Player player = new Player(jsonPlayer, i, (HeadQuarters)board[jsonPlayer.getInt("hq")], board[jsonPlayer.getInt("position")]);
+			assert mCases[jsonPlayer.getInt("hq")] instanceof HeadQuarters;
+			Player player = new Player(jsonPlayer, i, (HeadQuarters)mCases[jsonPlayer.getInt("hq")], mCases[jsonPlayer.getInt("position")]);
 			
 			this.mPlayers[i] = player;
 
@@ -143,7 +141,7 @@ public final class GameContext {
 			// Board
 			JSONArray jsonBoard = new JSONArray(); 
 			
-			for(Case c : mBoard.getCases())
+			for(Cell c : mCases)
 				jsonBoard.put(c.toJson());
 			
 			// Game
@@ -216,10 +214,6 @@ public final class GameContext {
 		return mCurrentPlayer;
 	}
 	
-	public Board getBoard() {
-		return mBoard;
-	}
-	
 	public long getGameIdentifier() {
 		return mGameIdentifier;
 	}
@@ -241,7 +235,7 @@ public final class GameContext {
 	//Etat initial lors d'une nouvelle partie.
 	public static String initialState() {
 		try {
-			int[] cellIdentifiers = Board.generate();
+			int[] cellIdentifiers = CellGenerator.generate();
 			int offset = 0;
 			JSONArray jsonPlayers = new JSONArray();
 			// Player 1
@@ -349,5 +343,33 @@ public final class GameContext {
 			}
 		}
 		return -1;
+	}
+	
+	public Cell[] getCases() {
+		return mCases;
+	}
+	
+	public Cell getCase(int i){
+		return mCases[i];
+	}
+	
+	public int getSize(){
+		return mCases.length;
+	}
+
+	public int findCaseIndex(Cell toFind) {
+		
+		for (int i = 0; i < mCases.length; i++){
+			if (mCases[i] == toFind)
+				return i;
+		}
+		
+		return -1;
+	}
+	
+	public Cell nextCellOf(Cell source) {
+		int offset = findCaseIndex(source);
+		offset = (offset + 1) % mCases.length;
+		return mCases[offset];
 	}
 }

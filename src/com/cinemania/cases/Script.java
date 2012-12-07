@@ -19,7 +19,7 @@ import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
-public class Script extends Case {
+public class Script extends Cell {
 	
 	public static final int TYPE = 2;
 

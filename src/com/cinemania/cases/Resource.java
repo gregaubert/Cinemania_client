@@ -8,23 +8,28 @@ import com.cinemania.constants.AllConstants;
 
 public abstract class Resource extends BuyableCase implements Profitable {
 
-	private int mLevel = 0;
-
+	private int mLevel;
+	private static final int LAYER_LEVEL = 1;
+	
 	public Resource(float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseResource, posX, posY);
+		this.setLevel(0);
 	}
-	
 	
 	public Resource(ITextureRegion texture, int level, float posX, float posY) {
 		super(texture, posX, posY);
-		mLevel = level;
+		this.setLevel(level);
 	}
 	
+	private void setLevel(int level){
+		this.mLevel = level;
+		//TODO Ajouter le Sprite avec 1,2,3 étoiles.
+	}
 	
 	@Override
 	public void upgrade() {
 		assert mLevel < AllConstants.LEVEL_MAX_BUILDING;
-		mLevel++;
+		this.setLevel(this.getLevel()+1);
 	}
 
 	@Override

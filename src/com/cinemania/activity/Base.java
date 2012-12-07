@@ -16,7 +16,6 @@ import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 import org.json.JSONException;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;

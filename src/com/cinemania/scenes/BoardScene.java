@@ -2,6 +2,7 @@ package com.cinemania.scenes;
 
 import org.andengine.engine.camera.ZoomCamera;
 import static com.cinemania.constants.AllConstants.*;
+
 import org.andengine.entity.Entity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
@@ -10,7 +11,6 @@ import android.util.Log;
 
 import com.cinemania.activity.Base;
 import com.cinemania.camera.CameraManager;
-import com.cinemania.cases.Case;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
@@ -94,10 +94,8 @@ public class BoardScene extends Scene implements Loader {
 		Log.i("GAME", "offsetWidth : " + offsetWidth);
 		Log.i("GAME", "offsetHeight : " + offsetHeight);
 		
-		Case[] mCases = mGameContext.getBoard().getCases();
-		
-		for (int i = 0; i < mCases.length; i++) {			
-			this.getChildByIndex(LAYER_BOARD).attachChild(mCases[i]);
+		for (int i = 0; i < mGameContext.getSize(); i++) {			
+			this.getChildByIndex(LAYER_BOARD).attachChild(mGameContext.getCase(i).getView());
 		}
 		
 		//Instancie les players.
@@ -109,10 +107,10 @@ public class BoardScene extends Scene implements Loader {
 	/* A changer / modifier / supprimer / renommer / verifier */
 	public boolean movePlayer() {
 		
-    	int move = mGameContext.getBoard().rollDice();
+    	int move = shootOneDice() + shootOneDice();
     	
     	Log.i("GAME","Déplacement du joueur  de " + move);
-    	mGameContext.getPlayer().Move(move, this.mGameContext.getBoard());
+    	mGameContext.getPlayer().Move(move);
     	
         return true;
 	}
@@ -165,5 +163,8 @@ public class BoardScene extends Scene implements Loader {
 		// 0 => right, 1 => down, 2 => left, 3 => up
 		return (int) i / side;
 	}
-
+	
+	private int shootOneDice() {
+		return (int)(Math.random()*6)+1;
+	}	
 }
