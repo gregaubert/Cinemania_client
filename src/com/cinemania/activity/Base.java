@@ -132,7 +132,7 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
     {
         // ready to receive GCM messages
-    	GCMConnector.registerGCMReceiver();
+    	GCMConnector.connect();
     	
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
