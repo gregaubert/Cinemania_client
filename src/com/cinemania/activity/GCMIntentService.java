@@ -26,10 +26,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.cinemania.activity.R;
-import com.google.android.gcm.GCMBaseIntentService;
-import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.gcm.CommonUtilities;
 import com.cinemania.network.gcm.ServerUtilities;
+import com.google.android.gcm.GCMBaseIntentService;
+import com.google.android.gcm.GCMRegistrar;
 
 /**
  * IntentService responsible for handling GCM messages.

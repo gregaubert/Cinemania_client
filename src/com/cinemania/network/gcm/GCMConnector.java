@@ -12,10 +12,8 @@ import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
 import com.google.android.gcm.GCMBroadcastReceiver;
 import com.google.android.gcm.GCMRegistrar;
-import com.cinemania.network.gcm.CommonUtilities;
-import com.cinemania.network.gcm.ServerUtilities;
 
-public class Connector {
+public class GCMConnector {
 	    
     private static AsyncTask mRegisterTask = null;
     
