@@ -57,10 +57,6 @@ public final class GameContext {
 		jsonGame = json.getJSONObject("game");
 		jsonPlayers = json.getJSONArray("players");
 		jsonBoard = json.getJSONArray("board");
-		
-		/*deserializeGame(c, jsonGame);
-		deserializeBoard(c, jsonBoard);
-		deserializePlayers(c, jsonPlayers, jsonGame);*/
 	}
 	
 	public void deserializeGame() throws JSONException {
@@ -154,7 +150,51 @@ public final class GameContext {
 	}
 	
 	public String serialize() {
-		return "";
+		try {
+			
+			JSONArray jsonPlayers = new JSONArray();
+			//Ajout des différents players.
+			for(Player p : this.mPlayers)
+			{
+				JSONObject player = new JSONObject();
+				player.put("id", p.getId());
+				player.put("name", p.getName());
+				//TODO index de la case plutot qu'objet
+				player.put("hq", mBoard.findCaseIndex(p.getHeadQuarters()));
+				player.put("position", mBoard.findCaseIndex(p.getPosition()));
+				player.put("properties", new JSONArray());
+				player.put("money", p.getAmount());
+				player.put("actors", p.getActors());
+				player.put("logistics", p.getLogistic());
+				jsonPlayers.put(player);
+			}
+			
+			
+			// Board
+			JSONArray jsonBoard = new JSONArray(); 
+			
+			for(Case c : mBoard.getCases()){
+				JSONObject jsonCell = new JSONObject();
+				
+				jsonBoard.put(jsonCell);
+			}
+			
+			// Game
+			JSONObject jsonGame = new JSONObject();
+			//TODO a corriger
+			jsonGame.put("player", 1001);
+			jsonGame.put("turn", 1);
+			jsonGame.put("id", 1234567);
+			JSONObject json = new JSONObject();
+			json.put("version", 1);
+			json.put("game", jsonGame);
+			json.put("players", jsonPlayers);
+			json.put("board", jsonBoard);
+			return json.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
@@ -166,7 +206,8 @@ public final class GameContext {
 		if(mCurrentPlayer != mPlayer)
 			throw new IllegalStateException("Vous ne pouvez passer votre tour que lorsque c'est à vous.");
 		this.nextPlayer();
-		this.serialize();
+		String res = this.serialize();
+		//TODO envoi des datas.
 	}
 	
 	/**
@@ -330,7 +371,7 @@ public final class GameContext {
 			json.put("board", jsonBoard);
 			return json.toString();
 		} catch (JSONException e) {
-			
+			e.printStackTrace();
 		}
 		return null;
 	}

@@ -94,7 +94,11 @@ public class BoardScene extends Scene implements Loader {
 		Log.i("GAME", "offsetWidth : " + offsetWidth);
 		Log.i("GAME", "offsetHeight : " + offsetHeight);
 		
-		initCases();
+		Case[] mCases = mGameContext.getBoard().getCases();
+		
+		for (int i = 0; i < mCases.length; i++) {			
+			this.getChildByIndex(LAYER_BOARD).attachChild(mCases[i]);
+		}
 		
 		//Instancie les players.
 		for(Player player : mGameContext.getPlayers()){
@@ -111,17 +115,6 @@ public class BoardScene extends Scene implements Loader {
     	mGameContext.getPlayer().Move(move, this.mGameContext.getBoard());
     	
         return true;
-	}
-	
-	private void initCases() {
-		Case[] mCases = mGameContext.getBoard().getCases();
-		
-		for (int i = 0; i < mCases.length; i++) {			
-			float[] position = calculateCasePosition(i);	
-			//sprite.setPosition(position[0], position[1]);
-			//mCases[i].setPosition(position[0], position[1]);
-			this.getChildByIndex(LAYER_BOARD).attachChild(mCases[i]);
-		}
 	}
 
 	/**
