@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.cinemania.activity.Base;
-import com.cinemania.client.R;
+import com.cinemania.activity.R;
 import com.cinemania.resources.ResourcesManager;
 
 public class Script extends Case {

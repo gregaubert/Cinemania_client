@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cinemania.client"
+    package="com.cinemania.activity"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -8,8 +8,8 @@
     <!-- To use the camera ??? -->
     <uses-permission android:name="android.permission.CAMERA"/>
     
-    <permission android:name="com.cinemania.network.gcm.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <!-- <uses-permission android:name="com.cinemania.network.gcm.permission.C2D_MESSAGE" /> -->
+    <permission android:name="com.cinemania.activity.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.cinemania.activity.permission.C2D_MESSAGE" />
     
     <!-- App receives GCM messages. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -42,10 +42,9 @@
             </intent-filter>
         </receiver>
         
-        <service android:name="com.cinemania.network.gcm.GCMIntentService" />
+        <service android:name="com.cinemania.activity.GCMIntentService" />
     
     </application>
-    
    
 
 </manifest>

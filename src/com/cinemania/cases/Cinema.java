@@ -9,7 +9,7 @@ import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Profitable;
 import com.cinemania.gamelogic.Room;
-import com.cinemania.client.R;
+import com.cinemania.activity.R;
 import com.cinemania.resources.ResourcesManager;
 
 public class Cinema extends BuyableCase implements Profitable  {

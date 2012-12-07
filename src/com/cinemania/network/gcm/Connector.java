@@ -9,7 +9,7 @@ import android.provider.Settings.Secure;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
-import com.cinemania.client.R;
+import com.cinemania.activity.R;
 import com.google.android.gcm.GCMBroadcastReceiver;
 import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.gcm.CommonUtilities;
