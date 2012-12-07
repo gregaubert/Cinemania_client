@@ -3,18 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
-	<RadioGroup
-        android:id="@+id/radioSelect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-	    <RadioButton
-	        android:id="@+id/scriptRadioBtn"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_vertical"
-	        android:layout_marginLeft="5dp"
-	        android:padding="10dp" />
-	</RadioGroup>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,11 +22,22 @@
             android:textStyle="bold" />
  
 	    <TextView
-	        android:id="@+id/scriptPrice"
+	        android:id="@+id/scriptYear"
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent"
 	        android:text="Description" />
  
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/scriptPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_money"
+        android:text="1234"
+        android:textColor="#FFD000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
  
 </LinearLayout>

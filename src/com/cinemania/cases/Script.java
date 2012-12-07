@@ -74,7 +74,7 @@ public class Script extends Case implements org.andengine.entity.sprite.ButtonSp
         scriptListItem.add(map);
         
         SimpleAdapter mSchedule = new SimpleAdapter (Base.getSharedInstance().getBaseContext(), scriptListItem, R.layout.scriptitem,
-                new String[] {"title", "price"}, new int[] {R.id.scriptTitle, R.id.scriptPrice});
+                new String[] {"title", "price", "year"}, new int[] {R.id.scriptTitle, R.id.scriptPrice, R.id.scriptYear});
         scriptListView.setAdapter(mSchedule);
 		 
 		Base.getSharedInstance().runOnUiThread(new Runnable() {
