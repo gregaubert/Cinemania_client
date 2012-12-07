@@ -16,7 +16,7 @@ import com.cinemania.activity.Base;
 import com.cinemania.client.R;
 import com.cinemania.resources.ResourcesManager;
 
-public class Script extends Case implements org.andengine.entity.sprite.ButtonSprite.OnClickListener {
+public class Script extends Case {
 	
 	public static final int TYPE = 2;
 
@@ -32,7 +32,10 @@ public class Script extends Case implements org.andengine.entity.sprite.ButtonSp
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		
+	}
+
+	@Override
+	public void onTheCell() {
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.script, null);
