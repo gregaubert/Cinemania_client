@@ -4,6 +4,9 @@ import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.entity.sprite.ButtonSprite.OnClickListener;
 
 import android.app.AlertDialog;
+import android.view.View;
+import android.webkit.WebView.FindListener;
+import android.widget.TabHost;
 
 import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
@@ -76,21 +79,23 @@ public class Cinema extends BuyableCase implements Profitable  {
 			float pTouchAreaLocalY) {
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
-		dialogBuilder.setView(Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null));
-		/*.setPositiveButton("Connect", new OnClickListener() {
-		@Override
-		public void onClick(final DialogInterface pDialog, final int pWhich) {
-		PongGameActivity.this.mServerIP = ipEditText.getText().toString();
-		PongGameActivity.this.initClient();
-		}
-		})
-		.setNegativeButton(android.R.string.cancel, new OnClickListener() {
-		@Override
-		public void onClick(final DialogInterface pDialog, final int pWhich) {
-		PongGameActivity.this.finish();
-		}
-		})
-		*/
+		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
+		
+		TabHost tabHost = (TabHost) view.findViewById(R.id.tabsCinema);
+		tabHost.newTabSpec("Cinéma");
+		tabHost.newTabSpec("Salle 1");
+		tabHost.newTabSpec("Salle 2");
+		tabHost.newTabSpec("Salle 3");
+		
+		
+		
+		
+		
+		
+		dialogBuilder.setView(view);
+		
+		
+		
 		 
 		Base.getSharedInstance().runOnUiThread(new Runnable() {
 			
