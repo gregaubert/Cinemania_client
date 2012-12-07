@@ -10,7 +10,6 @@ public abstract class Resource extends BuyableCase implements Profitable {
 
 	private int mLevel = 0;
 
-	// FIXME: Qu'est-ce que c'est �a
 	public Resource(float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseResource, posX, posY);
 	}

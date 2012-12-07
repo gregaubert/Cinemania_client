@@ -9,6 +9,7 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
+import com.cinemania.gamelogic.Player;
 
 public abstract class Case extends Rectangle implements org.andengine.entity.sprite.ButtonSprite.OnClickListener{
 	
@@ -44,5 +45,5 @@ public abstract class Case extends Rectangle implements org.andengine.entity.spr
 	@Override
 	public abstract void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX, float pTouchAreaLocalY);
 
-	public abstract void onTheCell();
+	public abstract void onTheCell(Player player);
 }

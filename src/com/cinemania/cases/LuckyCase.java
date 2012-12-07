@@ -2,6 +2,7 @@ package com.cinemania.cases;
 
 import org.andengine.entity.sprite.ButtonSprite;
 
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
 public class LuckyCase extends Case {
@@ -20,7 +21,7 @@ public class LuckyCase extends Case {
 	}
 
 	@Override
-	public void onTheCell() {
+	public void onTheCell(Player player) {
 		// TODO Auto-generated method stub
 		
 	}
