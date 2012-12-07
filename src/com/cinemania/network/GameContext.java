@@ -14,7 +14,6 @@ import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.LogisticFactory;
 import com.cinemania.cases.LuckyCase;
-import com.cinemania.cases.OwnableCell;
 import com.cinemania.cases.School;
 import com.cinemania.cases.Script;
 
@@ -65,8 +64,7 @@ public final class GameContext {
 	}
 	
 	public void deserializeBoard(BoardScene boardScene) throws JSONException {
-		// FIXME: Need to be discussed
-		// Case[] boardCases = new Case[AllConstants.BOARD_SIZE];
+
 		Case[] boardCases = new Case[jsonBoard.length()];
 		// Generate board's cells
 		for (int i = 0; i < jsonBoard.length(); i++) {
@@ -118,23 +116,8 @@ public final class GameContext {
 
 			JSONObject jsonPlayer = jsonPlayers.getJSONObject(i);
 			assert board[jsonPlayer.getInt("hq")] instanceof HeadQuarters;
-			Player player = new Player(
-					jsonPlayer.getLong("id"),
-					i,
-					jsonPlayer.getString("name"),
-					jsonPlayer.getInt("money"),
-					jsonPlayer.getInt("actors"),
-					jsonPlayer.getInt("logistics"),
-					(HeadQuarters)board[jsonPlayer.getInt("hq")],
-					board[jsonPlayer.getInt("position")]);
-			// Because the board game and all related cells are generated before without any reference to any player,
-			// we have to link the player and his properties afterward
-			JSONArray jsonProperties = jsonPlayer.getJSONArray("properties");
-			for (int j = 0; j < jsonProperties.length(); j++) {
-				assert board[jsonProperties.getInt(i)] instanceof OwnableCell;
-				player.addProperty((OwnableCell)board[jsonProperties.getInt(i)]);
-			}
-			player.getHeadQuarters().setOwner(player);
+			Player player = new Player(jsonPlayer, i, (HeadQuarters)board[jsonPlayer.getInt("hq")], board[jsonPlayer.getInt("position")]);
+			
 			this.mPlayers[i] = player;
 
 			// Define local user
@@ -155,34 +138,18 @@ public final class GameContext {
 			JSONArray jsonPlayers = new JSONArray();
 			//Ajout des différents players.
 			for(Player p : this.mPlayers)
-			{
-				JSONObject player = new JSONObject();
-				player.put("id", p.getId());
-				player.put("name", p.getName());
-				//TODO index de la case plutot qu'objet
-				player.put("hq", mBoard.findCaseIndex(p.getHeadQuarters()));
-				player.put("position", mBoard.findCaseIndex(p.getPosition()));
-				player.put("properties", new JSONArray());
-				player.put("money", p.getAmount());
-				player.put("actors", p.getActors());
-				player.put("logistics", p.getLogistic());
-				jsonPlayers.put(player);
-			}
-			
+				jsonPlayers.put(p.toJson());
 			
 			// Board
 			JSONArray jsonBoard = new JSONArray(); 
 			
-			for(Case c : mBoard.getCases()){
-				JSONObject jsonCell = new JSONObject();
-				
-				jsonBoard.put(jsonCell);
-			}
+			for(Case c : mBoard.getCases())
+				jsonBoard.put(c.toJson());
 			
 			// Game
 			JSONObject jsonGame = new JSONObject();
 			//TODO a corriger
-			jsonGame.put("player", 1001);
+			jsonGame.put("player", this.mPlayer.getId());
 			jsonGame.put("turn", 1);
 			jsonGame.put("id", 1234567);
 			JSONObject json = new JSONObject();

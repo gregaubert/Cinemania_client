@@ -2,6 +2,9 @@ package com.cinemania.cases;
 
 import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.cinemania.constants.AllConstants.*;
 
 import com.cinemania.gamelogic.Player;
@@ -93,6 +96,16 @@ public class School extends Resource {
 	public void onTheCell(Player player) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public JSONObject toJson() throws JSONException {
+		JSONObject jsonCell = new JSONObject();
+		
+		jsonCell.put("type", School.TYPE);
+		jsonCell.put("level", this.getLevel());
+		
+		return jsonCell;
 	}
 
 }

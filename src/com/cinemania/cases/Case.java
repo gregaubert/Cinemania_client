@@ -7,16 +7,19 @@ import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.entity.sprite.ButtonSprite.OnClickListener;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.json.JSONObject;
+
 import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
+import com.cinemania.gamelogic.JSonator;
 import com.cinemania.gamelogic.Player;
 
-public abstract class Case extends Rectangle implements org.andengine.entity.sprite.ButtonSprite.OnClickListener{
+public abstract class Case extends Rectangle implements JSonator, org.andengine.entity.sprite.ButtonSprite.OnClickListener{
 	
 	private ButtonSprite textureSprite;
 	private final int TEXTURELAYER = 0;
 	private final int LEVELLAYER = 1;
-
+	
 	public Case(ITextureRegion texture, float posX, float posY) {
 		super(posX, posY, texture.getWidth(), texture.getHeight(), Base.getSharedInstance().getVertexBufferObjectManager());
 		setColor(AllConstants.BOARD_CASE_COLOR);
