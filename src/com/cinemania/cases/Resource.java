@@ -6,7 +6,7 @@ import com.cinemania.gamelogic.Profitable;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.constants.AllConstants;
 
-public class Resource extends BuyableCase implements Profitable {
+public abstract class Resource extends BuyableCase implements Profitable {
 
 	private int mLevel = 0;
 

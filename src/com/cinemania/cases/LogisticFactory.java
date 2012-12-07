@@ -1,5 +1,8 @@
 package com.cinemania.cases;
 
+import org.andengine.entity.sprite.ButtonSprite;
+
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 import static com.cinemania.constants.AllConstants.*;
 
@@ -57,6 +60,19 @@ public class LogisticFactory extends Resource {
 
 	public void setHairdressingExtension(boolean hairdressingExtension) {
 		this.hairdressingExtension = hairdressingExtension;
+	}
+
+	@Override
+	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
+			float pTouchAreaLocalY) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTheCell(Player player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

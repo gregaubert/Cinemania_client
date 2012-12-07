@@ -7,12 +7,13 @@ import android.app.AlertDialog;
 
 import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Profitable;
 import com.cinemania.gamelogic.Room;
-import com.cinemania.client.R;
+import com.cinemania.activity.R;
 import com.cinemania.resources.ResourcesManager;
 
-public class Cinema extends BuyableCase implements Profitable, OnClickListener  {
+public class Cinema extends BuyableCase implements Profitable  {
 	
 	public static final int TYPE = 4;
 
@@ -98,5 +99,11 @@ public class Cinema extends BuyableCase implements Profitable, OnClickListener  
 				dialogBuilder.create().show();
 			}
 		});
+	}
+
+	@Override
+	public void onTheCell(Player player) {
+		// TODO Auto-generated method stub
+		
 	}
 }

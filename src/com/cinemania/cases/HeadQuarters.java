@@ -1,6 +1,9 @@
 package com.cinemania.cases;
 
+import org.andengine.entity.sprite.ButtonSprite;
+
 import com.cinemania.constants.AllConstants;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
 public class HeadQuarters extends OwnableCell {
@@ -30,6 +33,21 @@ public class HeadQuarters extends OwnableCell {
 	@Override
 	public boolean updateAvailable() {
 		return mLevel < AllConstants.LEVEL_MAX_BUILDING;
+	}
+
+
+	@Override
+	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
+			float pTouchAreaLocalY) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onTheCell(Player player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

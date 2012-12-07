@@ -18,7 +18,7 @@ package com.cinemania.network.gcm;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import com.cinemania.client.R;
+import com.cinemania.activity.R;
 
 /**
  * Helper class providing methods and constants common to other classes in the

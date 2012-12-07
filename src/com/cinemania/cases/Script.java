@@ -13,10 +13,11 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.cinemania.activity.Base;
-import com.cinemania.client.R;
+import com.cinemania.activity.R;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
-public class Script extends Case implements org.andengine.entity.sprite.ButtonSprite.OnClickListener {
+public class Script extends Case {
 	
 	public static final int TYPE = 2;
 
@@ -32,7 +33,10 @@ public class Script extends Case implements org.andengine.entity.sprite.ButtonSp
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		
+	}
+
+	@Override
+	public void onTheCell(Player player) {
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.script, null);
@@ -74,7 +78,7 @@ public class Script extends Case implements org.andengine.entity.sprite.ButtonSp
         scriptListItem.add(map);
         
         SimpleAdapter mSchedule = new SimpleAdapter (Base.getSharedInstance().getBaseContext(), scriptListItem, R.layout.scriptitem,
-                new String[] {"title", "price"}, new int[] {R.id.scriptTitle, R.id.scriptPrice});
+                new String[] {"title", "price", "year"}, new int[] {R.id.scriptTitle, R.id.scriptPrice, R.id.scriptYear});
         scriptListView.setAdapter(mSchedule);
 		 
 		Base.getSharedInstance().runOnUiThread(new Runnable() {
