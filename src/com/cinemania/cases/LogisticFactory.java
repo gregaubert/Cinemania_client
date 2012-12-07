@@ -2,6 +2,7 @@ package com.cinemania.cases;
 
 import org.andengine.entity.sprite.ButtonSprite;
 
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 import static com.cinemania.constants.AllConstants.*;
 
@@ -69,7 +70,7 @@ public class LogisticFactory extends Resource {
 	}
 
 	@Override
-	public void onTheCell() {
+	public void onTheCell(Player player) {
 		// TODO Auto-generated method stub
 		
 	}

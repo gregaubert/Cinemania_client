@@ -4,6 +4,7 @@ import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import static com.cinemania.constants.AllConstants.*;
 
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
 public class School extends Resource {
@@ -89,7 +90,7 @@ public class School extends Resource {
 	}
 
 	@Override
-	public void onTheCell() {
+	public void onTheCell(Player player) {
 		// TODO Auto-generated method stub
 		
 	}

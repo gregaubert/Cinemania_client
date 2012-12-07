@@ -14,6 +14,7 @@ import android.widget.SimpleAdapter;
 
 import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
+import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
 public class Script extends Case {
@@ -35,7 +36,7 @@ public class Script extends Case {
 	}
 
 	@Override
-	public void onTheCell() {
+	public void onTheCell(Player player) {
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.script, null);
