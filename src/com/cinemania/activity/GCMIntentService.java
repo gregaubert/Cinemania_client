@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cinemania.network.gcm;
+package com.cinemania.activity;
 
 import static com.cinemania.network.gcm.CommonUtilities.SENDER_ID;
 
@@ -25,11 +25,11 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.cinemania.activity.Base;
-import com.cinemania.client.R;
+import com.cinemania.activity.R;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.gcm.CommonUtilities;
+import com.cinemania.network.gcm.ServerUtilities;
 
 /**
  * IntentService responsible for handling GCM messages.

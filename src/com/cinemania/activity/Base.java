@@ -24,7 +24,7 @@ import android.view.KeyEvent;
 import com.cinemania.camera.BoardHUD;
 
 import com.cinemania.network.GameContext;
-import com.cinemania.client.R;
+import com.cinemania.activity.R;
 import com.cinemania.network.gcm.Connector;
 
 import com.cinemania.resources.ResourcesManager;
@@ -132,7 +132,7 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
     {
         // ready to receive GCM messages
-    	//Connector.registerGCMReceiver();
+    	Connector.registerGCMReceiver();
     	
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
