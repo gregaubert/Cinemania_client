@@ -8,12 +8,13 @@ import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import com.cinemania.cases.CellGenerator;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.LogisticFactory;
-import com.cinemania.cases.LuckyCase;
+import com.cinemania.cases.Chance;
 import com.cinemania.cases.School;
 import com.cinemania.cases.Script;
 
@@ -80,8 +81,8 @@ public final class GameContext {
 				case Script.TYPE:
 					cell = new Script(position[0], position[1]);
 					break;
-				case LuckyCase.TYPE:
-					cell = new LuckyCase(position[0], position[1]);
+				case Chance.TYPE:
+					cell = new Chance(position[0], position[1]);
 					break;
 				case Cinema.TYPE:
 					// Generate cinema's rooms
@@ -302,8 +303,8 @@ public final class GameContext {
 					case Script.TYPE:
 						jsonCell.put("type", Script.TYPE);
 						break;
-					case LuckyCase.TYPE:
-						jsonCell.put("type", LuckyCase.TYPE);
+					case Chance.TYPE:
+						jsonCell.put("type", Chance.TYPE);
 						break;
 					case Cinema.TYPE:
 						jsonCell.put("type", Cinema.TYPE);

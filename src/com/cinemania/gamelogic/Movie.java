@@ -1,6 +1,7 @@
 package com.cinemania.gamelogic;
 
 import static com.cinemania.constants.AllConstants.*;
+import com.cinemania.activity.R;
 
 public abstract class Movie implements Profitable {
 	

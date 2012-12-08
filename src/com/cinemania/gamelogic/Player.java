@@ -2,6 +2,7 @@ package com.cinemania.gamelogic;
 
 import static com.cinemania.constants.AllConstants.OFFSET;
 import static com.cinemania.constants.AllConstants.PLAYER_COLOR;
+import static com.cinemania.constants.AllConstants.PLAYER_COLOR_ANDROID;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.OwnableCell;
@@ -35,6 +37,7 @@ public class Player implements JSonator{
 	private String mName;
 	private Color mColorCell;
 	private Color mColorPawn;
+	private int mColorAndroid;
 	private int mMoney;
 	private int mActors;
 	private int mLogistics;
@@ -48,6 +51,7 @@ public class Player implements JSonator{
 		mName = name;
 		mColorCell = PLAYER_COLOR[1][order];
 		mColorPawn = PLAYER_COLOR[0][order];
+		mColorAndroid = PLAYER_COLOR_ANDROID[order];
 		mMoney = money;
 		mActors = actors;
 		mLogistics = logistics;
@@ -120,6 +124,11 @@ public class Player implements JSonator{
 		//TODO
 		Log.i("GAME","ENCAISSER!!!");
 	}
+	
+	public void payOpponent(Player opponent, int amount){
+		looseMoney(amount);
+		opponent.receiveMoney(amount);
+	}
 
 	public Sprite getView(){
 		return this.mView;
@@ -135,6 +144,14 @@ public class Player implements JSonator{
 	
 	public long getId() {
 		return mIdentifier;
+	}
+	
+	public void receiveMoney(int amount){
+		this.mMoney += amount;
+	}
+	
+	public void looseMoney(int amount){
+		this.mMoney -= amount;
 	}
 
 	public void setAmount(int amount) {
@@ -184,6 +201,10 @@ public class Player implements JSonator{
   
 	public Color getColorPawn() {
 		return mColorPawn;
+  	}
+
+	public int getColorAndroid() {
+		return mColorAndroid;
   	}
 
 

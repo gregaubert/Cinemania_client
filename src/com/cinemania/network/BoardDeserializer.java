@@ -3,11 +3,12 @@ package com.cinemania.network;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.LogisticFactory;
-import com.cinemania.cases.LuckyCase;
+import com.cinemania.cases.Chance;
 import com.cinemania.cases.School;
 import com.cinemania.cases.Script;
 import com.cinemania.gamelogic.Room;

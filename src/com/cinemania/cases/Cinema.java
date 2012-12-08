@@ -15,7 +15,7 @@ import com.cinemania.gamelogic.Room;
 import com.cinemania.activity.R;
 import com.cinemania.resources.ResourcesManager;
 
-public class Cinema extends BuyableCase implements Profitable  {
+public class Cinema extends BuyableCell implements Profitable  {
 	
 	public static final int TYPE = 4;
 
@@ -34,7 +34,6 @@ public class Cinema extends BuyableCase implements Profitable  {
 		super(ResourcesManager.getInstance().mCaseCinema, posX, posY);
 		setOnClickListener(this);
 	}
-	
 	
 	@Override
 	public void upgrade() {
@@ -104,12 +103,6 @@ public class Cinema extends BuyableCase implements Profitable  {
 	}
 
 	@Override
-	public void onTheCell(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public JSONObject toJson() throws JSONException {
 		JSONObject jsonCell = new JSONObject();
 		
@@ -124,5 +117,23 @@ public class Cinema extends BuyableCase implements Profitable  {
 		jsonCell.put("rooms", jsonRoom);
 		
 		return jsonCell;
+	}
+
+	@Override
+	public void askToBuy(Player player) {
+		//TODO
+	}
+
+	@Override
+	public void strangerOnCell(Player player) {
+		// TODO montant correct
+		player.payOpponent(getOwner(), AllConstants.COSTS_ON_HQ);
+		showPayDialog(AllConstants.COSTS_ON_HQ, R.drawable.ic_cinema, R.string.title_cinema);
+	}
+
+	@Override
+	public void ownerOnCell() {
+		// TODO Auto-generated method stub
+		
 	}
 }

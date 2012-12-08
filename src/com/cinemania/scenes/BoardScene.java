@@ -10,6 +10,7 @@ import org.andengine.entity.sprite.Sprite;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;

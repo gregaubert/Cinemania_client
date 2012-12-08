@@ -8,6 +8,7 @@ import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
@@ -59,6 +60,7 @@ public class BoardHUD extends HUD implements Loader {
 
 	public void setCurrentPlayer(Player p){
 		txtCurrentPlayer.setText("Id : " + p.getName());
+		txtCurrentPlayer.setColor(p.getColorPawn());
 	}
 	
 	public void setCurrentTurn(){

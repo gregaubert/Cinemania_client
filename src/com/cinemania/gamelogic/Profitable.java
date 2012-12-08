@@ -1,5 +1,7 @@
 package com.cinemania.gamelogic;
 
+import com.cinemania.activity.R;
+
 /**
  * Interface for all case which offer resources. 
  * @author joel

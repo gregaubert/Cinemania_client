@@ -3,6 +3,7 @@ package com.cinemania.gamelogic;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cinemania.activity.R;
 import com.cinemania.cases.Cinema;
 import static com.cinemania.constants.AllConstants.*;
 
