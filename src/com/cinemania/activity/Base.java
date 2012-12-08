@@ -118,8 +118,8 @@ public class Base extends BaseGameActivity
 		mTitle2.setPosition(mCamera.getWidth(), mCamera.getHeight() - 125);
 		
 		//Ajout de la modification du titre
-		mTitle1.registerEntityModifier(new MoveXModifier(1.5f, mTitle1.getX(), mCamera.getWidth() / 2 - mTitle1.getWidth() - 18));
-		mTitle2.registerEntityModifier(new MoveXModifier(1.5f, mTitle2.getX(), mCamera.getWidth() / 2 - 18));
+		mTitle1.registerEntityModifier(new MoveXModifier(1f, mTitle1.getX(), mCamera.getWidth() / 2 - mTitle1.getWidth() - 18));
+		mTitle2.registerEntityModifier(new MoveXModifier(1f, mTitle2.getX(), mCamera.getWidth() / 2 - 18));
     	
     	pOnCreateResourcesCallback.onCreateResourcesFinished();
     }
@@ -128,7 +128,7 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
     {
         // ready to receive GCM messages
-    	//GCMConnector.connect();
+    	GCMConnector.connect();
     	
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
