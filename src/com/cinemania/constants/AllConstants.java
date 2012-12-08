@@ -65,7 +65,7 @@ public final class AllConstants {
 	public static final int BOARD_NB_LUCK_TOT = 4;
 	
 	public static final float BOARD_ZOOM_MIN = 0.5f;
-	public static final float BOARD_ZOOM_MAX = 3f;
+	public static final float BOARD_ZOOM_MAX = 2f;
 
 	/**
 	 * Costs by turn depending on the case

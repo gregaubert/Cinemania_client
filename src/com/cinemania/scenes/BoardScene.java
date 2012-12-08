@@ -32,9 +32,9 @@ public class BoardScene extends Scene implements Loader {
 	private final int side = (int) BOARD_SIZE / 4;
 	private final float caseSize = 80f;
 
-	private float offsetWidth = 0;
-	private float offsetHeight = 0;
-
+	private float offsetWidth = (Base.CAMERA_WIDTH * 2-(side+1)*caseSize)/2;
+	private float offsetHeight = (Base.CAMERA_HEIGHT * 2-(side+1)*caseSize)/2;
+	
 	private float maxCoord = side*caseSize;
 	private float minCoord = 0;
 	
@@ -57,10 +57,6 @@ public class BoardScene extends Scene implements Loader {
 	    setBackground(new Background(0f, 0f, 0f));
 	    mActivity = Base.getSharedInstance();
 	    mCamera = (ZoomCamera)mActivity.getCamera();
-
-	    // compute margin according to size!
-	    offsetWidth = (mCamera.getWidth() * 2-(side+1)*caseSize)/2;
-		offsetHeight = (mCamera.getHeight() * 2-(side+1)*caseSize)/2;
 
 		//TODO Modifier la constante
 	    this.offsetHeight += 32;
@@ -104,7 +100,7 @@ public class BoardScene extends Scene implements Loader {
 		}
 	}
 	
-	/* A changer / modifier / supprimer / renommer / verifier */
+	//TODO A changer / modifier / supprimer / renommer / verifier
 	public boolean movePlayer() {
 		
     	int move = shootOneDice() + shootOneDice();
