@@ -6,7 +6,7 @@
     android:background="#FFFFFF"
     android:orientation="vertical" >
 
-    <LinearLayout
+   <LinearLayout
         android:id="@+id/layoutTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,14 +22,14 @@
             android:background="#FFFFBB33"
             android:contentDescription="@string/icon_descriptor"
             android:scaleType="center"
-            android:src="@drawable/ic_cinema" />
+            android:src="@drawable/ic_scripts" />
 
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/layout_title"
+            android:text="@string/title_script"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
             android:textStyle="bold"

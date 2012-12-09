@@ -30,6 +30,7 @@ public class Player implements JSonator{
 	private final int bordure = 10;
 
 	private ArrayList<OwnableCell> mProperties = new ArrayList<OwnableCell>();
+	private ArrayList<Script> mScripts = new ArrayList<Script>();
 	private HeadQuarters mHeadQuarters;
 	private Cell mCurrentPosition;
 	private long mIdentifier;
@@ -80,8 +81,13 @@ public class Player implements JSonator{
 		for (int j = 0; j < jsonProperties.length(); j++) {
 			this.addProperty((OwnableCell)mGameContext.getCases()[jsonProperties.getInt(j)]);
 		}
-		this.getHeadQuarters().setOwner(this);
 		
+		JSONArray jsonScripts = player.getJSONArray("scripts");
+		for (int i = 0; i < jsonScripts.length(); i++) {
+			this.addScript(new Script(jsonScripts.getJSONObject(i)));
+		}
+		
+		this.getHeadQuarters().setOwner(this);
 	}
 	
 	public void Move(int nb){
@@ -206,7 +212,27 @@ public class Player implements JSonator{
 	public int getColorAndroid() {
 		return mColorAndroid;
   	}
-
+	
+	public ArrayList<Script> getScripts(){
+		return mScripts;
+	}
+	
+	public int getScriptCount(){
+		return mScripts.size();
+	}
+	
+	public void addScript(Script script){
+		mScripts.add(script);
+	}
+	
+	public Script removeScript(){
+		assert mScripts.size()>0;
+		return mScripts.remove(0);
+	}
+	
+	public boolean removeScript(Script script){
+		return mScripts.remove(script);
+	}
 
 	@Override
 	public JSONObject toJson() throws JSONException {
@@ -225,6 +251,13 @@ public class Player implements JSonator{
 		player.put("money", this.getAmount());
 		player.put("actors", this.getActors());
 		player.put("logistics", this.getLogistic());
+		
+		JSONArray scripts = new JSONArray();
+		for(Script s : this.getScripts())
+			scripts.put(s.toJson());
+		
+		player.put("scripts", scripts);
+		
 		return player;
 	}
 

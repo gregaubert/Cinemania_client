@@ -10,7 +10,7 @@ import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.LogisticFactory;
 import com.cinemania.cases.Chance;
 import com.cinemania.cases.School;
-import com.cinemania.cases.Script;
+import com.cinemania.cases.ScriptCell;
 import com.cinemania.gamelogic.Room;
 
 public class BoardDeserializer {

@@ -16,7 +16,7 @@ import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.LogisticFactory;
 import com.cinemania.cases.Chance;
 import com.cinemania.cases.School;
-import com.cinemania.cases.Script;
+import com.cinemania.cases.ScriptCell;
 
 public final class GameContext {
 	
@@ -78,8 +78,8 @@ public final class GameContext {
 				case HeadQuarters.TYPE:
 					cell = new HeadQuarters(jsonCell.getInt("level"),position[0], position[1]);
 					break;
-				case Script.TYPE:
-					cell = new Script(position[0], position[1]);
+				case ScriptCell.TYPE:
+					cell = new ScriptCell(position[0], position[1]);
 					break;
 				case Chance.TYPE:
 					cell = new Chance(position[0], position[1]);
@@ -230,7 +230,7 @@ public final class GameContext {
 	
 	// FIXME: Only for tests
 	public static String test1() {
-		return "{ \"version\": 1, \"game\": { \"id\": 123456, \"turn\": 1, \"player\": 0 }, \"board\": [ { \"type\": 1, \"level\": 2 }, { \"type\": 1, \"level\": 3 }, { \"type\": 2 }, { \"type\": 5, \"level\": 0 } ], \"players\": [ { \"id\": 12345, \"name\": \"Mok\",  \"hq\": 0, \"position\": 0, \"properties\": [ 3 ], \"money\": 1000, \"actors\": 2, \"logistics\": 10 }, { \"id\": 4321, \"name\": \"Bof\", \"hq\": 1, \"position\": 1, \"properties\": [], \"money\": 223, \"actors\": 3, \"logistics\": 4 } ] }";
+		return "{ \"version\": 1, \"game\": { \"id\": 123456, \"turn\": 1, \"player\": 0 }, \"board\": [ { \"type\": 1, \"level\": 2 }, { \"type\": 1, \"level\": 3 }, { \"type\": 2 }, { \"type\": 5, \"level\": 0 } ], \"players\": [ { \"id\": 12345, \"name\": \"Mok\",  \"hq\": 0, \"position\": 0, \"properties\": [ 3 ], \"money\": 1000, \"actors\": 2, \"logistics\": 10, \"scripts\": []}, { \"id\": 4321, \"name\": \"Bof\", \"hq\": 1, \"position\": 1, \"properties\": [], \"money\": 223, \"actors\": 3, \"logistics\": 4, \"scripts\": [] } ] }";
 	}
 	
 	//Etat initial lors d'une nouvelle partie.
@@ -250,6 +250,7 @@ public final class GameContext {
 			player1.put("money", 1000);
 			player1.put("actors", 12);
 			player1.put("logistics", 10);
+			player1.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 2
 			offset = next(cellIdentifiers, offset);
@@ -262,6 +263,7 @@ public final class GameContext {
 			player2.put("money", 1000);
 			player2.put("actors", 12);
 			player2.put("logistics", 10);
+			player2.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 3
 			offset = next(cellIdentifiers, offset);
@@ -274,6 +276,7 @@ public final class GameContext {
 			player3.put("money", 1000);
 			player3.put("actors", 12);
 			player3.put("logistics", 10);
+			player3.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 4
 			offset = next(cellIdentifiers, offset);
@@ -286,6 +289,7 @@ public final class GameContext {
 			player4.put("money", 1000);
 			player4.put("actors", 12);
 			player4.put("logistics", 10);
+			player4.put("scripts", new JSONArray());
 			offset += 1;
 			jsonPlayers.put(player1);
 			jsonPlayers.put(player2);
@@ -300,8 +304,8 @@ public final class GameContext {
 						jsonCell.put("type", HeadQuarters.TYPE);
 						jsonCell.put("level", 1);
 						break;
-					case Script.TYPE:
-						jsonCell.put("type", Script.TYPE);
+					case ScriptCell.TYPE:
+						jsonCell.put("type", ScriptCell.TYPE);
 						break;
 					case Chance.TYPE:
 						jsonCell.put("type", Chance.TYPE);

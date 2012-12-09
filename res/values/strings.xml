@@ -45,5 +45,9 @@
 	<string name="txt_montant">Montant :</string>
 	<string name="txt_acteurs">acteurs</string>
 	<string name="txt_logistique">logistique</string>
+	<string name="txt_parenthese_gauche"> (</string>
+	<string name="txt_parenthese_droite">) </string>
+	<string name="txt_description">Description</string>
+	
 	
 </resources>

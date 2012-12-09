@@ -41,7 +41,7 @@ public class CellGenerator {
 					identifiers[i] = Cinema.TYPE;
 				} else if(random < actorsCount + logisticsCount + cinemaCount + scriptCount) {
 					scriptCount--;
-					identifiers[i] = Script.TYPE;
+					identifiers[i] = ScriptCell.TYPE;
 				} else {
 					currentLineOffset--;
 					identifiers[i] = Chance.TYPE;

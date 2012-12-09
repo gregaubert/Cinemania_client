@@ -102,7 +102,7 @@ public class School extends Resource {
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
 		// TODO Change this shit quand on implemente onClick
-		askToBuy(GameContext.getSharedInstance().getPlayers()[2]);
+		askToBuy(GameContext.getSharedInstance().getCurrentPlayer());
 	}
 
 	@Override
