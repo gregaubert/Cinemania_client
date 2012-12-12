@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
+import android.webkit.WebView.FindListener;
+import android.widget.TextView;
 
 
 import com.cinemania.activity.Base;
@@ -80,45 +82,48 @@ public class Cinema extends BuyableCell implements Profitable  {
 			float pTouchAreaLocalY) {
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
-		dialogBuilder.setCancelable(true);		
-		final View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
-		dialogBuilder.setView(view);
-		
-		
-		
-		
-		
-		
-		
-		dialogBuilder.setPositiveButton("oui", new android.content.DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
 
-		});
-		dialogBuilder.setNegativeButton("non", new android.content.DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
 		
+//		dialogBuilder.setCancelable(true);	
 		
-		dialogBuilder.setView(view);
+		final View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
+//		dialogBuilder.setView(view);
+		
+//		TextView benefCinema = (TextView)view.findViewById(R.id.txtBeneficeCinema);
 		
 		
 		
-		 
-		Base.getSharedInstance().runOnUiThread(new Runnable() {
-			
-			@Override
-			public void run() {
-				dialogBuilder.create().show();
-			}
-		});
+		
+		
+//		dialogBuilder.setPositiveButton("oui", new android.content.DialogInterface.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				dialog.dismiss();
+//			}
+//
+//		});
+//		dialogBuilder.setNegativeButton("non", new android.content.DialogInterface.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				dialog.dismiss();
+//			}
+//		});
+//		
+//		
+//		dialogBuilder.setView(view);
+//		
+//		
+//		
+//		 
+//		Base.getSharedInstance().runOnUiThread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				dialogBuilder.create().show();
+//			}
+//		});
 	}
 
 	@Override
