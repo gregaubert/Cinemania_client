@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView.FindListener;
@@ -84,54 +85,39 @@ public class Cinema extends BuyableCell implements Profitable  {
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
 		
+		// TODO: si cette case nous appartient
 		
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
-
+		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
+		
+		
+		TextView nbFilmPruiduits = (TextView)view.findViewById(R.id.txtnbFilms);
+		TextView benefices = (TextView)view.findViewById(R.id.txtBenefices);
+		
+		nbFilmPruiduits.setText("21");
+		benefices.setText("5432.-");
 
+		dialogBuilder.setView(view);
+		
+		
+		dialogBuilder.setPositiveButton("Fermer", new android.content.DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
 
-
-		
-		
-		
-//		dialogBuilder.setView(view);
-		
-//		TextView benefCinema = (TextView)view.findViewById(R.id.txtBeneficeCinema);
-		
-		
-		
-		
-		
-//		dialogBuilder.setPositiveButton("oui", new android.content.DialogInterface.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				dialog.dismiss();
-//			}
-//
-//		});
-//		dialogBuilder.setNegativeButton("non", new android.content.DialogInterface.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				dialog.dismiss();
-//			}
-//		});
-//		
-//		
-//		dialogBuilder.setView(view);
-//		
-//		
-//		
-//		 
-//		Base.getSharedInstance().runOnUiThread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				dialogBuilder.create().show();
-//			}
-//		});
+		});
+		 
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				dialogBuilder.create().show();
+			}
+		});
 	}
 
 	@Override
@@ -153,7 +139,27 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	@Override
 	public void askToBuy(Player player) {
-		//TODO
+		AlertDialog.Builder builder = new AlertDialog.Builder(Base.getSharedInstance());
+		builder.setMessage("Voulez-vous acheter ce cinéma ?");
+		final Player me = player;
+		final Cinema monCinoche = this;
+		builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {				
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing					
+			}
+		});
+		
+		builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {				
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				setOwner(me);
+				me.addProperty(monCinoche);
+			}
+		});
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 	@Override

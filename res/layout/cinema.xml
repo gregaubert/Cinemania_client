@@ -70,6 +70,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:typeface="normal"
                 android:layout_weight="1.0"
+                android:paddingLeft="5sp"
                 android:textSize="15sp" />
         </TableRow>
 
@@ -95,6 +96,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:typeface="normal"
                 android:layout_weight="1.0" 
+                android:paddingLeft="5sp"
                 android:textSize="15sp"/>
         </TableRow>
     </TableLayout>
