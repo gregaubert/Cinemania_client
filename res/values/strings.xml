@@ -48,6 +48,13 @@
 	<string name="txt_parenthese_gauche"> (</string>
 	<string name="txt_parenthese_droite">) </string>
 	<string name="txt_description">Description</string>
+	<string name="txt_beneficeCinema">Bénéfice du cinéma</string>
+	<string name="txt_salle1">Salle 1 :</string>
+	<string name="txt_salle2">Salle 2 :</string>
+	<string name="txt_salle3">Salle 3 :</string>
+	<string name="txt_beneficeSalle1">Bénéfice de la salle 1</string>
+	<string name="txt_beneficeSalle2">Bénéfice de la salle 2</string>
+	<string name="txt_beneficeSalle3">Bénéfice de la salle 3</string>
 	
 	
 </resources>

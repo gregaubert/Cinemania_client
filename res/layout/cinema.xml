@@ -32,10 +32,60 @@
             android:typeface="normal" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listSalles"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <!-- début de l'UI -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/txt_beneficeCinema"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/txtBeneficeCinema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:typeface="normal" />
+    </LinearLayout>
+
+    <!-- Salle 1 -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/txt_salle1"
+        android:typeface="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/txt_beneficeCinema"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/txtBeneficeCinema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:typeface="normal" />
+    </LinearLayout>
 
 </LinearLayout>

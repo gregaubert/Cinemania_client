@@ -6,9 +6,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
-import android.webkit.WebView.FindListener;
-import android.widget.TabHost;
+
 
 import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
@@ -78,15 +78,34 @@ public class Cinema extends BuyableCell implements Profitable  {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
-		dialogBuilder.setCancelable(true);
-		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
 		
-		//TabHost tabHost = (TabHost) view.findViewById(R.id.tabsCinema);
-//		tabHost.newTabSpec("Cinéma");
-//		tabHost.newTabSpec("Salle 1");
-//		tabHost.newTabSpec("Salle 2");
-//		tabHost.newTabSpec("Salle 3");
+		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+		dialogBuilder.setCancelable(true);		
+		final View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
+		dialogBuilder.setView(view);
+		
+		
+		
+		
+		
+		
+		
+		dialogBuilder.setPositiveButton("oui", new android.content.DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+
+		});
+		dialogBuilder.setNegativeButton("non", new android.content.DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		
 		
 		dialogBuilder.setView(view);
 		
@@ -136,4 +155,5 @@ public class Cinema extends BuyableCell implements Profitable  {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }
