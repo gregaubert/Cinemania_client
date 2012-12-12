@@ -32,141 +32,71 @@
             android:typeface="normal" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <!-- début de l'UI -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/txt_beneficeCinema"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="normal" />
-
-        <TextView
-            android:id="@+id/txtBeneficeCinema"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="normal" />
-    </LinearLayout>
-
-    <!-- Salle 1 -->
+    <!-- début de l'UI -->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="@string/txt_salle1"
+        android:text="@string/txt_statistiquesCinema"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:typeface="normal" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="10dip" >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/txt_beneficeSalle1"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="normal" />
+            android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/txtBeneficeSalle1"
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/txt_nbfilm"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:typeface="normal" 
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/txtnbFilms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:typeface="normal"
+                android:layout_weight="1.0"
+                android:textSize="15sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="normal" />
-    </LinearLayout>
+            android:orientation="horizontal" >
 
-    
-    <Spinner
-        android:id="@+id/spinnerSalle1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/txt_benefices"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:typeface="normal"
+                android:textSize="15sp" />
 
-    <!-- Salle 2 -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:text="@string/txt_salle2"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:typeface="normal" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/txt_beneficeSalle2"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="normal" />
-
-        <TextView
-            android:id="@+id/txtBeneficeSalle2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="normal" />
-    </LinearLayout>
-
-<!--     <Spinner
-        android:id="@+id/spinnerSalle2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" /> -->
-
-    <!-- Salle 3 -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:text="@string/txt_salle3"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:typeface="normal" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/txt_beneficeSalle3"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="normal" />
-
-        <TextView
-            android:id="@+id/txtBeneficeSalle3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:typeface="normal" />
-    </LinearLayout>
-
-<!--     <Spinner
-        android:id="@+id/spinnerSalle3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" /> -->
+            <TextView
+                android:id="@+id/txtBenefices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:typeface="normal"
+                android:layout_weight="1.0" 
+                android:textSize="15sp"/>
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>

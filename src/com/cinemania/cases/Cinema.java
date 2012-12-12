@@ -7,8 +7,11 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView.FindListener;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -81,12 +84,17 @@ public class Cinema extends BuyableCell implements Profitable  {
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
 		
+		
+		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 
+		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
+
+
+
 		
-//		dialogBuilder.setCancelable(true);	
 		
-		final View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
+		
 //		dialogBuilder.setView(view);
 		
 //		TextView benefCinema = (TextView)view.findViewById(R.id.txtBeneficeCinema);
