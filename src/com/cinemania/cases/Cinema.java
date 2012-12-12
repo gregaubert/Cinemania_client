@@ -82,16 +82,11 @@ public class Cinema extends BuyableCell implements Profitable  {
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
 		
-		TabHost tabHost = (TabHost) view.findViewById(R.id.tabsCinema);
-		tabHost.newTabSpec("Cinéma");
-		tabHost.newTabSpec("Salle 1");
-		tabHost.newTabSpec("Salle 2");
-		tabHost.newTabSpec("Salle 3");
-		
-		
-		
-		
-		
+		//TabHost tabHost = (TabHost) view.findViewById(R.id.tabsCinema);
+//		tabHost.newTabSpec("Cinéma");
+//		tabHost.newTabSpec("Salle 1");
+//		tabHost.newTabSpec("Salle 2");
+//		tabHost.newTabSpec("Salle 3");
 		
 		dialogBuilder.setView(view);
 		
