@@ -3,27 +3,27 @@ package com.cinemania.network;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.cinemania.cases.Case;
+import com.cinemania.activity.R;
+import com.cinemania.cases.Cell;
 import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.LogisticFactory;
-import com.cinemania.cases.LuckyCase;
+import com.cinemania.cases.Chance;
 import com.cinemania.cases.School;
-import com.cinemania.cases.Script;
-import com.cinemania.gamelogic.Board;
+import com.cinemania.cases.ScriptCell;
 import com.cinemania.gamelogic.Room;
 
 public class BoardDeserializer {
-
+	/*
 	public static Board deserialize(JSONArray jsonBoard) {
 		// FIXME: Need to be discussed
 		// Case[] boardCases = new Case[AllConstants.BOARD_SIZE];
-		Case[] boardCases = new Case[jsonBoard.length()];
+		Cell[] boardCases = new Cell[jsonBoard.length()];
 		// Generate board's cells
 		try{
 			for (int i = 0; i < jsonBoard.length(); i++) {
 				JSONObject jsonCell = jsonBoard.getJSONObject(i);
-				Case cell = null;
+				Cell cell = null;
 				switch (jsonCell.getInt("type")) {
 				case HeadQuarters.TYPE:
 					cell = new HeadQuarters(0,0,jsonCell.getInt("level"));
@@ -60,5 +60,5 @@ public class BoardDeserializer {
 		catch(Exception e){};
 			
 		return new Board(boardCases);
-	}
+	}*/
 }

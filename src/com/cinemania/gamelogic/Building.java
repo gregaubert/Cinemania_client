@@ -1,14 +1,15 @@
 package com.cinemania.gamelogic;
 
-import com.cinemania.cases.Case;
+import com.cinemania.activity.R;
+import com.cinemania.cases.Cell;
 import static com.cinemania.constants.AllConstants.*;
 
 public abstract class Building {
   private int level =  DEFAULT_LEVEL;
 
-  private Case theCase;
+  private Cell theCase;
 
-  public Building(Case theCase) {
+  public Building(Cell theCase) {
 		this.setTheCase(theCase);
   }
 
@@ -34,11 +35,11 @@ public abstract class Building {
 
   public abstract int profit() ;
 
-  public void setTheCase(Case theCase) {
+  public void setTheCase(Cell theCase) {
 		this.theCase = theCase;
   }
 
-  public Case getTheCase() {
+  public Cell getTheCase() {
 		return theCase;
   }
 

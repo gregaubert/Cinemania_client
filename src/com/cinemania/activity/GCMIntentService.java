@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 package com.cinemania.activity;
-
+ 
 import static com.cinemania.network.gcm.CommonUtilities.SENDER_ID;
-
+ 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -24,35 +24,35 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.cinemania.activity.R;
-import com.cinemania.network.gcm.CommonUtilities;
-import com.cinemania.network.gcm.ServerUtilities;
+ 
+import com.cinemania.activity.Base;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
-
+import com.cinemania.network.gcm.CommonUtilities;
+import com.cinemania.network.gcm.ServerUtilities;
+ 
 /**
  * IntentService responsible for handling GCM messages.
  */
 public class GCMIntentService extends GCMBaseIntentService {
-
+ 
     @SuppressWarnings("hiding")
     private static final String TAG = "GCMIntentService";
-
+ 
     public GCMIntentService() {
         super(SENDER_ID);
     }
-
+ 
     @Override
     protected void onRegistered(Context context, String registrationId) {
         Log.d(TAG, "Device registered: regId = " + registrationId);
         ServerUtilities.register(context, registrationId);
     }
-
+ 
     @Override
     protected void onUnregistered(Context context, String registrationId) {
         Log.d(TAG, "Device unregistered");
-    
+     
         if (GCMRegistrar.isRegisteredOnServer(context)) {
             ServerUtilities.unregister(context, registrationId);
         } else {
@@ -61,37 +61,37 @@ public class GCMIntentService extends GCMBaseIntentService {
             Log.d(TAG, "Ignoring unregister callback");
         }
     }
-
+ 
     @Override
     protected void onMessage(Context context, Intent intent) {
         Log.d(TAG, "Received message:" + getDataFromInputIntent(intent));
         passIntent(context,intent);
     }
-
+ 
     @Override
     protected void onDeletedMessages(Context context, int total) {
         Log.d(TAG, "Received deleted messages notification");
     }
-
+ 
     @Override
     public void onError(Context context, String errorId) {
         Log.d(TAG, "Received error: " + errorId);
     }
-
+ 
     @Override
     protected boolean onRecoverableError(Context context, String errorId) {
         // log message
         Log.d(TAG, "Received recoverable error: " + errorId);
         return super.onRecoverableError(context, errorId);
     }
-    
+     
     private String getDataFromInputIntent(Intent intent){
-    	return intent.getExtras().getString(CommonUtilities.MESSAGE);
+        return intent.getExtras().getString(CommonUtilities.MESSAGE);
     }
-    
+     
     private void passIntent(Context context, Intent intent) {
-    	Intent passIntent = new Intent(CommonUtilities.DISPLAY_MESSAGE_ACTION);
-    	passIntent.putExtra(CommonUtilities.MESSAGE, getDataFromInputIntent(intent));
+        Intent passIntent = new Intent(CommonUtilities.DISPLAY_MESSAGE_ACTION);
+        passIntent.putExtra(CommonUtilities.MESSAGE, getDataFromInputIntent(intent));
         context.sendBroadcast(passIntent);
     }
 }

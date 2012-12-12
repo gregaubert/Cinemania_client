@@ -2,9 +2,14 @@ package com.cinemania.cases;
 
 import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.cinemania.constants.AllConstants.*;
 
+import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
+import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 
 public class School extends Resource {
@@ -20,6 +25,7 @@ public class School extends Resource {
 	
 	public School(int level, float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseActors, level, posX, posY);
+		setOnClickListener(this);
 	}
 
 	@Override
@@ -81,18 +87,32 @@ public class School extends Resource {
 	public void setDisguiseExtension(boolean disguiseExtension) {
 		this.disguiseExtension = disguiseExtension;
 	}
+	
+	@Override
+	public JSONObject toJson() throws JSONException {
+		JSONObject jsonCell = new JSONObject();
+		
+		jsonCell.put("type", School.TYPE);
+		jsonCell.put("level", this.getLevel());
+		
+		return jsonCell;
+	}
 
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		// TODO Auto-generated method stub
-		
+		// TODO Change this shit quand on implemente onClick
+		askToBuy(GameContext.getSharedInstance().getCurrentPlayer());
 	}
 
 	@Override
-	public void onTheCell(Player player) {
+	public void askToBuy(Player player) {
+		showBuyDialog(player, R.drawable.ic_actors, R.string.title_actors, R.string.txt_acteurs);
+	}
+
+	@Override
+	public void ownerOnCell() {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

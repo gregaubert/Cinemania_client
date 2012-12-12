@@ -1,4 +1,5 @@
 package com.cinemania.constants;
+import com.cinemania.activity.R;
 import com.cinemania.cases.Cinema;
 import com.cinemania.gamelogic.BigMovie;
 import com.cinemania.gamelogic.Player;

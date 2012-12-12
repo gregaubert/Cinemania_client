@@ -27,8 +27,27 @@
 	<string name="icon_descriptor">icon</string>
 	<string name="title_cinema">Cinéma</string>
 	<string name="title_hq">QG</string>
-	<string name="title_script">Scriptes</string>
-	
+	<string name="title_script">Scripts</string>
+	<string name="title_actors">Ecole d\'acteurs</string>
+	<string name="title_logistics">Logistique</string>
+	<string name="btn_pay">Payer</string>
 	<string name="btn_buy">Acheter</string>
 	<string name="btn_close">Fermer</string>
+	<string name="layout_title">Titre</string>
+	<string name="txt_proprio">"Propriétaire : "</string>
+	<string name="txt_libre">libre</string>
+	<string name="txt_type_de_revenu">Type de revenu :</string>
+	<string name="txt_type">type</string>
+	<string name="txt_qte_de_revenu">Qte de revenu :</string>
+	<string name="txt_type_de_transaction">Type de transaction :</string>
+	<string name="txt_achat">achat</string>
+	<string name="txt_rachat">rachat</string>
+	<string name="txt_montant">Montant :</string>
+	<string name="txt_acteurs">acteurs</string>
+	<string name="txt_logistique">logistique</string>
+	<string name="txt_parenthese_gauche"> (</string>
+	<string name="txt_parenthese_droite">) </string>
+	<string name="txt_description">Description</string>
+	
+	
 </resources>

@@ -1,9 +1,13 @@
 package com.cinemania.gamelogic;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.cinemania.activity.R;
 import com.cinemania.cases.Cinema;
 import static com.cinemania.constants.AllConstants.*;
 
-public class Room implements Profitable {
+public class Room implements Profitable, JSonator {
 	  Cinema cinema;
 
 	  Movie movie;
@@ -34,5 +38,10 @@ public class Room implements Profitable {
 		  this.movie = movie;
 	  }
 
+	@Override
+	public JSONObject toJson() throws JSONException {
+		// TODO Auto-generated method stub
+		return null;
 	}
+}
 

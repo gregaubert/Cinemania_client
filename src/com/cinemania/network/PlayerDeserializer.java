@@ -3,14 +3,15 @@ package com.cinemania.network;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.cinemania.cases.Case;
+import com.cinemania.activity.R;
+import com.cinemania.cases.Cell;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.OwnableCell;
 import com.cinemania.gamelogic.Player;
 
 public class PlayerDeserializer {
 
-	public static Player deserialize(JSONObject jsonPlayer,Case[] board,int order){
+	public static Player deserialize(JSONObject jsonPlayer,Cell[] board,int order){
 		
 		try{
 			assert board[jsonPlayer.getInt("hq")] instanceof HeadQuarters;

@@ -6,7 +6,7 @@ import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
-import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.andengine.engine.options.resolutionpolicy.FillResolutionPolicy;
 import org.andengine.entity.modifier.MoveXModifier;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.Sprite;
@@ -16,17 +16,12 @@ import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
 import org.json.JSONException;
 
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
-
 import com.cinemania.network.GameContext;
 import com.cinemania.network.gcm.GCMConnector;
-import com.cinemania.activity.R;
-
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.scenes.GameMenu;
@@ -34,6 +29,12 @@ import com.cinemania.scenes.OptionScene;
 
 public class Base extends BaseGameActivity
 {
+	
+	// ===========================================================
+    // Constants
+    // ===========================================================
+    public static final int CAMERA_WIDTH = 800;
+    public static final int CAMERA_HEIGHT = 480;
     
     // ===========================================================
     // Fields
@@ -87,23 +88,18 @@ public class Base extends BaseGameActivity
     
     // ===========================================================
     // Methods
-    // ===========================================================    
-    @SuppressWarnings("deprecation")
+    // ===========================================================
+    
 	@Override
     public EngineOptions onCreateEngineOptions()
     {
     	//Singleton
     	instance = this;
     	
-    	// get device size
-    	final Display display = getWindowManager().getDefaultDisplay();
-        float cameraWidth = display.getWidth();
-        float cameraHeight = display.getHeight();
-    	
     	//Recupere instance manager ressources
     	manager = ResourcesManager.getInstance();
-    	mCamera = new ZoomCamera(0, 0, cameraWidth, cameraHeight);
-        EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(cameraWidth, cameraHeight), mCamera);
+    	mCamera = new ZoomCamera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+        EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new FillResolutionPolicy(), mCamera);
         return engineOptions;
     }
     
@@ -122,8 +118,8 @@ public class Base extends BaseGameActivity
 		mTitle2.setPosition(mCamera.getWidth(), mCamera.getHeight() - 125);
 		
 		//Ajout de la modification du titre
-		mTitle1.registerEntityModifier(new MoveXModifier(1.5f, mTitle1.getX(), mCamera.getWidth() / 2 - mTitle1.getWidth() - 18));
-		mTitle2.registerEntityModifier(new MoveXModifier(1.5f, mTitle2.getX(), mCamera.getWidth() / 2 - 18));
+		mTitle1.registerEntityModifier(new MoveXModifier(1f, mTitle1.getX(), mCamera.getWidth() / 2 - mTitle1.getWidth() - 18));
+		mTitle2.registerEntityModifier(new MoveXModifier(1f, mTitle2.getX(), mCamera.getWidth() / 2 - 18));
     	
     	pOnCreateResourcesCallback.onCreateResourcesFinished();
     }
@@ -132,7 +128,7 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
     {
         // ready to receive GCM messages
-    	GCMConnector.registerGCMReceiver();
+    	GCMConnector.connect();
     	
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
