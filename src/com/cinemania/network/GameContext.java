@@ -202,6 +202,10 @@ public final class GameContext {
 		return GameContext.LOCAL_IDENTIFIER;
 	}
 	
+	public boolean isCreator(){
+		return this.mPlayer == this.mPlayers[0];
+	}
+	
 	public Player[] getPlayers() {
 		return mPlayers;
 	}
@@ -226,6 +230,9 @@ public final class GameContext {
 		return mYear;
 	}
 	
+	public void addYear(){
+		this.mYear++;
+	}
 	
 	// FIXME: Only for tests
 	public static String test1() {

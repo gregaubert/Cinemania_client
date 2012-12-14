@@ -141,8 +141,8 @@ public class Player implements JSonator{
 	
 	//Methode appelee lorsque l'on passe par notre QG
 	public void encaisser(){
-		//TODO
-		Log.i("GAME","ENCAISSER!!!");
+		if(mGameContext.isCreator())
+			mGameContext.addYear();
 	}
 	
 	public void payOpponent(Player opponent, int amount){
