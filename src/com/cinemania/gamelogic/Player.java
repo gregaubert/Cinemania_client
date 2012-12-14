@@ -47,9 +47,12 @@ public class Player implements JSonator{
 	private int mLogistics;
 	private Sprite mView;	
 	
+	//Dernier fois où l'on a visité le QG
+	private int mLastTurn;
+	
 	private GameContext mGameContext;
 	
-	public Player(long identifier, int order, String name, int money, int actors, int logistics, HeadQuarters headQuarters, Cell currentPosition) {
+	public Player(long identifier, int order, String name, int money, int actors, int logistics, int lastTurn, HeadQuarters headQuarters, Cell currentPosition) {
 		mIdentifier = identifier;
 		mOrder = order;
 		mName = name;
@@ -59,6 +62,7 @@ public class Player implements JSonator{
 		mMoney = money;
 		mActors = actors;
 		mLogistics = logistics;
+		mLastTurn = lastTurn;
 		mHeadQuarters = headQuarters;
 		mCurrentPosition = currentPosition;
 		mView = new Sprite(mCurrentPosition.getX()+bordure, mCurrentPosition.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
@@ -76,6 +80,7 @@ public class Player implements JSonator{
 				player.getInt("money"),
 				player.getInt("actors"),
 				player.getInt("logistics"),
+				player.getInt("lastTurn"),
 				headQuarters,
 				currentPosition);
 		
@@ -141,8 +146,12 @@ public class Player implements JSonator{
 	
 	//Methode appelee lorsque l'on passe par notre QG
 	public void encaisser(){
-		//TODO
-		Log.i("GAME","ENCAISSER!!!");
+		if(mGameContext.isCreator())
+			mGameContext.completeTurn();
+		
+		//TODO calcul profit.
+		
+		this.setLastTurn(mGameContext.getCurrentTurn());
 	}
 	
 	public void payOpponent(Player opponent, int amount){
@@ -190,6 +199,14 @@ public class Player implements JSonator{
 		return mLogistics;
 	}
 
+	public int getLastTurn() {
+		return mLastTurn;
+	}
+	
+	public void setLastTurn(int lastTurn){
+		this.mLastTurn = lastTurn;
+	}
+	
 	public void setActors(int actors) {
 		this.mActors = actors;
 	}
@@ -265,6 +282,7 @@ public class Player implements JSonator{
 		player.put("money", this.getAmount());
 		player.put("actors", this.getActors());
 		player.put("logistics", this.getLogistic());
+		player.put("lastTurn", this.getLastTurn());
 		
 		JSONArray scripts = new JSONArray();
 		for(Script s : this.getScripts())
