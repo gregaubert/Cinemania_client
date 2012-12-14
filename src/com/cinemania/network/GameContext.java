@@ -8,7 +8,6 @@ import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import com.cinemania.cases.CellGenerator;
 import com.cinemania.cases.Cinema;

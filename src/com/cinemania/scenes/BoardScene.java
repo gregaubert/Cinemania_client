@@ -10,7 +10,6 @@ import org.andengine.entity.sprite.Sprite;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
@@ -107,7 +106,8 @@ public class BoardScene extends Scene implements Loader {
     	int move = shootOneDice() + shootOneDice();
     	
     	Log.i("GAME","Déplacement du joueur  de " + move);
-    	mGameContext.getPlayer().Move(move);
+    	Player p = mGameContext.getPlayer();
+    	p.Move(move);
     	
         return true;
 	}

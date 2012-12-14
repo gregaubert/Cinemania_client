@@ -6,7 +6,6 @@ import static com.cinemania.constants.AllConstants.BOARD_NB_LOGISTIC_LINE;
 import static com.cinemania.constants.AllConstants.BOARD_NB_SCRIPT_LINE;
 import static com.cinemania.constants.AllConstants.BOARD_NB_TOT_LINE;
 import static com.cinemania.constants.AllConstants.BOARD_SIZE;
-import com.cinemania.activity.R;
 
 public class CellGenerator {
 	public static int[] generate() {

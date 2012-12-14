@@ -6,11 +6,15 @@ import static com.cinemania.constants.AllConstants.PLAYER_COLOR_ANDROID;
 
 import java.util.ArrayList;
 
+import org.andengine.entity.IEntity;
+import org.andengine.entity.modifier.DelayModifier;
 import org.andengine.entity.modifier.IEntityModifier;
 import org.andengine.entity.modifier.MoveModifier;
 import org.andengine.entity.modifier.SequenceEntityModifier;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.util.color.Color;
+import org.andengine.util.modifier.IModifier;
+import org.andengine.util.modifier.IModifier.IModifierListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +22,6 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.OwnableCell;
@@ -94,12 +97,10 @@ public class Player implements JSonator{
 	  
 		//int pos = mBoard.findCaseIndex(mCurrentPosition);
 	
-		IEntityModifier [] entity = new IEntityModifier[nb];
+		IEntityModifier [] entity = new IEntityModifier[nb+1];
 		
-		int i = 0;
-		
-		while(i < nb){
-			//pos = (pos+1)%mBoard.getSize();
+		for(int i = 0; i < nb; i++){
+			
 			Cell temp = mGameContext.nextCellOf(mCurrentPosition);
 
 			//Mouvement de la case courante, a la case suivant. Le pion est decalle
@@ -113,16 +114,29 @@ public class Player implements JSonator{
 			//Test si on passe au QG
 			if(temp == this.mHeadQuarters)
 				this.encaisser();
-		  
-			mCurrentPosition = temp;
 			
-			i++;		
+			mCurrentPosition = temp;
+		
 		}
+		
+		DelayModifier dMod = new DelayModifier(0.5f);
+		dMod.addModifierListener(new IModifierListener<IEntity>() {
+		    @Override
+		    public void onModifierStarted(IModifier<IEntity> arg0, IEntity arg1) {
+		    }
+		 
+		    @Override
+		    public void onModifierFinished(IModifier<IEntity> arg0, IEntity arg1) {
+		    	//Le joueur arrive sur une position.
+		    	Player.this.getPosition().onTheCell(Player.this);
+		    }
+		});
+		
+		entity[nb] = dMod;
 		
 		SequenceEntityModifier sem = new SequenceEntityModifier(entity);
 		
 		mView.registerEntityModifier(sem);
-	  
 	}
 	
 	//Methode appelee lorsque l'on passe par notre QG

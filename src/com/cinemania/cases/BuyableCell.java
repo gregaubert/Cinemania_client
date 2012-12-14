@@ -2,15 +2,6 @@ package com.cinemania.cases;
 
 import org.andengine.opengl.texture.region.ITextureRegion;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
 
 public abstract class BuyableCell extends OwnableCell {

@@ -8,7 +8,6 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.color.Color;
 
 import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.JSonator;
 import com.cinemania.gamelogic.Player;

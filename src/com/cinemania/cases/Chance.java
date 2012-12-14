@@ -4,7 +4,6 @@ import org.andengine.entity.sprite.ButtonSprite;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 

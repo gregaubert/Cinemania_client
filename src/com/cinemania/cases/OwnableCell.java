@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
-import com.cinemania.network.GameContext;
 
 public abstract class OwnableCell extends Cell {
 	

@@ -5,16 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
-import android.os.Looper;
-import android.provider.Settings.Secure;
 import android.util.Log;
  
 import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
-import com.google.android.gcm.GCMBroadcastReceiver;
 import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.gcm.CommonUtilities;
-import com.cinemania.network.gcm.ServerUtilities;
  
 public class GCMConnector {
          

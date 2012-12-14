@@ -1,8 +1,5 @@
 package com.cinemania.cases;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.andengine.entity.sprite.ButtonSprite;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,8 +8,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.cinemania.activity.Base;

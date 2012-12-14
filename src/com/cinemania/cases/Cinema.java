@@ -7,12 +7,7 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView.FindListener;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -139,7 +134,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	@Override
 	public void askToBuy(Player player) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(Base.getSharedInstance());
+		final AlertDialog.Builder builder = new AlertDialog.Builder(Base.getSharedInstance());
 		builder.setMessage("Voulez-vous acheter ce cinéma ?");
 		final Player me = player;
 		final Cinema monCinoche = this;
@@ -158,8 +153,14 @@ public class Cinema extends BuyableCell implements Profitable  {
 			}
 		});
 
-		AlertDialog dialog = builder.create();
-		dialog.show();
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				AlertDialog dialog = builder.create();
+				dialog.show();
+			}
+		});
 	}
 
 	@Override
