@@ -31,6 +31,7 @@ public class Player implements JSonator{
 
 	private ArrayList<OwnableCell> mProperties = new ArrayList<OwnableCell>();
 	private ArrayList<Script> mScripts = new ArrayList<Script>();
+	private ArrayList<Movie> mMovies = new ArrayList<Movie>();
 	private HeadQuarters mHeadQuarters;
 	private Cell mCurrentPosition;
 	private long mIdentifier;
@@ -212,6 +213,14 @@ public class Player implements JSonator{
 	public int getColorAndroid() {
 		return mColorAndroid;
   	}
+	
+	public ArrayList<Movie> getMovies(){
+		return mMovies;
+	}
+	
+	public void addScript(Movie movie){
+		mMovies.add(movie);
+	}
 	
 	public ArrayList<Script> getScripts(){
 		return mScripts;
