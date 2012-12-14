@@ -50,7 +50,10 @@
 	<string name="txt_description">Description</string>
 	<string name="txt_statistiquesCinema">Statistiques de vos cinémas</string>
 	<string name="txt_nbfilm">Nombre de films produits :</string>
-	<string name="txt_benefices">Bénéfices des cinémas :</string>
+	<string name="txt_benefices">Dernier bénéfice\nencaissé des cinémas :</string>
+	<string name="txt_level">Passer au niveau suivant</string>
+	<string name="txt_levelActuel">Niveau actuel :</string>
+	
 
 	
 	

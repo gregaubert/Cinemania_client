@@ -90,9 +90,11 @@ public class Cinema extends BuyableCell implements Profitable  {
 		
 		TextView nbFilmPruiduits = (TextView)view.findViewById(R.id.txtnbFilms);
 		TextView benefices = (TextView)view.findViewById(R.id.txtBenefices);
+		TextView level = (TextView)view.findViewById(R.id.txtLevelActuel);
 		
 		nbFilmPruiduits.setText("21");
 		benefices.setText("5432.-");
+		level.setText(getLevel());
 
 		dialogBuilder.setView(view);
 		
