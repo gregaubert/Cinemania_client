@@ -1,5 +1,7 @@
 package com.cinemania.cases;
 
+import java.util.ArrayList;
+
 import org.andengine.entity.sprite.ButtonSprite;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +21,7 @@ import com.cinemania.gamelogic.Profitable;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.activity.R;
 import com.cinemania.resources.ResourcesManager;
+import com.cinemania.gamelogic.Movie;
 
 public class Cinema extends BuyableCell implements Profitable  {
 	
@@ -87,7 +90,6 @@ public class Cinema extends BuyableCell implements Profitable  {
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
-		
 		
 		TextView nbFilmPruiduits = (TextView)view.findViewById(R.id.txtnbFilms);
 		TextView benefices = (TextView)view.findViewById(R.id.txtBenefices);
@@ -171,6 +173,13 @@ public class Cinema extends BuyableCell implements Profitable  {
 	@Override
 	public void strangerOnCell(Player player) {
 		// TODO montant correct
+		Player proprietaire = getOwner();
+		ArrayList<Movie> movies; // TODO récupérer movies du player
+		int montant;
+//		for(Movie m : movies){
+//			// montant += valeur film * constantes
+//		}
+		
 		player.payOpponent(getOwner(), AllConstants.COSTS_ON_HQ);
 		showPayDialog(AllConstants.COSTS_ON_HQ, R.drawable.ic_cinema, R.string.title_cinema);
 	}
