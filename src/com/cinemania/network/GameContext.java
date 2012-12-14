@@ -41,6 +41,8 @@ public final class GameContext {
 	//Singleton
     public static GameContext instance;
 	
+    public final int offsetYear = 1;
+    
     // ===========================================================
     public static GameContext getSharedInstance() {
     	if(instance == null)
@@ -175,6 +177,11 @@ public final class GameContext {
 		//TODO envoi des datas.
 	}
 	
+	public void completeTurn(){
+		this.mYear += offsetYear;
+		this.mCurrentTurn++;
+	}
+	
 	/**
 	 * On passe au joueur suivant
 	 */
@@ -228,10 +235,6 @@ public final class GameContext {
 
 	public int getYear() {
 		return mYear;
-	}
-	
-	public void addYear(){
-		this.mYear++;
 	}
 	
 	// FIXME: Only for tests
