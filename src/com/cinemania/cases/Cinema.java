@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -91,10 +92,12 @@ public class Cinema extends BuyableCell implements Profitable  {
 		TextView nbFilmPruiduits = (TextView)view.findViewById(R.id.txtnbFilms);
 		TextView benefices = (TextView)view.findViewById(R.id.txtBenefices);
 		TextView level = (TextView)view.findViewById(R.id.txtLevelActuel);
+		Button btnLevel = (Button)view.findViewById(R.id.btnLevel);
 		
 		nbFilmPruiduits.setText("21");
 		benefices.setText("5432.-");
 		level.setText(getLevel());
+		btnLevel.setEnabled(updateAvailable());
 
 		dialogBuilder.setView(view);
 		

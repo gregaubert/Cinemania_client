@@ -56,7 +56,6 @@ public abstract class Movie implements Profitable {
 	  return profit;
   }
 
-
   public int getBeginingTurn() {
 	  return beginingTurn;
   }
