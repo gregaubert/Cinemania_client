@@ -50,6 +50,8 @@ public class Player implements JSonator{
 	//Dernier fois où l'on a visité le QG
 	private int mLastTurn;
 	
+	private int mLastProfit;
+	
 	private GameContext mGameContext;
 	
 	public Player(long identifier, int order, String name, int money, int actors, int logistics, int lastTurn, HeadQuarters headQuarters, Cell currentPosition) {
@@ -100,8 +102,6 @@ public class Player implements JSonator{
 	
 	public void Move(int nb){
 	  
-		//int pos = mBoard.findCaseIndex(mCurrentPosition);
-	
 		IEntityModifier [] entity = new IEntityModifier[nb+1];
 		
 		for(int i = 0; i < nb; i++){
@@ -149,10 +149,12 @@ public class Player implements JSonator{
 		if(mGameContext.isCreator())
 			mGameContext.completeTurn();
 		
-		//TODO calcul profit.
+		
 		
 		this.setLastTurn(mGameContext.getCurrentTurn());
 	}
+	
+	
 	
 	public void payOpponent(Player opponent, int amount){
 		looseMoney(amount);
@@ -187,6 +189,10 @@ public class Player implements JSonator{
 		this.mMoney = amount;
 	}
 
+	public int getLastProfit(){
+		return this.mLastProfit;
+	}
+	
 	public int getAmount() {
 		return mMoney;
 	}
