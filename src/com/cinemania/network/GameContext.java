@@ -256,6 +256,7 @@ public final class GameContext {
 			player1.put("money", 1000);
 			player1.put("actors", 12);
 			player1.put("logistics", 10);
+			player1.put("lastTurn", 0);
 			player1.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 2
@@ -269,6 +270,7 @@ public final class GameContext {
 			player2.put("money", 1000);
 			player2.put("actors", 12);
 			player2.put("logistics", 10);
+			player2.put("lastTurn", 0);
 			player2.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 3
@@ -282,6 +284,7 @@ public final class GameContext {
 			player3.put("money", 1000);
 			player3.put("actors", 12);
 			player3.put("logistics", 10);
+			player3.put("lastTurn", 0);
 			player3.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 4
@@ -295,6 +298,7 @@ public final class GameContext {
 			player4.put("money", 1000);
 			player4.put("actors", 12);
 			player4.put("logistics", 10);
+			player4.put("lastTurn", 0);
 			player4.put("scripts", new JSONArray());
 			offset += 1;
 			jsonPlayers.put(player1);
