@@ -23,7 +23,7 @@ public final class GameContext {
 	private static long LOCAL_IDENTIFIER = 1001;
 	
 	private Player[] mPlayers;
-	//Nous-mêmes
+	//Nous-mï¿½mes
 	private Player mPlayer;
 	//Joueu en train de jouer
 	private Player mCurrentPlayer;
@@ -71,7 +71,7 @@ public final class GameContext {
 		// Generate board's cells
 		for (int i = 0; i < jsonBoard.length(); i++) {
 			JSONObject jsonCell = jsonBoard.getJSONObject(i);
-			//Récupère l'emplacement de la case
+			//Rï¿½cupï¿½re l'emplacement de la case
 			float[] position = boardScene.calculateCasePosition(i);
 			
 			Cell cell = null;
@@ -136,7 +136,7 @@ public final class GameContext {
 		try {
 			
 			JSONArray jsonPlayers = new JSONArray();
-			//Ajout des différents players.
+			//Ajout des diffï¿½rents players.
 			for(Player p : this.mPlayers)
 				jsonPlayers.put(p.toJson());
 			
@@ -171,7 +171,7 @@ public final class GameContext {
 		
 		//Si on passe le tour alors que nous ne somme pas le joueur en cours.
 		if(mCurrentPlayer != mPlayer)
-			throw new IllegalStateException("Vous ne pouvez passer votre tour que lorsque c'est à vous.");
+			throw new IllegalStateException("Vous ne pouvez passer votre tour que lorsque c'est ï¿½ vous.");
 		this.nextPlayer();
 		String res = this.serialize();
 		//TODO envoi des datas.
@@ -179,6 +179,7 @@ public final class GameContext {
 	
 	public void completeTurn(){
 		this.mYear += offsetYear;
+		Base.getSharedInstance().getHUD().setYear(this.mYear);
 		this.mCurrentTurn++;
 	}
 	
@@ -260,6 +261,7 @@ public final class GameContext {
 			player1.put("actors", 12);
 			player1.put("logistics", 10);
 			player1.put("lastTurn", 0);
+			player1.put("lastProfit",0);
 			player1.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 2
@@ -274,6 +276,7 @@ public final class GameContext {
 			player2.put("actors", 12);
 			player2.put("logistics", 10);
 			player2.put("lastTurn", 0);
+			player2.put("lastProfit",0);
 			player2.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 3
@@ -288,6 +291,7 @@ public final class GameContext {
 			player3.put("actors", 12);
 			player3.put("logistics", 10);
 			player3.put("lastTurn", 0);
+			player3.put("lastProfit",0);
 			player3.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 4
@@ -302,6 +306,7 @@ public final class GameContext {
 			player4.put("actors", 12);
 			player4.put("logistics", 10);
 			player4.put("lastTurn", 0);
+			player4.put("lastProfit",0);
 			player4.put("scripts", new JSONArray());
 			offset += 1;
 			jsonPlayers.put(player1);
