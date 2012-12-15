@@ -116,7 +116,10 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		Base.getSharedInstance().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				dialogBuilder.create().show();
+				AlertDialog dialog = dialogBuilder.create();
+				dialog.show();
+				if(player.getAmount() < totalValue())
+					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 			}
 		});
 	}

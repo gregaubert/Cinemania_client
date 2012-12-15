@@ -54,7 +54,7 @@ public final class AllConstants {
 	/**
 	 * Costs for stepping on opponent cell
 	 */
-	public static final int COSTS_ON_HQ = 1000;
+	public static final int COSTS_ON_HQ = 750;
 	
 	/**
 	 * Board generation

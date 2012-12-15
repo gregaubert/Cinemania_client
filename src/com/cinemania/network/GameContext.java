@@ -23,9 +23,9 @@ public final class GameContext {
 	private static long LOCAL_IDENTIFIER = 1001;
 	
 	private Player[] mPlayers;
-	//Nous-m�mes
+	//Nous-memes
 	private Player mPlayer;
-	//Joueu en train de jouer
+	//Joueur en train de jouer
 	private Player mCurrentPlayer;
 	private Cell[] mCases;
 	
@@ -171,7 +171,7 @@ public final class GameContext {
 		
 		//Si on passe le tour alors que nous ne somme pas le joueur en cours.
 		if(mCurrentPlayer != mPlayer)
-			throw new IllegalStateException("Vous ne pouvez passer votre tour que lorsque c'est � vous.");
+			throw new IllegalStateException("Vous ne pouvez passer votre tour que lorsque c'est a vous.");
 		this.nextPlayer();
 		String res = this.serialize();
 		//TODO envoi des datas.
@@ -240,7 +240,7 @@ public final class GameContext {
 	
 	// FIXME: Only for tests
 	public static String test1() {
-		return "{ \"version\": 1, \"game\": { \"id\": 123456, \"turn\": 1, \"player\": 0 }, \"board\": [ { \"type\": 1, \"level\": 2 }, { \"type\": 1, \"level\": 3 }, { \"type\": 2 }, { \"type\": 5, \"level\": 0 } ], \"players\": [ { \"id\": 12345, \"name\": \"Mok\",  \"hq\": 0, \"position\": 0, \"properties\": [ 3 ], \"money\": 1000, \"actors\": 2, \"logistics\": 10, \"scripts\": []}, { \"id\": 4321, \"name\": \"Bof\", \"hq\": 1, \"position\": 1, \"properties\": [], \"money\": 223, \"actors\": 3, \"logistics\": 4, \"scripts\": [] } ] }";
+		return "{ \"version\": 1, \"game\": { \"id\": 123456, \"turn\": 1, \"player\": 0 }, \"board\": [ { \"type\": 1, \"level\": 2 }, { \"type\": 1, \"level\": 3 }, { \"type\": 2 }, { \"type\": 5, \"level\": 0 } ], \"players\": [ { \"id\": 12345, \"name\": \"Mok\",  \"hq\": 0, \"position\": 0, \"properties\": [ 3 ], \"money\": 1000, \"actors\": 2, \"logistics\": 10, \"scripts\": [], \"movies\": []}, { \"id\": 4321, \"name\": \"Bof\", \"hq\": 1, \"position\": 1, \"properties\": [], \"money\": 223, \"actors\": 3, \"logistics\": 4, \"scripts\": [],  \"movies\": [] } ] }";
 	}
 	
 	//Etat initial lors d'une nouvelle partie.
@@ -263,6 +263,7 @@ public final class GameContext {
 			player1.put("lastTurn", 0);
 			player1.put("lastProfit",0);
 			player1.put("scripts", new JSONArray());
+			player1.put("movies", new JSONArray());
 			offset += 1;
 			// Player 2
 			offset = next(cellIdentifiers, offset);
@@ -278,6 +279,7 @@ public final class GameContext {
 			player2.put("lastTurn", 0);
 			player2.put("lastProfit",0);
 			player2.put("scripts", new JSONArray());
+			player2.put("movies", new JSONArray());
 			offset += 1;
 			// Player 3
 			offset = next(cellIdentifiers, offset);
@@ -293,6 +295,7 @@ public final class GameContext {
 			player3.put("lastTurn", 0);
 			player3.put("lastProfit",0);
 			player3.put("scripts", new JSONArray());
+			player3.put("movies", new JSONArray());
 			offset += 1;
 			// Player 4
 			offset = next(cellIdentifiers, offset);
@@ -308,6 +311,7 @@ public final class GameContext {
 			player4.put("lastTurn", 0);
 			player4.put("lastProfit",0);
 			player4.put("scripts", new JSONArray());
+			player4.put("movies", new JSONArray());
 			offset += 1;
 			jsonPlayers.put(player1);
 			jsonPlayers.put(player2);

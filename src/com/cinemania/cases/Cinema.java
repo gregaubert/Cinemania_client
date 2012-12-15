@@ -20,6 +20,7 @@ import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Profitable;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.activity.R;
+import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.gamelogic.Movie;
 
@@ -86,7 +87,6 @@ public class Cinema extends BuyableCell implements Profitable  {
 		
 		// TODO: si cette case nous appartient
 		
-		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
@@ -97,7 +97,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 		Button btnLevel = (Button)view.findViewById(R.id.btnLevel);
 		
 		nbFilmPruiduits.setText("21");
-		benefices.setText("5432.-");
+		benefices.setText("5432");
 		level.setText(getLevel());
 		btnLevel.setEnabled(updateAvailable());
 
@@ -123,40 +123,24 @@ public class Cinema extends BuyableCell implements Profitable  {
 	}
 
 	@Override
-	public JSONObject toJson() throws JSONException {
-		JSONObject jsonCell = new JSONObject();
-		
-		jsonCell.put("type", Cinema.TYPE);
-		
-		JSONArray jsonRoom = new JSONArray();
-		
-		for(Room r : this.mRooms)
-			if(r!=null)
-				jsonRoom.put(r.toJson());
-		
-		jsonCell.put("rooms", jsonRoom);
-		
-		return jsonCell;
-	}
-
-	@Override
-	public void askToBuy(Player player) {
+	public void askToBuy(final Player player) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(Base.getSharedInstance());
-		builder.setMessage("Voulez-vous acheter ce cinéma ?");
-		final Player me = player;
-		final Cinema monCinoche = this;
+		builder.setMessage("Voulez-vous acheter ce cinema ?");
+		//TODO faire une belle dialog pour �a
 		builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {				
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// Do nothing					
+				player.looseMoney(getBaseValue());
+				Cinema.this.setOwner(player);
+				player.addProperty(Cinema.this);
+				dialog.dismiss();
 			}
 		});
 		
 		builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {				
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				setOwner(me);
-				me.addProperty(monCinoche);
+				dialog.dismiss();
 			}
 		});
 
@@ -166,6 +150,8 @@ public class Cinema extends BuyableCell implements Profitable  {
 			public void run() {
 				AlertDialog dialog = builder.create();
 				dialog.show();
+				if(player.getAmount() < totalValue())
+					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 			}
 		});
 	}
@@ -174,7 +160,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 	public void strangerOnCell(Player player) {
 		// TODO montant correct
 		Player proprietaire = getOwner();
-		ArrayList<Movie> movies; // TODO récupérer movies du player
+		ArrayList<Movie> movies; // TODO recuperer movies du player
 		int montant;
 //		for(Movie m : movies){
 //			// montant += valeur film * constantes
@@ -190,4 +176,20 @@ public class Cinema extends BuyableCell implements Profitable  {
 		
 	}
 	
+	@Override
+	public JSONObject toJson() throws JSONException {
+		JSONObject jsonCell = new JSONObject();
+		
+		jsonCell.put("type", Cinema.TYPE);
+		
+		JSONArray jsonRoom = new JSONArray();
+		
+		for(Room r : this.mRooms)
+			if(r!=null)
+				jsonRoom.put(r.toJson());
+		
+		jsonCell.put("rooms", jsonRoom);
+		
+		return jsonCell;
+	}
 }

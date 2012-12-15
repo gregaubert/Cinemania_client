@@ -80,8 +80,7 @@ public class Player implements JSonator{
 	}
 
 	public Player(JSONObject player, int order, HeadQuarters headQuarters, Cell currentPosition) throws JSONException{
-		this(
-				player.getLong("id"),
+		this(	player.getLong("id"),
 				order,
 				player.getString("name"),
 				player.getInt("money"),
@@ -95,15 +94,23 @@ public class Player implements JSonator{
 		// Because the board game and all related cells are generated before without any reference to any player,		
 		JSONArray jsonProperties = player.getJSONArray("properties");
 		for (int j = 0; j < jsonProperties.length(); j++) {
-			this.addProperty((OwnableCell)mGameContext.getCases()[jsonProperties.getInt(j)]);
+			addProperty((OwnableCell)mGameContext.getCases()[jsonProperties.getInt(j)]);
 		}
 		
 		JSONArray jsonScripts = player.getJSONArray("scripts");
 		for (int i = 0; i < jsonScripts.length(); i++) {
-			this.addScript(new Script(jsonScripts.getJSONObject(i)));
+			addScript(new Script(jsonScripts.getJSONObject(i)));
 		}
 		
-		this.getHeadQuarters().setOwner(this);
+		JSONArray jsonMovies = player.getJSONArray("movies");
+		for (int i = 0; i < jsonMovies.length(); i++) {
+			if(jsonMovies.getJSONObject(i).has("producer"))
+				addMovie(new BigMovie(jsonMovies.getJSONObject(i)));
+			else
+				addMovie(new AuthorMovie(jsonMovies.getJSONObject(i)));
+		}
+		
+		getHeadQuarters().setOwner(this);
 	}
 	
 	public void Move(int nb){
@@ -120,7 +127,7 @@ public class Player implements JSonator{
 		    
 		    entity[i] = mm;
 		    
-		    Log.i("GAME","D�placement de : " +(mCurrentPosition.getX()+bordure) + " ," + (temp.getX()+bordure) + " � " + (mCurrentPosition.getY()+bordure) + " ," + (temp.getY()+bordure));
+		    Log.i("GAME","Deplacement de : " +(mCurrentPosition.getX()+bordure) + " ," + (temp.getX()+bordure) + " a " + (mCurrentPosition.getY()+bordure) + " ," + (temp.getY()+bordure));
 		    
 			//Test if we pass in our QG.
 			if(temp == this.mHeadQuarters)
@@ -203,16 +210,18 @@ public class Player implements JSonator{
 	}
 	
 	public void receiveMoney(int amount){
-		setAmount(this.getAmount()+amount);
+		setAmount(getAmount()+amount);
 	}
 	
 	public void looseMoney(int amount){
-		setAmount(this.getAmount()-amount);
+		setAmount(getAmount()-amount);
 	}
 
 	public void setAmount(int amount) {
-		this.mMoney = amount;
-		Base.getSharedInstance().getHUD().setMoney(this.mMoney);
+		mMoney = amount;
+		//TODO ca marche pas ca, car quand player 1 donne de l'argent a player 2, player 2 vas aussi mettre a jour l'hud alors que c'est pas le sien.
+		// utiliser Gamecontext.getplayer();
+		Base.getSharedInstance().getHUD().setMoney(getAmount());
 	}
 
 	public int getAmount() {
@@ -220,12 +229,12 @@ public class Player implements JSonator{
 	}
 	
 	public int getLastProfit(){
-		return this.mLastProfit;
+		return mLastProfit;
 	}
 
 	public void setLogistic(int logistic) {
-		this.mLogistics = logistic;
-		Base.getSharedInstance().getHUD().setLogistics(this.mLogistics);
+		mLogistics = logistic;
+		Base.getSharedInstance().getHUD().setLogistics(getLogistic());
 	}
 
 	public int getLogistic() {
@@ -233,7 +242,11 @@ public class Player implements JSonator{
 	}
 
 	public void receiveLogistic(int logistic) {
-		setLogistic(this.getLogistic()+logistic);
+		setLogistic(getLogistic() + logistic);
+	}
+	
+	public void looseLogistic(int logistic){
+		setLogistic(getLogistic() - logistic);
 	}
 	
 	public int getLastTurn() {
@@ -245,12 +258,16 @@ public class Player implements JSonator{
 	}
 	
 	public void receiveActors(int actors) {
-		setLogistic(actors);
+		setActors(getActors() + actors);
+	}
+	
+	public void looseActors(int actors) {
+		setActors(getActors() - actors);
 	}
 	
 	public void setActors(int actors) {
-		this.mActors = actors;
-		Base.getSharedInstance().getHUD().setActors(this.getActors() + actors);
+		mActors = actors;
+		Base.getSharedInstance().getHUD().setActors(getActors());
 	}
 
 	public int getActors() {
@@ -290,7 +307,7 @@ public class Player implements JSonator{
 		return mMovies;
 	}
 	
-	public void addScript(Movie movie){
+	public void addMovie(Movie movie){
 		mMovies.add(movie);
 	}
 	
@@ -304,10 +321,12 @@ public class Player implements JSonator{
 	
 	public void addScript(Script script){
 		mScripts.add(script);
+		Base.getSharedInstance().getHUD().setScripts(getScriptCount());
 	}
 	
 	public Script removeScript(){
 		assert mScripts.size()>0;
+		Base.getSharedInstance().getHUD().setScripts(getScriptCount()-1);
 		return mScripts.remove(0);
 	}
 	
@@ -318,28 +337,34 @@ public class Player implements JSonator{
 	@Override
 	public JSONObject toJson() throws JSONException {
 		JSONObject player = new JSONObject();
-		player.put("id", this.getId());
-		player.put("name", this.getName());
-		player.put("hq", mGameContext.findCaseIndex(this.getHeadQuarters()));
-		player.put("position",mGameContext.findCaseIndex(this.getPosition()));
+		player.put("id", getId());
+		player.put("name", getName());
+		player.put("hq", mGameContext.findCaseIndex(getHeadQuarters()));
+		player.put("position",mGameContext.findCaseIndex(getPosition()));
 		
 		JSONArray prop = new JSONArray();
 		
-		for(OwnableCell o : this.mProperties)
+		for(OwnableCell o : mProperties)
 			prop.put(o.toJson());
 		
 		player.put("properties", prop);
-		player.put("money", this.getAmount());
-		player.put("actors", this.getActors());
-		player.put("logistics", this.getLogistic());
-		player.put("lastTurn", this.getLastTurn());
-		player.put("lastProfit", this.getLastProfit());
+		player.put("money", getAmount());
+		player.put("actors", getActors());
+		player.put("logistics", getLogistic());
+		player.put("lastTurn", getLastTurn());
+		player.put("lastProfit", getLastProfit());
 		
 		JSONArray scripts = new JSONArray();
-		for(Script s : this.getScripts())
+		for(Script s : getScripts())
 			scripts.put(s.toJson());
 		
 		player.put("scripts", scripts);
+		
+		JSONArray movies = new JSONArray();
+		for(Movie m : getMovies())
+			movies.put(m.toJson());
+		
+		player.put("movies", movies);
 		
 		return player;
 	}

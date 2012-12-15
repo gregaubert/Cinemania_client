@@ -73,11 +73,11 @@ public class BoardHUD extends HUD implements Loader {
 		mGameContext = GameContext.getSharedInstance();
 		
 		txtYear = new Text(10, 8, mResourcesManager.mYearFont, "Annee: 0123456789", mActivity.getVertexBufferObjectManager());
-		txtMoney = new Text(235, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		txtActors = new Text(335, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		txtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		txtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
-		txtCurrentPlayer = new Text(600, 8, mResourcesManager.mResourcesFont, "0123456789", mActivity.getVertexBufferObjectManager());
+		txtMoney = new Text(235, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtActors = new Text(335, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtCurrentPlayer = new Text(600, 8, mResourcesManager.mResourcesFont, "abcdefghijklmnopqrstuvwxyz0123456789", mActivity.getVertexBufferObjectManager());
 
 		setYear(mGameContext.getYear());
 		setMoney(mGameContext.getPlayer().getAmount());

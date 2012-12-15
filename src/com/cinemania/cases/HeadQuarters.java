@@ -55,7 +55,7 @@ public class HeadQuarters extends OwnableCell {
 			float pTouchAreaLocalY) {
 		// TODO Afficher la vue du quartier général
 		// TODO Change this shit quand on implemente onClick
-		strangerOnCell(GameContext.getSharedInstance().getPlayers()[3]);
+		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
 	}
 	
 	@Override
@@ -75,7 +75,7 @@ public class HeadQuarters extends OwnableCell {
 
 	@Override
 	public void strangerOnCell(Player player) {
-		player.payOpponent(getOwner(), AllConstants.COSTS_ON_HQ);
 		showPayDialog(AllConstants.COSTS_ON_HQ, R.drawable.ic_hq, R.string.title_hq);
+		player.payOpponent(getOwner(), AllConstants.COSTS_ON_HQ);
 	}
 }

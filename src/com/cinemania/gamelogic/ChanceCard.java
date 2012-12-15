@@ -16,23 +16,23 @@ public class ChanceCard {
 		return mTitle;
 	}
 
-	public void setTitle(String mTitle) {
-		this.mTitle = mTitle;
+	public void setTitle(String title) {
+		mTitle = title;
 	}
 
 	public String getText() {
 		return mText;
 	}
 
-	public void setText(String mText) {
-		this.mText = mText;
+	public void setText(String text) {
+		mText = text;
 	}
 
 	public int getAmount() {
 		return mAmount;
 	}
 
-	public void setAmount(int mAmount) {
-		this.mAmount = mAmount;
+	public void setAmount(int amount) {
+		mAmount = amount;
 	}
 }

@@ -33,16 +33,16 @@ public class ScriptCell extends Cell {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		//TODO désactiver le onclick ou changer l'action dessus, la c'est juste pour pouvoir tester
+		//TODO dï¿½sactiver le onclick ou changer l'action dessus, la c'est juste pour pouvoir tester
 		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
 	}
 
 	@Override
 	public void onTheCell(final Player player) {
 		
-		//TODO Récupérer des scripts aléatoirement d'un bd
-		final Script script = new Script("Demain ne meurt jamais", 1589, 5569);
-		script.setSummary("bla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla bla bla bla bla blabla bla bla blabla bla bla blabla bla bla blbla bla blabla bla bla blabla bla bla blbla bla blabla bla bla blabla bla bla blbla bla blabla bla bla blabla bla bla blbla bla.");
+		//TODO Recuperer des scripts aleatoirement d'une bd
+		final Script script = new Script("Demain ne meurt jamais", 1589, 263);
+		script.setSummary("la bla blabla bla bla blbla bla blabla bla bla blabla bla bla blbla bla blabla bla bla blabla bla bla blbla bla.");
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
@@ -81,7 +81,10 @@ public class ScriptCell extends Cell {
 			
 			@Override
 			public void run() {
-				dialogBuilder.create().show();
+				AlertDialog dialog = dialogBuilder.create();
+				dialog.show();
+				if(player.getAmount() < script.getPrice())
+					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 			}
 		});
 	}

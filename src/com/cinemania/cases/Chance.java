@@ -24,6 +24,7 @@ public class Chance extends Cell {
 
 	public Chance(float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseLuck, posX, posY);
+		setOnClickListener(this);
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class Chance extends Cell {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				player.looseMoney(chanceCard.getAmount());
+				player.receiveMoney(chanceCard.getAmount());
 				dialog.dismiss();
 			}
 		});

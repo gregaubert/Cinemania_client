@@ -1,56 +1,90 @@
 package com.cinemania.gamelogic;
+
 import static com.cinemania.constants.AllConstants.*;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class BigMovie extends Movie {
-  private int logistic;
+	private int mLogistic;
 
-  private int actors;
+	private int mActors;
 
-  private int initPrice;
+	private int mInitPrice;
 
-  private int marketing;
-  
-  private int year;
-  
-  private int maxMarketing;
+	private int mMarketing;
 
-  /**
-   *  if producer is null then the movie is a author's film 
-   */
-  private Player producer;
+	private int mYear;
 
-  public BigMovie(String title, int logistic, int actors, int initPrice, int year, int maxMarketing) {
+	private int mMaxMarketing;
+
+	//TODO un big movie peut etre un author movie ? wtf ?
+	/**
+	 * if producer is null then the movie is a author's film
+	 */
+	private Player mProducer;
+
+	public BigMovie(String title, int logistic, int actors, int initPrice, int year, int maxMarketing) {
 		super(title, year);
-		this.logistic = logistic;
-		this.actors = actors;
-		this.initPrice = initPrice;
-		this.year = year;
-		this.maxMarketing = maxMarketing;
-  }
+		mLogistic = logistic;
+		mActors = actors;
+		mInitPrice = initPrice;
+		mYear = year;
+		mMaxMarketing = maxMarketing;
+	}
 
-  public void produceThisMovie(Player player, int budgetMarketing) {
-		this.producer = player;
-		this.marketing = budgetMarketing;
-		
-		double rateMarketing = (1 + RATE_MARKETING / 2 )- (marketing / maxMarketing * RATE_MARKETING);
-		int peopleInit = (int)(rateMarketing * (double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(GROWING_RATE_SPECTATORS, year - INITIAL_YEAR));
+	public BigMovie(JSONObject movie) throws JSONException {
+		super(movie);
+		mLogistic = movie.getInt("logistic");
+		mActors = movie.getInt("actors");
+		mInitPrice = movie.getInt("initprice");
+		mYear = movie.getInt("year");
+		mMarketing = movie.getInt("marketing");
+		mMaxMarketing = movie.getInt("maxmarketing");
+		//TODO Rajouter le producteur si vraiment y en a besoin
+	}
+
+	public void produceThisMovie(Player player, int budgetMarketing) {
+		mProducer = player;
+		mMarketing = budgetMarketing;
+
+		double rateMarketing = (1 + RATE_MARKETING / 2)
+				- (mMarketing / mMaxMarketing * RATE_MARKETING);
+		int peopleInit = (int) (rateMarketing
+				* (double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
+				GROWING_RATE_SPECTATORS, mYear - INITIAL_YEAR));
 		setPeopleInit(peopleInit);
-		
-		double decrasingRate = DECREASING_MOVIE_RATE_MIN_BM + Math.random() * (DECREASING_MOVIE_RATE_MAX_BM - DECREASING_MOVIE_RATE_MIN_BM);
-		setDecreasingRate(1 - decrasingRate); 
-  }
 
-  public Player getProducer() {
-		return producer;
-  }
+		double decrasingRate = DECREASING_MOVIE_RATE_MIN_BM + Math.random()
+				* (DECREASING_MOVIE_RATE_MAX_BM - DECREASING_MOVIE_RATE_MIN_BM);
+		setDecreasingRate(1 - decrasingRate);
+	}
 
-  public int totalValue() {
-		return initPrice + marketing + logistic * LOGISTIC_VALUE + actors * ACTOR_VALUE;
-  }
+	public Player getProducer() {
+		return mProducer;
+	}
 
-  @Override
-  public int sellingPrice() {
-		return (int)((double)totalValue() * SELLINGPRICE_RATIO);
-  }
+	public int totalValue() {
+		return mInitPrice + mMarketing + mLogistic * LOGISTIC_VALUE + mActors * ACTOR_VALUE;
+	}
+
+	@Override
+	public int sellingPrice() {
+		return (int) ((double) totalValue() * SELLINGPRICE_RATIO);
+	}
+
+	@Override
+	public JSONObject toJson() throws JSONException {
+		JSONObject movie = super.toJson();
+		movie.put("logistic", mLogistic);
+		movie.put("actors", mActors);
+		movie.put("initprice", mInitPrice);
+		movie.put("year", mYear);
+		movie.put("marketing", mMarketing);
+		movie.put("maxmarketing", mMaxMarketing);
+		//TODO Est ce qu'on doit vraiment avoir le joueur a qui appartient le film ?
+		//movie.put("producer", mProducer.getId());
+		return movie;
+	}
 
 }
