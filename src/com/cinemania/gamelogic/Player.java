@@ -23,8 +23,11 @@ import android.util.Log;
 
 import com.cinemania.activity.Base;
 import com.cinemania.cases.Cell;
+import com.cinemania.cases.Cinema;
 import com.cinemania.cases.HeadQuarters;
+import com.cinemania.cases.LogisticFactory;
 import com.cinemania.cases.OwnableCell;
+import com.cinemania.cases.School;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 
@@ -48,14 +51,14 @@ public class Player implements JSonator{
 	private int mLogistics;
 	private Sprite mView;	
 	
-	//Dernier fois où l'on a visité le QG
+	//Last time when we visite the QG
 	private int mLastTurn;
 	
 	private int mLastProfit;
 	
 	private GameContext mGameContext;
 	
-	public Player(long identifier, int order, String name, int money, int actors, int logistics, int lastTurn, HeadQuarters headQuarters, Cell currentPosition) {
+	public Player(long identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, HeadQuarters headQuarters, Cell currentPosition) {
 		mIdentifier = identifier;
 		mOrder = order;
 		mName = name;
@@ -66,6 +69,7 @@ public class Player implements JSonator{
 		mActors = actors;
 		mLogistics = logistics;
 		mLastTurn = lastTurn;
+		mLastProfit = lastProfit;
 		mHeadQuarters = headQuarters;
 		mCurrentPosition = currentPosition;
 		mView = new Sprite(mCurrentPosition.getX()+bordure, mCurrentPosition.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
@@ -84,6 +88,7 @@ public class Player implements JSonator{
 				player.getInt("actors"),
 				player.getInt("logistics"),
 				player.getInt("lastTurn"),
+				player.getInt("lastProfit"),
 				headQuarters,
 				currentPosition);
 		
@@ -109,15 +114,15 @@ public class Player implements JSonator{
 			
 			Cell temp = mGameContext.nextCellOf(mCurrentPosition);
 
-			//Mouvement de la case courante, a la case suivant. Le pion est decalle
+			//Movement from case to case. The pawn use an offset
 			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure+mOrder*OFFSET, temp.getX()+bordure+mOrder*OFFSET, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
 		    
 		    entity[i] = mm;
 		    
-		    Log.i("GAME","Déplacement de : " +(mCurrentPosition.getX()+bordure) + " ," + (temp.getX()+bordure) + " à " + (mCurrentPosition.getY()+bordure) + " ," + (temp.getY()+bordure));
+		    Log.i("GAME","Dï¿½placement de : " +(mCurrentPosition.getX()+bordure) + " ," + (temp.getX()+bordure) + " ï¿½ " + (mCurrentPosition.getY()+bordure) + " ," + (temp.getY()+bordure));
 		    
-			//Test si on passe au QG
+			//Test if we pass in our QG.
 			if(temp == this.mHeadQuarters)
 				this.encaisser();
 			
@@ -133,7 +138,7 @@ public class Player implements JSonator{
 		 
 		    @Override
 		    public void onModifierFinished(IModifier<IEntity> arg0, IEntity arg1) {
-		    	//Le joueur arrive sur une position.
+		    	//The player arrive on a cell.
 		    	Player.this.getPosition().onTheCell(Player.this);
 		    }
 		});
@@ -145,13 +150,32 @@ public class Player implements JSonator{
 		mView.registerEntityModifier(sem);
 	}
 	
-	//Methode appelee lorsque l'on passe par notre QG
+	//When we pass our QG we can get all the profit.
 	public void encaisser(){
 		if(mGameContext.isCreator())
 			mGameContext.completeTurn();
 		
+		int lvlCinema = 0;
+		//Count the number of cinema.
+		for(OwnableCell cell : mProperties)
+			if(cell instanceof Cinema)
+			{
+				lvlCinema += ((Cinema)cell).getLevel();
+				this.receiveMoney(((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
+			}
+			else if(cell instanceof School)
+			{
+				this.receiveActors(((School)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
+			}
+			else if(cell instanceof LogisticFactory)
+			{
+				this.receiveLogistic(((LogisticFactory)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
+			}
 		
+		int nbMovie = 0;
 		
+		//TODO profit de tous les films * lvlCinema
+		this.receiveMoney(lvlCinema*nbMovie);
 		this.setLastTurn(mGameContext.getCurrentTurn());
 	}
 	
@@ -179,33 +203,39 @@ public class Player implements JSonator{
 	}
 	
 	public void receiveMoney(int amount){
-		this.mMoney += amount;
+		setAmount(this.getAmount()+amount);
 	}
 	
 	public void looseMoney(int amount){
-		this.mMoney -= amount;
+		setAmount(this.getAmount()-amount);
 	}
 
 	public void setAmount(int amount) {
 		this.mMoney = amount;
+		Base.getSharedInstance().getHUD().setMoney(this.mMoney);
 	}
 
-	public int getLastProfit(){
-		return this.mLastProfit;
-	}
-	
 	public int getAmount() {
 		return mMoney;
+	}
+	
+	public int getLastProfit(){
+		return this.mLastProfit;
 	}
 
 	public void setLogistic(int logistic) {
 		this.mLogistics = logistic;
+		Base.getSharedInstance().getHUD().setLogistics(this.mLogistics);
 	}
 
 	public int getLogistic() {
 		return mLogistics;
 	}
 
+	public void receiveLogistic(int logistic) {
+		setLogistic(this.getLogistic()+logistic);
+	}
+	
 	public int getLastTurn() {
 		return mLastTurn;
 	}
@@ -214,8 +244,13 @@ public class Player implements JSonator{
 		this.mLastTurn = lastTurn;
 	}
 	
+	public void receiveActors(int actors) {
+		setLogistic(actors);
+	}
+	
 	public void setActors(int actors) {
 		this.mActors = actors;
+		Base.getSharedInstance().getHUD().setActors(this.getActors() + actors);
 	}
 
 	public int getActors() {
@@ -298,6 +333,7 @@ public class Player implements JSonator{
 		player.put("actors", this.getActors());
 		player.put("logistics", this.getLogistic());
 		player.put("lastTurn", this.getLastTurn());
+		player.put("lastProfit", this.getLastProfit());
 		
 		JSONArray scripts = new JSONArray();
 		for(Script s : this.getScripts())
