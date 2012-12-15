@@ -34,9 +34,9 @@ public class Chance extends Cell {
 	}
 
 	@Override
-	public void onTheCell(Player player) {
+	public void onTheCell(final Player player) {
 		
-		ChanceCard chanceCard = ChanceCardManager.getSharedInstance().pickACard();
+		final ChanceCard chanceCard = ChanceCardManager.getSharedInstance().pickACard();
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(false);
@@ -48,34 +48,26 @@ public class Chance extends Cell {
 		TextView chanceText = (TextView) view.findViewById(R.id.chanceText);
 		TextView chancePrice = (TextView) view.findViewById(R.id.chancePrice);
 		
-//		chanceTitle.setText(script.getTitle());
-//		chanceText.setText(script.getSummary());
-//		chancePrice.setText(Integer.toString(script.getYear()));
-//		
-//		dialogBuilder.setPositiveButton(R.string.btn_buy, new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				player.looseMoney(script.getPrice());
-//				player.addScript(script);
-//				dialog.dismiss();
-//			}
-//		});
-//		dialogBuilder.setNegativeButton(R.string.btn_close, new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				dialog.dismiss();
-//			}
-//		});
-//		 
-//		Base.getSharedInstance().runOnUiThread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				dialogBuilder.create().show();
-//			}
-//		});
+		chanceTitle.setText(chanceCard.getTitle());
+		chanceText.setText(chanceCard.getText());
+		chancePrice.setText(Integer.toString(chanceCard.getAmount()));
+		
+		dialogBuilder.setNeutralButton(R.string.btn_close, new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				player.looseMoney(chanceCard.getAmount());
+				dialog.dismiss();
+			}
+		});
+		 
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				dialogBuilder.create().show();
+			}
+		});
 	}
 
 	@Override

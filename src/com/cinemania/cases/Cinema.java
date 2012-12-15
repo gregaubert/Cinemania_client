@@ -1,5 +1,7 @@
 package com.cinemania.cases;
 
+import java.util.ArrayList;
+
 import org.andengine.entity.sprite.ButtonSprite;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -7,12 +9,8 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView.FindListener;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -23,6 +21,7 @@ import com.cinemania.gamelogic.Profitable;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.activity.R;
 import com.cinemania.resources.ResourcesManager;
+import com.cinemania.gamelogic.Movie;
 
 public class Cinema extends BuyableCell implements Profitable  {
 	
@@ -92,12 +91,15 @@ public class Cinema extends BuyableCell implements Profitable  {
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
 		
-		
 		TextView nbFilmPruiduits = (TextView)view.findViewById(R.id.txtnbFilms);
 		TextView benefices = (TextView)view.findViewById(R.id.txtBenefices);
+		TextView level = (TextView)view.findViewById(R.id.txtLevelActuel);
+		Button btnLevel = (Button)view.findViewById(R.id.btnLevel);
 		
 		nbFilmPruiduits.setText("21");
 		benefices.setText("5432.-");
+		level.setText(getLevel());
+		btnLevel.setEnabled(updateAvailable());
 
 		dialogBuilder.setView(view);
 		
@@ -139,7 +141,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	@Override
 	public void askToBuy(Player player) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(Base.getSharedInstance());
+		final AlertDialog.Builder builder = new AlertDialog.Builder(Base.getSharedInstance());
 		builder.setMessage("Voulez-vous acheter ce cinéma ?");
 		final Player me = player;
 		final Cinema monCinoche = this;
@@ -158,13 +160,26 @@ public class Cinema extends BuyableCell implements Profitable  {
 			}
 		});
 
-		AlertDialog dialog = builder.create();
-		dialog.show();
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				AlertDialog dialog = builder.create();
+				dialog.show();
+			}
+		});
 	}
 
 	@Override
 	public void strangerOnCell(Player player) {
 		// TODO montant correct
+		Player proprietaire = getOwner();
+		ArrayList<Movie> movies; // TODO récupérer movies du player
+		int montant;
+//		for(Movie m : movies){
+//			// montant += valeur film * constantes
+//		}
+		
 		player.payOpponent(getOwner(), AllConstants.COSTS_ON_HQ);
 		showPayDialog(AllConstants.COSTS_ON_HQ, R.drawable.ic_cinema, R.string.title_cinema);
 	}

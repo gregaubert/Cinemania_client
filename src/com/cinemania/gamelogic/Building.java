@@ -1,6 +1,5 @@
 package com.cinemania.gamelogic;
 
-import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import static com.cinemania.constants.AllConstants.*;
 

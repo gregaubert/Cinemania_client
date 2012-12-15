@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import com.cinemania.activity.R;
 import com.google.android.gcm.GCMRegistrar;
 
 import android.content.Context;

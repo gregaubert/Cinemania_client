@@ -13,8 +13,6 @@ import org.andengine.input.touch.detector.ScrollDetector.IScrollDetectorListener
 import static com.cinemania.constants.AllConstants.*;
 
 import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
-
 import android.util.Log;
 
 public class CameraManager implements IOnSceneTouchListener, IScrollDetectorListener, IPinchZoomDetectorListener{

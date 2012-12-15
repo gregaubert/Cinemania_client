@@ -59,19 +59,19 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/txt_nbfilm"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:typeface="normal" 
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:typeface="normal" />
 
             <TextView
                 android:id="@+id/txtnbFilms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:typeface="normal"
                 android:layout_weight="1.0"
                 android:paddingLeft="5sp"
-                android:textSize="15sp" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15sp"
+                android:typeface="normal" />
         </TableRow>
 
         <TableRow
@@ -85,20 +85,52 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/txt_benefices"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:typeface="normal"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:typeface="normal" />
 
             <TextView
                 android:id="@+id/txtBenefices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:typeface="normal"
-                android:layout_weight="1.0" 
+                android:layout_weight="1.0"
                 android:paddingLeft="5sp"
-                android:textSize="15sp"/>
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15sp"
+                android:typeface="normal" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/txt_levelActuel"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15sp"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/txtLevelActuel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.0"
+                android:paddingLeft="5sp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15sp"
+                android:typeface="normal" />
+        </TableRow>
+
+        <Button
+            android:id="@+id/btnLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_level" />
     </TableLayout>
 
 </LinearLayout>

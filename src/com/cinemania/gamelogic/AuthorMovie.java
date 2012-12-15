@@ -1,6 +1,5 @@
 package com.cinemania.gamelogic;
 import static com.cinemania.constants.AllConstants.*;
-import com.cinemania.activity.R;
 
 public class AuthorMovie extends Movie {
   private int sellingPrice;

@@ -6,11 +6,15 @@ import static com.cinemania.constants.AllConstants.PLAYER_COLOR_ANDROID;
 
 import java.util.ArrayList;
 
+import org.andengine.entity.IEntity;
+import org.andengine.entity.modifier.DelayModifier;
 import org.andengine.entity.modifier.IEntityModifier;
 import org.andengine.entity.modifier.MoveModifier;
 import org.andengine.entity.modifier.SequenceEntityModifier;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.util.color.Color;
+import org.andengine.util.modifier.IModifier;
+import org.andengine.util.modifier.IModifier.IModifierListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +22,6 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.OwnableCell;
@@ -45,9 +48,14 @@ public class Player implements JSonator{
 	private int mLogistics;
 	private Sprite mView;	
 	
+	//Dernier fois où l'on a visité le QG
+	private int mLastTurn;
+	
+	private int mLastProfit;
+	
 	private GameContext mGameContext;
 	
-	public Player(long identifier, int order, String name, int money, int actors, int logistics, HeadQuarters headQuarters, Cell currentPosition) {
+	public Player(long identifier, int order, String name, int money, int actors, int logistics, int lastTurn, HeadQuarters headQuarters, Cell currentPosition) {
 		mIdentifier = identifier;
 		mOrder = order;
 		mName = name;
@@ -57,6 +65,7 @@ public class Player implements JSonator{
 		mMoney = money;
 		mActors = actors;
 		mLogistics = logistics;
+		mLastTurn = lastTurn;
 		mHeadQuarters = headQuarters;
 		mCurrentPosition = currentPosition;
 		mView = new Sprite(mCurrentPosition.getX()+bordure, mCurrentPosition.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
@@ -74,6 +83,7 @@ public class Player implements JSonator{
 				player.getInt("money"),
 				player.getInt("actors"),
 				player.getInt("logistics"),
+				player.getInt("lastTurn"),
 				headQuarters,
 				currentPosition);
 		
@@ -93,14 +103,10 @@ public class Player implements JSonator{
 	
 	public void Move(int nb){
 	  
-		//int pos = mBoard.findCaseIndex(mCurrentPosition);
-	
-		IEntityModifier [] entity = new IEntityModifier[nb];
+		IEntityModifier [] entity = new IEntityModifier[nb+1];
 		
-		int i = 0;
-		
-		while(i < nb){
-			//pos = (pos+1)%mBoard.getSize();
+		for(int i = 0; i < nb; i++){
+			
 			Cell temp = mGameContext.nextCellOf(mCurrentPosition);
 
 			//Mouvement de la case courante, a la case suivant. Le pion est decalle
@@ -114,23 +120,42 @@ public class Player implements JSonator{
 			//Test si on passe au QG
 			if(temp == this.mHeadQuarters)
 				this.encaisser();
-		  
-			mCurrentPosition = temp;
 			
-			i++;		
+			mCurrentPosition = temp;
+		
 		}
+		
+		DelayModifier dMod = new DelayModifier(0.5f);
+		dMod.addModifierListener(new IModifierListener<IEntity>() {
+		    @Override
+		    public void onModifierStarted(IModifier<IEntity> arg0, IEntity arg1) {
+		    }
+		 
+		    @Override
+		    public void onModifierFinished(IModifier<IEntity> arg0, IEntity arg1) {
+		    	//Le joueur arrive sur une position.
+		    	Player.this.getPosition().onTheCell(Player.this);
+		    }
+		});
+		
+		entity[nb] = dMod;
 		
 		SequenceEntityModifier sem = new SequenceEntityModifier(entity);
 		
 		mView.registerEntityModifier(sem);
-	  
 	}
 	
 	//Methode appelee lorsque l'on passe par notre QG
 	public void encaisser(){
-		//TODO
-		Log.i("GAME","ENCAISSER!!!");
+		if(mGameContext.isCreator())
+			mGameContext.completeTurn();
+		
+		
+		
+		this.setLastTurn(mGameContext.getCurrentTurn());
 	}
+	
+	
 	
 	public void payOpponent(Player opponent, int amount){
 		looseMoney(amount);
@@ -165,6 +190,10 @@ public class Player implements JSonator{
 		this.mMoney = amount;
 	}
 
+	public int getLastProfit(){
+		return this.mLastProfit;
+	}
+	
 	public int getAmount() {
 		return mMoney;
 	}
@@ -177,6 +206,14 @@ public class Player implements JSonator{
 		return mLogistics;
 	}
 
+	public int getLastTurn() {
+		return mLastTurn;
+	}
+	
+	public void setLastTurn(int lastTurn){
+		this.mLastTurn = lastTurn;
+	}
+	
 	public void setActors(int actors) {
 		this.mActors = actors;
 	}
@@ -260,6 +297,7 @@ public class Player implements JSonator{
 		player.put("money", this.getAmount());
 		player.put("actors", this.getActors());
 		player.put("logistics", this.getLogistic());
+		player.put("lastTurn", this.getLastTurn());
 		
 		JSONArray scripts = new JSONArray();
 		for(Script s : this.getScripts())

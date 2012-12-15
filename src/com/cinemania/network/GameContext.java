@@ -8,7 +8,6 @@ import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.activity.Base;
-import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import com.cinemania.cases.CellGenerator;
 import com.cinemania.cases.Cinema;
@@ -42,6 +41,8 @@ public final class GameContext {
 	//Singleton
     public static GameContext instance;
 	
+    public final int offsetYear = 1;
+    
     // ===========================================================
     public static GameContext getSharedInstance() {
     	if(instance == null)
@@ -176,6 +177,11 @@ public final class GameContext {
 		//TODO envoi des datas.
 	}
 	
+	public void completeTurn(){
+		this.mYear += offsetYear;
+		this.mCurrentTurn++;
+	}
+	
 	/**
 	 * On passe au joueur suivant
 	 */
@@ -203,6 +209,10 @@ public final class GameContext {
 		return GameContext.LOCAL_IDENTIFIER;
 	}
 	
+	public boolean isCreator(){
+		return this.mPlayer == this.mPlayers[0];
+	}
+	
 	public Player[] getPlayers() {
 		return mPlayers;
 	}
@@ -227,7 +237,6 @@ public final class GameContext {
 		return mYear;
 	}
 	
-	
 	// FIXME: Only for tests
 	public static String test1() {
 		return "{ \"version\": 1, \"game\": { \"id\": 123456, \"turn\": 1, \"player\": 0 }, \"board\": [ { \"type\": 1, \"level\": 2 }, { \"type\": 1, \"level\": 3 }, { \"type\": 2 }, { \"type\": 5, \"level\": 0 } ], \"players\": [ { \"id\": 12345, \"name\": \"Mok\",  \"hq\": 0, \"position\": 0, \"properties\": [ 3 ], \"money\": 1000, \"actors\": 2, \"logistics\": 10, \"scripts\": []}, { \"id\": 4321, \"name\": \"Bof\", \"hq\": 1, \"position\": 1, \"properties\": [], \"money\": 223, \"actors\": 3, \"logistics\": 4, \"scripts\": [] } ] }";
@@ -250,6 +259,7 @@ public final class GameContext {
 			player1.put("money", 1000);
 			player1.put("actors", 12);
 			player1.put("logistics", 10);
+			player1.put("lastTurn", 0);
 			player1.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 2
@@ -263,6 +273,7 @@ public final class GameContext {
 			player2.put("money", 1000);
 			player2.put("actors", 12);
 			player2.put("logistics", 10);
+			player2.put("lastTurn", 0);
 			player2.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 3
@@ -276,6 +287,7 @@ public final class GameContext {
 			player3.put("money", 1000);
 			player3.put("actors", 12);
 			player3.put("logistics", 10);
+			player3.put("lastTurn", 0);
 			player3.put("scripts", new JSONArray());
 			offset += 1;
 			// Player 4
@@ -289,6 +301,7 @@ public final class GameContext {
 			player4.put("money", 1000);
 			player4.put("actors", 12);
 			player4.put("logistics", 10);
+			player4.put("lastTurn", 0);
 			player4.put("scripts", new JSONArray());
 			offset += 1;
 			jsonPlayers.put(player1);

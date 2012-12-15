@@ -1,11 +1,4 @@
 package com.cinemania.constants;
-import com.cinemania.activity.R;
-import com.cinemania.cases.Cinema;
-import com.cinemania.gamelogic.BigMovie;
-import com.cinemania.gamelogic.Player;
-import com.cinemania.gamelogic.Room;
-
-import android.util.Log;
 public class Test {
 	/*
 	public static void test(){

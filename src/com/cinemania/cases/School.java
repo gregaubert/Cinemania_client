@@ -1,7 +1,6 @@
 package com.cinemania.cases;
 
 import org.andengine.entity.sprite.ButtonSprite;
-import org.andengine.opengl.texture.region.ITextureRegion;
 import org.json.JSONException;
 import org.json.JSONObject;
 

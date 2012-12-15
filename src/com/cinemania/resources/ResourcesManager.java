@@ -16,7 +16,6 @@ import org.andengine.util.debug.Debug;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import com.cinemania.activity.R;
 
 public class ResourcesManager {
 	

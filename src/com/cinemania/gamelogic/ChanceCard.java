@@ -12,27 +12,27 @@ public class ChanceCard {
 		mAmount = amount;
 	}
 	
-	public String getmTitle() {
+	public String getTitle() {
 		return mTitle;
 	}
 
-	public void setmTitle(String mTitle) {
+	public void setTitle(String mTitle) {
 		this.mTitle = mTitle;
 	}
 
-	public String getmText() {
+	public String getText() {
 		return mText;
 	}
 
-	public void setmText(String mText) {
+	public void setText(String mText) {
 		this.mText = mText;
 	}
 
-	public int getmAmount() {
+	public int getAmount() {
 		return mAmount;
 	}
 
-	public void setmAmount(int mAmount) {
+	public void setAmount(int mAmount) {
 		this.mAmount = mAmount;
 	}
 }

@@ -3,7 +3,6 @@ package com.cinemania.network;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.cinemania.activity.R;
 import com.cinemania.cases.Cell;
 import com.cinemania.cases.HeadQuarters;
 import com.cinemania.cases.OwnableCell;
@@ -23,6 +22,7 @@ public class PlayerDeserializer {
 				jsonPlayer.getInt("money"),
 				jsonPlayer.getInt("actors"),
 				jsonPlayer.getInt("logistics"),
+				jsonPlayer.getInt("lastTurn"),
 				(HeadQuarters)board[jsonPlayer.getInt("hq")],
 				board[jsonPlayer.getInt("position")]
 			);
