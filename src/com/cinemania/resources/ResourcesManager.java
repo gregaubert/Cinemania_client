@@ -13,6 +13,8 @@ import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.debug.Debug;
 
+import com.cinemania.gamelogic.Script;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -62,7 +64,7 @@ public class ResourcesManager {
 	}
 	
 	public void LoadSplash(Context context, Engine engine){
-		//Gestion des polices d'écritures
+		//Gestion des polices d'ï¿½critures
 		mSplashFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/GunslingerDEMO-KCFonts.ttf", 48f, true, Color.WHITE);
 		//mSplashFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
 		mSplashFont.load();
@@ -70,26 +72,26 @@ public class ResourcesManager {
 		//Indique le dossier contenant les textures.
     	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
     	BitmapTextureAtlas splashTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
-    	//Récupère la bonne texture.
+    	//Rï¿½cupï¿½re la bonne texture.
     	mSplashLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashTextureAtlas,context,"splash.png", 0, 0);
     	splashTextureAtlas.load();
 	}
 	
 	public void LoadMenu(Context context, Engine engine){
-		//Gestion des polices d'écritures
+		//Gestion des polices d'ï¿½critures
 		mMenuFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
 		mMenuFont.load();
 		
-		//Récupère la bonne texture.
+		//Rï¿½cupï¿½re la bonne texture.
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
     	BitmapTextureAtlas splashTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 500, 300, TextureOptions.DEFAULT);
-    	//Récupère la bonne texture.
+    	//Rï¿½cupï¿½re la bonne texture.
     	mMenuLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashTextureAtlas,context,"menu.jpg", 0, 0);
     	splashTextureAtlas.load();
 	}
 	
 	public void LoadHUD(Context context, Engine engine){
-		// Gestion des polices d'écritures
+		// Gestion des polices d'ï¿½critures
 		mYearFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/veteran typewriter.ttf", 24, true, Color.BLACK);
 		//mYearFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
 		mYearFont.load();
@@ -117,10 +119,10 @@ public class ResourcesManager {
 	}
 	
 	public void LoadPlayer(Context context, Engine engine){
-		//Récupère la bonne texture.
+		//Rï¿½cupï¿½re la bonne texture.
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
     	BitmapTextureAtlas PlayerTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 80, 80, TextureOptions.DEFAULT);
-    	//Récupère la bonne texture.
+    	//Rï¿½cupï¿½re la bonne texture.
     	mPlayer = BitmapTextureAtlasTextureRegionFactory.createFromAsset(PlayerTextureAtlas,context,"player.png", 0, 0);
     	PlayerTextureAtlas.load();
 	}
@@ -130,6 +132,9 @@ public class ResourcesManager {
 	}
 	
 	public void LoadBoardGame(Context context, Engine engine) {
+		
+		Script.loadMovieDB();
+		
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
         BuildableBitmapTextureAtlas boardBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 1024);
         

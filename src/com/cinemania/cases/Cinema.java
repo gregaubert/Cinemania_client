@@ -134,6 +134,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 		TextView txtRooms = (TextView) view.findViewById(R.id.txtRooms);
 		TextView txtAmount = (TextView) view.findViewById(R.id.txtAmount);
 		
+		//TODO verifier si c'est bien ce qu'il faut afficher
 		txtAmount.setText(Integer.toString(totalValue()));
 		txtCost.setText(Integer.toString(AllConstants.COSTS_PER_CINEMA));
 		txtRooms.setText(Integer.toString(getLevel()));

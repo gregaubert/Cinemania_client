@@ -16,6 +16,7 @@ import com.cinemania.cases.LogisticFactory;
 import com.cinemania.cases.Chance;
 import com.cinemania.cases.School;
 import com.cinemania.cases.ScriptCell;
+import com.cinemania.constants.AllConstants;
 
 public final class GameContext {
 	
@@ -179,7 +180,7 @@ public final class GameContext {
 	
 	public void completeTurn(){
 		this.mYear += offsetYear;
-		Base.getSharedInstance().getHUD().setYear(this.mYear);
+		Base.getSharedInstance().getHUD().setYear(getYear());
 		this.mCurrentTurn++;
 	}
 	
@@ -235,7 +236,7 @@ public final class GameContext {
 	}
 
 	public int getYear() {
-		return mYear;
+		return mYear + AllConstants.INITIAL_YEAR;
 	}
 	
 	// FIXME: Only for tests

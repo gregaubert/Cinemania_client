@@ -33,7 +33,7 @@ public class ScriptCell extends Cell {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		//TODO d�sactiver le onclick ou changer l'action dessus, la c'est juste pour pouvoir tester
+		//TODO desactiver le onclick ou changer l'action dessus, la c'est juste pour pouvoir tester
 		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
 	}
 
@@ -41,8 +41,7 @@ public class ScriptCell extends Cell {
 	public void onTheCell(final Player player) {
 		
 		//TODO Recuperer des scripts aleatoirement d'une bd
-		final Script script = new Script("Demain ne meurt jamais", 1589, 263);
-		script.setSummary("la bla blabla bla bla blbla bla blabla bla bla blabla bla bla blbla bla blabla bla bla blabla bla bla blbla bla.");
+		final Script script = Script.pickAScript();
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
@@ -54,11 +53,14 @@ public class ScriptCell extends Cell {
 		TextView scriptSummary = (TextView) view.findViewById(R.id.scriptSummary);
 		TextView scriptYear = (TextView) view.findViewById(R.id.scriptYear);
 		TextView scriptPrice = (TextView) view.findViewById(R.id.scriptPrice);
+		TextView scriptRealisation = (TextView) view.findViewById(R.id.scriptRealisation);
 		
 		scriptTitle.setText(script.getTitle());
 		scriptSummary.setText(script.getSummary());
 		scriptYear.setText(Integer.toString(script.getYear()));
 		scriptPrice.setText(Integer.toString(script.getPrice()));
+		scriptRealisation.setText(script.getActors() + (script.getActors() <= 1 ?" acteur, ":" acteurs, ") 
+				+ script.getLogistics() + (script.getLogistics() <= 1 ?" logistique":" logistiques"));
 		
 		dialogBuilder.setPositiveButton(R.string.btn_buy, new OnClickListener() {
 			

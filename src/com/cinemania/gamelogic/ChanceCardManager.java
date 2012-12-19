@@ -1,4 +1,4 @@
-package com.cinemania.gamelogic;
+ï»¿package com.cinemania.gamelogic;
 
 import java.util.ArrayList;
 
@@ -22,15 +22,15 @@ public class ChanceCardManager {
 	}
 	
 	private void loadCard(){
-		//TODO Changer ça et charger depuis un fichier genre json ou autre. Mais pas pour le proto.
-		cardList.add(new ChanceCard("Oscar", "Bravo!\nVotre dernier film à remporté un Oscar! ", 300));
-		cardList.add(new ChanceCard("Promotion de votre secrétaire", "Vous découvrez des talents d'actrice chez votre secrétaire!", 200));
-		cardList.add(new ChanceCard("Justice!", "Vous remportez un vieux procès contre un concurrent!", 250));
-		cardList.add(new ChanceCard("Adaptation en jeu vidéo!", "Vous avez attiré la curiosité d'un grand producteur de jeux vidéos.\nIl veut votre coopération sur l'adaptation vidéoludique d'un de vos films!", 275));
-		cardList.add(new ChanceCard("Mauvaise pub", "Suite à un coup médiatique de vos adversaires votre réputation est en baisse!", -250));
-		cardList.add(new ChanceCard("Acteur en fuite", "La résiliation du contrat d'un acteur met en périle vos productions!", -200));
-		cardList.add(new ChanceCard("Invasion d'extra-terrestre", "Vous entamez la construction d'un bunker afin de vous protéger de la récente invasion extra-terrestre!", -500));
-		cardList.add(new ChanceCard("Grève des scénaristes", "Vos scénaristes refusent leur nouvelles conditions de travail! Ils se mettent en grève!", -50));
+		//TODO Changer Ã§a et charger depuis un fichier genre json ou autre. Mais pas pour le proto.
+		cardList.add(new ChanceCard("Oscar", "Bravo!\nVotre dernier film Ã  remportÃ© un Oscar! ", 300));
+		cardList.add(new ChanceCard("Promotion de votre secrÃ©taire", "Vous dÃ©couvrez des talents d'actrice chez votre secrÃ©taire!", 200));
+		cardList.add(new ChanceCard("Justice!", "Vous remportez un vieux procÃ¨s contre un concurrent!", 250));
+		cardList.add(new ChanceCard("Adaptation en jeu vidÃ©o!", "Vous avez attirÃ© la curiositÃ© d'un grand producteur de jeux vidÃ©os.\nIl veut votre coopÃ©ration sur l'adaptation vidÃ©oludique d'un de vos films!", 275));
+		cardList.add(new ChanceCard("Mauvaise pub", "Suite Ã  un coup mÃ©diatique de vos adversaires votre rÃ©putation est en baisse!", -250));
+		cardList.add(new ChanceCard("Acteur en fuite", "La rÃ©siliation du contrat d'un acteur met en pÃ©rile vos productions!", -200));
+		cardList.add(new ChanceCard("Invasion d'extra-terrestre", "Vous entamez la construction d'un bunker afin de vous protÃ©ger de la rÃ©cente invasion extra-terrestre!", -500));
+		cardList.add(new ChanceCard("GrÃ¨ve des scÃ©naristes", "Vos scÃ©naristes refusent leur nouvelles conditions de travail! Ils se mettent en grÃ¨ve!", -50));
 		cardList.add(new ChanceCard("Caprice d'actrice!", "Votre actrice star exige un jacuzzi dans sa loge!", -75));
 	}
 }
