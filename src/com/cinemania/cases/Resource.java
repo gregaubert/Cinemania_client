@@ -33,7 +33,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 	
 	private void setLevel(int level){
 		this.mLevel = level;
-		//TODO Ajouter le Sprite avec 1,2,3 étoiles.
+		//TODO Ajouter le Sprite avec 1,2,3 ï¿½toiles.
 	}
 	
 	@Override
@@ -95,7 +95,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		txtTitle.setText(titre);
 		txtAmount.setText(Integer.toString(totalValue()));
 		txtType.setText(type);
-		//TODO Vérifier le profit
+		//TODO VÃ©rifier le profit
 		txtIncome.setText(Integer.toString(profit(0, 1)));
 		txtTransaction.setText(hasOwner()?R.string.txt_rachat:R.string.txt_achat);
 		txtLevel.setText(Integer.toString(getLevel()));

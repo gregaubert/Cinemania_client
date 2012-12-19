@@ -9,8 +9,10 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -84,7 +86,6 @@ public class Cinema extends BuyableCell implements Profitable  {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		
 		// TODO: si cette case nous appartient
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
@@ -124,31 +125,36 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	@Override
 	public void askToBuy(final Player player) {
-		final AlertDialog.Builder builder = new AlertDialog.Builder(Base.getSharedInstance());
-		builder.setMessage("Voulez-vous acheter ce cinema ?");
-		//TODO faire une belle dialog pour �a
-		builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {				
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				player.looseMoney(getBaseValue());
-				Cinema.this.setOwner(player);
-				player.addProperty(Cinema.this);
-				dialog.dismiss();
-			}
-		});
-		
-		builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {				
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
+		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+		dialogBuilder.setCancelable(true);
+		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.buycinema, null);
+		dialogBuilder.setView(view);
 
+		TextView txtCost = (TextView) view.findViewById(R.id.txtCost);
+		TextView txtRooms = (TextView) view.findViewById(R.id.txtRooms);
+		TextView txtAmount = (TextView) view.findViewById(R.id.txtAmount);
+		
+		txtAmount.setText(Integer.toString(totalValue()));
+		txtCost.setText(Integer.toString(AllConstants.COSTS_PER_CINEMA));
+		txtRooms.setText(Integer.toString(getLevel()));
+		
+		dialogBuilder.setPositiveButton(R.string.btn_buy, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Cinema.this.buy(player);
+				dialog.dismiss();
+			}
+		});
+		dialogBuilder.setNegativeButton(R.string.btn_close, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
 		Base.getSharedInstance().runOnUiThread(new Runnable() {
-			
 			@Override
 			public void run() {
-				AlertDialog dialog = builder.create();
+				AlertDialog dialog = dialogBuilder.create();
 				dialog.show();
 				if(player.getAmount() < totalValue())
 					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);

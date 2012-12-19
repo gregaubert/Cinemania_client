@@ -55,4 +55,7 @@
 	<string name="txt_benefices">Dernier bénéfice\nencaissé des cinémas :</string>
 	<string name="txt_level">Passer au niveau suivant</string>
 	<string name="txt_levelActuel">Niveau actuel :</string>
+	<string name="txt_prix">Prix :</string>
+	<string name="txt_entretien">Coût d\'entretien :</string>
+	<string name="txt_nombre_de_salles">Nombre de salles :</string>
 </resources>
