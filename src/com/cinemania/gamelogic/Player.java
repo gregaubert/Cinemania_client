@@ -159,6 +159,8 @@ public class Player implements JSonator{
 	
 	//When we pass our QG we can get all the profit.
 	public void encaisser(){
+		
+		//FIXME Je pense que ça c'est pas correct, il faut update le tour a chaque fois que le créateur tire le dé pas a chaque fois qu'il tombe sur son hq
 		if(mGameContext.isCreator())
 			mGameContext.completeTurn();
 		
@@ -221,7 +223,8 @@ public class Player implements JSonator{
 		mMoney = amount;
 		//TODO ca marche pas ca, car quand player 1 donne de l'argent a player 2, player 2 vas aussi mettre a jour l'hud alors que c'est pas le sien.
 		// utiliser Gamecontext.getplayer();
-		Base.getSharedInstance().getHUD().setMoney(getAmount());
+		if(GameContext.getSharedInstance().getPlayer().equals(this))
+			Base.getSharedInstance().getHUD().setMoney(getAmount());
 	}
 
 	public int getAmount() {
@@ -234,7 +237,9 @@ public class Player implements JSonator{
 
 	public void setLogistic(int logistic) {
 		mLogistics = logistic;
-		Base.getSharedInstance().getHUD().setLogistics(getLogistic());
+
+		if(GameContext.getSharedInstance().getPlayer().equals(this))
+			Base.getSharedInstance().getHUD().setLogistics(getLogistic());
 	}
 
 	public int getLogistic() {
@@ -267,7 +272,9 @@ public class Player implements JSonator{
 	
 	public void setActors(int actors) {
 		mActors = actors;
-		Base.getSharedInstance().getHUD().setActors(getActors());
+
+		if(GameContext.getSharedInstance().getPlayer().equals(this))
+			Base.getSharedInstance().getHUD().setActors(getActors());
 	}
 
 	public int getActors() {
@@ -321,12 +328,17 @@ public class Player implements JSonator{
 	
 	public void addScript(Script script){
 		mScripts.add(script);
-		Base.getSharedInstance().getHUD().setScripts(getScriptCount());
+
+		if(GameContext.getSharedInstance().getPlayer().equals(this))
+			Base.getSharedInstance().getHUD().setScripts(getScriptCount());
 	}
 	
 	public Script removeScript(){
 		assert mScripts.size()>0;
-		Base.getSharedInstance().getHUD().setScripts(getScriptCount()-1);
+
+		if(GameContext.getSharedInstance().getPlayer().equals(this))
+			Base.getSharedInstance().getHUD().setScripts(getScriptCount()-1);
+		
 		return mScripts.remove(0);
 	}
 	

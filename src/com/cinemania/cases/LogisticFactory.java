@@ -80,8 +80,9 @@ public class LogisticFactory extends Resource {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		// TODO Change this shit quand on implemente onClick
+		// TODO Virer cette ligne
 		askToBuy(GameContext.getSharedInstance().getCurrentPlayer());
+		//TODO Verifier si c'est le owner et ouvrir la fenetre pour augmenter le niveau
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class LogisticFactory extends Resource {
 
 	@Override
 	public void ownerOnCell() {
-		// TODO Auto-generated method stub
+		// TODO Proposer d'augmenter le niveau, comme quand le owner clique
 		
 	}
 }

@@ -86,7 +86,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		// TODO: si cette case nous appartient
+		// TODO: si cette case nous appartient, sinon ne rien faire
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);

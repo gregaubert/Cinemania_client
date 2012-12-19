@@ -33,14 +33,13 @@ public class ScriptCell extends Cell {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		//TODO desactiver le onclick ou changer l'action dessus, la c'est juste pour pouvoir tester
+		//TODO Supprimer l'action sur le onClick, ne devrait pas y en avoir.
 		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
 	}
 
 	@Override
 	public void onTheCell(final Player player) {
 		
-		//TODO Recuperer des scripts aleatoirement d'une bd
 		final Script script = Script.pickAScript();
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());

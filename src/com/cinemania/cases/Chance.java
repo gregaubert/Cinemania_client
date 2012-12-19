@@ -30,7 +30,7 @@ public class Chance extends Cell {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		//TODO Virer cette merde, c'est juste pour le test
+		//TODO Pas d'action sur le onclick, virer cette ligne
 		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
 	}
 

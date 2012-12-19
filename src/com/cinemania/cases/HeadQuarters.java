@@ -53,9 +53,9 @@ public class HeadQuarters extends OwnableCell {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		// TODO Afficher la vue du quartier général
-		// TODO Change this shit quand on implemente onClick
+		// TODO Virer cette ligne
 		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
+		// TODO Afficher la vue du quartier general si c'est le owner qui clique, sinon afficher des infos du owner
 	}
 	
 	@Override
