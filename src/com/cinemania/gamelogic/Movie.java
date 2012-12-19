@@ -49,6 +49,10 @@ public abstract class Movie implements Profitable, JSonator {
 				movie.getDouble("decreasingrate"));
 	}
 
+	/**
+	 * Price opportunity for concurrent
+	 * @return
+	 */
 	public abstract int sellingPrice();
 
 	public int getPeopleInit() {

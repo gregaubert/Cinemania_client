@@ -164,16 +164,16 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	@Override
 	public void strangerOnCell(Player player) {
-		// TODO montant correct
 		Player proprietaire = getOwner();
-		ArrayList<Movie> movies; // TODO recuperer movies du player
-		int montant;
-//		for(Movie m : movies){
-//			// montant += valeur film * constantes
-//		}
+		ArrayList<Movie> movies = proprietaire.getMovies(); // TODO recuperer movies du player
+		int montant = 0;
+		for(Movie m : movies){
+			 montant += m.sellingPrice();
+		}
+		montant /= proprietaire.getNbCinema();
 		
-		player.payOpponent(getOwner(), AllConstants.COSTS_ON_HQ);
-		showPayDialog(AllConstants.COSTS_ON_HQ, R.drawable.ic_cinema, R.string.title_cinema);
+		player.payOpponent(getOwner(), montant);
+		showPayDialog(montant, R.drawable.ic_cinema, R.string.title_cinema);
 	}
 
 	@Override

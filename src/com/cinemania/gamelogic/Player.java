@@ -368,5 +368,14 @@ public class Player implements JSonator{
 		
 		return player;
 	}
+	
+	public int getNbCinema(){
+		int nb = 0;
+		for(OwnableCell o : mProperties){
+			if(o instanceof Cinema)
+				nb++;
+		}
+		return nb;
+	}
 
 }
