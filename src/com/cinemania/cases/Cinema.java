@@ -190,7 +190,10 @@ public class Cinema extends BuyableCell implements Profitable  {
 			
 			@Override
 			public void run() {
-				dialogBuilder.create().show();
+				AlertDialog dialog = dialogBuilder.create();
+				dialog.show();
+				if(dialog.getButton(AlertDialog.BUTTON_POSITIVE) != null && getOwner().getAmount() < AllConstants.PRICE_ROOM)
+					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 			}
 		});
 	}
