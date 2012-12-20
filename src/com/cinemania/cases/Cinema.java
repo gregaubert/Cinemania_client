@@ -49,6 +49,8 @@ public class Cinema extends BuyableCell implements Profitable  {
 	@Override
 	public void upgrade() {
 		assert mPurchasedRooms < AllConstants.MAX_ROOMS;
+		assert getOwner() != null;
+		getOwner().looseMoney(AllConstants.PRICE_ROOM);
 		mRooms[mPurchasedRooms++] = new Room();
 	}
 
@@ -86,41 +88,9 @@ public class Cinema extends BuyableCell implements Profitable  {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		// TODO: si cette case nous appartient, sinon ne rien faire
-		
-		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
-		dialogBuilder.setCancelable(true);
-		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
-		
-		TextView nbFilmPruiduits = (TextView)view.findViewById(R.id.txtnbFilms);
-		TextView benefices = (TextView)view.findViewById(R.id.txtBenefices);
-		TextView level = (TextView)view.findViewById(R.id.txtLevelActuel);
-		Button btnLevel = (Button)view.findViewById(R.id.btnLevel);
-		
-		nbFilmPruiduits.setText("21");
-		benefices.setText("5432");
-		level.setText(getLevel());
-		btnLevel.setEnabled(updateAvailable());
-
-		dialogBuilder.setView(view);
-		
-		
-		dialogBuilder.setPositiveButton("Fermer", new android.content.DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-
-		});
-		 
-		Base.getSharedInstance().runOnUiThread(new Runnable() {
-			
-			@Override
-			public void run() {
-				dialogBuilder.create().show();
-			}
-		});
+		if(GameContext.getSharedInstance().getPlayer().equals(this.getOwner())){
+			ownerOnCell();
+		}
 	}
 
 	@Override
@@ -179,8 +149,50 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	@Override
 	public void ownerOnCell() {
-		// TODO Auto-generated method stub
+			
+		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+		dialogBuilder.setCancelable(true);
+		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
+		dialogBuilder.setView(view);
+		TextView nbFilmPruiduits = (TextView)view.findViewById(R.id.txtnbFilms);
+		TextView benefices = (TextView)view.findViewById(R.id.txtBenefices);
+		TextView level = (TextView)view.findViewById(R.id.txtLevelActuel);
+		TextView levelPrice = (TextView)view.findViewById(R.id.txtLevelPrice);
 		
+		nbFilmPruiduits.setText("21");
+		benefices.setText("5432");
+		level.setText(Integer.toString(getLevel()));
+		levelPrice.setText(Integer.toString(AllConstants.PRICE_ROOM));
+		
+		if(updateAvailable()){
+			dialogBuilder.setPositiveButton(R.string.btn_level, new android.content.DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Cinema.this.upgrade();
+					dialog.dismiss();
+				}
+			});
+		}
+		else{
+			view.findViewById(R.id.tableRowNextLevel).setVisibility(View.INVISIBLE);
+		}
+		
+		dialogBuilder.setNegativeButton(R.string.btn_close, new android.content.DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		 
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				dialogBuilder.create().show();
+			}
+		});
 	}
 	
 	@Override

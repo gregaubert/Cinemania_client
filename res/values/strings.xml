@@ -52,10 +52,11 @@
 	<string name="txt_nbfilm">Nombre de films produits :</string>
 	<string name="txt_benefices">Bénéfices des cinémas :</string>
 	<string name="title_chance">Chance</string>
-	<string name="txt_benefices">Dernier bénéfice\nencaissé des cinémas :</string>
-	<string name="txt_level">Passer au niveau suivant</string>
+	<string name="txt_benefices">Dernier bénéfices :</string>
+	<string name="btn_level">Acheter un niveau</string>
 	<string name="txt_levelActuel">Niveau actuel :</string>
 	<string name="txt_prix">Prix :</string>
 	<string name="txt_entretien">Coût d\'entretien :</string>
 	<string name="txt_nombre_de_salles">Nombre de salles :</string>
+	<string name="txt_nextlevel">Prix prochain niveau :</string>
 </resources>
