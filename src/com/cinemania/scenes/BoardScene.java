@@ -13,6 +13,7 @@ import com.cinemania.activity.Base;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
+import com.cinemania.network.api.API;
 import com.cinemania.resources.ResourcesManager;
 
 
@@ -105,7 +106,7 @@ public class BoardScene extends Scene implements Loader {
 		
     	int move = shootOneDice() + shootOneDice();
     	
-    	Log.i("GAME","Déplacement du joueur  de " + move);
+    	Log.i("GAME","Dï¿½placement du joueur  de " + move);
     	Player p = mGameContext.getPlayer();
     	p.Move(move);
     	

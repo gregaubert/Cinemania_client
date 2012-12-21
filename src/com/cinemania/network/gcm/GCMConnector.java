@@ -9,6 +9,9 @@ import android.util.Log;
  
 import com.cinemania.activity.Base;
 import com.google.android.gcm.GCMRegistrar;
+import com.cinemania.network.api.API;
+import com.cinemania.network.api.API.GameDataResult;
+import com.cinemania.network.api.API.GameIdentifierResult;
 import com.cinemania.network.gcm.CommonUtilities;
  
 public class GCMConnector {
@@ -43,6 +46,13 @@ public class GCMConnector {
          
         // needid if you want messages to be delivered to this app!
         GCMRegistrar.setRegisteredOnServer(mActivity, true);
+        
+        /*boolean x = API.registerDevice(regId);
+        Log.d("API", Boolean.toString(x));
+        GameIdentifierResult r1 = API.newGame();
+        GameDataResult r2 = API.gameData(r1.getGameIdentifier());
+        API.gamePassTurn(r1.getGameIdentifier(), r2.getGameData());
+        */
                 
         // Try to register again, but not in the UI thread.
         // It's also necessary to cancel the thread onDestroy(),
