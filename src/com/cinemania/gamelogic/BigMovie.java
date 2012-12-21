@@ -18,10 +18,6 @@ public class BigMovie extends Movie {
 
 	private int mMaxMarketing;
 
-	//TODO un big movie peut etre un author movie ? wtf ?
-	/**
-	 * if producer is null then the movie is a author's film
-	 */
 	private Player mProducer;
 
 	public BigMovie(String title, int logistic, int actors, int initPrice, int year, int maxMarketing) {
@@ -41,7 +37,7 @@ public class BigMovie extends Movie {
 		mYear = movie.getInt("year");
 		mMarketing = movie.getInt("marketing");
 		mMaxMarketing = movie.getInt("maxmarketing");
-		//TODO Rajouter le producteur si vraiment y en a besoin
+		//FIXME Rajouter le producteur
 	}
 
 	public void produceThisMovie(Player player, int budgetMarketing) {
@@ -82,7 +78,7 @@ public class BigMovie extends Movie {
 		movie.put("year", mYear);
 		movie.put("marketing", mMarketing);
 		movie.put("maxmarketing", mMaxMarketing);
-		//TODO Est ce qu'on doit vraiment avoir le joueur a qui appartient le film ?
+		//FIXME Ajouter une référence au joueur qui a créer le film
 		//movie.put("producer", mProducer.getId());
 		return movie;
 	}

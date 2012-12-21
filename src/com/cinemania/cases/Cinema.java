@@ -11,20 +11,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.constants.AllConstants;
+import com.cinemania.gamelogic.Movie;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Profitable;
 import com.cinemania.gamelogic.Room;
-import com.cinemania.activity.R;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
-import com.cinemania.gamelogic.Movie;
 
 public class Cinema extends BuyableCell implements Profitable  {
 	
@@ -52,6 +49,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 		assert getOwner() != null;
 		getOwner().looseMoney(AllConstants.PRICE_ROOM);
 		mRooms[mPurchasedRooms++] = new Room();
+		addLevel(getLevel());
 	}
 
 	@Override
@@ -135,13 +133,13 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	@Override
 	public void strangerOnCell(Player player) {
-		Player proprietaire = getOwner();
-		ArrayList<Movie> movies = proprietaire.getMovies(); // TODO recuperer movies du player
+		Player owner = getOwner();
+		ArrayList<Movie> movies = owner.getMovies();
 		int montant = 0;
 		for(Movie m : movies){
 			 montant += m.sellingPrice();
 		}
-		montant /= proprietaire.getNbCinema();
+		montant /= owner.getNbCinema();
 		
 		player.payOpponent(getOwner(), montant);
 		showPayDialog(montant, R.drawable.ic_cinema, R.string.title_cinema);
@@ -159,8 +157,8 @@ public class Cinema extends BuyableCell implements Profitable  {
 		TextView level = (TextView)view.findViewById(R.id.txtLevelActuel);
 		TextView levelPrice = (TextView)view.findViewById(R.id.txtLevelPrice);
 		
-		nbFilmPruiduits.setText("21");
-		benefices.setText("5432");
+		nbFilmPruiduits.setText(Integer.toString(getOwner().getMovies().size()));
+		benefices.setText(Integer.toString(getOwner().getLastProfit()));
 		level.setText(Integer.toString(getLevel()));
 		levelPrice.setText(Integer.toString(AllConstants.PRICE_ROOM));
 		

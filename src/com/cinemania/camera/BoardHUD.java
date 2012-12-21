@@ -83,8 +83,7 @@ public class BoardHUD extends HUD implements Loader {
 		setMoney(mGameContext.getPlayer().getAmount());
 		setActors(mGameContext.getPlayer().getActors());
 		setLogistics(mGameContext.getPlayer().getLogistic());
-		//TODO r�cup�rer le nombre de script du joueur
-		setScripts(0);
+		setScripts(mGameContext.getPlayer().getScriptCount());
 		setCurrentPlayer(mGameContext.getPlayer());
 		
 		Sprite moneySprite =  new Sprite(200, 5, 32, 32, mResourcesManager.mMoneyLogo, mActivity.getVertexBufferObjectManager());
@@ -92,7 +91,7 @@ public class BoardHUD extends HUD implements Loader {
 		Sprite logisticsSprite = new Sprite(400, 5, 32, 32, mResourcesManager.mLogisticsLogo, mActivity.getVertexBufferObjectManager());
 		Sprite scriptsSprite = new Sprite(500, 5, 32, 32, mResourcesManager.mScriptsLogo, mActivity.getVertexBufferObjectManager());
 		
-		/*TODO V�rifier emplacement */
+		/*TODO Verifier emplacement */
 		float cameraHeight = ((ZoomCamera)mActivity.getCamera()).getHeight();
 		float cameraWidth = ((ZoomCamera)mActivity.getCamera()).getWidth();
 		

@@ -4,6 +4,7 @@ import static com.cinemania.constants.AllConstants.OFFSET;
 import static com.cinemania.constants.AllConstants.PLAYER_COLOR;
 import static com.cinemania.constants.AllConstants.PLAYER_COLOR_ANDROID;
 
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 
 import org.andengine.entity.IEntity;
@@ -55,10 +56,12 @@ public class Player implements JSonator{
 	private int mLastTurn;
 	
 	private int mLastProfit;
+	private int mLastActors;
+	private int mLastLogistics;
 	
 	private GameContext mGameContext;
 	
-	public Player(long identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, HeadQuarters headQuarters, Cell currentPosition) {
+	public Player(long identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, int lastActors, int lastLogistics, HeadQuarters headQuarters, Cell currentPosition) {
 		mIdentifier = identifier;
 		mOrder = order;
 		mName = name;
@@ -70,6 +73,8 @@ public class Player implements JSonator{
 		mLogistics = logistics;
 		mLastTurn = lastTurn;
 		mLastProfit = lastProfit;
+		mLastActors = lastActors;
+		mLastLogistics = lastLogistics;
 		mHeadQuarters = headQuarters;
 		mCurrentPosition = currentPosition;
 		mView = new Sprite(mCurrentPosition.getX()+bordure, mCurrentPosition.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
@@ -88,6 +93,8 @@ public class Player implements JSonator{
 				player.getInt("logistics"),
 				player.getInt("lastTurn"),
 				player.getInt("lastProfit"),
+				player.getInt("lastActors"),
+				player.getInt("lastLogistics"),
 				headQuarters,
 				currentPosition);
 		
@@ -164,31 +171,30 @@ public class Player implements JSonator{
 		if(mGameContext.isCreator())
 			mGameContext.completeTurn();
 		
-		int lvlCinema = 0;
-		//Count the number of cinema.
+		int lvlCinema = 0,
+			profitMovies = 0,
+			profitActors = 0,
+			profitLogistic = 0;
+		
 		for(OwnableCell cell : mProperties)
 			if(cell instanceof Cinema)
-			{
-				lvlCinema += ((Cinema)cell).getLevel();
-				this.receiveMoney(((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
-			}
+				lvlCinema += cell.getLevel();
+				//this.receiveMoney(((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
 			else if(cell instanceof School)
-			{
-				this.receiveActors(((School)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
-			}
+				profitActors +=	((School)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			else if(cell instanceof LogisticFactory)
-			{
-				this.receiveLogistic(((LogisticFactory)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
-			}
+				profitLogistic += ((LogisticFactory)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 		
-		int nbMovie = 0;
-		
-		//TODO profit de tous les films * lvlCinema
-		this.receiveMoney(lvlCinema*nbMovie);
-		this.setLastTurn(mGameContext.getCurrentTurn());
+		for(Movie movie : getMovies())
+			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+		mLastProfit = lvlCinema * profitMovies;
+		receiveMoney(mLastProfit);
+		mLastActors = profitActors;
+		receiveActors(mLastActors);
+		mLastLogistics = profitLogistic;
+		receiveLogistic(mLastLogistics);
+		setLastTurn(mGameContext.getCurrentTurn());
 	}
-	
-	
 	
 	public void payOpponent(Player opponent, int amount){
 		looseMoney(amount);
@@ -221,8 +227,6 @@ public class Player implements JSonator{
 
 	public void setAmount(int amount) {
 		mMoney = amount;
-		//TODO ca marche pas ca, car quand player 1 donne de l'argent a player 2, player 2 vas aussi mettre a jour l'hud alors que c'est pas le sien.
-		// utiliser Gamecontext.getplayer();
 		if(GameContext.getSharedInstance().getPlayer().equals(this))
 			Base.getSharedInstance().getHUD().setMoney(getAmount());
 	}
@@ -233,6 +237,14 @@ public class Player implements JSonator{
 	
 	public int getLastProfit(){
 		return mLastProfit;
+	}
+	
+	public int getLastActors(){
+		return mLastActors;
+	}
+	
+	public int getLastLogistics(){
+		return mLastLogistics;
 	}
 
 	public void setLogistic(int logistic) {
@@ -365,6 +377,8 @@ public class Player implements JSonator{
 		player.put("logistics", getLogistic());
 		player.put("lastTurn", getLastTurn());
 		player.put("lastProfit", getLastProfit());
+		player.put("lastActors", getLastActors());
+		player.put("lastLogistics", getLastLogistics());
 		
 		JSONArray scripts = new JSONArray();
 		for(Script s : getScripts())

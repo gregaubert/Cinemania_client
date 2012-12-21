@@ -13,6 +13,7 @@ import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.debug.Debug;
 
+import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Script;
 
 import android.content.Context;
@@ -32,6 +33,7 @@ public class ResourcesManager {
 	public ITextureRegion mCaseLogistics;
 	public ITextureRegion mCaseLuck;
 	public ITextureRegion mCaseEmpty;
+	public ITextureRegion[] mCaseLevel = new ITextureRegion[AllConstants.LEVEL_MAX_BUILDING];
 	public ITextureRegion mBoardBackground;
 	public ITextureRegion mBoardCenter;
 	
@@ -146,6 +148,9 @@ public class ResourcesManager {
         mCaseLuck = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_luck.png");
         mCaseEmpty = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_empty1.png");
         mCaseHQ = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_hq.png");
+        mCaseLevel[0] = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "level1.png");
+        mCaseLevel[1] = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "level2.png");
+        mCaseLevel[2] = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "level3.png");
         
         BuildableBitmapTextureAtlas backgroundBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 1024);
         mBoardBackground = BitmapTextureAtlasTextureRegionFactory.createFromAsset(backgroundBitmapTextureAtlas, context, "background.png");

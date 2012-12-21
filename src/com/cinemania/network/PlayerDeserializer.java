@@ -9,7 +9,7 @@ import com.cinemania.cases.OwnableCell;
 import com.cinemania.gamelogic.Player;
 
 public class PlayerDeserializer {
-
+	// FIXME: Need to be discussed this shit, not used
 	public static Player deserialize(JSONObject jsonPlayer,Cell[] board,int order){
 		
 		try{
@@ -24,6 +24,8 @@ public class PlayerDeserializer {
 				jsonPlayer.getInt("logistics"),
 				jsonPlayer.getInt("lastTurn"),
 				jsonPlayer.getInt("lastProfit"),
+				jsonPlayer.getInt("lastActors"),
+				jsonPlayer.getInt("lastLogistics"),
 				(HeadQuarters)board[jsonPlayer.getInt("hq")],
 				board[jsonPlayer.getInt("position")]
 			);

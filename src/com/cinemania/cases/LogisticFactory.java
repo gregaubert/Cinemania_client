@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.cinemania.activity.R;
+import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
@@ -28,10 +29,18 @@ public class LogisticFactory extends Resource {
 	public int totalValue() {
 		return BASEVALUE_OF_LOGISTIC * getLevel() + nbExtensions() * PRICE_LOGISTIC_EXTENSION;
 	}
+	
+	@Override
+	public void upgrade() {
+		assert getLevel() < AllConstants.LEVEL_MAX_BUILDING;
+		assert getOwner() != null;
+		getOwner().looseMoney(AllConstants.PRICE_LOGISTIC_EXTENSION);
+		setLevel(getLevel()+1);
+	}
 
 	@Override
 	public int profit(int startTurn, int stopTurn){
-		return getLevel() + nbExtensions();
+		return (stopTurn-startTurn) * getLevel() + AllConstants.BASE_LOGISTIC_INCOME + nbExtensions();
 	}
 
 	private int nbExtensions() {
@@ -80,19 +89,19 @@ public class LogisticFactory extends Resource {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		// TODO Virer cette ligne
-		askToBuy(GameContext.getSharedInstance().getCurrentPlayer());
-		//TODO Verifier si c'est le owner et ouvrir la fenetre pour augmenter le niveau
+		if(GameContext.getSharedInstance().getPlayer().equals(this.getOwner())){
+			ownerOnCell();
+		}
 	}
 
 	@Override
 	public void askToBuy(Player player) {
-		showBuyDialog(player, R.drawable.ic_logistics, R.string.title_logistics, R.string.txt_logistique);
+		showBuyDialog(player, R.drawable.ic_logistics, R.string.title_logistics, R.string.txt_logistique, AllConstants.BASE_LOGISTIC_INCOME);
 	}
 
 	@Override
 	public void ownerOnCell() {
-		// TODO Proposer d'augmenter le niveau, comme quand le owner clique
-		
+		assert hasOwner();
+		showOwnerDialog(R.drawable.ic_logistics, R.string.title_logistics, getOwner().getLastLogistics(), AllConstants.PRICE_LOGISTIC_EXTENSION);
 	}
 }

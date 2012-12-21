@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import static com.cinemania.constants.AllConstants.*;
 
 import com.cinemania.activity.R;
+import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
@@ -33,8 +34,16 @@ public class School extends Resource {
 	}
 	
 	@Override
+	public void upgrade() {
+		assert getLevel() < AllConstants.LEVEL_MAX_BUILDING;
+		assert getOwner() != null;
+		getOwner().looseMoney(AllConstants.PRICE_SCHOOL_EXTENSION);
+		setLevel(getLevel()+1);
+	}
+	
+	@Override
 	public int profit(int startTurn, int stopTurn){
-		return getLevel() + nbExtensions();
+		return (stopTurn-startTurn) * getLevel() + AllConstants.BASE_SCHOOL_INCOME + nbExtensions();
 	}
 
 	private int nbExtensions() {
@@ -100,18 +109,19 @@ public class School extends Resource {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		// TODO Virer cette ligne
-		askToBuy(GameContext.getSharedInstance().getCurrentPlayer());
-		//TODO Verifier si c'est le owner et ouvrir la fenetre pour augmenter le niveau
+		if(GameContext.getSharedInstance().getPlayer().equals(this.getOwner())){
+			ownerOnCell();
+		}
 	}
 
 	@Override
 	public void askToBuy(Player player) {
-		showBuyDialog(player, R.drawable.ic_actors, R.string.title_actors, R.string.txt_acteurs);
+		showBuyDialog(player, R.drawable.ic_actors, R.string.title_actors, R.string.txt_acteurs, AllConstants.BASE_SCHOOL_INCOME);
 	}
 
 	@Override
 	public void ownerOnCell() {
-		// TODO Proposer d'augmenter le niveau, comme quand le owner clique
+		assert hasOwner();
+		showOwnerDialog(R.drawable.ic_actors, R.string.title_actors, getOwner().getLastActors(), AllConstants.PRICE_SCHOOL_EXTENSION);
 	}
 }

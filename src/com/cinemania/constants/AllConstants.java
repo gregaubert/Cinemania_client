@@ -28,7 +28,7 @@ public final class AllConstants {
 	/**
 	 * Game start constant
 	 */
-	public static final int DEFAULT_AMOUNT = 2000;
+	public static final int DEFAULT_AMOUNT = 10000;
 	public static final int DEFAULT_ACTORS = 0;
 	public static final int DEFAULT_LOGISTIC = 0;
 	public static final int DEFAULT_LEVEL = 1;
@@ -43,6 +43,8 @@ public final class AllConstants {
 	public static final int LOGISTIC_VALUE = 200;
 	public static final int ACTOR_VALUE = 300;
 	public static final double SELLINGPRICE_RATIO = 0.25;
+	public static final int BASE_SCHOOL_INCOME = 2;
+	public static final int BASE_LOGISTIC_INCOME = 3;
 	
 	/**
 	 * Costs by turn depending on the cell
@@ -76,8 +78,6 @@ public final class AllConstants {
 	public static final float BOARD_ZOOM_MIN = 0.5f;
 	public static final float BOARD_ZOOM_MAX = 2f;
 	public static int OFFSET = 10;
-
-
 
 	public static final Color  BOARD_CASE_COLOR = new Color(250/255f, 252/255f, 124/255f);
 	public static final Color[][] PLAYER_COLOR = { {new Color(136/255f, 30/255f, 30/255f), new Color(30/255f, 136/255f, 30/255f), new Color(30/255f, 30/255f, 136/255f), new Color(208/255f, 208/255f, 69/255f)},

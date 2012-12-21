@@ -4,6 +4,7 @@ import org.andengine.entity.Entity;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.entity.sprite.ButtonSprite.OnClickListener;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.color.Color;
 
@@ -11,6 +12,7 @@ import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.JSonator;
 import com.cinemania.gamelogic.Player;
+import com.cinemania.resources.ResourcesManager;
 
 public abstract class Cell implements JSonator, org.andengine.entity.sprite.ButtonSprite.OnClickListener{
 	
@@ -18,6 +20,7 @@ public abstract class Cell implements JSonator, org.andengine.entity.sprite.Butt
 	private Rectangle mView;
 	
 	private static final int LAYER_IMAGE = 0;
+	private static final int LAYER_LEVEL = 1;
 	
 	public Cell(ITextureRegion texture, float posX, float posY) {
 		mView = new Rectangle(posX, posY, texture.getWidth(), texture.getHeight(), Base.getSharedInstance().getVertexBufferObjectManager());
@@ -25,6 +28,7 @@ public abstract class Cell implements JSonator, org.andengine.entity.sprite.Butt
 		
 		mView.attachChild(new Entity());
 		mView.getChildByIndex(LAYER_IMAGE).attachChild(mImage);
+		mView.attachChild(new Entity());
 		
 		this.setColor(AllConstants.BOARD_CASE_COLOR);
 	}
@@ -57,6 +61,10 @@ public abstract class Cell implements JSonator, org.andengine.entity.sprite.Butt
 	
 	public void setColor(Color pColor){
 		mView.setColor(pColor);
+	}
+	
+	public void addLevel(int level){
+		mView.getChildByIndex(LAYER_LEVEL).attachChild(new Sprite(0, 0, ResourcesManager.getInstance().mCaseLevel[level-1], Base.getSharedInstance().getVertexBufferObjectManager()));
 	}
 	
 	public Rectangle getView(){
