@@ -173,7 +173,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 			});
 		}
 		else{
-			view.findViewById(R.id.tableRowNextLevel).setVisibility(View.INVISIBLE);
+			view.findViewById(R.id.tableRowNextLevel).setVisibility(View.GONE);
 		}
 		
 		dialogBuilder.setNegativeButton(R.string.btn_close, new android.content.DialogInterface.OnClickListener() {

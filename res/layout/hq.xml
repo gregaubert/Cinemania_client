@@ -54,14 +54,15 @@
             android:text="Prochaine production :"
             android:textSize="16sp"
             android:textStyle="bold" />
-
+
         <LinearLayout
             android:id="@+id/layoutScriptView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingBottom="10dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
