@@ -43,6 +43,10 @@ public class BigMovie extends Movie {
 	public void produceThisMovie(Player player, int budgetMarketing) {
 		mProducer = player;
 		mMarketing = budgetMarketing;
+		
+		mProducer.looseMoney(mInitPrice);
+		mProducer.looseLogistic(mLogistic);
+		mProducer.looseActors(mActors);
 
 		double rateMarketing = (1 + RATE_MARKETING / 2)
 				- (mMarketing / mMaxMarketing * RATE_MARKETING);

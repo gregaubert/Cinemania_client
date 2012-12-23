@@ -44,22 +44,23 @@ public class ScriptCell extends Cell {
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
-		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.script, null);
+		final View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.script, null);
 		dialogBuilder.setView(view);
 		
 		
-		TextView scriptTitle = (TextView) view.findViewById(R.id.scriptTitle);
-		TextView scriptSummary = (TextView) view.findViewById(R.id.scriptSummary);
-		TextView scriptYear = (TextView) view.findViewById(R.id.scriptYear);
-		TextView scriptPrice = (TextView) view.findViewById(R.id.scriptPrice);
-		TextView scriptRealisation = (TextView) view.findViewById(R.id.scriptRealisation);
+		final TextView scriptTitle = (TextView) view.findViewById(R.id.scriptTitle);
+		final TextView scriptSummary = (TextView) view.findViewById(R.id.scriptSummary);
+		final TextView scriptYear = (TextView) view.findViewById(R.id.scriptYear);
+		final TextView scriptPrice = (TextView) view.findViewById(R.id.scriptPrice);
+		final TextView scriptRealisation = (TextView) view.findViewById(R.id.scriptRealisation);
 		
 		scriptTitle.setText(script.getTitle());
 		scriptSummary.setText(script.getSummary());
 		scriptYear.setText(Integer.toString(script.getYear()));
 		scriptPrice.setText(Integer.toString(script.getPrice()));
 		scriptRealisation.setText(script.getActors() + (script.getActors() <= 1 ?" acteur, ":" acteurs, ") 
-				+ script.getLogistics() + (script.getLogistics() <= 1 ?" logistique":" logistiques"));
+				+ script.getLogistics() + (script.getLogistics() <= 1 ?" logistique":" logistiques et ")
+				+ script.getPriceProd() + ".-");
 		
 		dialogBuilder.setPositiveButton(R.string.btn_buy, new OnClickListener() {
 			

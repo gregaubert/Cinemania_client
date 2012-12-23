@@ -4,7 +4,6 @@ import static com.cinemania.constants.AllConstants.OFFSET;
 import static com.cinemania.constants.AllConstants.PLAYER_COLOR;
 import static com.cinemania.constants.AllConstants.PLAYER_COLOR_ANDROID;
 
-import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 
 import org.andengine.entity.IEntity;
@@ -355,7 +354,10 @@ public class Player implements JSonator{
 	}
 	
 	public boolean removeScript(Script script){
-		return mScripts.remove(script);
+		boolean result = mScripts.remove(script); 
+		if(GameContext.getSharedInstance().getPlayer().equals(this) && result)
+			Base.getSharedInstance().getHUD().setScripts(getScriptCount());
+		return result;
 	}
 
 	@Override

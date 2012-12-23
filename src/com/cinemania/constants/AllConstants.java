@@ -57,12 +57,14 @@ public final class AllConstants {
 	 * General cost
 	 */
 	public static final int COSTS_ON_HQ = 750;
-	public static final int COSTS_SCRIPT_MIN = 200;
-	public static final int COSTS_SCRIPT_MAX = 750;
+	public static final int COSTS_SCRIPT_MIN = 100;
+	public static final int COSTS_SCRIPT_MAX = 450;
 	public static final int COSTS_ACTOR_MIN = 0;
 	public static final int COSTS_ACTOR_MAX = 15;
 	public static final int COSTS_LOGISTIC_MIN = 1;
 	public static final int COSTS_LOGISTIC_MAX = 10;
+	public static final int COSTS_MOVIE_MIN = 100;
+	public static final int COSTS_MOVIE_MAX = 1200;
 	
 	/**
 	 * Board generation
