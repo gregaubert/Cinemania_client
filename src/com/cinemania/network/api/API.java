@@ -129,11 +129,11 @@ public final class API {
 		(joins the device to the game)
 		return: {"playerid":1,"success":1}
 	 */
-	public static PlayerResult joinGame(int game) {
+	public static PlayerResult joinGame(long gameIdentifier) {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("device", Utilities.DEVICE_ID);
-		params.put("game", Long.toString(game));
+		params.put("game", Long.toString(gameIdentifier));
 		
 		PlayerResult result = new PlayerResult();
 		
