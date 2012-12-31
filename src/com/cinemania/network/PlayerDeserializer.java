@@ -16,7 +16,7 @@ public class PlayerDeserializer {
 			assert board[jsonPlayer.getInt("hq")] instanceof HeadQuarters;
 			
 			Player player = new Player(
-				jsonPlayer.getLong("id"),
+				jsonPlayer.getString("id"),
 				order,
 				jsonPlayer.getString("name"),
 				jsonPlayer.getInt("money"),

@@ -43,6 +43,8 @@ public class GCMConnector {
         } 
          
         Log.d("DEBUG", "RegID: " + regId);
+        
+        API.registerDevice(regId);
          
         // needid if you want messages to be delivered to this app!
         GCMRegistrar.setRegisteredOnServer(mActivity, true);
@@ -76,6 +78,7 @@ public class GCMConnector {
  
     }
      
+    // TODO: This one is never referenced
     public void destroy() {
         if (mRegisterTask != null) {
             mRegisterTask.cancel(true);

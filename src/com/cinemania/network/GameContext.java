@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
+import com.cinemania.network.api.API;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.activity.Base;
 import com.cinemania.cases.Cell;
@@ -19,9 +20,6 @@ import com.cinemania.cases.ScriptCell;
 import com.cinemania.constants.AllConstants;
 
 public final class GameContext {
-	
-	// FIXME: These data have to be saved localy
-	private static long LOCAL_IDENTIFIER = 1001;
 	
 	private Player[] mPlayers;
 	//Nous-memes
@@ -122,12 +120,12 @@ public final class GameContext {
 			this.mPlayers[i] = player;
 
 			// Define local user
-			if (player.getId() == LOCAL_IDENTIFIER) {
+			if (player.getId() == Utilities.DEVICE_ID) {
 				this.mPlayer = player;
 			}
 			
 			// Define who is playing
-			if (player.getId() == jsonGame.getLong("player")) {
+			if (player.getId() == jsonGame.getString("player")) {
 				this.mCurrentPlayer = player;
 			}
 		}
@@ -168,14 +166,24 @@ public final class GameContext {
 	/**
 	 * On passe le tour, on envoit les infos au serveur.
 	 */
-	public void nextTurn(){
+	public void nextTurn() {
+		
+		// Check if the player could perform this action
+		// These checks are both done on the client and the server
+		if (mCurrentPlayer == mPlayer) {
+			API.gamePassTurn(mGameIdentifier, serialize());
+		}
+		
 		
 		//Si on passe le tour alors que nous ne somme pas le joueur en cours.
+		/*
 		if(mCurrentPlayer != mPlayer)
 			throw new IllegalStateException("Vous ne pouvez passer votre tour que lorsque c'est a vous.");
 		this.nextPlayer();
 		String res = this.serialize();
 		//TODO envoi des datas.
+		 * 
+		 */
 	}
 	
 	public void completeTurn(){
@@ -207,8 +215,8 @@ public final class GameContext {
 	}
 	
 	
-	public long getLocalIdentifier() {
-		return GameContext.LOCAL_IDENTIFIER;
+	public String getLocalIdentifier() {
+		return Utilities.DEVICE_ID;
 	}
 	
 	public boolean isCreator(){
@@ -372,6 +380,7 @@ public final class GameContext {
 		}
 		return null;
 	}
+	
 	private static int next(int[] identifiers, int offset) {
 		for (int i = offset; i < identifiers.length; i++) {
 			if (identifiers[i] == HeadQuarters.TYPE) {
@@ -407,5 +416,9 @@ public final class GameContext {
 		int offset = findCaseIndex(source);
 		offset = (offset + 1) % mCases.length;
 		return mCases[offset];
+	}
+	
+	public void setGameIdentifier(long gameIdentifier) {
+		mGameIdentifier = gameIdentifier;
 	}
 }

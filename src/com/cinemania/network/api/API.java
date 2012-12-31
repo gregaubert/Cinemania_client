@@ -14,7 +14,7 @@ import com.cinemania.network.Utilities;
 
 public final class API {
 	
-	private static final String SERVER_LOCATION = "http://157.26.110.187/cinemania/index.php";
+	private static final String SERVER_LOCATION = "http://192.168.1.39/cinemania/index.php";
 
 	private static final URL REGISTER_DEVICE_URL = createURL("/devices/register");
 	private static final URL UNREGISTER_DEVICE_URL = createURL("/devices/unregister");
