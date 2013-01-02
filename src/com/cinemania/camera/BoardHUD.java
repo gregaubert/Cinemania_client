@@ -91,11 +91,7 @@ public class BoardHUD extends HUD implements Loader {
 		Sprite logisticsSprite = new Sprite(400, 5, 32, 32, mResourcesManager.mLogisticsLogo, mActivity.getVertexBufferObjectManager());
 		Sprite scriptsSprite = new Sprite(500, 5, 32, 32, mResourcesManager.mScriptsLogo, mActivity.getVertexBufferObjectManager());
 		
-		/*TODO Verifier emplacement */
-		float cameraHeight = ((ZoomCamera)mActivity.getCamera()).getHeight();
-		float cameraWidth = ((ZoomCamera)mActivity.getCamera()).getWidth();
-		
-		mDiceSprite = new ButtonSprite(10, cameraHeight - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
+		mDiceSprite = new ButtonSprite(10, Base.CAMERA_HEIGHT - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
 			@Override
 		    public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
@@ -112,7 +108,7 @@ public class BoardHUD extends HUD implements Loader {
 		    }
 		};
 		
-		mNextSprite = new ButtonSprite(10, cameraHeight - 74, mResourcesManager.mNextTurn, mActivity.getVertexBufferObjectManager()){
+		mNextSprite = new ButtonSprite(10, Base.CAMERA_HEIGHT - 74, mResourcesManager.mNextTurn, mActivity.getVertexBufferObjectManager()){
 			@Override
 		    public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
@@ -132,7 +128,7 @@ public class BoardHUD extends HUD implements Loader {
 		};
 		mNextSprite.setVisible(false);
 		
-		mWaiting = new Sprite((cameraWidth - mResourcesManager.mWaiting.getWidth())/2, (cameraHeight - mResourcesManager.mWaiting.getHeight())/2, mResourcesManager.mWaiting, mActivity.getVertexBufferObjectManager());
+		mWaiting = new Sprite((Base.CAMERA_WIDTH - mResourcesManager.mWaiting.getWidth())/2, (Base.CAMERA_HEIGHT - mResourcesManager.mWaiting.getHeight())/2, mResourcesManager.mWaiting, mActivity.getVertexBufferObjectManager());
 		mWaiting.setVisible(false);
 		
 		registerTouchArea(mDiceSprite);
