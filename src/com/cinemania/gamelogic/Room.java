@@ -3,7 +3,8 @@ package com.cinemania.gamelogic;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cinemania.cases.Cinema;
+import com.cinemania.cells.Cinema;
+
 import static com.cinemania.constants.AllConstants.*;
 
 public class Room implements Profitable, JSonator {

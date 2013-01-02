@@ -8,14 +8,14 @@ import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.activity.Base;
-import com.cinemania.cases.Cell;
-import com.cinemania.cases.CellGenerator;
-import com.cinemania.cases.Cinema;
-import com.cinemania.cases.HeadQuarters;
-import com.cinemania.cases.LogisticFactory;
-import com.cinemania.cases.Chance;
-import com.cinemania.cases.School;
-import com.cinemania.cases.ScriptCell;
+import com.cinemania.cells.Cell;
+import com.cinemania.cells.CellGenerator;
+import com.cinemania.cells.Chance;
+import com.cinemania.cells.Cinema;
+import com.cinemania.cells.HeadQuarters;
+import com.cinemania.cells.LogisticFactory;
+import com.cinemania.cells.School;
+import com.cinemania.cells.ScriptCell;
 import com.cinemania.constants.AllConstants;
 
 public final class GameContext {

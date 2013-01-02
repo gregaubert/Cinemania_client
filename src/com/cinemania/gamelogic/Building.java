@@ -1,6 +1,7 @@
 package com.cinemania.gamelogic;
 
-import com.cinemania.cases.Cell;
+import com.cinemania.cells.Cell;
+
 import static com.cinemania.constants.AllConstants.*;
 
 public abstract class Building {

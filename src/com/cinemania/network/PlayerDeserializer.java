@@ -3,9 +3,9 @@ package com.cinemania.network;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.cinemania.cases.Cell;
-import com.cinemania.cases.HeadQuarters;
-import com.cinemania.cases.OwnableCell;
+import com.cinemania.cells.Cell;
+import com.cinemania.cells.HeadQuarters;
+import com.cinemania.cells.OwnableCell;
 import com.cinemania.gamelogic.Player;
 
 public class PlayerDeserializer {

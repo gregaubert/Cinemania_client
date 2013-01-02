@@ -22,12 +22,12 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
-import com.cinemania.cases.Cell;
-import com.cinemania.cases.Cinema;
-import com.cinemania.cases.HeadQuarters;
-import com.cinemania.cases.LogisticFactory;
-import com.cinemania.cases.OwnableCell;
-import com.cinemania.cases.School;
+import com.cinemania.cells.Cell;
+import com.cinemania.cells.Cinema;
+import com.cinemania.cells.HeadQuarters;
+import com.cinemania.cells.LogisticFactory;
+import com.cinemania.cells.OwnableCell;
+import com.cinemania.cells.School;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 

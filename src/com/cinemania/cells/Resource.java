@@ -1,4 +1,4 @@
-package com.cinemania.cases;
+package com.cinemania.cells;
 
 import org.andengine.opengl.texture.region.ITextureRegion;
 

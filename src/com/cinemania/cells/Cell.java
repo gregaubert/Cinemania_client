@@ -1,4 +1,4 @@
-package com.cinemania.cases;
+package com.cinemania.cells;
 
 import org.andengine.entity.Entity;
 import org.andengine.entity.primitive.Rectangle;
