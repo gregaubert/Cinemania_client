@@ -21,7 +21,7 @@ import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.Utilities;
-import com.cinemania.network.gcm.CommonUtilities;
+import com.cinemania.network.gcm.GCMUtilities;
 import com.cinemania.network.gcm.ServerUtilities;
  
 /**
@@ -79,12 +79,12 @@ public class GCMIntentService extends GCMBaseIntentService {
     }
      
     private String getDataFromInputIntent(Intent intent){
-        return intent.getExtras().getString(CommonUtilities.MESSAGE);
+        return intent.getExtras().getString(GCMUtilities.MESSAGE);
     }
      
     private void passIntent(Context context, Intent intent) {
-        Intent passIntent = new Intent(CommonUtilities.DISPLAY_MESSAGE_ACTION);
-        passIntent.putExtra(CommonUtilities.MESSAGE, getDataFromInputIntent(intent));
+        Intent passIntent = new Intent(GCMUtilities.DISPLAY_MESSAGE_ACTION);
+        passIntent.putExtra(GCMUtilities.MESSAGE, getDataFromInputIntent(intent));
         context.sendBroadcast(passIntent);
     }
 }

@@ -22,7 +22,7 @@ import com.cinemania.activity.Base;
  * Helper class providing methods and constants common to other classes in the
  * app.
  */
-public final class CommonUtilities {
+public final class GCMUtilities {
 
     /**
      * Tag used on log messages.

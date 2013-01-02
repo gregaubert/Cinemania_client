@@ -13,7 +13,7 @@ import com.cinemania.network.Utilities;
 import com.cinemania.network.api.API;
 import com.cinemania.network.api.API.GameDataResult;
 import com.cinemania.network.api.API.GameIdentifierResult;
-import com.cinemania.network.gcm.CommonUtilities;
+import com.cinemania.network.gcm.GCMUtilities;
  
 public class GCMConnector {
          
@@ -21,6 +21,7 @@ public class GCMConnector {
      
     private static Base mActivity = Base.getSharedInstance();
      
+    private static String regId;
      
     public static void connect(){
          
@@ -31,13 +32,13 @@ public class GCMConnector {
         // while developing the app, then uncomment it when it's ready.
         GCMRegistrar.checkManifest(mActivity);
          
-        mActivity.registerReceiver(mHandleMessageReceiver, new IntentFilter(CommonUtilities.DISPLAY_MESSAGE_ACTION));
+        mActivity.registerReceiver(mHandleMessageReceiver, new IntentFilter(GCMUtilities.DISPLAY_MESSAGE_ACTION));
          
          
-        String regId = GCMRegistrar.getRegistrationId(mActivity);
+        regId = GCMRegistrar.getRegistrationId(mActivity);
            
         if (regId.equals("")) {
-            Log.v(CommonUtilities.TAG, "Registering for a new ID");
+            Log.v(GCMUtilities.TAG, "Registering for a new ID");
              
             GCMRegistrar.register(mActivity, Utilities.SENDER_ID);
             regId = GCMRegistrar.getRegistrationId(mActivity);
@@ -53,12 +54,12 @@ public class GCMConnector {
         GameIdentifierResult r1 = API.newGame();
         GameDataResult r2 = API.gameData(r1.getGameIdentifier());
         API.gamePassTurn(r1.getGameIdentifier(), r2.getGameData());
-        */
+        
                 
         // Try to register again, but not in the UI thread.
         // It's also necessary to cancel the thread onDestroy(),
         // hence the use of AsyncTask instead of a raw thread.
-        /*final Context context = mActivity;
+        final Context context = mActivity;
         mRegisterTask = new AsyncTask<Void, Void, Void>() {
  
             @Override
@@ -73,7 +74,7 @@ public class GCMConnector {
             }
  
         };
-        mRegisterTask.execute(null, null, null);*/   
+        mRegisterTask.execute(null, null, null);*/
  
     }
      
@@ -95,7 +96,7 @@ public class GCMConnector {
     private static BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context context, Intent intent) {
-            String newMessage = intent.getExtras().getString(CommonUtilities.MESSAGE);
+            String newMessage = intent.getExtras().getString(GCMUtilities.MESSAGE);
             Log.d("DEBUG", "Message received! " + newMessage);
         }
     };
