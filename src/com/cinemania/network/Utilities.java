@@ -24,7 +24,7 @@ public final class Utilities {
 	/**
      * Base URL of the Demo Server (such as http://my_host:8080/gcm-demo)
      */
-    public static final String SERVER_URL = "http://jorgealbaladejo.com/cinemania";
+    public static final String SERVER_URL = "http://jorgealbaladejo.com/cinemania/app/index.php";
 
     /**
      * Google API project id registered to use GCM.
