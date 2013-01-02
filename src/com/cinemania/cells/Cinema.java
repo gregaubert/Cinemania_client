@@ -152,12 +152,12 @@ public class Cinema extends BuyableCell implements Profitable  {
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
 		dialogBuilder.setView(view);
-		TextView nbFilmPruiduits = (TextView)view.findViewById(R.id.txtnbFilms);
+		TextView nbFilmProduced = (TextView)view.findViewById(R.id.txtnbFilms);
 		TextView benefices = (TextView)view.findViewById(R.id.txtBenefices);
 		TextView level = (TextView)view.findViewById(R.id.txtLevelActuel);
 		TextView levelPrice = (TextView)view.findViewById(R.id.txtLevelPrice);
 		
-		nbFilmPruiduits.setText(Integer.toString(getOwner().getMovies().size()));
+		nbFilmProduced.setText(Integer.toString(getOwner().getMovies().size()));
 		benefices.setText(Integer.toString(getOwner().getLastProfit()));
 		level.setText(Integer.toString(getLevel()));
 		levelPrice.setText(Integer.toString(AllConstants.PRICE_ROOM));
