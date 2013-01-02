@@ -9,6 +9,7 @@ import android.util.Log;
  
 import com.cinemania.activity.Base;
 import com.google.android.gcm.GCMRegistrar;
+import com.cinemania.network.Utilities;
 import com.cinemania.network.api.API;
 import com.cinemania.network.api.API.GameDataResult;
 import com.cinemania.network.api.API.GameIdentifierResult;
@@ -38,7 +39,7 @@ public class GCMConnector {
         if (regId.equals("")) {
             Log.v(CommonUtilities.TAG, "Registering for a new ID");
              
-            GCMRegistrar.register(mActivity, CommonUtilities.SENDER_ID);
+            GCMRegistrar.register(mActivity, Utilities.SENDER_ID);
             regId = GCMRegistrar.getRegistrationId(mActivity);
         } 
          

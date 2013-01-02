@@ -25,16 +25,6 @@ import com.cinemania.activity.Base;
 public final class CommonUtilities {
 
     /**
-     * Base URL of the Demo Server (such as http://my_host:8080/gcm-demo)
-     */
-    public static final String SERVER_URL = "http://localhost/projects/Cinemania_server/message.php";
-
-    /**
-     * Google API project id registered to use GCM.
-     */
-    public static final String SENDER_ID = "253409584595";
-
-    /**
      * Tag used on log messages.
      */
     public static final String TAG = "GCMDemo";
@@ -48,8 +38,5 @@ public final class CommonUtilities {
      * Intent's extra that contains the message to be displayed.
      */
     public static final String MESSAGE = "message";
-    
-    
-    public static final String DEVICE_ID = Secure.getString(Base.getSharedInstance().getBaseContext().getContentResolver(), Secure.ANDROID_ID);
     
 }

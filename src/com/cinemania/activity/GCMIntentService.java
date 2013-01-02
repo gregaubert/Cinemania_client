@@ -15,13 +15,12 @@
  */
 package com.cinemania.activity;
  
-import static com.cinemania.network.gcm.CommonUtilities.SENDER_ID;
- 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
+import com.cinemania.network.Utilities;
 import com.cinemania.network.gcm.CommonUtilities;
 import com.cinemania.network.gcm.ServerUtilities;
  
@@ -34,7 +33,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     private static final String TAG = "GCMIntentService";
  
     public GCMIntentService() {
-        super(SENDER_ID);
+        super(Utilities.SENDER_ID);
     }
  
     @Override
