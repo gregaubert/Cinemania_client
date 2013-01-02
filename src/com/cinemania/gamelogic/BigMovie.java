@@ -82,8 +82,7 @@ public class BigMovie extends Movie {
 		movie.put("year", mYear);
 		movie.put("marketing", mMarketing);
 		movie.put("maxmarketing", mMaxMarketing);
-		//FIXME Ajouter une référence au joueur qui a créer le film
-		//movie.put("producer", mProducer.getId());
+		movie.put("producer", mProducer.getId());
 		return movie;
 	}
 
