@@ -55,15 +55,15 @@ public abstract class Cell implements JSonator, org.andengine.entity.sprite.Butt
 		return this.mView.getY();
 	}
 	
-	public void setScale(float pScale){
+	protected void setScale(float pScale){
 		mView.setScale(pScale);
 	}
 	
-	public void setColor(Color pColor){
+	protected void setColor(Color pColor){
 		mView.setColor(pColor);
 	}
 	
-	public void addLevel(int level){
+	protected void addLevel(int level){
 		mView.getChildByIndex(LAYER_LEVEL).attachChild(new Sprite(0, 0, ResourcesManager.getInstance().mCaseLevel[level-1], Base.getSharedInstance().getVertexBufferObjectManager()));
 	}
 	
