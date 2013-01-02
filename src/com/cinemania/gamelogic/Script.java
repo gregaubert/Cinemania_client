@@ -14,6 +14,7 @@ import android.util.SparseArray;
 import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
 import com.cinemania.constants.AllConstants;
+import com.cinemania.gamelogic.interfaces.JSonator;
 import com.cinemania.network.GameContext;
 
 public class Script implements JSonator{

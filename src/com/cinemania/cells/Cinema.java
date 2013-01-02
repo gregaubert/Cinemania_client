@@ -18,8 +18,8 @@ import com.cinemania.activity.R;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Movie;
 import com.cinemania.gamelogic.Player;
-import com.cinemania.gamelogic.Profitable;
 import com.cinemania.gamelogic.Room;
+import com.cinemania.gamelogic.interfaces.Profitable;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 

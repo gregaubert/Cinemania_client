@@ -28,6 +28,7 @@ import com.cinemania.cells.HeadQuarters;
 import com.cinemania.cells.LogisticFactory;
 import com.cinemania.cells.OwnableCell;
 import com.cinemania.cells.School;
+import com.cinemania.gamelogic.interfaces.JSonator;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 

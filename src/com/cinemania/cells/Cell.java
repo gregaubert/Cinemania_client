@@ -10,8 +10,8 @@ import org.andengine.util.color.Color;
 
 import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
-import com.cinemania.gamelogic.JSonator;
 import com.cinemania.gamelogic.Player;
+import com.cinemania.gamelogic.interfaces.JSonator;
 import com.cinemania.resources.ResourcesManager;
 
 public abstract class Cell implements JSonator, org.andengine.entity.sprite.ButtonSprite.OnClickListener{

@@ -4,6 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.cinemania.cells.Cinema;
+import com.cinemania.gamelogic.interfaces.JSonator;
+import com.cinemania.gamelogic.interfaces.Profitable;
 
 import static com.cinemania.constants.AllConstants.*;
 

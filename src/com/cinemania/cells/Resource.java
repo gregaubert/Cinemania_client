@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cinemania.gamelogic.Player;
-import com.cinemania.gamelogic.Profitable;
+import com.cinemania.gamelogic.interfaces.Profitable;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
