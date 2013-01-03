@@ -1,19 +1,19 @@
 package com.cinemania.scenes;
 
-import org.andengine.engine.camera.ZoomCamera;
-import static com.cinemania.constants.AllConstants.*;
+import static com.cinemania.constants.AllConstants.BOARD_SIZE;
 
+import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.entity.Entity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
+
 import android.util.Log;
 
 import com.cinemania.activity.Base;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
-import com.cinemania.network.api.API;
 import com.cinemania.resources.ResourcesManager;
 
 

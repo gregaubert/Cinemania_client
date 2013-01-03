@@ -1,13 +1,12 @@
 package com.cinemania.gamelogic;
 
+import static com.cinemania.constants.AllConstants.COSTS_PER_ROOM;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cinemania.cells.Cinema;
 import com.cinemania.gamelogic.interfaces.JSonator;
 import com.cinemania.gamelogic.interfaces.Profitable;
-
-import static com.cinemania.constants.AllConstants.*;
 
 public class Room implements Profitable, JSonator {
 

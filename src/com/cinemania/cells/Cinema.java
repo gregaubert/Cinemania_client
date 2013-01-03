@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
 import android.widget.TextView;
@@ -93,6 +94,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	@Override
 	public void askToBuy(final Player player) {
+		ResourcesManager.getInstance().mSndProjector.play();
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.buycinema, null);
@@ -111,13 +113,25 @@ public class Cinema extends BuyableCell implements Profitable  {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Cinema.this.buy(player);
+				ResourcesManager.getInstance().mSndProjector.stop();
+				ResourcesManager.getInstance().mSndCashMachine.stop();
+				ResourcesManager.getInstance().mSndCashMachine.play();
 				dialog.dismiss();
 			}
 		});
+		
 		dialogBuilder.setNegativeButton(R.string.btn_close, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
+				dialog.cancel();
+			}
+		});
+		
+		dialogBuilder.setOnCancelListener(new OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				ResourcesManager.getInstance().mSndProjector.stop();
 			}
 		});
 		Base.getSharedInstance().runOnUiThread(new Runnable() {
@@ -140,14 +154,16 @@ public class Cinema extends BuyableCell implements Profitable  {
 			 montant += m.sellingPrice();
 		}
 		montant /= owner.getNbCinema();
-		
+			
 		player.payOpponent(getOwner(), montant);
 		showPayDialog(montant, R.drawable.ic_cinema, R.string.title_cinema);
 	}
 
 	@Override
 	public void ownerOnCell() {
-			
+		
+		ResourcesManager.getInstance().mSndProjector.play();
+		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.cinema, null);
@@ -168,6 +184,9 @@ public class Cinema extends BuyableCell implements Profitable  {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					Cinema.this.upgrade();
+					ResourcesManager.getInstance().mSndProjector.stop();
+					ResourcesManager.getInstance().mSndCashMachine.stop();
+					ResourcesManager.getInstance().mSndCashMachine.play();
 					dialog.dismiss();
 				}
 			});
@@ -180,15 +199,23 @@ public class Cinema extends BuyableCell implements Profitable  {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
+				dialog.cancel();
+			}
+		});		
+		 
+		dialogBuilder.setOnCancelListener(new OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				ResourcesManager.getInstance().mSndProjector.stop();
 			}
 		});
-		 
+		
 		Base.getSharedInstance().runOnUiThread(new Runnable() {
 			
 			@Override
 			public void run() {
-				AlertDialog dialog = dialogBuilder.create();
+				AlertDialog dialog = dialogBuilder.create();				
 				dialog.show();
 				if(dialog.getButton(AlertDialog.BUTTON_POSITIVE) != null && getOwner().getAmount() < AllConstants.PRICE_ROOM)
 					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);

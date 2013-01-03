@@ -96,6 +96,8 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		dialogBuilder.setPositiveButton(R.string.btn_buy, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				ResourcesManager.getInstance().mSndCashMachine.stop();
+				ResourcesManager.getInstance().mSndCashMachine.play();
 				Resource.this.buy(player);
 				dialog.dismiss();
 			}
@@ -103,7 +105,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		dialogBuilder.setNegativeButton(R.string.btn_close, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
+				dialog.cancel();
 			}
 		});
 		Base.getSharedInstance().runOnUiThread(new Runnable() {
@@ -140,6 +142,8 @@ public abstract class Resource extends BuyableCell implements Profitable {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					ResourcesManager.getInstance().mSndCashMachine.stop();
+					ResourcesManager.getInstance().mSndCashMachine.play();
 					Resource.this.upgrade();
 					dialog.dismiss();
 				}
@@ -152,7 +156,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		dialogBuilder.setNegativeButton(R.string.btn_close, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
+				dialog.cancel();
 			}
 		});
 		

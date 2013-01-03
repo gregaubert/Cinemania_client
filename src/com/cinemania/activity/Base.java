@@ -1,5 +1,6 @@
 package com.cinemania.activity;
 
+import org.andengine.audio.music.Music;
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.engine.handler.timer.ITimerCallback;
@@ -55,6 +56,7 @@ public class Base extends BaseGameActivity
     
     //Scene courrante
     private Scene mCurrentScene;
+    
     //Type de scene
     private SceneType mSceneType = SceneType.LOADING;
     
@@ -79,6 +81,9 @@ public class Base extends BaseGameActivity
     //Game context
     private GameContext mGameContext;
     
+    // Musique du jeu
+    private Music mMusicLoop;
+    
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -100,6 +105,8 @@ public class Base extends BaseGameActivity
     	manager = ResourcesManager.getInstance();
     	mCamera = new ZoomCamera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
         EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new FillResolutionPolicy(), mCamera);
+        engineOptions.getAudioOptions().setNeedsSound(true);
+        engineOptions.getAudioOptions().setNeedsMusic(true);
         return engineOptions;
     }
     
@@ -205,11 +212,14 @@ public class Base extends BaseGameActivity
 			e.printStackTrace();
 		}
 			
-		//Initialisation des ressources
+		// Initialisation des ressources
 		mMenu.Load();
 		mOption.Load();
 		mGame.Load();
 		mHUD.Load();
+		
+		// Charge la musique
+		mMusicLoop = ResourcesManager.getInstance().mMusicLoop;
 	}
 	
 	private void loadScenes()
@@ -242,6 +252,8 @@ public class Base extends BaseGameActivity
                 case GAME:
                 	this.setSceneType(SceneType.MENU);
                 	this.setCurrentScene(mMenu);
+                	if(mMusicLoop.isPlaying())
+                		mMusicLoop.pause();
                     break; 
               }
          }
@@ -280,6 +292,8 @@ public class Base extends BaseGameActivity
     	if(mSceneType == SceneType.GAME){
     		mHUD.setVisible(true);
     		mCamera.setZoomFactor(0.5f);
+    		if(!mMusicLoop.isPlaying())
+    			mMusicLoop.play();
     	}
     	else{
     		mHUD.setVisible(false);

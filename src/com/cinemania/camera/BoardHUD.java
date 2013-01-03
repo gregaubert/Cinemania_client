@@ -1,6 +1,5 @@
 package com.cinemania.camera;
 
-import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.entity.sprite.Sprite;
@@ -99,6 +98,7 @@ public class BoardHUD extends HUD implements Loader {
 				{
 
 	                case TouchEvent.ACTION_DOWN: {
+	                	ResourcesManager.getInstance().mSndDiceWood.play();
 	                	this.setVisible(false);
 	                	mNextSprite.setVisible(true);
 	                	return mActivity.getGame().movePlayer();	                	

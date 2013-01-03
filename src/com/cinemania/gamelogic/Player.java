@@ -167,6 +167,9 @@ public class Player implements JSonator{
 	//When we pass our QG we can get all the profit.
 	public void encaisser(){
 		
+		ResourcesManager.getInstance().mSndCashMachine.stop();
+		ResourcesManager.getInstance().mSndCashMachine.play();
+		
 		//FIXME Je pense que ça c'est pas correct, il faut update le tour a chaque fois que le créateur tire le dé pas a chaque fois qu'il tombe sur son hq
 		if(mGameContext.isCreator())
 			mGameContext.completeTurn();

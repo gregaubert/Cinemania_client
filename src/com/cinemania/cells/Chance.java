@@ -37,6 +37,8 @@ public class Chance extends Cell {
 	@Override
 	public void onTheCell(final Player player) {
 		
+		ResourcesManager.getInstance().mSndShufflingCards.play();
+		
 		final ChanceCard chanceCard = ChanceCardManager.getSharedInstance().pickACard();
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
@@ -57,6 +59,8 @@ public class Chance extends Cell {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				ResourcesManager.getInstance().mSndCashMachine.stop();
+				ResourcesManager.getInstance().mSndCashMachine.play();
 				player.receiveMoney(chanceCard.getAmount());
 				dialog.dismiss();
 			}
