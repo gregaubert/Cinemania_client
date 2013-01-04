@@ -83,6 +83,7 @@ public class GCMConnector {
 					public void run() {
 						// TODO Auto-generated method stub
 						Base.getSharedInstance().getGame().getDataFromServer();
+						Base.getSharedInstance().getGame().regenerateGameElements();
 		            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).hideWaitingForPlayers();
 					}
 	            	

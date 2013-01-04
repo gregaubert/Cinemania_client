@@ -104,22 +104,10 @@ public class BoardScene extends Scene implements Loader {
 		setBackgroundEnabled(true);
 		getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
 		
-		Sprite boardCenter = new Sprite(caseSize + offsetWidth, caseSize + offsetHeight, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());
-		//boardCenter.setSize(caseSize * (side - 1), caseSize * (side - 1));
-		
-		getChildByIndex(LAYER_PAWN).attachChild(boardCenter);
-		
-		Log.i("GAME", "offsetWidth : " + offsetWidth);
-		Log.i("GAME", "offsetHeight : " + offsetHeight);
-		
-		for (int i = 0; i < mGameContext.getSize(); i++) {			
-			this.getChildByIndex(LAYER_BOARD).attachChild(mGameContext.getCase(i).getView());
-		}
-		
-		// Attach player's view to 
-		for (Player player : mGameContext.getPlayers()){
-			getChildByIndex(LAYER_PAWN).attachChild(player.getView());
-		}
+		Sprite boardCenter = new Sprite(caseSize + offsetWidth, caseSize + offsetHeight, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());		
+		getChildByIndex(LAYER_BACKGROUND).attachChild(boardCenter);
+
+		regenerateGameElements();
 	}
 
 	public void getDataFromServer() {
@@ -135,6 +123,28 @@ public class BoardScene extends Scene implements Loader {
 			mGameContext.deserializeGame();
 		} catch (JSONException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void regenerateGameElements(){
+		cleanGameElements();
+		createGameElements();
+	}
+	
+	private void cleanGameElements(){
+		this.getChildByIndex(LAYER_BOARD).detachChildren();
+		this.getChildByIndex(LAYER_PAWN).detachChildren();
+	}
+	
+	private void createGameElements(){
+	
+		for (int i = 0; i < mGameContext.getSize(); i++) {			
+			this.getChildByIndex(LAYER_BOARD).attachChild(mGameContext.getCase(i).getView());
+		}
+		
+		// Attach player's view to 
+		for (Player player : mGameContext.getPlayers()){
+			getChildByIndex(LAYER_PAWN).attachChild(player.getView());
 		}
 	}
 	
