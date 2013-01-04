@@ -75,8 +75,19 @@ public class GCMConnector {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getExtras().getString(GCMUtilities.MESSAGE);
             
+	            
             if (action.equals("PASS_TURN")){
-            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).hideWaitingForPlayers();
+            	Base.getSharedInstance().runOnUpdateThread(new Runnable(){
+            		
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Base.getSharedInstance().getGame().getDataFromServer();
+		            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).hideWaitingForPlayers();
+					}
+	            	
+	            });
+	            
             }
             
         }
