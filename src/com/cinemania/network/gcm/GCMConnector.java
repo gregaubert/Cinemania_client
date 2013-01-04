@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.util.Log;
  
 import com.cinemania.activity.Base;
+import com.cinemania.camera.BoardHUD;
 import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.Utilities;
 import com.cinemania.network.api.API;
@@ -72,8 +73,12 @@ public class GCMConnector {
     private static BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context context, Intent intent) {
-            String newMessage = intent.getExtras().getString(GCMUtilities.MESSAGE);
-            Log.d("DEBUG", "Message received! " + newMessage);
+            String action = intent.getExtras().getString(GCMUtilities.MESSAGE);
+            
+            if (action.equals("PASS_TURN")){
+            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).setNewTurn();
+            }
+            
         }
     };
      
