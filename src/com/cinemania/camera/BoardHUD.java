@@ -72,7 +72,18 @@ public class BoardHUD extends HUD implements Loader {
 		mWaiting.setVisible(false);
 	}
 	
+	public void showWaitingForPlayer(){
+		mDiceSprite.setVisible(false);
+		mWaiting.setVisible(true);
+	}
+	
 	public void update(){
+		//Si c'est à nous de joueur.
+		if(mGameContext.getCurrentPlayer() == mGameContext.getPlayer())
+			hideWaitingForPlayers();
+		else
+			showWaitingForPlayer();
+		
 		setYear(mGameContext.getYear());
 		setMoney(mGameContext.getPlayer().getAmount());
 		setActors(mGameContext.getPlayer().getActors());
@@ -92,8 +103,6 @@ public class BoardHUD extends HUD implements Loader {
 		txtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
 		txtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
 		txtCurrentPlayer = new Text(600, 8, mResourcesManager.mResourcesFont, "abcdefghijklmnopqrstuvwxyz0123456789", mActivity.getVertexBufferObjectManager());
-
-		update();
 		
 		Sprite moneySprite =  new Sprite(170, 5, 32, 32, mResourcesManager.mMoneyLogo, mActivity.getVertexBufferObjectManager());
 		Sprite actorsSprite = new Sprite(300, 5, 32, 32, mResourcesManager.mActorsLogo, mActivity.getVertexBufferObjectManager());
@@ -198,5 +207,7 @@ public class BoardHUD extends HUD implements Loader {
 		attachChild(mDiceSprite);
 		attachChild(mNextSprite);
 		attachChild(mWaiting);
+		
+		update();
 	}
 }
