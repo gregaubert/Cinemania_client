@@ -130,7 +130,7 @@ public class Player implements JSonator{
 		for(int i = 0; i < nb; i++){
 			
 			Cell temp = mGameContext.nextCellOf(mCurrentPosition);
-
+			//Cell temp = mGameContext.getCase((38+i)%40);
 			//Movement from case to case. The pawn use an offset
 			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure+mOrder*OFFSET, temp.getX()+bordure+mOrder*OFFSET, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
@@ -174,14 +174,17 @@ public class Player implements JSonator{
 		ResourcesManager.getInstance().mSndCashMachine.play();
 		
 		int lvlCinema = 0,
+			profitCinema = 0,
 			profitMovies = 0,
 			profitActors = 0,
 			profitLogistic = 0;
 		
 		for(OwnableCell cell : mProperties)
 			if(cell instanceof Cinema)
+			{
 				lvlCinema += cell.getLevel();
-				//this.receiveMoney(((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
+				profitCinema += ((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+			}
 			else if(cell instanceof School)
 				profitActors +=	((School)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			else if(cell instanceof LogisticFactory)
@@ -190,7 +193,13 @@ public class Player implements JSonator{
 		for(Movie movie : getMovies())
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 		
-		mLastProfit = lvlCinema * profitMovies;
+		//Affiche une boîte de dialogue avec les gains.
+		
+		Log.i("GAME", "Gain : " + lvlCinema * profitMovies + ", " + profitCinema);
+		Log.i("GAME", "Actors : " + profitActors);
+		Log.i("GAME", "Logistique : " + profitLogistic);
+		
+		mLastProfit = lvlCinema * profitMovies + profitCinema;
 		receiveMoney(mLastProfit);
 		mLastActors = profitActors;
 		receiveActors(mLastActors);
