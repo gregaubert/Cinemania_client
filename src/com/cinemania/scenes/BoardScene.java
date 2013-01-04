@@ -17,6 +17,7 @@ import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.network.api.API;
 import com.cinemania.network.api.API.GameDataResult;
+import com.cinemania.network.api.API.GameListResult;
 import com.cinemania.resources.ResourcesManager;
 
 
@@ -83,38 +84,39 @@ public class BoardScene extends Scene implements Loader {
 	public void Load() {	
 		
 	    long gameIdentifier;
-		
-		// Create a new game through the API
-    	gameIdentifier = API.newGame().getGameIdentifier();
+	    
+	    // Check there is already an unfull game
+	    GameListResult gameList = API.availableGames();
+	    if (gameList.getGames().length > 0) {
+	    	gameIdentifier = gameList.getGames()[0];
+	    	Log.d(BoardScene.class.getName(), "Get game (" + gameIdentifier + ")");
+	    } else {
+	    	// Create a new game
+	    	gameIdentifier = API.newGame().getGameIdentifier();
+	    	Log.d(BoardScene.class.getName(), "Create new game (" + gameIdentifier + ")");
+	    }
     	API.joinGame(gameIdentifier);
-    	
-    	GameDataResult gameDataResult = API.gameData(gameIdentifier);
-
+    	GameDataResult gameData = API.gameData(gameIdentifier);
+    	// Extract game data
 		mGameContext = GameContext.getSharedInstance();
-		
-		//TODO tester si nouvelle partie, si oui deserialie un jSon de base
-		try 
-		{
-			Log.d("DEBUG","deserializing");
+		try {
 			mGameContext = GameContext.getSharedInstance();
-			mGameContext.deserialize(gameDataResult.getGameData());
+			mGameContext.deserialize(gameData.getGameData());
 					
 			mGameContext.deserializeBoard(Base.getSharedInstance().getGame());
 			mGameContext.deserializePlayers();
 			mGameContext.deserializeGame();
-		}
-		catch (JSONException e)
-		{
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		
-		this.setBackgroundEnabled(true);
-		this.getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
+		setBackgroundEnabled(true);
+		getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
 		
 		Sprite boardCenter = new Sprite(caseSize + offsetWidth, caseSize + offsetHeight, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());
 		//boardCenter.setSize(caseSize * (side - 1), caseSize * (side - 1));
 		
-		this.getChildByIndex(LAYER_PAWN).attachChild(boardCenter);
+		getChildByIndex(LAYER_PAWN).attachChild(boardCenter);
 		
 		Log.i("GAME", "offsetWidth : " + offsetWidth);
 		Log.i("GAME", "offsetHeight : " + offsetHeight);
@@ -123,9 +125,9 @@ public class BoardScene extends Scene implements Loader {
 			this.getChildByIndex(LAYER_BOARD).attachChild(mGameContext.getCase(i).getView());
 		}
 		
-		//Instancie les players.
-		for(Player player : mGameContext.getPlayers()){
-			this.getChildByIndex(LAYER_PAWN).attachChild(player.getView());
+		// Attach player's view to 
+		for (Player player : mGameContext.getPlayers()){
+			getChildByIndex(LAYER_PAWN).attachChild(player.getView());
 		}
 	}
 	
