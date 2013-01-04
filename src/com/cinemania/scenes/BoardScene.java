@@ -12,6 +12,7 @@ import org.json.JSONException;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
+import com.cinemania.camera.BoardHUD;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
@@ -53,6 +54,8 @@ public class BoardScene extends Scene implements Loader {
 	private static final int LAYER_BACKGROUND = 0;
 	private static final int LAYER_BOARD = 1;
 	private static final int LAYER_PAWN = 2;
+	
+	private long mGameIdentifier;
     
 	// ===========================================================
 	// Constructors
@@ -81,45 +84,61 @@ public class BoardScene extends Scene implements Loader {
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
 	@Override
-	public void Load() {	
-		
-	    long gameIdentifier;
+	public void Load() {		    
 	    
 	    // Check there is already an unfull game
 	    GameListResult gameList = API.availableGames();
 	    if (gameList.getGames().length > 0) {
-	    	gameIdentifier = gameList.getGames()[0];
-	    	Log.d(BoardScene.class.getName(), "Get game (" + gameIdentifier + ")");
+	    	mGameIdentifier = gameList.getGames()[0];
+	    	Log.d(BoardScene.class.getName(), "Get game (" + mGameIdentifier + ")");
 	    } else {
 	    	// Create a new game
-	    	gameIdentifier = API.newGame().getGameIdentifier();
-	    	Log.d(BoardScene.class.getName(), "Create new game (" + gameIdentifier + ")");
+	    	mGameIdentifier = API.newGame().getGameIdentifier();
+	    	Log.d(BoardScene.class.getName(), "Create new game (" + mGameIdentifier + ")");
 	    }
-    	API.joinGame(gameIdentifier);
-    	GameDataResult gameData = API.gameData(gameIdentifier);
+    	API.joinGame(mGameIdentifier);
+		
+		setBackgroundEnabled(true);		
+		getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
+		
+		Sprite boardCenter = new Sprite(caseSize + offsetWidth, caseSize + offsetHeight, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());
+		getChildByIndex(LAYER_BACKGROUND).attachChild(boardCenter);
+		
+		recreateGameFromServerData();
+	}
+
+	public void recreateGameFromServerData() {
+		
+		GameDataResult gameData = API.gameData(mGameIdentifier);
+		
+		cleanGameElements();
+		
     	// Extract game data
 		mGameContext = GameContext.getSharedInstance();
+		
 		try {
 			mGameContext = GameContext.getSharedInstance();
 			mGameContext.deserialize(gameData.getGameData());
 					
 			mGameContext.deserializeBoard(Base.getSharedInstance().getGame());
 			mGameContext.deserializePlayers();
-			mGameContext.deserializeGame();
+			mGameContext.deserializeGame();			
+			
+			generateGameElements();
+			
+			((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).update();
+			
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}
-		
-		setBackgroundEnabled(true);
-		getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
-		
-		Sprite boardCenter = new Sprite(caseSize + offsetWidth, caseSize + offsetHeight, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());
-		//boardCenter.setSize(caseSize * (side - 1), caseSize * (side - 1));
-		
-		getChildByIndex(LAYER_PAWN).attachChild(boardCenter);
-		
-		Log.i("GAME", "offsetWidth : " + offsetWidth);
-		Log.i("GAME", "offsetHeight : " + offsetHeight);
+		}		
+	}
+	
+	private void cleanGameElements(){
+		this.getChildByIndex(LAYER_BOARD).detachChildren();
+		getChildByIndex(LAYER_PAWN).detachChildren();
+	}
+	
+	private void generateGameElements(){
 		
 		for (int i = 0; i < mGameContext.getSize(); i++) {			
 			this.getChildByIndex(LAYER_BOARD).attachChild(mGameContext.getCase(i).getView());

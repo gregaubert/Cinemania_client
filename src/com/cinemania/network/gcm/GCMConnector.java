@@ -76,7 +76,7 @@ public class GCMConnector {
             String action = intent.getExtras().getString(GCMUtilities.MESSAGE);
             
             if (action.equals("PASS_TURN")){
-            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).setNewTurn();
+            	Base.getSharedInstance().getGame().recreateGameFromServerData();
             }
             
         }
