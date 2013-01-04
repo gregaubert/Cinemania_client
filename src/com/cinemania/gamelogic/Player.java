@@ -19,9 +19,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.cells.Cell;
 import com.cinemania.cells.Cinema;
 import com.cinemania.cells.HeadQuarters;
@@ -141,7 +148,9 @@ public class Player implements JSonator{
 		    
 			//Test if we pass in our QG.
 			if(temp == this.mHeadQuarters)
+			{
 				this.encaisser();
+			}
 			
 			mCurrentPosition = temp;
 		
@@ -178,7 +187,7 @@ public class Player implements JSonator{
 			profitMovies = 0,
 			profitActors = 0,
 			profitLogistic = 0;
-		
+
 		for(OwnableCell cell : mProperties)
 			if(cell instanceof Cinema)
 			{
@@ -186,18 +195,48 @@ public class Player implements JSonator{
 				profitCinema += ((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			}
 			else if(cell instanceof School)
+			{
 				profitActors +=	((School)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+			}
 			else if(cell instanceof LogisticFactory)
+			{
 				profitLogistic += ((LogisticFactory)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+			}
 		
 		for(Movie movie : getMovies())
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 		
 		//Affiche une boîte de dialogue avec les gains.
+		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+		dialogBuilder.setCancelable(true);
+		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.profit, null);
+		dialogBuilder.setView(view);
+
+		TextView txtMovies = (TextView) view.findViewById(R.id.txtNbMovies);
+		TextView txtCinema = (TextView) view.findViewById(R.id.txtNbCinema);
+		TextView txtActor = (TextView) view.findViewById(R.id.txtNbActor);
+		TextView txtLogistic = (TextView) view.findViewById(R.id.txtNbLogistic);
 		
-		Log.i("GAME", "Gain : " + lvlCinema * profitMovies + ", " + profitCinema);
-		Log.i("GAME", "Actors : " + profitActors);
-		Log.i("GAME", "Logistique : " + profitLogistic);
+		txtMovies.setText(Integer.toString(lvlCinema * profitMovies));
+		txtCinema.setText(Integer.toString(profitCinema));
+		txtActor.setText(Integer.toString(profitActors));
+		txtLogistic.setText(Integer.toString(mLastLogistics));
+		
+		dialogBuilder.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		
+		dialogBuilder.setOnCancelListener(new OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				Log.i("GAME", "Cancel");
+				//TODO Remettre thread en marche.
+			}
+		});
 		
 		mLastProfit = lvlCinema * profitMovies + profitCinema;
 		receiveMoney(mLastProfit);
