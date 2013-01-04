@@ -86,15 +86,15 @@ public class BoardScene extends Scene implements Loader {
 	    long gameIdentifier;
 	    
 	    // Check there is already an unfull game
-	    GameListResult gameList = API.availableGames();
+	    /*GameListResult gameList = API.availableGames();
 	    if (gameList.getGames().length > 0) {
 	    	gameIdentifier = gameList.getGames()[0];
 	    	Log.d(BoardScene.class.getName(), "Get game (" + gameIdentifier + ")");
-	    } else {
+	    } else {*/
 	    	// Create a new game
 	    	gameIdentifier = API.newGame().getGameIdentifier();
 	    	Log.d(BoardScene.class.getName(), "Create new game (" + gameIdentifier + ")");
-	    }
+	    //}
     	API.joinGame(gameIdentifier);
     	GameDataResult gameData = API.gameData(gameIdentifier);
     	// Extract game data
