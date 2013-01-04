@@ -50,33 +50,6 @@ public class GCMConnector {
          
         // needid if you want messages to be delivered to this app!
         GCMRegistrar.setRegisteredOnServer(mActivity, true);
-        
-        /*boolean x = API.registerDevice(regId);
-        Log.d("API", Boolean.toString(x));
-        GameIdentifierResult r1 = API.newGame();
-        GameDataResult r2 = API.gameData(r1.getGameIdentifier());
-        API.gamePassTurn(r1.getGameIdentifier(), r2.getGameData());
-        
-                
-        // Try to register again, but not in the UI thread.
-        // It's also necessary to cancel the thread onDestroy(),
-        // hence the use of AsyncTask instead of a raw thread.
-        final Context context = mActivity;
-        mRegisterTask = new AsyncTask<Void, Void, Void>() {
- 
-            @Override
-            protected Void doInBackground(Void... params) {
-                ServerUtilities.register(context, regId);
-                return null;
-            }
- 
-            @Override
-            protected void onPostExecute(Void result) {
-                mRegisterTask = null;
-            }
- 
-        };
-        mRegisterTask.execute(null, null, null);*/
  
     }
      
