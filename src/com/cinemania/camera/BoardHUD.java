@@ -67,9 +67,18 @@ public class BoardHUD extends HUD implements Loader {
 		txtCurrentPlayer.setColor(p.getColorPawn());
 	}
 	
-	public void setNewTurn(){
+	public void hideWaitingForPlayers(){
 		mDiceSprite.setVisible(true);
 		mWaiting.setVisible(false);
+	}
+	
+	public void update(){
+		setYear(mGameContext.getYear());
+		setMoney(mGameContext.getPlayer().getAmount());
+		setActors(mGameContext.getPlayer().getActors());
+		setLogistics(mGameContext.getPlayer().getLogistic());
+		setScripts(mGameContext.getPlayer().getScriptCount());
+		setCurrentPlayer(mGameContext.getPlayer());
 	}
 	
 	@Override
@@ -84,12 +93,7 @@ public class BoardHUD extends HUD implements Loader {
 		txtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
 		txtCurrentPlayer = new Text(600, 8, mResourcesManager.mResourcesFont, "abcdefghijklmnopqrstuvwxyz0123456789", mActivity.getVertexBufferObjectManager());
 
-		setYear(mGameContext.getYear());
-		setMoney(mGameContext.getPlayer().getAmount());
-		setActors(mGameContext.getPlayer().getActors());
-		setLogistics(mGameContext.getPlayer().getLogistic());
-		setScripts(mGameContext.getPlayer().getScriptCount());
-		setCurrentPlayer(mGameContext.getPlayer());
+		update();
 		
 		Sprite moneySprite =  new Sprite(170, 5, 32, 32, mResourcesManager.mMoneyLogo, mActivity.getVertexBufferObjectManager());
 		Sprite actorsSprite = new Sprite(300, 5, 32, 32, mResourcesManager.mActorsLogo, mActivity.getVertexBufferObjectManager());
