@@ -1,4 +1,4 @@
-package com.cinemania.gamelogic;
+package com.cinemania.gamelogic.interfaces;
 
 /**
  * Interface for all case which offer resources. 

@@ -9,14 +9,14 @@ import com.cinemania.gamelogic.Room;
 import com.cinemania.network.api.API;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.activity.Base;
-import com.cinemania.cases.Cell;
-import com.cinemania.cases.CellGenerator;
-import com.cinemania.cases.Cinema;
-import com.cinemania.cases.HeadQuarters;
-import com.cinemania.cases.LogisticFactory;
-import com.cinemania.cases.Chance;
-import com.cinemania.cases.School;
-import com.cinemania.cases.ScriptCell;
+import com.cinemania.cells.Cell;
+import com.cinemania.cells.CellGenerator;
+import com.cinemania.cells.Chance;
+import com.cinemania.cells.Cinema;
+import com.cinemania.cells.HeadQuarters;
+import com.cinemania.cells.LogisticFactory;
+import com.cinemania.cells.School;
+import com.cinemania.cells.ScriptCell;
 import com.cinemania.constants.AllConstants;
 
 public final class GameContext {
@@ -120,12 +120,12 @@ public final class GameContext {
 			this.mPlayers[i] = player;
 
 			// Define local user
-			if (player.getId() == Utilities.DEVICE_ID) {
+			if (player.getId().equals(Utilities.DEVICE_ID)) {
 				this.mPlayer = player;
 			}
 			
 			// Define who is playing
-			if (player.getId() == jsonGame.getString("player")) {
+			if (player.getId().equals(jsonGame.getString("player"))) {
 				this.mCurrentPlayer = player;
 			}
 		}
@@ -176,10 +176,18 @@ public final class GameContext {
 		Base.getSharedInstance().getHUD().setCurrentPlayer(mCurrentPlayer);
 	}
 	
+	/**
+	 * Permet d'augmenter le tour d'un.
+	 * 
+	 * Tout les 4 tour, on augment l'année.
+	 */
 	public void completeTurn(){
-		this.mYear += offsetYear;
-		Base.getSharedInstance().getHUD().setYear(getYear());
 		this.mCurrentTurn++;
+		if(mCurrentTurn%4==0)
+		{
+			this.mYear += offsetYear;
+			Base.getSharedInstance().getHUD().setYear(getYear());
+		}
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package com.cinemania.cases;
+package com.cinemania.cells;
 
 import org.andengine.entity.sprite.ButtonSprite;
 import org.json.JSONException;
@@ -67,6 +67,7 @@ public class HeadQuarters extends OwnableCell {
 	@Override
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
+		
 		if(GameContext.getSharedInstance().getPlayer().equals(getOwner())){
 			
 			final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
@@ -109,6 +110,8 @@ public class HeadQuarters extends OwnableCell {
 					public void onClick(DialogInterface dialog, int which) {
 						if(getOwner().removeScript(script)){
 							// TODO Marketing
+							ResourcesManager.getInstance().mSndTaDa.stop();
+							ResourcesManager.getInstance().mSndTaDa.play();
 							BigMovie movie = new BigMovie(script.getTitle(), script.getLogistics(), script.getActors(), script.getPriceProd(), GameContext.getSharedInstance().getYear(), 10);
 							movie.produceThisMovie(getOwner(), 5);
 							getOwner().addMovie(movie);
@@ -127,7 +130,7 @@ public class HeadQuarters extends OwnableCell {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
+					dialog.cancel();
 				}
 			});
 			 

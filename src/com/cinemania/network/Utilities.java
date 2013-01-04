@@ -21,10 +21,21 @@ import com.cinemania.activity.Base;
 
 public final class Utilities {
 	
-	public static final String DEVICE_ID = Secure.getString(Base.getSharedInstance().getBaseContext().getContentResolver(), Secure.ANDROID_ID);
-	
-	public static final String SENDER_ID = "253409584595";
+	/**
+     * Base URL of the Demo Server (such as http://my_host:8080/gcm-demo)
+     */
+    public static final String SERVER_URL = "http://jorgealbaladejo.com/cinemania/app/index.php";
 
+    /**
+     * Google API project id registered to use GCM.
+     */
+    public static final String SENDER_ID = "253409584595";
+    
+    /**
+     * The device's hard ID
+     */
+    public static final String DEVICE_ID = Secure.getString(Base.getSharedInstance().getBaseContext().getContentResolver(), Secure.ANDROID_ID);
+		
 	public static Response post(URL url, Map<String, String> params) {
 		
 		Response response = new Response();

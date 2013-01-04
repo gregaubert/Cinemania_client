@@ -1,4 +1,4 @@
-package com.cinemania.cases;
+package com.cinemania.cells;
 
 import org.andengine.entity.sprite.ButtonSprite;
 import org.json.JSONException;
@@ -40,6 +40,8 @@ public class ScriptCell extends Cell {
 	@Override
 	public void onTheCell(final Player player) {
 		
+		ResourcesManager.getInstance().mSndTaDa.play();
+		
 		final Script script = Script.pickAScript();
 		
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
@@ -59,13 +61,15 @@ public class ScriptCell extends Cell {
 		scriptYear.setText(Integer.toString(script.getYear()));
 		scriptPrice.setText(Integer.toString(script.getPrice()));
 		scriptRealisation.setText(script.getActors() + (script.getActors() <= 1 ?" acteur, ":" acteurs, ") 
-				+ script.getLogistics() + (script.getLogistics() <= 1 ?" logistique":" logistiques et ")
+				+ script.getLogistics() + (script.getLogistics() <= 1 ?" logistique et ":" logistiques et ")
 				+ script.getPriceProd() + ".-");
 		
 		dialogBuilder.setPositiveButton(R.string.btn_buy, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				ResourcesManager.getInstance().mSndCashMachine.stop();
+				ResourcesManager.getInstance().mSndCashMachine.play();
 				player.looseMoney(script.getPrice());
 				player.addScript(script);
 				dialog.dismiss();

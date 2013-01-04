@@ -1,4 +1,4 @@
-package com.cinemania.cases;
+package com.cinemania.cells;
 
 import static com.cinemania.constants.AllConstants.BOARD_NB_ACTOR_LINE;
 import static com.cinemania.constants.AllConstants.BOARD_NB_CINEMA_LINE;

@@ -1,6 +1,5 @@
 package com.cinemania.camera;
 
-import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.entity.sprite.Sprite;
@@ -73,7 +72,7 @@ public class BoardHUD extends HUD implements Loader {
 		mGameContext = GameContext.getSharedInstance();
 		
 		txtYear = new Text(10, 8, mResourcesManager.mYearFont, "Annee: 0123456789", mActivity.getVertexBufferObjectManager());
-		txtMoney = new Text(235, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtMoney = new Text(205, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
 		txtActors = new Text(335, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
 		txtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
 		txtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
@@ -86,16 +85,12 @@ public class BoardHUD extends HUD implements Loader {
 		setScripts(mGameContext.getPlayer().getScriptCount());
 		setCurrentPlayer(mGameContext.getPlayer());
 		
-		Sprite moneySprite =  new Sprite(200, 5, 32, 32, mResourcesManager.mMoneyLogo, mActivity.getVertexBufferObjectManager());
+		Sprite moneySprite =  new Sprite(170, 5, 32, 32, mResourcesManager.mMoneyLogo, mActivity.getVertexBufferObjectManager());
 		Sprite actorsSprite = new Sprite(300, 5, 32, 32, mResourcesManager.mActorsLogo, mActivity.getVertexBufferObjectManager());
 		Sprite logisticsSprite = new Sprite(400, 5, 32, 32, mResourcesManager.mLogisticsLogo, mActivity.getVertexBufferObjectManager());
 		Sprite scriptsSprite = new Sprite(500, 5, 32, 32, mResourcesManager.mScriptsLogo, mActivity.getVertexBufferObjectManager());
 		
-		/*TODO Verifier emplacement */
-		float cameraHeight = ((ZoomCamera)mActivity.getCamera()).getHeight();
-		float cameraWidth = ((ZoomCamera)mActivity.getCamera()).getWidth();
-		
-		mDiceSprite = new ButtonSprite(10, cameraHeight - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
+		mDiceSprite = new ButtonSprite(10, Base.CAMERA_HEIGHT - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
 			@Override
 		    public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
@@ -103,6 +98,7 @@ public class BoardHUD extends HUD implements Loader {
 				{
 
 	                case TouchEvent.ACTION_DOWN: {
+	                	ResourcesManager.getInstance().mSndDiceWood.play();
 	                	this.setVisible(false);
 	                	mNextSprite.setVisible(true);
 	                	return mActivity.getGame().movePlayer();	                	
@@ -112,7 +108,7 @@ public class BoardHUD extends HUD implements Loader {
 		    }
 		};
 		
-		mNextSprite = new ButtonSprite(10, cameraHeight - 74, mResourcesManager.mNextTurn, mActivity.getVertexBufferObjectManager()){
+		mNextSprite = new ButtonSprite(10, Base.CAMERA_HEIGHT - 74, mResourcesManager.mNextTurn, mActivity.getVertexBufferObjectManager()){
 			@Override
 		    public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
@@ -132,7 +128,7 @@ public class BoardHUD extends HUD implements Loader {
 		};
 		mNextSprite.setVisible(false);
 		
-		mWaiting = new Sprite((cameraWidth - mResourcesManager.mWaiting.getWidth())/2, (cameraHeight - mResourcesManager.mWaiting.getHeight())/2, mResourcesManager.mWaiting, mActivity.getVertexBufferObjectManager());
+		mWaiting = new Sprite((Base.CAMERA_WIDTH - mResourcesManager.mWaiting.getWidth())/2, (Base.CAMERA_HEIGHT - mResourcesManager.mWaiting.getHeight())/2, mResourcesManager.mWaiting, mActivity.getVertexBufferObjectManager());
 		mWaiting.setVisible(false);
 		
 		registerTouchArea(mDiceSprite);

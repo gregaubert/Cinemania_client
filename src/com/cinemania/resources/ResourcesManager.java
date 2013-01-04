@@ -1,5 +1,11 @@
 package com.cinemania.resources;
 
+import java.io.IOException;
+
+import org.andengine.audio.music.Music;
+import org.andengine.audio.music.MusicFactory;
+import org.andengine.audio.sound.Sound;
+import org.andengine.audio.sound.SoundFactory;
 import org.andengine.engine.Engine;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
@@ -50,12 +56,23 @@ public class ResourcesManager {
 	
 	public ITextureRegion mSplashLogo;
 	public ITextureRegion mMenuLogo;
+	
 	//**************************** FONT ****************************
 	public Font mSplashFont;
 	public Font mMenuFont;
 	public Font mYearFont;
 	public Font mResourcesFont;
 	public Font mWindowsFont;
+	
+	//**************************** SOUND ****************************
+	public Sound mSndCashMachine;
+	public Sound mSndMenuButton;
+	public Sound mSndCowboy;
+	public Sound mSndDiceWood;
+	public Sound mSndProjector;
+	public Sound mSndShufflingCards;
+	public Sound mSndTaDa;
+	public Music mMusicLoop;
 	
 	private ResourcesManager(){
 		
@@ -66,7 +83,7 @@ public class ResourcesManager {
 	}
 	
 	public void LoadSplash(Context context, Engine engine){
-		//Gestion des polices d'�critures
+		//Gestion des polices d'ecritures
 		mSplashFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/GunslingerDEMO-KCFonts.ttf", 48f, true, Color.WHITE);
 		//mSplashFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
 		mSplashFont.load();
@@ -74,22 +91,33 @@ public class ResourcesManager {
 		//Indique le dossier contenant les textures.
     	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
     	BitmapTextureAtlas splashTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
-    	//R�cup�re la bonne texture.
+    	//Recupere la bonne texture.
     	mSplashLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashTextureAtlas,context,"splash.png", 0, 0);
     	splashTextureAtlas.load();
 	}
 	
 	public void LoadMenu(Context context, Engine engine){
-		//Gestion des polices d'�critures
+		//Gestion des polices d'ecritures
 		mMenuFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
 		mMenuFont.load();
 		
-		//R�cup�re la bonne texture.
+
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+		SoundFactory.setAssetBasePath("mfx/");
+		
+		//Recupere la bonne texture
     	BitmapTextureAtlas splashTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 500, 300, TextureOptions.DEFAULT);
-    	//R�cup�re la bonne texture.
+    	//Recupere la bonne texture.
     	mMenuLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashTextureAtlas,context,"menu.jpg", 0, 0);
     	splashTextureAtlas.load();
+    	
+    	// Sound
+    	try {
+        	mSndMenuButton = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "button.ogg");
+        	mSndMenuButton.setVolume(0.3f);
+        } catch (final IOException e) {
+        	Debug.e(e);
+        }
 	}
 	
 	public void LoadHUD(Context context, Engine engine){
@@ -121,10 +149,10 @@ public class ResourcesManager {
 	}
 	
 	public void LoadPlayer(Context context, Engine engine){
-		//R�cup�re la bonne texture.
+		//Recupere la bonne texture.
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
     	BitmapTextureAtlas PlayerTextureAtlas = new BitmapTextureAtlas(engine.getTextureManager(), 80, 80, TextureOptions.DEFAULT);
-    	//R�cup�re la bonne texture.
+    	//Recupere la bonne texture.
     	mPlayer = BitmapTextureAtlasTextureRegionFactory.createFromAsset(PlayerTextureAtlas,context,"player.png", 0, 0);
     	PlayerTextureAtlas.load();
 	}
@@ -138,6 +166,9 @@ public class ResourcesManager {
 		Script.loadMovieDB();
 		
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+        SoundFactory.setAssetBasePath("mfx/");
+        MusicFactory.setAssetBasePath("mfx/");
+        
         BuildableBitmapTextureAtlas boardBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 2048, 1024);
         
         mCaseCinema = BitmapTextureAtlasTextureRegionFactory.createFromAsset(boardBitmapTextureAtlas, context, "case_cinema.png");
@@ -167,5 +198,21 @@ public class ResourcesManager {
 		} catch (final TextureAtlasBuilderException e) {
 			Debug.e(e);
 		}
+        
+        try {
+        	mSndCashMachine = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "cha_ching.ogg");
+        	mSndCashMachine.setVolume(0.8f);
+        	mSndCowboy = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "cowboy.ogg");
+        	mSndDiceWood = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "dice_wood.ogg");
+        	mSndProjector = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "16mm_film_projector.ogg");
+        	mSndShufflingCards = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "shuffling_cards.ogg");
+        	mSndTaDa = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "ta_da.ogg");
+        	mSndTaDa.setVolume(0.25f);
+        	mMusicLoop = MusicFactory.createMusicFromAsset(engine.getMusicManager(), context, "western_spaghetti.ogg");
+        	mMusicLoop.setLooping(true);
+    		mMusicLoop.setVolume(0.6f);
+        } catch (final IOException e) {
+        	Debug.e(e);
+        }
 	}
 }

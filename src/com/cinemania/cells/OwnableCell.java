@@ -1,4 +1,4 @@
-package com.cinemania.cases;
+package com.cinemania.cells;
 
 import org.andengine.opengl.texture.region.ITextureRegion;
 
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
+import com.cinemania.resources.ResourcesManager;
 
 public abstract class OwnableCell extends Cell {
 	
@@ -33,6 +34,7 @@ public abstract class OwnableCell extends Cell {
 	public abstract void strangerOnCell(Player player);
 	
 	public void showPayDialog(int amount, int titleIcon, int titre){
+		ResourcesManager.getInstance().mSndCowboy.play();
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(false);
 		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.payopponent, null);
@@ -51,6 +53,8 @@ public abstract class OwnableCell extends Cell {
 		dialogBuilder.setNeutralButton(R.string.btn_pay, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				ResourcesManager.getInstance().mSndCashMachine.stop();
+				ResourcesManager.getInstance().mSndCashMachine.play();
 				dialog.dismiss();
 			}
 		});

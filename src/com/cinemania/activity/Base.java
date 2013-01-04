@@ -1,5 +1,6 @@
 package com.cinemania.activity;
 
+import org.andengine.audio.music.Music;
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.engine.handler.timer.ITimerCallback;
@@ -57,6 +58,7 @@ public class Base extends BaseGameActivity
     
     //Scene courrante
     private Scene mCurrentScene;
+    
     //Type de scene
     private SceneType mSceneType = SceneType.LOADING;
     
@@ -78,12 +80,9 @@ public class Base extends BaseGameActivity
     private BoardScene mGame;
     // HUD
     private BoardHUD mHUD;
-    //Game context
-    private GameContext mGameContext;
-    
-    
-    private String mGameData;
-    private long mGameIdentifier;
+
+    // Musique du jeu
+    private Music mMusicLoop;
     
     // ===========================================================
     // Constructors
@@ -106,6 +105,8 @@ public class Base extends BaseGameActivity
     	manager = ResourcesManager.getInstance();
     	mCamera = new ZoomCamera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
         EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new FillResolutionPolicy(), mCamera);
+        engineOptions.getAudioOptions().setNeedsSound(true);
+        engineOptions.getAudioOptions().setNeedsMusic(true);
         return engineOptions;
     }
     
@@ -134,19 +135,6 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception {
     	// Active GCM message reception
     	GCMConnector.connect();
-    	
-    	// TODO: menu do create / join
-    	
-    	
-    	
-    	// Create a new game through the API
-    	mGameIdentifier = API.newGame().getGameIdentifier();
-    	API.joinGame(mGameIdentifier);
-    	
-    	// TODO: do this here
-    	
-    	GameDataResult gameDataResult = API.gameData(mGameIdentifier);
-    	mGameData = gameDataResult.getGameData();
     	
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
@@ -204,22 +192,10 @@ public class Base extends BaseGameActivity
 		manager.LoadPlayer(this, this.mEngine);
 		manager.LoadHUD(this, this.mEngine);
 		
-		// Generate game context based on new game data
-		mGameContext = GameContext.getSharedInstance();
-		try {
-			mGameContext.deserialize(mGameData);
-			mGameContext.deserializeBoard(mGame);
-			mGameContext.deserializePlayers();
-			mGameContext.deserializeGame();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-			
-		//Initialisation des ressources
-		mMenu.Load();
-		mOption.Load();
-		mGame.Load();
-		mHUD.Load();
+		mMenu.Load();		
+		
+		// Charge la musique
+		mMusicLoop = ResourcesManager.getInstance().mMusicLoop;
 	}
 	
 	private void loadScenes()
@@ -252,6 +228,8 @@ public class Base extends BaseGameActivity
                 case GAME:
                 	this.setSceneType(SceneType.MENU);
                 	this.setCurrentScene(mMenu);
+                	if(mMusicLoop.isPlaying())
+                		mMusicLoop.pause();
                     break; 
               }
          }
@@ -290,6 +268,8 @@ public class Base extends BaseGameActivity
     	if(mSceneType == SceneType.GAME){
     		mHUD.setVisible(true);
     		mCamera.setZoomFactor(0.5f);
+    		if(!mMusicLoop.isPlaying())
+    			mMusicLoop.play();
     	}
     	else{
     		mHUD.setVisible(false);

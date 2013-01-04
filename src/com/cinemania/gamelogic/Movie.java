@@ -5,6 +5,9 @@ import static com.cinemania.constants.AllConstants.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cinemania.gamelogic.interfaces.JSonator;
+import com.cinemania.gamelogic.interfaces.Profitable;
+
 public abstract class Movie implements Profitable, JSonator {
 
 	private int mId;

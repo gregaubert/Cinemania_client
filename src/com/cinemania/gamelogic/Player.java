@@ -22,12 +22,13 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.cinemania.activity.Base;
-import com.cinemania.cases.Cell;
-import com.cinemania.cases.Cinema;
-import com.cinemania.cases.HeadQuarters;
-import com.cinemania.cases.LogisticFactory;
-import com.cinemania.cases.OwnableCell;
-import com.cinemania.cases.School;
+import com.cinemania.cells.Cell;
+import com.cinemania.cells.Cinema;
+import com.cinemania.cells.HeadQuarters;
+import com.cinemania.cells.LogisticFactory;
+import com.cinemania.cells.OwnableCell;
+import com.cinemania.cells.School;
+import com.cinemania.gamelogic.interfaces.JSonator;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 
@@ -120,7 +121,10 @@ public class Player implements JSonator{
 	}
 	
 	public void Move(int nb){
-	  
+		
+		if(mGameContext.isCreator())
+			mGameContext.completeTurn();
+		
 		IEntityModifier [] entity = new IEntityModifier[nb+1];
 		
 		for(int i = 0; i < nb; i++){
@@ -166,9 +170,8 @@ public class Player implements JSonator{
 	//When we pass our QG we can get all the profit.
 	public void encaisser(){
 		
-		//FIXME Je pense que ça c'est pas correct, il faut update le tour a chaque fois que le créateur tire le dé pas a chaque fois qu'il tombe sur son hq
-		if(mGameContext.isCreator())
-			mGameContext.completeTurn();
+		ResourcesManager.getInstance().mSndCashMachine.stop();
+		ResourcesManager.getInstance().mSndCashMachine.play();
 		
 		int lvlCinema = 0,
 			profitMovies = 0,
@@ -186,6 +189,7 @@ public class Player implements JSonator{
 		
 		for(Movie movie : getMovies())
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+		
 		mLastProfit = lvlCinema * profitMovies;
 		receiveMoney(mLastProfit);
 		mLastActors = profitActors;

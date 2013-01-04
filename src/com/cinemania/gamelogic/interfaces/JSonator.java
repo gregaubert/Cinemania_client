@@ -1,4 +1,4 @@
-package com.cinemania.gamelogic;
+package com.cinemania.gamelogic.interfaces;
 
 import org.json.JSONException;
 import org.json.JSONObject;

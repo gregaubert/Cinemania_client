@@ -1,4 +1,4 @@
-package com.cinemania.cases;
+package com.cinemania.cells;
 
 import org.andengine.entity.Entity;
 import org.andengine.entity.primitive.Rectangle;
@@ -10,8 +10,8 @@ import org.andengine.util.color.Color;
 
 import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
-import com.cinemania.gamelogic.JSonator;
 import com.cinemania.gamelogic.Player;
+import com.cinemania.gamelogic.interfaces.JSonator;
 import com.cinemania.resources.ResourcesManager;
 
 public abstract class Cell implements JSonator, org.andengine.entity.sprite.ButtonSprite.OnClickListener{
@@ -55,15 +55,15 @@ public abstract class Cell implements JSonator, org.andengine.entity.sprite.Butt
 		return this.mView.getY();
 	}
 	
-	public void setScale(float pScale){
+	protected void setScale(float pScale){
 		mView.setScale(pScale);
 	}
 	
-	public void setColor(Color pColor){
+	protected void setColor(Color pColor){
 		mView.setColor(pColor);
 	}
 	
-	public void addLevel(int level){
+	protected void addLevel(int level){
 		mView.getChildByIndex(LAYER_LEVEL).attachChild(new Sprite(0, 0, ResourcesManager.getInstance().mCaseLevel[level-1], Base.getSharedInstance().getVertexBufferObjectManager()));
 	}
 	

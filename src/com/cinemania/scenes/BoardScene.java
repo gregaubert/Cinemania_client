@@ -1,12 +1,14 @@
 package com.cinemania.scenes;
 
-import org.andengine.engine.camera.ZoomCamera;
-import static com.cinemania.constants.AllConstants.*;
+import static com.cinemania.constants.AllConstants.BOARD_SIZE;
 
+import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.entity.Entity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
+import org.json.JSONException;
+
 import android.util.Log;
 
 import com.cinemania.activity.Base;
@@ -14,6 +16,7 @@ import com.cinemania.camera.CameraManager;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.network.api.API;
+import com.cinemania.network.api.API.GameDataResult;
 import com.cinemania.resources.ResourcesManager;
 
 
@@ -77,8 +80,33 @@ public class BoardScene extends Scene implements Loader {
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
 	@Override
-	public void Load() {		
+	public void Load() {	
+		
+	    long gameIdentifier;
+		
+		// Create a new game through the API
+    	gameIdentifier = API.newGame().getGameIdentifier();
+    	API.joinGame(gameIdentifier);
+    	
+    	GameDataResult gameDataResult = API.gameData(gameIdentifier);
+
 		mGameContext = GameContext.getSharedInstance();
+		
+		//TODO tester si nouvelle partie, si oui deserialie un jSon de base
+		try 
+		{
+			Log.d("DEBUG","deserializing");
+			mGameContext = GameContext.getSharedInstance();
+			mGameContext.deserialize(gameDataResult.getGameData());
+					
+			mGameContext.deserializeBoard(Base.getSharedInstance().getGame());
+			mGameContext.deserializePlayers();
+			mGameContext.deserializeGame();
+		}
+		catch (JSONException e)
+		{
+			e.printStackTrace();
+		}
 		
 		this.setBackgroundEnabled(true);
 		this.getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
