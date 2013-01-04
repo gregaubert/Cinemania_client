@@ -178,10 +178,18 @@ public final class GameContext {
 		//TODO envoi des datas.
 	}
 	
+	/**
+	 * Permet d'augmenter le tour d'un.
+	 * 
+	 * Tout les 4 tour, on augment l'année.
+	 */
 	public void completeTurn(){
-		this.mYear += offsetYear;
-		Base.getSharedInstance().getHUD().setYear(getYear());
 		this.mCurrentTurn++;
+		if(mCurrentTurn%4==0)
+		{
+			this.mYear += offsetYear;
+			Base.getSharedInstance().getHUD().setYear(getYear());
+		}
 	}
 	
 	/**

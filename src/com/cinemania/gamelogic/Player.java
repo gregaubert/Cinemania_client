@@ -121,7 +121,10 @@ public class Player implements JSonator{
 	}
 	
 	public void Move(int nb){
-	  
+		
+		if(mGameContext.isCreator())
+			mGameContext.completeTurn();
+		
 		IEntityModifier [] entity = new IEntityModifier[nb+1];
 		
 		for(int i = 0; i < nb; i++){
@@ -170,10 +173,6 @@ public class Player implements JSonator{
 		ResourcesManager.getInstance().mSndCashMachine.stop();
 		ResourcesManager.getInstance().mSndCashMachine.play();
 		
-		//FIXME Je pense que ça c'est pas correct, il faut update le tour a chaque fois que le créateur tire le dé pas a chaque fois qu'il tombe sur son hq
-		if(mGameContext.isCreator())
-			mGameContext.completeTurn();
-		
 		int lvlCinema = 0,
 			profitMovies = 0,
 			profitActors = 0,
@@ -190,6 +189,7 @@ public class Player implements JSonator{
 		
 		for(Movie movie : getMovies())
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+		
 		mLastProfit = lvlCinema * profitMovies;
 		receiveMoney(mLastProfit);
 		mLastActors = profitActors;
