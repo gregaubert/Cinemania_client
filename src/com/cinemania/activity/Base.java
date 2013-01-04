@@ -15,15 +15,10 @@ import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
-import org.json.JSONException;
-
 import android.util.Log;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
-import com.cinemania.network.GameContext;
-import com.cinemania.network.api.API;
-import com.cinemania.network.api.API.GameDataResult;
 import com.cinemania.network.gcm.GCMConnector;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
