@@ -6,7 +6,12 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.view.View;
+
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
@@ -25,6 +30,7 @@ public class BoardHUD extends HUD implements Loader {
 	private Text txtCurrentPlayer;
 
 	private ButtonSprite mDiceSprite;
+	
 	private ButtonSprite mNextSprite;
 	private Sprite mWaiting;
 	
@@ -98,10 +104,14 @@ public class BoardHUD extends HUD implements Loader {
 				{
 
 	                case TouchEvent.ACTION_DOWN: {
+	                	
 	                	ResourcesManager.getInstance().mSndDiceWood.play();
-	                	this.setVisible(false);
+	                	setVisible(false);
 	                	mNextSprite.setVisible(true);
-	                	return mActivity.getGame().movePlayer();	                	
+	                	mActivity.getGame().movePlayer();
+
+	            		//L'action a été gérée.
+	            		return true;
 	                }
                 }
                 return false;
@@ -116,10 +126,41 @@ public class BoardHUD extends HUD implements Loader {
 				{
 
 	                case TouchEvent.ACTION_DOWN: {
-	                	this.setVisible(false);
-	                	mGameContext.nextTurn();
-	                	mWaiting.setVisible(true);
 	                	
+	                	final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+	            		dialogBuilder.setCancelable(true);
+	            		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.confirmturn, null);
+	            		dialogBuilder.setView(view);
+	                	
+	            		//On confirme le passage de tour.
+	            		dialogBuilder.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								mNextSprite.setVisible(false);
+			                	mGameContext.nextTurn();
+			                	mWaiting.setVisible(true);
+							}
+						});
+	            		
+	            		//On annule le passage de tour.
+	            		dialogBuilder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.cancel();
+							}
+						}); 
+	            		
+	            		Base.getSharedInstance().runOnUiThread(new Runnable() {
+	            			@Override
+	            			public void run() {
+	            				AlertDialog dialog = dialogBuilder.create();
+	            				dialog.show();
+	            			}
+	            		});
+	            		
+	            		//L'action a été gérée.
 	                	return true;	                	
 	                }
                 }

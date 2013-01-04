@@ -102,15 +102,13 @@ public class BoardScene extends Scene implements Loader {
 	}
 	
 	//TODO A changer / modifier / supprimer / renommer / verifier
-	public boolean movePlayer() {
+	public void movePlayer() {
 		
     	int move = shootOneDice() + shootOneDice();
     	
-    	Log.i("GAME","D�placement du joueur  de " + move);
+    	Log.i("GAME","Deplacement du joueur " + move);
     	Player p = mGameContext.getPlayer();
     	p.Move(move);
-    	
-        return true;
 	}
 
 	/**

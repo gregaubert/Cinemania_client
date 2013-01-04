@@ -15,7 +15,6 @@ import com.cinemania.activity.R;
 import com.cinemania.gamelogic.ChanceCard;
 import com.cinemania.gamelogic.ChanceCardManager;
 import com.cinemania.gamelogic.Player;
-import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 
 public class Chance extends Cell {
@@ -28,10 +27,7 @@ public class Chance extends Cell {
 	}
 
 	@Override
-	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
-			float pTouchAreaLocalY) {
-		//TODO Pas d'action sur le onclick, virer cette ligne
-		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
+	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 	}
 
 	@Override
