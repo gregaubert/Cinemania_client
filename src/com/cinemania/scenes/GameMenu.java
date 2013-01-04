@@ -65,10 +65,17 @@ public class GameMenu extends MenuScene implements IOnMenuItemClickListener, Loa
 		mManager.mSndMenuButton.play();
 		switch (menuItem.getID()) {
 	        case MENU_START:
+	        	
+	        	mActivity.getGame().Load();
+	        	mActivity.getHUD().Load();
+	        	
 	        	mActivity.setSceneType(SceneType.GAME);
 	        	mActivity.setCurrentScene(mActivity.getGame());
 	            return true;
 	        case MENU_OPTION:
+	        	
+	        	mActivity.getOption().Load();	
+	        	
 	        	mActivity.setSceneType(SceneType.OPTIONS);
 	        	mActivity.setCurrentScene(mActivity.getOption());
 	        	return true;

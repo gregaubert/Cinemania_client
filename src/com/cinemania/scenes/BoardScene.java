@@ -7,6 +7,7 @@ import org.andengine.entity.Entity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
+import org.json.JSONException;
 
 import android.util.Log;
 
@@ -77,8 +78,25 @@ public class BoardScene extends Scene implements Loader {
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
 	@Override
-	public void Load() {		
+	public void Load() {	
+		
 		mGameContext = GameContext.getSharedInstance();
+		
+		//TODO tester si nouvelle partie, si oui deserialie un jSon de base
+		try 
+		{
+			Log.d("DEBUG","deserializing");
+			mGameContext = GameContext.getSharedInstance();
+			mGameContext.deserialize(GameContext.initialState());
+					
+			mGameContext.deserializeBoard(Base.getSharedInstance().getGame());
+			mGameContext.deserializePlayers();
+			mGameContext.deserializeGame();
+		}
+		catch (JSONException e)
+		{
+			e.printStackTrace();
+		}
 		
 		this.setBackgroundEnabled(true);
 		this.getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));

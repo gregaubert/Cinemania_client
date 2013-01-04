@@ -197,26 +197,7 @@ public class Base extends BaseGameActivity
 		manager.LoadPlayer(this, this.mEngine);
 		manager.LoadHUD(this, this.mEngine);
 		
-		//TODO tester si nouvelle partie, si oui deserialie un jSon de base
-		try 
-		{
-			mGameContext = GameContext.getSharedInstance();
-			mGameContext.deserialize(GameContext.initialState());
-			
-			mGameContext.deserializeBoard(this.mGame);
-			mGameContext.deserializePlayers();
-			mGameContext.deserializeGame();
-		}
-		catch (JSONException e)
-		{
-			e.printStackTrace();
-		}
-			
-		// Initialisation des ressources
-		mMenu.Load();
-		mOption.Load();
-		mGame.Load();
-		mHUD.Load();
+		mMenu.Load();		
 		
 		// Charge la musique
 		mMusicLoop = ResourcesManager.getInstance().mMusicLoop;
