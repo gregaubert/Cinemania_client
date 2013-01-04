@@ -54,6 +54,8 @@ public class BoardScene extends Scene implements Loader {
 	private static final int LAYER_BOARD = 1;
 	private static final int LAYER_PAWN = 2;
     
+	private long mGameIdentifier;
+	
 	// ===========================================================
 	// Constructors
 	// ===========================================================
@@ -83,32 +85,21 @@ public class BoardScene extends Scene implements Loader {
 	@Override
 	public void Load() {	
 		
-	    long gameIdentifier;
+	    ;
 	    
 	    // Check there is already an unfull game
-	    /*GameListResult gameList = API.availableGames();
+	    GameListResult gameList = API.availableGames();
 	    if (gameList.getGames().length > 0) {
-	    	gameIdentifier = gameList.getGames()[0];
-	    	Log.d(BoardScene.class.getName(), "Get game (" + gameIdentifier + ")");
-	    } else {*/
+	    	mGameIdentifier = gameList.getGames()[0];
+	    	Log.d(BoardScene.class.getName(), "Get game (" + mGameIdentifier + ")");
+	    } else {
 	    	// Create a new game
-	    	gameIdentifier = API.newGame().getGameIdentifier();
-	    	Log.d(BoardScene.class.getName(), "Create new game (" + gameIdentifier + ")");
-	    //}
-    	API.joinGame(gameIdentifier);
-    	GameDataResult gameData = API.gameData(gameIdentifier);
-    	// Extract game data
-		mGameContext = GameContext.getSharedInstance();
-		try {
-			mGameContext = GameContext.getSharedInstance();
-			mGameContext.deserialize(gameData.getGameData());
-					
-			mGameContext.deserializeBoard(Base.getSharedInstance().getGame());
-			mGameContext.deserializePlayers();
-			mGameContext.deserializeGame();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	    	mGameIdentifier = API.newGame().getGameIdentifier();
+	    	Log.d(BoardScene.class.getName(), "Create new game (" + mGameIdentifier + ")");
+	    }
+    	API.joinGame(mGameIdentifier);
+    	
+    	getDataFromServer();
 		
 		setBackgroundEnabled(true);
 		getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
@@ -128,6 +119,22 @@ public class BoardScene extends Scene implements Loader {
 		// Attach player's view to 
 		for (Player player : mGameContext.getPlayers()){
 			getChildByIndex(LAYER_PAWN).attachChild(player.getView());
+		}
+	}
+
+	public void getDataFromServer() {
+		GameDataResult gameData = API.gameData(mGameIdentifier);
+    	// Extract game data
+		mGameContext = GameContext.getSharedInstance();
+		try {
+			mGameContext = GameContext.getSharedInstance();
+			mGameContext.deserialize(gameData.getGameData());
+					
+			mGameContext.deserializeBoard(Base.getSharedInstance().getGame());
+			mGameContext.deserializePlayers();
+			mGameContext.deserializeGame();
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 	

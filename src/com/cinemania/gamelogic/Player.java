@@ -423,7 +423,7 @@ public class Player implements JSonator{
 		JSONArray prop = new JSONArray();
 		
 		for(OwnableCell o : mProperties)
-			prop.put(o.toJson());
+			prop.put(mGameContext.findCaseIndex(o));
 		
 		player.put("properties", prop);
 		player.put("money", getAmount());
