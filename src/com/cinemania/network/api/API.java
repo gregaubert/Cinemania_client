@@ -114,7 +114,7 @@ public final class API {
 				JSONArray games = response.getJson().getJSONArray("games");
 				result.mGames = new Long[games.length()];
 				for (int i = 0; i < games.length(); i++) {
-					result.mGames[i] = games.getLong(i);
+					result.mGames[i] = games.getJSONObject(i).getLong("id");
 				}
 			} catch (JSONException e) {
 				result.mSuccessful = false;

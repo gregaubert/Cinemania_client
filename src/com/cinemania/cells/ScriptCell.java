@@ -99,7 +99,7 @@ public class ScriptCell extends Cell {
 	public JSONObject toJson() throws JSONException {
 		JSONObject jsonCell = new JSONObject();
 		
-		jsonCell.put("type", HeadQuarters.TYPE);		
+		jsonCell.put("type", ScriptCell.TYPE);		
 		return jsonCell;
 	}
 }
