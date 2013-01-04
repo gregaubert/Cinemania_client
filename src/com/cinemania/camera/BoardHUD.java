@@ -131,15 +131,20 @@ public class BoardHUD extends HUD implements Loader {
 	            		dialogBuilder.setCancelable(true);
 	            		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.confirmturn, null);
 	            		dialogBuilder.setView(view);
-	                	
+	            		
 	            		//On confirme le passage de tour.
 	            		dialogBuilder.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener() {
 							
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								mNextSprite.setVisible(false);
-			                	mGameContext.nextTurn();
+								
+								new Thread("Connect to Serveur" ) {
+							        public void run() { mGameContext.nextTurn(); }
+							     }.start();
+							     
 			                	mWaiting.setVisible(true);
+			                	dialog.dismiss();
 							}
 						});
 	            		
