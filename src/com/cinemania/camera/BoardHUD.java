@@ -67,7 +67,7 @@ public class BoardHUD extends HUD implements Loader {
 		txtCurrentPlayer.setColor(p.getColorPawn());
 	}
 	
-	public void setCurrentTurn(){
+	public void setNewTurn(){
 		mDiceSprite.setVisible(true);
 		mWaiting.setVisible(false);
 	}

@@ -37,6 +37,6 @@ public final class GCMUtilities {
     /**
      * Intent's extra that contains the message to be displayed.
      */
-    public static final String MESSAGE = "message";
+    public static final String MESSAGE = "action";
     
 }

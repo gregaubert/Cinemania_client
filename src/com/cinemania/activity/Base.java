@@ -22,6 +22,8 @@ import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
 import com.cinemania.network.GameContext;
+import com.cinemania.network.api.API;
+import com.cinemania.network.api.API.GameDataResult;
 import com.cinemania.network.gcm.GCMConnector;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
@@ -78,9 +80,7 @@ public class Base extends BaseGameActivity
     private BoardScene mGame;
     // HUD
     private BoardHUD mHUD;
-    //Game context
-    private GameContext mGameContext;
-    
+
     // Musique du jeu
     private Music mMusicLoop;
     
@@ -132,9 +132,8 @@ public class Base extends BaseGameActivity
     }
 
     @Override
-    public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception
-    {
-        // ready to receive GCM messages
+    public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception {
+    	// Active GCM message reception
     	GCMConnector.connect();
     	
     	initSplashScene();
@@ -142,18 +141,15 @@ public class Base extends BaseGameActivity
     }
 
     @Override
-    public void onPopulateScene(Scene pScene, OnPopulateSceneCallback pOnPopulateSceneCallback) throws Exception
-    {
-    	//Apres 1 secondes, on appel la methode onTimePassed
-    	mEngine.registerUpdateHandler(new TimerHandler(1f, new ITimerCallback() 
-    	{
-    		public void onTimePassed(final TimerHandler pTimerHandler) 
-    	    {
-    			//Desincription du handler
+    public void onPopulateScene(Scene pScene, OnPopulateSceneCallback pOnPopulateSceneCallback) throws Exception {
+    	// Apres 1 secondes, on appel la methode onTimePassed
+    	mEngine.registerUpdateHandler(new TimerHandler(1f, new ITimerCallback() {
+    		public void onTimePassed(final TimerHandler pTimerHandler) {
     			mEngine.unregisterUpdateHandler(pTimerHandler);
-    	        //Chargement des ressources et scenes.
+    			
     			loadScenes();
     			loadResources();
+    			
     			mCamera.setHUD(mHUD);
     	        mCurrentScene.detachChildren();
     	        setSceneType(SceneType.MENU);
@@ -162,7 +158,6 @@ public class Base extends BaseGameActivity
     	}));
     	  
     	pOnPopulateSceneCallback.onPopulateSceneFinished();
-
     }
         
     //Creer la scene affiche e l'ecran.
@@ -197,26 +192,7 @@ public class Base extends BaseGameActivity
 		manager.LoadPlayer(this, this.mEngine);
 		manager.LoadHUD(this, this.mEngine);
 		
-		//TODO tester si nouvelle partie, si oui deserialie un jSon de base
-		try 
-		{
-			mGameContext = GameContext.getSharedInstance();
-			mGameContext.deserialize(GameContext.initialState());
-			
-			mGameContext.deserializeBoard(this.mGame);
-			mGameContext.deserializePlayers();
-			mGameContext.deserializeGame();
-		}
-		catch (JSONException e)
-		{
-			e.printStackTrace();
-		}
-			
-		// Initialisation des ressources
-		mMenu.Load();
-		mOption.Load();
-		mGame.Load();
-		mHUD.Load();
+		mMenu.Load();		
 		
 		// Charge la musique
 		mMusicLoop = ResourcesManager.getInstance().mMusicLoop;

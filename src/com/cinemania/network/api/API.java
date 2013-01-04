@@ -16,7 +16,7 @@ import com.cinemania.network.gcm.ServerUtilities;
 
 public final class API {
 	
-	private static final String SERVER_LOCATION = "http://157.26.110.187/cinemania/index.php";
+	private static final String SERVER_LOCATION = "http://10.192.51.85/cinemania/app/index.php";
 
 	private static final URL REGISTER_DEVICE_URL = createURL("/devices/register");
 	private static final URL UNREGISTER_DEVICE_URL = createURL("/devices/unregister");
@@ -131,11 +131,11 @@ public final class API {
 		(joins the device to the game)
 		return: {"playerid":1,"success":1}
 	 */
-	public static PlayerResult joinGame(int game) {
+	public static PlayerResult joinGame(long gameIdentifier) {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("device", Utilities.DEVICE_ID);
-		params.put("game", Long.toString(game));
+		params.put("game", Long.toString(gameIdentifier));
 		
 		PlayerResult result = new PlayerResult();
 		
@@ -190,7 +190,7 @@ public final class API {
 			result.mSuccessful = false;
 		} else {
 			try {
-				result.mGameData = response.getJson().getString("data");
+				result.mGameData = response.getJson().getJSONObject("game").getString("data");
 			} catch (JSONException e) {
 				result.mSuccessful = false;
 			}

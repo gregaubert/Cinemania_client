@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.util.Log;
  
 import com.cinemania.activity.Base;
+import com.cinemania.camera.BoardHUD;
 import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.Utilities;
 import com.cinemania.network.api.API;
@@ -45,39 +46,15 @@ public class GCMConnector {
         } 
          
         Log.d("DEBUG", "RegID: " + regId);
+        
+        API.registerDevice(regId);
          
         // needid if you want messages to be delivered to this app!
         GCMRegistrar.setRegisteredOnServer(mActivity, true);
-        
-        /*boolean x = API.registerDevice(regId);
-        Log.d("API", Boolean.toString(x));
-        GameIdentifierResult r1 = API.newGame();
-        GameDataResult r2 = API.gameData(r1.getGameIdentifier());
-        API.gamePassTurn(r1.getGameIdentifier(), r2.getGameData());
-        
-                
-        // Try to register again, but not in the UI thread.
-        // It's also necessary to cancel the thread onDestroy(),
-        // hence the use of AsyncTask instead of a raw thread.
-        final Context context = mActivity;
-        mRegisterTask = new AsyncTask<Void, Void, Void>() {
- 
-            @Override
-            protected Void doInBackground(Void... params) {
-                ServerUtilities.register(context, regId);
-                return null;
-            }
- 
-            @Override
-            protected void onPostExecute(Void result) {
-                mRegisterTask = null;
-            }
- 
-        };
-        mRegisterTask.execute(null, null, null);*/
  
     }
      
+    // TODO: This one is never referenced
     public void destroy() {
         if (mRegisterTask != null) {
             mRegisterTask.cancel(true);
@@ -96,8 +73,12 @@ public class GCMConnector {
     private static BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context context, Intent intent) {
-            String newMessage = intent.getExtras().getString(GCMUtilities.MESSAGE);
-            Log.d("DEBUG", "Message received! " + newMessage);
+            String action = intent.getExtras().getString(GCMUtilities.MESSAGE);
+            
+            if (action.equals("PASS_TURN")){
+            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).setNewTurn();
+            }
+            
         }
     };
      

@@ -41,7 +41,7 @@ public class Player implements JSonator{
 	private ArrayList<Movie> mMovies = new ArrayList<Movie>();
 	private HeadQuarters mHeadQuarters;
 	private Cell mCurrentPosition;
-	private long mIdentifier;
+	private String mIdentifier;
 	private int mOrder;
 	private String mName;
 	private Color mColorCell;
@@ -61,7 +61,7 @@ public class Player implements JSonator{
 	
 	private GameContext mGameContext;
 	
-	public Player(long identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, int lastActors, int lastLogistics, HeadQuarters headQuarters, Cell currentPosition) {
+	public Player(String identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, int lastActors, int lastLogistics, HeadQuarters headQuarters, Cell currentPosition) {
 		mIdentifier = identifier;
 		mOrder = order;
 		mName = name;
@@ -85,7 +85,7 @@ public class Player implements JSonator{
 	}
 
 	public Player(JSONObject player, int order, HeadQuarters headQuarters, Cell currentPosition) throws JSONException{
-		this(	player.getLong("id"),
+		this(	player.getString("id"),
 				order,
 				player.getString("name"),
 				player.getInt("money"),
@@ -216,7 +216,7 @@ public class Player implements JSonator{
 		return mHeadQuarters;
 	}
 	
-	public long getId() {
+	public String getId() {
 		return mIdentifier;
 	}
 	

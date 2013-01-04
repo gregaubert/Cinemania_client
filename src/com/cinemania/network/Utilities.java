@@ -45,7 +45,7 @@ public final class Utilities {
 		String body = buildPostBody(params);
 		
 		// Post builded request to the specified server's URL
-		Log.d("API", body);
+		Log.d(Utilities.class.getName(), "Post(" + url + "): " + body);
 		byte[] bytes = body.getBytes();
 		
 		/*
@@ -110,7 +110,7 @@ public final class Utilities {
 		while (-1 != (n = reader.read(buffer))) {
 			builder.append(buffer, 0, n);
 		}
-		Log.d("API", builder.toString());
+		Log.d(Utilities.class.getName(), "Result: " + builder.toString());
 		return new JSONObject(builder.toString());
 	}
 	
