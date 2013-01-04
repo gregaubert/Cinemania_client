@@ -147,10 +147,9 @@ public final class GameContext {
 			
 			// Game
 			JSONObject jsonGame = new JSONObject();
-			//TODO a corriger
-			jsonGame.put("player", this.mPlayer.getId());
-			jsonGame.put("turn", 1);
-			jsonGame.put("id", 1234567);
+			jsonGame.put("player",mPlayer.getId());
+			jsonGame.put("turn", mCurrentTurn);
+			jsonGame.put("id", mGameIdentifier);
 			JSONObject json = new JSONObject();
 			json.put("version", 1);
 			json.put("game", jsonGame);
@@ -174,16 +173,7 @@ public final class GameContext {
 			API.gamePassTurn(mGameIdentifier, serialize());
 		}
 		
-		
-		//Si on passe le tour alors que nous ne somme pas le joueur en cours.
-		/*
-		if(mCurrentPlayer != mPlayer)
-			throw new IllegalStateException("Vous ne pouvez passer votre tour que lorsque c'est a vous.");
-		this.nextPlayer();
-		String res = this.serialize();
-		//TODO envoi des datas.
-		 * 
-		 */
+		Base.getSharedInstance().getHUD().setCurrentPlayer(mCurrentPlayer);
 	}
 	
 	public void completeTurn(){
@@ -193,22 +183,7 @@ public final class GameContext {
 	}
 	
 	/**
-	 * On passe au joueur suivant
-	 */
-	private void nextPlayer(){
-		
-		for(int i = 0; i < mPlayers.length; i++)
-			if(mPlayers[i] == mCurrentPlayer)
-			{
-				mCurrentPlayer = mPlayers[(i+1)%mPlayers.length];
-				Base.getSharedInstance().getHUD().setCurrentPlayer(mCurrentPlayer);
-				return;
-			}
-		
-	}
-	
-	/**
-	 * D�termine si le tour est au joueur local
+	 * Déermine si le tour est au joueur local
 	 */
 	public boolean isLocalTurn() {
 		return mPlayer == mCurrentPlayer;
@@ -261,7 +236,7 @@ public final class GameContext {
 			// Player 1
 			offset = next(cellIdentifiers, offset);
 			JSONObject player1 = new JSONObject();
-			player1.put("id", 1001);
+			player1.put("id", -1);
 			player1.put("name", "player1");
 			player1.put("hq", offset);
 			player1.put("position", offset);
@@ -279,7 +254,7 @@ public final class GameContext {
 			// Player 2
 			offset = next(cellIdentifiers, offset);
 			JSONObject player2 = new JSONObject();
-			player2.put("id", 2001);
+			player2.put("id", -1);
 			player2.put("name", "player2");
 			player2.put("hq", offset);
 			player2.put("position", offset);
@@ -297,7 +272,7 @@ public final class GameContext {
 			// Player 3
 			offset = next(cellIdentifiers, offset);
 			JSONObject player3 = new JSONObject();
-			player3.put("id", 3001);
+			player3.put("id", -1);
 			player3.put("name", "player3");
 			player3.put("hq", offset);
 			player3.put("position", offset);
@@ -315,7 +290,7 @@ public final class GameContext {
 			// Player 4
 			offset = next(cellIdentifiers, offset);
 			JSONObject player4 = new JSONObject();
-			player4.put("id", 4001);
+			player4.put("id", -1);
 			player4.put("name", "player4");
 			player4.put("hq", offset);
 			player4.put("position", offset);
@@ -366,9 +341,9 @@ public final class GameContext {
 			}
 			// Game
 			JSONObject jsonGame = new JSONObject();
-			jsonGame.put("player", 1001);
+			jsonGame.put("player", -1);
 			jsonGame.put("turn", 1);
-			jsonGame.put("id", 1234567);
+			jsonGame.put("id", -1);
 			JSONObject json = new JSONObject();
 			json.put("version", 1);
 			json.put("game", jsonGame);

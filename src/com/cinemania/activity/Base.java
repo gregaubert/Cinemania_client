@@ -134,8 +134,17 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception {
     	// Active GCM message reception
     	GCMConnector.connect();
+    	
+    	// TODO: menu do create / join
+    	
+    	
+    	
     	// Create a new game through the API
     	mGameIdentifier = API.newGame().getGameIdentifier();
+    	API.joinGame(mGameIdentifier);
+    	
+    	// TODO: do this here
+    	
     	GameDataResult gameDataResult = API.gameData(mGameIdentifier);
     	mGameData = gameDataResult.getGameData();
     	

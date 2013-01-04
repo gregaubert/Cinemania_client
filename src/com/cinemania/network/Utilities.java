@@ -34,7 +34,7 @@ public final class Utilities {
 		String body = buildPostBody(params);
 		
 		// Post builded request to the specified server's URL
-		Log.d(Utilities.class.getName(), "Post: " + body);
+		Log.d(Utilities.class.getName(), "Post(" + url + "): " + body);
 		byte[] bytes = body.getBytes();
 		
 		/*

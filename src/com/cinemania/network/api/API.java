@@ -14,7 +14,7 @@ import com.cinemania.network.Utilities;
 
 public final class API {
 	
-	private static final String SERVER_LOCATION = "http://192.168.1.39/cinemania/index.php";
+	private static final String SERVER_LOCATION = "http://10.192.51.85/cinemania/app/index.php";
 
 	private static final URL REGISTER_DEVICE_URL = createURL("/devices/register");
 	private static final URL UNREGISTER_DEVICE_URL = createURL("/devices/unregister");
@@ -188,7 +188,7 @@ public final class API {
 			result.mSuccessful = false;
 		} else {
 			try {
-				result.mGameData = response.getJson().getString("data");
+				result.mGameData = response.getJson().getJSONObject("game").getString("data");
 			} catch (JSONException e) {
 				result.mSuccessful = false;
 			}
