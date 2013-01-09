@@ -76,15 +76,14 @@ public class GCMConnector {
             String action = intent.getExtras().getString(GCMUtilities.MESSAGE);
             
 	            
-            if (action.equals("PASS_TURN")){
+            if (action.equals("PASS_TURN") || action.equals("PLAYER_JOINED")){
             	Base.getSharedInstance().runOnUpdateThread(new Runnable(){
             		
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						Base.getSharedInstance().getGame().getDataFromServer();
 						Base.getSharedInstance().getGame().regenerateGameElements();
-		            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).hideWaitingForPlayers();
+		            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).update();
 					}
 	            	
 	            });
