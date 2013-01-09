@@ -9,9 +9,14 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.json.JSONException;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
@@ -150,11 +155,34 @@ public class BoardScene extends Scene implements Loader {
 	
 	public void movePlayer() {
 		
-    	int move = shootOneDice() + shootOneDice();
+		final int dice1 = shootOneDice(),
+		    dice2 = shootOneDice(),
+    	    move = dice1 + dice2;
     	
-    	Log.i("GAME","Deplacement du joueur " + move);
-    	Player p = mGameContext.getPlayer();
-    	p.Move(move);
+    	final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.diceresult, null);
+		dialogBuilder.setView(view);
+		
+		TextView diceResult = (TextView) view.findViewById(R.id.txtDiceResult);
+		diceResult.setText(dice1 + " + " + dice2 + " = " + move);
+		
+		dialogBuilder.setNeutralButton(R.string.btn_move, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+		    	mGameContext.getPlayer().Move(move);
+            	dialog.dismiss();
+			}
+		});
+		
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				AlertDialog dialog = dialogBuilder.create();
+				dialog.show();
+			}
+		});
 	}
 
 	/**

@@ -84,8 +84,11 @@ public class Player implements JSonator{
 		mLastLogistics = lastLogistics;
 		mHeadQuarters = headQuarters;
 		mCurrentPosition = currentPosition;
-		mView = new Sprite(mCurrentPosition.getX()+bordure, mCurrentPosition.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
-		mView.setSize(mView.getWidth()-2*bordure, mView.getHeight() - 2*bordure);
+		mView = new Sprite(mCurrentPosition.getX() + bordure + mOrder * OFFSET, 
+							mCurrentPosition.getY() + bordure, 
+							ResourcesManager.getInstance().mPlayer, 
+							Base.getSharedInstance().getVertexBufferObjectManager());
+		mView.setSize(mView.getWidth()- 2 * bordure, mView.getHeight() - 2 * bordure);
 		mView.setColor(this.mColorPawn);
 		
 		this.mGameContext = GameContext.getSharedInstance();
@@ -139,7 +142,11 @@ public class Player implements JSonator{
 			Cell temp = mGameContext.nextCellOf(mCurrentPosition);
 			//Cell temp = mGameContext.getCase((38+i)%40);
 			//Movement from case to case. The pawn use an offset
-			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure+mOrder*OFFSET, temp.getX()+bordure+mOrder*OFFSET, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
+			MoveModifier mm = new MoveModifier(0.2f, 
+												mCurrentPosition.getX() + bordure + mOrder * OFFSET, 
+												temp.getX() + bordure + mOrder * OFFSET, 
+												mCurrentPosition.getY() + bordure, 
+												temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
 		    
 		    entity[i] = mm;
@@ -237,6 +244,8 @@ public class Player implements JSonator{
 				//TODO Remettre thread en marche.
 			}
 		});
+		
+		dialogBuilder.create().show();
 		
 		mLastProfit = lvlCinema * profitMovies + profitCinema;
 		receiveMoney(mLastProfit);

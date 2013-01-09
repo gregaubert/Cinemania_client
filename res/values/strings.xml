@@ -27,6 +27,7 @@
 	<string name="icon_descriptor">icon</string>
 	<string name="title_cinema">Cinéma</string>
 	<string name="title_confirm">Tour suivant</string>
+	<string name="title_diceresult">Résultat du lancé</string>
 	<string name="title_hq">QG</string>
 	<string name="title_script">Scripts</string>
 	<string name="title_actors">Ecole d\'acteurs</string>
@@ -40,10 +41,12 @@
 	<string name="txt_profit_actor">Écoles d\'acteurs : </string>
 	<string name="txt_profit_logistic">Fabrique de logistiques : </string>
 	<string name="btn_ok">Valider</string>
+	<string name="btn_move">Avancer</string>
 	<string name="btn_pay">Payer</string>
 	<string name="btn_buy">Acheter</string>
 	<string name="btn_close">Fermer</string>
 	<string name="txt_confirm_title">Voulez-vous vraiment passer votre tour?</string>
+	<string name="txt_dice_title">Vous avez fait un : </string>
 	<string name="btn_confirm">Oui</string>
 	<string name="btn_cancel">Annuler</string>
 	<string name="layout_title">Titre</string>
@@ -74,4 +77,6 @@
 	<string name="txt_nombre_de_salles">Nombre de salles :</string>
 	<string name="txt_nextlevel">Prix prochain niveau :</string>
 	<string name="txt_no_script_available">Aucun script disponible&#8230;</string>
+	<string name="txt_production">"Coûts de production : "</string>
+	<string name="txt_next_production">Prochaine production :</string>
 </resources>
