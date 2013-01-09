@@ -14,7 +14,6 @@ import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Script;
-import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
 
 public class ScriptCell extends Cell {
@@ -31,10 +30,7 @@ public class ScriptCell extends Cell {
 	}
 
 	@Override
-	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
-			float pTouchAreaLocalY) {
-		//TODO Supprimer l'action sur le onClick, ne devrait pas y en avoir.
-		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
+	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,	float pTouchAreaLocalY) {
 	}
 
 	@Override

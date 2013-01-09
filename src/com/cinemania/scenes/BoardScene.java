@@ -148,7 +148,6 @@ public class BoardScene extends Scene implements Loader {
 		}
 	}
 	
-	//TODO A changer / modifier / supprimer / renommer / verifier
 	public void movePlayer() {
 		
     	int move = shootOneDice() + shootOneDice();

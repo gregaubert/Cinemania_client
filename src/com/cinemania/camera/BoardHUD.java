@@ -78,7 +78,7 @@ public class BoardHUD extends HUD implements Loader {
 	}
 	
 	public void update(){
-		//Si c'est à nous de joueur.
+		//Si c'est à nous de jouer.
 		if(mGameContext.getCurrentPlayer() == mGameContext.getPlayer())
 			hideWaitingForPlayers();
 		else

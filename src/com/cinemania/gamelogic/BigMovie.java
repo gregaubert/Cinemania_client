@@ -37,7 +37,7 @@ public class BigMovie extends Movie {
 		mYear = movie.getInt("year");
 		mMarketing = movie.getInt("marketing");
 		mMaxMarketing = movie.getInt("maxmarketing");
-		//FIXME Rajouter le producteur
+		//FIXME Rajouter le producteur, pour lorsqu'il y aura une collaboration pour la production de film seulement
 	}
 
 	public void produceThisMovie(Player player, int budgetMarketing) {
@@ -82,7 +82,7 @@ public class BigMovie extends Movie {
 		movie.put("year", mYear);
 		movie.put("marketing", mMarketing);
 		movie.put("maxmarketing", mMaxMarketing);
-		movie.put("producer", mProducer.getId());
+		//movie.put("producer", mProducer.getId());		// TODO Rajouter le producteur lorsqu'il y aura la collaboration pour les films
 		return movie;
 	}
 
