@@ -16,7 +16,7 @@ import com.cinemania.network.gcm.ServerUtilities;
 
 public final class API {
 	
-	private static final String SERVER_LOCATION = "http://10.192.51.85/cinemania/app/index.php";
+	private static final String SERVER_LOCATION = "http://www.jorgealbaladejo.com/cinemania/app/index.php";
 
 	private static final URL REGISTER_DEVICE_URL = createURL("/devices/register");
 	private static final URL UNREGISTER_DEVICE_URL = createURL("/devices/unregister");
