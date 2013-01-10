@@ -213,6 +213,9 @@ public class Player implements JSonator{
 		for(Movie movie : getMovies())
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 		
+		// màj profit
+		mLastProfit = lvlCinema * profitMovies + profitCinema;
+		
 		//Affiche une boîte de dialogue avec les gains.
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 		dialogBuilder.setCancelable(true);
@@ -224,7 +227,7 @@ public class Player implements JSonator{
 		TextView txtActor = (TextView) view.findViewById(R.id.txtNbActor);
 		TextView txtLogistic = (TextView) view.findViewById(R.id.txtNbLogistic);
 		
-		txtMovies.setText(Integer.toString(lvlCinema * profitMovies));
+		txtMovies.setText(Integer.toString(mLastProfit));
 		txtCinema.setText(Integer.toString(profitCinema));
 		txtActor.setText(Integer.toString(profitActors));
 		txtLogistic.setText(Integer.toString(mLastLogistics));
@@ -254,7 +257,7 @@ public class Player implements JSonator{
 			}
 		});
 		
-		mLastProfit = lvlCinema * profitMovies + profitCinema;
+		
 		receiveMoney(mLastProfit);
 		mLastActors = profitActors;
 		receiveActors(mLastActors);
