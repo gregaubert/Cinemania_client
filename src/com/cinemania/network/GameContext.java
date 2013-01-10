@@ -404,4 +404,8 @@ public final class GameContext {
 	public void setGameIdentifier(long gameIdentifier) {
 		mGameIdentifier = gameIdentifier;
 	}
+	
+	public void leaveGame(){
+		API.gameLeave(mGameIdentifier);
+	}
 }

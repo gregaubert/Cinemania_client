@@ -24,6 +24,7 @@ public final class API {
 	private static final URL AVAILABLE_GAMES_URL = createURL("/games/available");
 	private static final URL JOIN_GAME_URL = createURL("/games/join");
 	private static final URL PASSTURN_GAME_URL = createURL("/games/passturn");
+	private static final URL LEAVE_GAME_URL = createURL("/games/leave");
 	private static final URL DATA_GAME_URL = createURL("/games/data");
 	
 	// http://stackoverflow.com/questions/1866770/how-to-handle-a-static-final-field-initializer-that-throws-checked-exception
@@ -172,6 +173,23 @@ public final class API {
 		params.put("data", data);
 		
 		Utilities.Response response = Utilities.post(PASSTURN_GAME_URL, params);
+		// Check if any errors occurs
+		return response.successful();
+	}
+	
+    /*
+	 /games/passturn
+ 	 $device
+	 $game
+	 (calls GCM) for all players
+	 return: {"device":"1","game":1,"notified":1,"success":1}
+	 */
+	public static boolean gameLeave(long gameIdentifier){
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("device", Utilities.DEVICE_ID);
+		params.put("game", Long.toString(gameIdentifier));
+		
+		Utilities.Response response = Utilities.post(LEAVE_GAME_URL, params);
 		// Check if any errors occurs
 		return response.successful();
 	}

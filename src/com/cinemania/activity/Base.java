@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
+import com.cinemania.network.GameContext;
 import com.cinemania.network.gcm.GCMConnector;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
@@ -153,6 +154,16 @@ public class Base extends BaseGameActivity
     	}));
     	  
     	pOnPopulateSceneCallback.onPopulateSceneFinished();
+    }
+    
+    // TODO cannot make this actually execute when the game closes!!!
+    @Override
+    public synchronized void onGameDestroyed(){
+    	try{
+    		GameContext.getSharedInstance().leaveGame();
+    	} catch(Exception e){}
+    	
+    	super.onGameDestroyed();
     }
         
     //Creer la scene affiche e l'ecran.
