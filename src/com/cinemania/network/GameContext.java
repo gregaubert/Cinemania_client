@@ -133,7 +133,7 @@ public final class GameContext {
 		try {
 			
 			JSONArray jsonPlayers = new JSONArray();
-			//Ajout des diff�rents players.
+			//Ajout des differents players.
 			for(Player p : this.mPlayers)
 				jsonPlayers.put(p.toJson());
 			
@@ -266,9 +266,9 @@ public final class GameContext {
 			player2.put("hq", offset);
 			player2.put("position", offset);
 			player2.put("properties", new JSONArray());
-			player1.put("money", AllConstants.DEFAULT_AMOUNT);
-			player1.put("actors", AllConstants.DEFAULT_ACTORS);
-			player1.put("logistics", AllConstants.DEFAULT_LOGISTIC);
+			player2.put("money", AllConstants.DEFAULT_AMOUNT);
+			player2.put("actors", AllConstants.DEFAULT_ACTORS);
+			player2.put("logistics", AllConstants.DEFAULT_LOGISTIC);
 			player2.put("lastTurn", 0);
 			player2.put("lastProfit",0);
 			player2.put("lastActors",0);
@@ -284,9 +284,9 @@ public final class GameContext {
 			player3.put("hq", offset);
 			player3.put("position", offset);
 			player3.put("properties", new JSONArray());
-			player1.put("money", AllConstants.DEFAULT_AMOUNT);
-			player1.put("actors", AllConstants.DEFAULT_ACTORS);
-			player1.put("logistics", AllConstants.DEFAULT_LOGISTIC);
+			player3.put("money", AllConstants.DEFAULT_AMOUNT);
+			player3.put("actors", AllConstants.DEFAULT_ACTORS);
+			player3.put("logistics", AllConstants.DEFAULT_LOGISTIC);
 			player3.put("lastTurn", 0);
 			player3.put("lastProfit",0);
 			player3.put("lastActors",0);
@@ -302,9 +302,9 @@ public final class GameContext {
 			player4.put("hq", offset);
 			player4.put("position", offset);
 			player4.put("properties", new JSONArray());
-			player1.put("money", AllConstants.DEFAULT_AMOUNT);
-			player1.put("actors", AllConstants.DEFAULT_ACTORS);
-			player1.put("logistics", AllConstants.DEFAULT_LOGISTIC);
+			player4.put("money", AllConstants.DEFAULT_AMOUNT);
+			player4.put("actors", AllConstants.DEFAULT_ACTORS);
+			player4.put("logistics", AllConstants.DEFAULT_LOGISTIC);
 			player4.put("lastTurn", 0);
 			player4.put("lastProfit",0);
 			player4.put("lastActors",0);
