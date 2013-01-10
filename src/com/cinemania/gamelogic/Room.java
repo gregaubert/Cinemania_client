@@ -33,8 +33,7 @@ public class Room implements Profitable, JSonator {
 
 	@Override
 	public JSONObject toJson() throws JSONException {
-		// TODO Auto-generated method stub
-		return null;
+		return new JSONObject();
 	}
 }
 

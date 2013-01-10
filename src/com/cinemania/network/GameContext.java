@@ -89,8 +89,6 @@ public final class GameContext {
 					JSONArray jsonRooms = jsonCell.getJSONArray("rooms");
 					Room[] rooms = new Room[jsonRooms.length()];
 					for (int j = 0; j < jsonRooms.length(); j++) {
-						// TODO: Define movie from identifier
-						jsonRooms.getInt(j);
 						rooms[j] = new Room();
 					}
 					cell = new Cinema(rooms,position[0], position[1]);
