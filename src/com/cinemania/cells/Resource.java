@@ -18,11 +18,10 @@ import com.cinemania.constants.AllConstants;
 
 public abstract class Resource extends BuyableCell implements Profitable {
 
-	private int mLevel;
+	private int mLevel = AllConstants.DEFAULT_RESOURCES_LEVEL_BF_BUY;
 	
 	public Resource(float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseResource, posX, posY);
-		this.setLevel(0);
 	}
 	
 	public Resource(ITextureRegion texture, int level, float posX, float posY) {
@@ -32,9 +31,14 @@ public abstract class Resource extends BuyableCell implements Profitable {
 	
 	protected void setLevel(int level){
 		mLevel = level;
-		if(hasOwner())
-			for(int i = 1; i <= mLevel; i++)
-				addLevel(i);
+		for(int i = 0; i < mLevel; i++)
+			addLevel(i+1);
+	}
+	
+	protected void upgradeLevel(){
+		assert getLevel() < AllConstants.LEVEL_MAX_BUILDING;
+		assert getOwner() != null;
+		addLevel(++mLevel);
 	}
 
 	@Override
@@ -53,7 +57,9 @@ public abstract class Resource extends BuyableCell implements Profitable {
 			getOwner().removeProperty(this);
 			getOwner().receiveMoney(totalValue());
 		}
-		addLevel(mLevel);
+		else{
+			setLevel(AllConstants.DEFAULT_RESOURCES_LEVEL_AF_BUY);
+		}
 		super.buy(p);
 	}
 	

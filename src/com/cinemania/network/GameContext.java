@@ -318,7 +318,7 @@ public final class GameContext {
 				switch (cellIdentifiers[i]) {
 					case HeadQuarters.TYPE:
 						jsonCell.put("type", HeadQuarters.TYPE);
-						jsonCell.put("level", 1);
+						jsonCell.put("level", AllConstants.DEFAULT_HQ_LEVEL);
 						break;
 					case ScriptCell.TYPE:
 						jsonCell.put("type", ScriptCell.TYPE);
@@ -332,11 +332,11 @@ public final class GameContext {
 						break;
 					case School.TYPE:
 						jsonCell.put("type", School.TYPE);
-						jsonCell.put("level", 1);
+						jsonCell.put("level", AllConstants.DEFAULT_RESOURCES_LEVEL_BF_BUY);
 						break;
 					case LogisticFactory.TYPE:
 						jsonCell.put("type", LogisticFactory.TYPE);
-						jsonCell.put("level", 1);
+						jsonCell.put("level", AllConstants.DEFAULT_RESOURCES_LEVEL_BF_BUY);
 						break;
 				}
 				jsonBoard.put(jsonCell);

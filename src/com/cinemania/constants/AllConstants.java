@@ -31,7 +31,10 @@ public final class AllConstants {
 	public static final int DEFAULT_AMOUNT = 10000;
 	public static final int DEFAULT_ACTORS = 6;
 	public static final int DEFAULT_LOGISTIC = 6;
-	public static final int DEFAULT_LEVEL = 1;
+	public static final int DEFAULT_HQ_LEVEL = 1;
+	public static final int DEFAULT_RESOURCES_LEVEL_BF_BUY = 0;
+	public static final int DEFAULT_RESOURCES_LEVEL_AF_BUY = 1;
+	public static final int DEFAULT_BUILDING_LEVEL = 1;
 	public static final int LEVEL_MAX_BUILDING = 3;
 	public static final int BASEVALUE_OF_SCHOOL = 800;
 	public static final int BASEVALUE_OF_LOGISTIC = 1000;
