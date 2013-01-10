@@ -84,8 +84,11 @@ public class Player implements JSonator{
 		mLastLogistics = lastLogistics;
 		mHeadQuarters = headQuarters;
 		mCurrentPosition = currentPosition;
-		mView = new Sprite(mCurrentPosition.getX()+bordure, mCurrentPosition.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
-		mView.setSize(mView.getWidth()-2*bordure, mView.getHeight() - 2*bordure);
+		mView = new Sprite(mCurrentPosition.getX() + bordure + mOrder * OFFSET, 
+							mCurrentPosition.getY() + bordure, 
+							ResourcesManager.getInstance().mPlayer, 
+							Base.getSharedInstance().getVertexBufferObjectManager());
+		mView.setSize(mView.getWidth()- 2 * bordure, mView.getHeight() - 2 * bordure);
 		mView.setColor(this.mColorPawn);
 		
 		this.mGameContext = GameContext.getSharedInstance();
@@ -139,7 +142,11 @@ public class Player implements JSonator{
 			Cell temp = mGameContext.nextCellOf(mCurrentPosition);
 			//Cell temp = mGameContext.getCase((38+i)%40);
 			//Movement from case to case. The pawn use an offset
-			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure+mOrder*OFFSET, temp.getX()+bordure+mOrder*OFFSET, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
+			MoveModifier mm = new MoveModifier(0.2f, 
+												mCurrentPosition.getX() + bordure + mOrder * OFFSET, 
+												temp.getX() + bordure + mOrder * OFFSET, 
+												mCurrentPosition.getY() + bordure, 
+												temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
 		    
 		    entity[i] = mm;
@@ -222,7 +229,7 @@ public class Player implements JSonator{
 		txtActor.setText(Integer.toString(profitActors));
 		txtLogistic.setText(Integer.toString(mLastLogistics));
 		
-		dialogBuilder.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+		dialogBuilder.setPositiveButton(R.string.btn_close, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -235,6 +242,15 @@ public class Player implements JSonator{
 			public void onCancel(DialogInterface dialog) {
 				Log.i("GAME", "Cancel");
 				//TODO Remettre thread en marche.
+			}
+		});
+		
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				AlertDialog dialog = dialogBuilder.create();
+				dialog.show();
 			}
 		});
 		

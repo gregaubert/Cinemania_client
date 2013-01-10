@@ -141,7 +141,7 @@ public class ResourcesManager {
 	    mNextTurn = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "next_turn.png");
 	    mWaiting = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "waiting.png");
 	    
-	    mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "dice.png");
+	    mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "dice2.png");
 	    
 		try {
 			HUDBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));

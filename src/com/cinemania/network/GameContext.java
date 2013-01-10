@@ -190,7 +190,8 @@ public final class GameContext {
 	 */
 	public void completeTurn(){
 		this.mCurrentTurn++;
-		if(mCurrentTurn%4==0)
+		//TODO Je suis pas sur que ce soit bien de faire tout les 4 tours, ça fait un peu bizarre si y a que 1 ou 3 joueurs
+		//if(mCurrentTurn%4==0)
 		{
 			this.mYear += offsetYear;
 			Base.getSharedInstance().getHUD().setYear(getYear());

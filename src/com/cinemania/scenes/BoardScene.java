@@ -9,9 +9,14 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.json.JSONException;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
 import com.cinemania.camera.CameraManager;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
@@ -104,22 +109,10 @@ public class BoardScene extends Scene implements Loader {
 		setBackgroundEnabled(true);
 		getChildByIndex(LAYER_BACKGROUND).attachChild(new Sprite(0, 0, mResourcesManager.mBoardBackground, mActivity.getVertexBufferObjectManager()));
 		
-		Sprite boardCenter = new Sprite(caseSize + offsetWidth, caseSize + offsetHeight, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());
-		//boardCenter.setSize(caseSize * (side - 1), caseSize * (side - 1));
-		
-		getChildByIndex(LAYER_PAWN).attachChild(boardCenter);
-		
-		Log.i("GAME", "offsetWidth : " + offsetWidth);
-		Log.i("GAME", "offsetHeight : " + offsetHeight);
-		
-		for (int i = 0; i < mGameContext.getSize(); i++) {			
-			this.getChildByIndex(LAYER_BOARD).attachChild(mGameContext.getCase(i).getView());
-		}
-		
-		// Attach player's view to 
-		for (Player player : mGameContext.getPlayers()){
-			getChildByIndex(LAYER_PAWN).attachChild(player.getView());
-		}
+		Sprite boardCenter = new Sprite(caseSize + offsetWidth, caseSize + offsetHeight, mResourcesManager.mBoardCenter, mActivity.getVertexBufferObjectManager());		
+		getChildByIndex(LAYER_BACKGROUND).attachChild(boardCenter);
+
+		regenerateGameElements();
 	}
 
 	public void getDataFromServer() {
@@ -138,14 +131,58 @@ public class BoardScene extends Scene implements Loader {
 		}
 	}
 	
-	//TODO A changer / modifier / supprimer / renommer / verifier
+	public void regenerateGameElements(){
+		cleanGameElements();
+		createGameElements();
+	}
+	
+	private void cleanGameElements(){
+		this.getChildByIndex(LAYER_BOARD).detachChildren();
+		this.getChildByIndex(LAYER_PAWN).detachChildren();
+	}
+	
+	private void createGameElements(){
+	
+		for (int i = 0; i < mGameContext.getSize(); i++) {			
+			this.getChildByIndex(LAYER_BOARD).attachChild(mGameContext.getCase(i).getView());
+		}
+		
+		// Attach player's view to 
+		for (Player player : mGameContext.getPlayers()){
+			getChildByIndex(LAYER_PAWN).attachChild(player.getView());
+		}
+	}
+	
 	public void movePlayer() {
 		
-    	int move = shootOneDice() + shootOneDice();
+		final int dice1 = shootOneDice(),
+		    dice2 = shootOneDice(),
+    	    move = dice1 + dice2;
     	
-    	Log.i("GAME","Deplacement du joueur " + move);
-    	Player p = mGameContext.getPlayer();
-    	p.Move(move);
+    	final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.diceresult, null);
+		dialogBuilder.setView(view);
+		
+		TextView diceResult = (TextView) view.findViewById(R.id.txtDiceResult);
+		diceResult.setText(dice1 + " + " + dice2 + " = " + move);
+		
+		dialogBuilder.setNeutralButton(R.string.btn_move, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+		    	mGameContext.getPlayer().Move(move);
+            	dialog.dismiss();
+			}
+		});
+		
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				AlertDialog dialog = dialogBuilder.create();
+				dialog.show();
+			}
+		});
 	}
 
 	/**
