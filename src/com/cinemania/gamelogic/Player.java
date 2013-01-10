@@ -229,7 +229,7 @@ public class Player implements JSonator{
 		txtActor.setText(Integer.toString(profitActors));
 		txtLogistic.setText(Integer.toString(mLastLogistics));
 		
-		dialogBuilder.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+		dialogBuilder.setPositiveButton(R.string.btn_close, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -245,7 +245,14 @@ public class Player implements JSonator{
 			}
 		});
 		
-		dialogBuilder.create().show();
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				AlertDialog dialog = dialogBuilder.create();
+				dialog.show();
+			}
+		});
 		
 		mLastProfit = lvlCinema * profitMovies + profitCinema;
 		receiveMoney(mLastProfit);
