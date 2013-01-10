@@ -229,11 +229,6 @@ public final class GameContext {
 		return mYear + AllConstants.INITIAL_YEAR;
 	}
 	
-	// FIXME: Only for tests
-	public static String test1() {
-		return "{ \"version\": 1, \"game\": { \"id\": 123456, \"turn\": 1, \"player\": 0 }, \"board\": [ { \"type\": 1, \"level\": 2 }, { \"type\": 1, \"level\": 3 }, { \"type\": 2 }, { \"type\": 5, \"level\": 0 } ], \"players\": [ { \"id\": 12345, \"name\": \"Mok\",  \"hq\": 0, \"position\": 0, \"properties\": [ 3 ], \"money\": 1000, \"actors\": 2, \"logistics\": 10, \"scripts\": [], \"movies\": []}, { \"id\": 4321, \"name\": \"Bof\", \"hq\": 1, \"position\": 1, \"properties\": [], \"money\": 223, \"actors\": 3, \"logistics\": 4, \"scripts\": [],  \"movies\": [] } ] }";
-	}
-	
 	//Etat initial lors d'une nouvelle partie.
 	public static String initialState() {
 		try {

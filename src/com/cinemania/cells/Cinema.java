@@ -41,7 +41,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 		mPurchasedRooms = rooms.length;
 		for (int i = 0; i < rooms.length; i++) {
 			mRooms[i] = rooms[i];
-			addLevel(i);
+			addLevel(i+1);
 		}
 	}
 
