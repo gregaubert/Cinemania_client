@@ -27,13 +27,14 @@ public abstract class Resource extends BuyableCell implements Profitable {
 	
 	public Resource(ITextureRegion texture, int level, float posX, float posY) {
 		super(texture, posX, posY);
-		this.setLevel(level);
+		setLevel(level);
 	}
 	
 	protected void setLevel(int level){
 		mLevel = level;
 		if(hasOwner())
-			addLevel(mLevel);
+			for(int i = 1; i <= mLevel; i++)
+				addLevel(i);
 	}
 
 	@Override

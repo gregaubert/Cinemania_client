@@ -46,7 +46,8 @@ public class HeadQuarters extends OwnableCell {
 	
 	protected void setLevel(int level){
 		mLevel = level;
-		addLevel(mLevel);
+		for(int i = 1; i <= mLevel; i++)
+			addLevel(mLevel);
 	}
 
 	@Override

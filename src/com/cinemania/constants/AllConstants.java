@@ -29,8 +29,8 @@ public final class AllConstants {
 	 * Game start constant
 	 */
 	public static final int DEFAULT_AMOUNT = 10000;
-	public static final int DEFAULT_ACTORS = 0;
-	public static final int DEFAULT_LOGISTIC = 0;
+	public static final int DEFAULT_ACTORS = 6;
+	public static final int DEFAULT_LOGISTIC = 6;
 	public static final int DEFAULT_LEVEL = 1;
 	public static final int LEVEL_MAX_BUILDING = 3;
 	public static final int BASEVALUE_OF_SCHOOL = 800;
@@ -57,13 +57,14 @@ public final class AllConstants {
 	 * General cost
 	 */
 	public static final int COSTS_ON_HQ = 750;
+	public static final int COSTS_ON_CINEMA = 200;
 	public static final int COSTS_SCRIPT_MIN = 100;
 	public static final int COSTS_SCRIPT_MAX = 450;
 	public static final int COSTS_ACTOR_MIN = 0;
 	public static final int COSTS_ACTOR_MAX = 15;
 	public static final int COSTS_LOGISTIC_MIN = 1;
 	public static final int COSTS_LOGISTIC_MAX = 10;
-	public static final int COSTS_MOVIE_MIN = 100;
+	public static final int COSTS_MOVIE_MIN = 200;
 	public static final int COSTS_MOVIE_MAX = 1200;
 	
 	/**
