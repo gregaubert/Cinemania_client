@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.network.api.API;
@@ -115,7 +117,12 @@ public final class GameContext {
 
 			JSONObject jsonPlayer = jsonPlayers.getJSONObject(i);
 			assert mCases[jsonPlayer.getInt("hq")] instanceof HeadQuarters;
-			Player player = new Player(jsonPlayer, i, (HeadQuarters)mCases[jsonPlayer.getInt("hq")], mCases[jsonPlayer.getInt("position")]);
+			int indice = jsonPlayer.getInt("position");
+			int HQ = jsonPlayer.getInt("hq");
+			
+			Player player = new Player(jsonPlayer, i, (HeadQuarters)mCases[HQ], mCases[indice]);
+			
+			Log.i("GAME", "Création du joueur " + player.getName() + " HQ : " + HQ + " pos : " + indice);
 			
 			this.mPlayers[i] = player;
 
@@ -403,5 +410,9 @@ public final class GameContext {
 	
 	public void setGameIdentifier(long gameIdentifier) {
 		mGameIdentifier = gameIdentifier;
+	}
+	
+	public void leaveGame(){
+		API.gameLeave(mGameIdentifier);
 	}
 }
