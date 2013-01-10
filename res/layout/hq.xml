@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF" xmlns:app="http://schemas.android.com/tools">
-
+
     <LinearLayout
         android:id="@+id/baseLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="10dp" >
 
         <LinearLayout
             android:id="@+id/layoutTitle"
@@ -51,18 +51,17 @@
             android:ellipsize="end"
             android:maxWidth="350dp"
             android:singleLine="true"
-            android:text="Prochaine production :"
+            android:text="@string/txt_next_production"
             android:textSize="16sp"
             android:textStyle="bold" />
-
+
         <LinearLayout
             android:id="@+id/layoutScriptView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:paddingBottom="10dp" >
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,7 +149,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="Production : "
+                android:text="@string/txt_production"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -173,14 +172,14 @@
                 android:text="2 logistiques"
                 android:textSize="16sp"
                 android:textStyle="normal" />
-
+
             <TextView
                 android:id="@+id/scriptReaPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
-                android:text="345.-"
+                android:text="486.-"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
