@@ -48,6 +48,9 @@ public final class AllConstants {
 	public static final double SELLINGPRICE_RATIO = 0.25;
 	public static final int BASE_SCHOOL_INCOME = 2;
 	public static final int BASE_LOGISTIC_INCOME = 3;
+	public static final int MAX_PRICE_MOVIE = DEFAULT_LOGISTIC * LOGISTIC_VALUE +
+											  DEFAULT_ACTORS * ACTOR_VALUE;
+											  
 	
 	/**
 	 * Costs by turn depending on the cell
