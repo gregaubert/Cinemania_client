@@ -78,7 +78,7 @@ public abstract class Movie implements Profitable, JSonator {
 	@Override
 	public int profit(int startTurn, int stopTurn) {
 		int profit = 0;
-		while (startTurn++ <= stopTurn)
+		while (++startTurn <= stopTurn)
 			profit += COSTS_CINEMA_TICKET
 					* getPeopleInit()
 					* Math.pow(getDecreasingRate(), startTurn
