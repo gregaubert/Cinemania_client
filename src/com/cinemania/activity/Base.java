@@ -15,13 +15,12 @@ import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
-import org.andengine.util.debug.Debug;
 
 import android.util.Log;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
-import com.cinemania.network.GameContext;
+import com.cinemania.constants.AllConstants;
 import com.cinemania.network.gcm.GCMConnector;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
@@ -249,6 +248,10 @@ public class Base extends BaseGameActivity
          }
          return false;
     }
+
+	public void vibrate(){
+		mEngine.vibrate(AllConstants.VIBRATE_TIME);
+	}
 	
 	//************GETTER************
     public Camera getCamera(){
