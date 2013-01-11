@@ -64,6 +64,7 @@ public final class GameContext {
 	public void deserializeGame() throws JSONException {
 		this.mGameIdentifier = jsonGame.getLong("id");
 		this.mCurrentTurn = jsonGame.getInt("turn");
+		this.mYear = jsonGame.getInt("year");
 	}
 	
 	public void deserializeBoard(BoardScene boardScene) throws JSONException {
@@ -155,6 +156,7 @@ public final class GameContext {
 			jsonGame.put("player",mPlayer.getId());
 			jsonGame.put("turn", mCurrentTurn);
 			jsonGame.put("id", mGameIdentifier);
+			jsonGame.put("year", mYear);
 			JSONObject json = new JSONObject();
 			json.put("version", 1);
 			json.put("game", jsonGame);
@@ -357,6 +359,7 @@ public final class GameContext {
 			jsonGame.put("player", -1);
 			jsonGame.put("turn", 1);
 			jsonGame.put("id", -1);
+			jsonGame.put("year", 0);
 			JSONObject json = new JSONObject();
 			json.put("version", 1);
 			json.put("game", jsonGame);
