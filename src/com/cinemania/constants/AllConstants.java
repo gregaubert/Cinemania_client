@@ -47,9 +47,9 @@ public final class AllConstants {
 	public static final int BASEVALUE_OF_SCHOOL = 800;
 	public static final int BASEVALUE_OF_LOGISTIC = 1000;
 	public static final int BASEVALUE_OF_CINEMA = 1000;
-	public static final int PRICE_SCHOOL_EXTENSION = 200;
-	public static final int PRICE_LOGISTIC_EXTENSION = 300;
-	public static final int PRICE_ROOM = 1000;
+	public static final int PRICE_SCHOOL_EXTENSION = 1900;
+	public static final int PRICE_LOGISTIC_EXTENSION = 2100;
+	public static final int PRICE_ROOM = 1700;
 	public static final int MAX_ROOMS = 3;
 	public static final int LOGISTIC_VALUE = 200;
 	public static final int ACTOR_VALUE = 300;
