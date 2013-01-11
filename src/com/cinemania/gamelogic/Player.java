@@ -211,8 +211,11 @@ public class Player implements JSonator{
 				profitLogistic += ((LogisticFactory)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			}
 		
-		for(Movie movie : getMovies())
+		for(Movie movie : getMovies()){
+			Log.d("GAME", "(last, current,) -> prifit ;;; ("+this.getLastTurn() +", " + mGameContext.getCurrentTurn() + ")->> " + movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+			
+		}
 		
 		// màj profit
 		mLastProfit = lvlCinema * profitMovies + profitCinema;
