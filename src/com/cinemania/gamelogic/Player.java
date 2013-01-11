@@ -192,9 +192,8 @@ public class Player implements JSonator{
 		
 		ResourcesManager.getInstance().mSndCashMachine.stop();
 		ResourcesManager.getInstance().mSndCashMachine.play();
-		
-		int lvlCinema = 0,
-			profitCinema = 0,
+		double lvlCinema = 0.0;
+		int profitCinema = 0,
 			profitMovies = 0,
 			profitActors = 0,
 			profitLogistic = 0;
@@ -202,7 +201,25 @@ public class Player implements JSonator{
 		for(OwnableCell cell : mProperties)
 			if(cell instanceof Cinema)
 			{
+				switch(cell.getLevel()){
+				case 0:
+					lvlCinema += 0;
+					break;
+				case 1:
+					lvlCinema += 1;
+					break;
+				case 2:
+					lvlCinema += 1.15;
+					break;
+				case 3:
+					lvlCinema += 1.4;
+					break;				
+				}
+				
 				lvlCinema += cell.getLevel();
+				// FIXME: prochaines release
+				// Pour l'instant, juste les charges des salles/cinémas, tant qu'il n'y a pas de salle où l'on
+				// peut affecter des films
 				profitCinema += ((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			}
 			else if(cell instanceof School)
@@ -216,12 +233,11 @@ public class Player implements JSonator{
 		
 		for(Movie movie : getMovies()){
 			Log.d("GAME", "(last, current,) -> profit ;;; ("+this.getLastTurn() +", " + mGameContext.getCurrentTurn() + ")->> " + movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
-			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
-			
+			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());			
 		}
 		
 		// maj profit
-		mLastProfit = lvlCinema * profitMovies + profitCinema;
+		mLastProfit = (int)(lvlCinema * (double)profitMovies) + profitCinema;
 		mLastActors = profitActors;
 		mLastLogistics = profitLogistic;
 		
@@ -237,7 +253,7 @@ public class Player implements JSonator{
 		TextView txtLogistic = (TextView) view.findViewById(R.id.txtNbLogistic);
 		TextView txtBonus = (TextView) view.findViewById(R.id.txtNbBonus);
 		
-		txtMovies.setText(Integer.toString(lvlCinema * profitMovies));
+		txtMovies.setText(Integer.toString((int)(lvlCinema * (double)profitMovies)));
 		txtCinema.setText(Integer.toString(profitCinema));
 		txtActor.setText(Integer.toString(mLastActors));
 		txtLogistic.setText(Integer.toString(mLastLogistics));
