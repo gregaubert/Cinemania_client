@@ -215,7 +215,7 @@ public class ResourcesManager {
 //        	mMusicLoop = MusicFactory.createMusicFromAsset(engine.getMusicManager(), context, "western_spaghetti.ogg");
 //    		mMusicLoop.setVolume(0.6f);
         	mMusicLoop = MusicFactory.createMusicFromAsset(engine.getMusicManager(), context, "le_jeu.ogg");
-    		mMusicLoop.setVolume(0.8f);
+    		mMusicLoop.setVolume(0.5f);
         	mMusicLoop.setLooping(true);
         } catch (final IOException e) {
         	Debug.e(e);

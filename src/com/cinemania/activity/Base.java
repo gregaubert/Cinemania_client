@@ -15,6 +15,8 @@ import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
+import org.andengine.util.debug.Debug;
+
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -131,7 +133,7 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception {
     	// Active GCM message reception
     	GCMConnector.connect();
-    	
+    	enableVibrator();
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
     }
@@ -164,6 +166,12 @@ public class Base extends BaseGameActivity
     	} catch(Exception e){}
     	
     	super.onGameDestroyed();
+    }
+    
+    @Override
+    public synchronized void onResumeGame() {
+    	if(this.mEngine != null)
+    		super.onResumeGame();
     }
         
     //Creer la scene affiche e l'ecran.
