@@ -14,7 +14,8 @@ public final class AllConstants {
 
 	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 40;
 	
-	public static final long VIBRATE_TIME = 200; 
+	public static final long VIBRATE_TIME_LOCAL = 200;
+	public static final long VIBRATE_TIME_OTHER = 100;
 
 	/**
 	 * Stats rate
@@ -99,8 +100,8 @@ public final class AllConstants {
 	public static int OFFSET = 10;
 
 	public static final Color  BOARD_CASE_COLOR = new Color(250/255f, 252/255f, 124/255f);
-	public static final Color[][] PLAYER_COLOR = { {new Color(136/255f, 30/255f, 30/255f), new Color(30/255f, 136/255f, 30/255f), new Color(30/255f, 30/255f, 136/255f), new Color(208/255f, 208/255f, 69/255f)},
-		{new Color(221/255f, 115/255f, 115/255f), new Color(115/255f, 221/255f, 115/255f), new Color(115/255f, 115/255f, 221/255f), new Color(223/255f, 223/255f, 131/255f)}};
+	public static final Color[][] PLAYER_COLOR = { {new Color(136/255f, 30/255f, 30/255f), new Color(30/255f, 136/255f, 30/255f), new Color(30/255f, 30/255f, 136/255f), new Color(168/255f, 118/255f, 60/255f)},
+		{new Color(221/255f, 115/255f, 115/255f), new Color(115/255f, 221/255f, 115/255f), new Color(115/255f, 115/255f, 221/255f), new Color(253/255f, 177/255f, 91/255f)}};
 	public static final int[] PLAYER_COLOR_ANDROID = {R.color.player1, R.color.player2, R.color.player3, R.color.player4};
 
 }
