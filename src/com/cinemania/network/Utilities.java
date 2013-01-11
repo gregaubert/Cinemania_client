@@ -71,10 +71,10 @@ public final class Utilities {
 				// TODO: All responses from server have this field
 				//response.mSuccessful &= response.mJson.getInt("success") == 1;
 			} else {
-				Log.d("GAME", "Wrong HTTP code response " + response.mCode);
+				Log.e("GAME", "Wrong HTTP code response " + response.mCode);
 			}
 		} catch (Exception e) {
-			Log.d("GAME", "HTTP exception on POST " + e.toString());
+			Log.e("GAME", "HTTP exception on POST", e);
 			response.mSuccessful = false;
 		} finally {
 			if (conn != null) {

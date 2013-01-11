@@ -212,9 +212,11 @@ public class ResourcesManager {
         	mSndShufflingCards = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "shuffling_cards.ogg");
         	mSndTaDa = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "ta_da.ogg");
         	mSndTaDa.setVolume(0.25f);
-        	mMusicLoop = MusicFactory.createMusicFromAsset(engine.getMusicManager(), context, "western_spaghetti.ogg");
+//        	mMusicLoop = MusicFactory.createMusicFromAsset(engine.getMusicManager(), context, "western_spaghetti.ogg");
+//    		mMusicLoop.setVolume(0.6f);
+        	mMusicLoop = MusicFactory.createMusicFromAsset(engine.getMusicManager(), context, "le_jeu.ogg");
+    		mMusicLoop.setVolume(0.8f);
         	mMusicLoop.setLooping(true);
-    		mMusicLoop.setVolume(0.6f);
         } catch (final IOException e) {
         	Debug.e(e);
         }
