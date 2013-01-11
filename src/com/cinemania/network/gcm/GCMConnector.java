@@ -50,7 +50,7 @@ public class GCMConnector {
     }
      
     // TODO: This one is never referenced
-    public void destroy() {
+    public static void destroy() {
         try{
             mActivity.unregisterReceiver(mHandleMessageReceiver);
         }

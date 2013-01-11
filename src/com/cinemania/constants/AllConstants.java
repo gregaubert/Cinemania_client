@@ -58,6 +58,7 @@ public final class AllConstants {
 	public static final int BASE_LOGISTIC_INCOME = 1;
 
 
+
 	/**
 	 * Costs by turn depending on the cell
 	 */
