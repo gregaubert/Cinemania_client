@@ -75,6 +75,7 @@ public final class Utilities {
 			}
 		} catch (Exception e) {
 			Log.e("GAME", "HTTP exception on POST", e);
+			Log.e("GAME", "URL : " + url);
 			response.mSuccessful = false;
 		} finally {
 			if (conn != null) {

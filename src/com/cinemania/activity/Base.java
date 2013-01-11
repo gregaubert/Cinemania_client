@@ -159,9 +159,9 @@ public class Base extends BaseGameActivity
     // TODO cannot make this actually execute when the game closes!!!
     @Override
     public synchronized void onGameDestroyed(){
-    	try{
+    	/*try{
     		GameContext.getSharedInstance().leaveGame();
-    	} catch(Exception e){}
+    	} catch(Exception e){}*/
     	
     	super.onGameDestroyed();
     }
