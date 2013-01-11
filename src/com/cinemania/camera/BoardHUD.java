@@ -5,7 +5,6 @@ import org.andengine.entity.sprite.ButtonSprite;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
@@ -29,6 +28,8 @@ public class BoardHUD extends HUD implements Loader {
 	private Text txtScripts;
 	private Text txtCurrentPlayer;
 
+	private Sprite mBackground;
+	
 	private ButtonSprite mDiceSprite;
 	
 	private ButtonSprite mNextSprite;
@@ -104,17 +105,21 @@ public class BoardHUD extends HUD implements Loader {
 		
 		mGameContext = GameContext.getSharedInstance();
 		
-		txtYear = new Text(10, 8, mResourcesManager.mYearFont, "Annee: 0123456789", mActivity.getVertexBufferObjectManager());
-		txtMoney = new Text(205, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
-		txtActors = new Text(335, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
-		txtLogistics = new Text(435, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
-		txtScripts  = new Text(535, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
-		txtCurrentPlayer = new Text(600, 8, mResourcesManager.mResourcesFont, "abcdefghijklmnopqrstuvwxyz0123456789", mActivity.getVertexBufferObjectManager());
+		txtYear 		= new Text(10, 8, mResourcesManager.mYearFont, "Annee: 0123456789", mActivity.getVertexBufferObjectManager());
+		txtMoney 		= new Text(205, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtActors 		= new Text(335, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtLogistics 	= new Text(435, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtScripts  	= new Text(535, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		txtCurrentPlayer= new Text(600, 8, mResourcesManager.mResourcesFont, "abcdefghijklmnopqrstuvwxyz0123456789", mActivity.getVertexBufferObjectManager());
 		
 		Sprite moneySprite =  new Sprite(170, 5, 32, 32, mResourcesManager.mMoneyLogo, mActivity.getVertexBufferObjectManager());
 		Sprite actorsSprite = new Sprite(300, 5, 32, 32, mResourcesManager.mActorsLogo, mActivity.getVertexBufferObjectManager());
 		Sprite logisticsSprite = new Sprite(400, 5, 32, 32, mResourcesManager.mLogisticsLogo, mActivity.getVertexBufferObjectManager());
 		Sprite scriptsSprite = new Sprite(500, 5, 32, 32, mResourcesManager.mScriptsLogo, mActivity.getVertexBufferObjectManager());
+		
+		mBackground = new Sprite(0,0,Base.CAMERA_WIDTH, 40,mResourcesManager.mBackgroundHUD, mActivity.getVertexBufferObjectManager());
+		//mBackground.setColor(Color.WHITE);
+		mBackground.setAlpha(0.8f);
 		
 		mDiceSprite = new ButtonSprite(10, Base.CAMERA_HEIGHT - 74, mResourcesManager.mDice, mActivity.getVertexBufferObjectManager()){
 			@Override
@@ -137,8 +142,7 @@ public class BoardHUD extends HUD implements Loader {
                 return false;
 		    }
 		};
-		
-		mNextSprite = new ButtonSprite(10, Base.CAMERA_HEIGHT - 74, mResourcesManager.mNextTurn, mActivity.getVertexBufferObjectManager()){
+		mNextSprite = new ButtonSprite(10, Base.CAMERA_HEIGHT - 120, mResourcesManager.mNextTurn, mActivity.getVertexBufferObjectManager()){
 			@Override
 		    public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
@@ -206,6 +210,7 @@ public class BoardHUD extends HUD implements Loader {
 		attachChild(txtScripts);
 		attachChild(txtLogistics);
 		attachChild(txtCurrentPlayer);
+		attachChild(mBackground);
 		
 		attachChild(actorsSprite);
 		attachChild(moneySprite);

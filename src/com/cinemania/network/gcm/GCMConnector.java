@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.util.Log;
  
 import com.cinemania.activity.Base;
@@ -15,8 +14,6 @@ import com.cinemania.network.api.API;
 import com.cinemania.network.gcm.GCMUtilities;
  
 public class GCMConnector {
-         
-    private static AsyncTask mRegisterTask = null;
      
     private static Base mActivity = Base.getSharedInstance();
      
@@ -54,10 +51,6 @@ public class GCMConnector {
      
     // TODO: This one is never referenced
     public void destroy() {
-        if (mRegisterTask != null) {
-            mRegisterTask.cancel(true);
-        }
-         
         try{
             mActivity.unregisterReceiver(mHandleMessageReceiver);
         }
