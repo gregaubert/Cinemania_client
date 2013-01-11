@@ -16,6 +16,8 @@ public final class AllConstants {
 	
 	public static final long VIBRATE_TIME_LOCAL = 250;
 	public static final long VIBRATE_TIME_OTHER = 150;
+	
+	public static final int NUMBER_PLAYER = 4;
 
 	/**
 	 * Stats rate

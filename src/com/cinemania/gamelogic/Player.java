@@ -279,6 +279,10 @@ public class Player implements JSonator{
 		return this.mView;
 	}
 
+	public int getOrder(){
+		return this.mOrder;
+	}
+	
 	public String getName(){
 		return this.mName;
 	}
