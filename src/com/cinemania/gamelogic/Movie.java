@@ -33,6 +33,7 @@ public abstract class Movie implements Profitable, JSonator {
 		setYear(year);
 	}
 	
+	// FIXME: Vraiment utilisée ???????????? -> A supprimer (JCA)
 	public Movie(int id, String title, int year, int beginingTurn, int peopleInit, double decreasingRate) {
 		mId = id;
 		mBaseId = Math.max(mBaseId, id + 1);
@@ -77,7 +78,7 @@ public abstract class Movie implements Profitable, JSonator {
 	@Override
 	public int profit(int startTurn, int stopTurn) {
 		int profit = 0;
-		while (startTurn++ < stopTurn)
+		while (startTurn++ <= stopTurn)
 			profit += COSTS_CINEMA_TICKET
 					* getPeopleInit()
 					* Math.pow(getDecreasingRate(), startTurn

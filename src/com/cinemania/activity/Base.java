@@ -21,6 +21,7 @@ import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
 import com.cinemania.constants.AllConstants;
+import com.cinemania.network.GameContext;
 
 import com.cinemania.network.gcm.GCMConnector;
 import com.cinemania.resources.ResourcesManager;
@@ -255,7 +256,10 @@ public class Base extends BaseGameActivity
     }
 
 	public void vibrate(){
-		mEngine.vibrate(AllConstants.VIBRATE_TIME);
+		if(GameContext.getSharedInstance().isLocalTurn())
+			mEngine.vibrate(AllConstants.VIBRATE_TIME_LOCAL);
+		else
+			mEngine.vibrate(AllConstants.VIBRATE_TIME_OTHER);
 	}
 	
 	//************GETTER************
