@@ -27,6 +27,8 @@ public final class AllConstants {
 	public static final double DECREASING_MOVIE_RATE_MIN_AM = 0.14;
 	public static final double DECREASING_MOVIE_RATE_MAX_AM = 0.22;
 	public static final double RATE_SALE = 2.0;
+	public static final int FACTOR_DIVIDE_FACTORY = 2; // Division des revenus ressources
+	public static final int FACTOR_DIVIDE_SCHOOL = 2; // Division des revenus écoles
 
 	public static final int BONUS_AMOUT = 1000;
 	
@@ -51,8 +53,8 @@ public final class AllConstants {
 	public static final int LOGISTIC_VALUE = 200;
 	public static final int ACTOR_VALUE = 300;
 	public static final double SELLINGPRICE_RATIO = 0.25;
-	public static final int BASE_SCHOOL_INCOME = 2;
-	public static final int BASE_LOGISTIC_INCOME = 3;
+	public static final int BASE_SCHOOL_INCOME = 1;
+	public static final int BASE_LOGISTIC_INCOME = 1;
 
 
 
