@@ -12,8 +12,6 @@ import com.cinemania.camera.BoardHUD;
 import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.Utilities;
 import com.cinemania.network.api.API;
-import com.cinemania.network.api.API.GameDataResult;
-import com.cinemania.network.api.API.GameIdentifierResult;
 import com.cinemania.network.gcm.GCMUtilities;
  
 public class GCMConnector {
