@@ -37,6 +37,7 @@
 	<string name="title_profit_actor">Acteurs gagnés</string>
 	<string name="title_profit_logistic">Logistiques gagnées</string>
 	<string name="title_profit_bonus">Bonus : </string>
+	<string name="title_author_film">Film d\'auteurs</string>
 	<string name="txt_profit_cinema">Cinémas : </string>
 	<string name="txt_profit_movies">Films : </string>
 	<string name="txt_profit_actor">Écoles d\'acteurs : </string>

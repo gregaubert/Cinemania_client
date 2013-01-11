@@ -26,6 +26,7 @@ public class PlayerDeserializer {
 				jsonPlayer.getInt("lastProfit"),
 				jsonPlayer.getInt("lastActors"),
 				jsonPlayer.getInt("lastLogistics"),
+				jsonPlayer.getBoolean("canBuyAuthorFilm"),
 				(HeadQuarters)board[jsonPlayer.getInt("hq")],
 				board[jsonPlayer.getInt("position")]
 			);

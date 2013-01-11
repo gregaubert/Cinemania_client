@@ -14,8 +14,8 @@ public final class AllConstants {
 
 	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 40;
 	
-	public static final long VIBRATE_TIME_LOCAL = 250;
-	public static final long VIBRATE_TIME_OTHER = 150;
+	public static final long VIBRATE_TIME_LOCAL = 400;
+	public static final long VIBRATE_TIME_OTHER = 200;
 
 	/**
 	 * Stats rate
@@ -76,6 +76,8 @@ public final class AllConstants {
 	public static final int COSTS_LOGISTIC_MAX = 10;
 	public static final int COSTS_MOVIE_MIN = 200;
 	public static final int COSTS_MOVIE_MAX = 1200;
+	public static final int COSTS_AUTHOR_MIN = 200;
+	public static final int COSTS_AUTHOR_MAX = 400;
 
 	/** Max/Min price for a movie
 	 * 
