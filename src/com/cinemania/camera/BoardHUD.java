@@ -62,9 +62,13 @@ public class BoardHUD extends HUD implements Loader {
 		txtScripts.setText(Integer.toString(scripts));
 	}
 
-	public void setCurrentPlayer(Player p){
+	public void setCurrentPlayer(Player p){		
+		this.detachChild(txtCurrentPlayer);
+		
+		txtCurrentPlayer = new Text(600, 8, mResourcesManager.mResourcesFontTab[p.getOrder()], "abcdefghijklmnopqrstuvwxyz0123456789", mActivity.getVertexBufferObjectManager());
 		txtCurrentPlayer.setText("Id : " + p.getName());
-		txtCurrentPlayer.setColor(p.getColorPawn());
+		
+		this.attachChild(txtCurrentPlayer);
 	}
 	
 	public void hideWaitingForPlayers(){
@@ -94,6 +98,9 @@ public class BoardHUD extends HUD implements Loader {
 	
 	@Override
 	public void Load() {
+		
+		//On efface tout avant de load.
+		this.detachChildren();
 		
 		mGameContext = GameContext.getSharedInstance();
 		

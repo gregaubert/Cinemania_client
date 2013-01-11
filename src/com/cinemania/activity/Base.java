@@ -247,8 +247,6 @@ public class Base extends BaseGameActivity
                 	this.setCurrentScene(mMenu);
                 	if(mMusicLoop.isPlaying())
                 		mMusicLoop.pause();
-                	//this.mCamera.setHUD(null);
-                	this.mHUD.setCamera(null);
                     break; 
               }
          }

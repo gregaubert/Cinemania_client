@@ -14,6 +14,7 @@ public final class AllConstants {
 
 	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 40;
 	
+	public static final int NUMBER_PLAYER = 4;
 	public static final long VIBRATE_TIME_LOCAL = 400;
 	public static final long VIBRATE_TIME_OTHER = 200;
 

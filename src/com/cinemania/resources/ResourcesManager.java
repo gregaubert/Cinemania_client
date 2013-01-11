@@ -19,6 +19,7 @@ import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.debug.Debug;
 
+import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Script;
 
@@ -63,6 +64,7 @@ public class ResourcesManager {
 	public Font mMenuFont;
 	public Font mYearFont;
 	public Font mResourcesFont;
+	public Font[] mResourcesFontTab = new Font[AllConstants.NUMBER_PLAYER];
 	public Font mWindowsFont;
 	
 	//**************************** SOUND ****************************
@@ -129,6 +131,12 @@ public class ResourcesManager {
 		mResourcesFont = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/veteran typewriter.ttf", 24, true, Color.BLACK);
 		//mResourcesFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
 		mResourcesFont.load();
+		
+		for(int i = 0; i < AllConstants.NUMBER_PLAYER; i++)
+		{
+			mResourcesFontTab[i] = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/veteran typewriter.ttf", 24, true, Base.getSharedInstance().getResources().getColor(AllConstants.PLAYER_COLOR_ANDROID[i]));
+			mResourcesFontTab[i].load();
+		}
 		
 		// Gestion des textures
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
