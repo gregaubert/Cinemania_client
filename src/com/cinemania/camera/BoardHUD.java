@@ -209,7 +209,6 @@ public class BoardHUD extends HUD implements Loader {
 		attachChild(txtMoney);
 		attachChild(txtScripts);
 		attachChild(txtLogistics);
-		attachChild(txtCurrentPlayer);
 		attachChild(mBackground);
 		
 		attachChild(actorsSprite);
