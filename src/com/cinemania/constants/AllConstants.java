@@ -28,7 +28,7 @@ public final class AllConstants {
 	/**
 	 * Game start constant
 	 */
-	public static final int DEFAULT_AMOUNT = 5000;
+	public static final int DEFAULT_AMOUNT = 10000;
 	public static final int DEFAULT_ACTORS = 6;
 	public static final int DEFAULT_LOGISTIC = 6;
 	public static final int DEFAULT_HQ_LEVEL = 1;

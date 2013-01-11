@@ -27,7 +27,7 @@ public class LogisticFactory extends Resource {
 
 	@Override
 	public int totalValue() {
-		return BASEVALUE_OF_LOGISTIC * getLevel() + nbExtensions() * PRICE_LOGISTIC_EXTENSION;
+		return BASEVALUE_OF_LOGISTIC * (getLevel() + 1) + nbExtensions() * PRICE_LOGISTIC_EXTENSION;
 	}
 	
 	@Override

@@ -30,7 +30,7 @@ public class School extends Resource {
 
 	@Override
 	public int totalValue() {
-		return BASEVALUE_OF_SCHOOL * getLevel() + nbExtensions() * PRICE_SCHOOL_EXTENSION;
+		return BASEVALUE_OF_SCHOOL * (getLevel() + 1) + nbExtensions() * PRICE_SCHOOL_EXTENSION;
 	}
 	
 	@Override
