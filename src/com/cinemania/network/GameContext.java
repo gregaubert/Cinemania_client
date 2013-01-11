@@ -64,6 +64,7 @@ public final class GameContext {
 	public void deserializeGame() throws JSONException {
 		this.mGameIdentifier = jsonGame.getLong("id");
 		this.mCurrentTurn = jsonGame.getInt("turn");
+		this.mYear = jsonGame.getInt("year");
 	}
 	
 	public void deserializeBoard(BoardScene boardScene) throws JSONException {
@@ -155,6 +156,7 @@ public final class GameContext {
 			jsonGame.put("player",mPlayer.getId());
 			jsonGame.put("turn", mCurrentTurn);
 			jsonGame.put("id", mGameIdentifier);
+			jsonGame.put("year", mYear);
 			JSONObject json = new JSONObject();
 			json.put("version", 1);
 			json.put("game", jsonGame);
@@ -257,6 +259,7 @@ public final class GameContext {
 			player1.put("lastProfit",0);
 			player1.put("lastActors",0);
 			player1.put("lastLogistics",0);
+			player1.put("canBuyAuthorFilm", true);
 			player1.put("scripts", new JSONArray());
 			player1.put("movies", new JSONArray());
 			offset += 1;
@@ -275,6 +278,7 @@ public final class GameContext {
 			player2.put("lastProfit",0);
 			player2.put("lastActors",0);
 			player2.put("lastLogistics",0);
+			player2.put("canBuyAuthorFilm", true);
 			player2.put("scripts", new JSONArray());
 			player2.put("movies", new JSONArray());
 			offset += 1;
@@ -293,6 +297,7 @@ public final class GameContext {
 			player3.put("lastProfit",0);
 			player3.put("lastActors",0);
 			player3.put("lastLogistics",0);
+			player3.put("canBuyAuthorFilm", true);
 			player3.put("scripts", new JSONArray());
 			player3.put("movies", new JSONArray());
 			offset += 1;
@@ -311,6 +316,7 @@ public final class GameContext {
 			player4.put("lastProfit",0);
 			player4.put("lastActors",0);
 			player4.put("lastLogistics",0);
+			player4.put("canBuyAuthorFilm", true);
 			player4.put("scripts", new JSONArray());
 			player4.put("movies", new JSONArray());
 			offset += 1;
@@ -353,6 +359,7 @@ public final class GameContext {
 			jsonGame.put("player", -1);
 			jsonGame.put("turn", 1);
 			jsonGame.put("id", -1);
+			jsonGame.put("year", 0);
 			JSONObject json = new JSONObject();
 			json.put("version", 1);
 			json.put("game", jsonGame);

@@ -58,7 +58,8 @@ public class Player implements JSonator{
 	private int mMoney;
 	private int mActors;
 	private int mLogistics;
-	private Sprite mView;	
+	private boolean mCanBuyAuthorFilm;
+	private Sprite mView;
 	
 	//Last time when we visite the QG
 	private int mLastTurn;
@@ -69,7 +70,7 @@ public class Player implements JSonator{
 	
 	private GameContext mGameContext;
 	
-	public Player(String identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, int lastActors, int lastLogistics, HeadQuarters headQuarters, Cell currentPosition) {
+	public Player(String identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, int lastActors, int lastLogistics, boolean canBuyAuthorFilm, HeadQuarters headQuarters, Cell currentPosition) {
 		mIdentifier = identifier;
 		mOrder = order;
 		mName = name;
@@ -83,6 +84,7 @@ public class Player implements JSonator{
 		mLastProfit = lastProfit;
 		mLastActors = lastActors;
 		mLastLogistics = lastLogistics;
+		mCanBuyAuthorFilm = canBuyAuthorFilm;
 		mHeadQuarters = headQuarters;
 		mCurrentPosition = currentPosition;
 		mView = new Sprite(mCurrentPosition.getX() + bordure + mOrder * OFFSET, 
@@ -106,6 +108,7 @@ public class Player implements JSonator{
 				player.getInt("lastProfit"),
 				player.getInt("lastActors"),
 				player.getInt("lastLogistics"),
+				player.getBoolean("canBuyAuthorFilm"),
 				headQuarters,
 				currentPosition);
 		
@@ -211,11 +214,16 @@ public class Player implements JSonator{
 				profitLogistic += ((LogisticFactory)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			}
 		
-		for(Movie movie : getMovies())
+		for(Movie movie : getMovies()){
+			Log.d("GAME", "(last, current,) -> profit ;;; ("+this.getLastTurn() +", " + mGameContext.getCurrentTurn() + ")->> " + movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+			
+		}
 		
-		// màj profit
+		// maj profit
 		mLastProfit = lvlCinema * profitMovies + profitCinema;
+		mLastActors = profitActors;
+		mLastLogistics = profitLogistic;
 		
 		//Affiche une boîte de dialogue avec les gains.
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
@@ -229,9 +237,9 @@ public class Player implements JSonator{
 		TextView txtLogistic = (TextView) view.findViewById(R.id.txtNbLogistic);
 		TextView txtBonus = (TextView) view.findViewById(R.id.txtNbBonus);
 		
-		txtMovies.setText(Integer.toString(mLastProfit));
+		txtMovies.setText(Integer.toString(lvlCinema * profitMovies));
 		txtCinema.setText(Integer.toString(profitCinema));
-		txtActor.setText(Integer.toString(profitActors));
+		txtActor.setText(Integer.toString(mLastActors));
 		txtLogistic.setText(Integer.toString(mLastLogistics));
 		txtBonus.setText(Integer.toString(AllConstants.BONUS_AMOUT));
 		
@@ -263,10 +271,9 @@ public class Player implements JSonator{
 		
 		receiveMoney(mLastProfit);
 		receiveMoney(AllConstants.BONUS_AMOUT);
-		mLastActors = profitActors;
 		receiveActors(mLastActors);
-		mLastLogistics = profitLogistic;
 		receiveLogistic(mLastLogistics);
+		setCanBuyAuthorFilm(true);
 		setLastTurn(mGameContext.getCurrentTurn());
 	}
 	
@@ -416,6 +423,14 @@ public class Player implements JSonator{
 		return mScripts.size();
 	}
 	
+	public boolean getCanBuyAuthorFilm() {
+		return mCanBuyAuthorFilm;
+	}
+	
+	public void setCanBuyAuthorFilm(boolean canBuyAuthorFilm) {
+		mCanBuyAuthorFilm = canBuyAuthorFilm;
+	}
+	
 	public void addScript(Script script){
 		mScripts.add(script);
 
@@ -460,6 +475,7 @@ public class Player implements JSonator{
 		player.put("lastProfit", getLastProfit());
 		player.put("lastActors", getLastActors());
 		player.put("lastLogistics", getLastLogistics());
+		player.put("canBuyAuthorFilm", getCanBuyAuthorFilm());
 		
 		JSONArray scripts = new JSONArray();
 		for(Script s : getScripts())
