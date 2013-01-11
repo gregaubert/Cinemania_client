@@ -78,7 +78,7 @@ public class HeadQuarters extends OwnableCell {
 			
 			Script fetchedScript = null;
 			if(getOwner().getScriptCount() > 0)
-				fetchedScript = getOwner().getScripts().get(0);
+				fetchedScript = getOwner().getScripts().get(getOwner().getScriptCount() - 1);
 			
 			final Script script = fetchedScript;
 			
