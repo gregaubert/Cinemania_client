@@ -29,7 +29,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 	public static final int TYPE = 4;
 
 	private Room[] mRooms = new Room[AllConstants.MAX_ROOMS];
-	private int mPurchasedRooms = 1;
+	private int mPurchasedRooms = 0;
 
 	public Cinema(Room[] rooms, float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseCinema, posX, posY);
