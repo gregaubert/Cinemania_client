@@ -4,19 +4,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.view.View;
 
 import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Room;
 import com.cinemania.network.api.API;
 import com.cinemania.scenes.BoardScene;
 import com.cinemania.activity.Base;
+import com.cinemania.activity.R;
+import com.cinemania.activity.Base.SceneType;
 import com.cinemania.cells.Cell;
 import com.cinemania.cells.CellGenerator;
 import com.cinemania.cells.Chance;
 import com.cinemania.cells.Cinema;
 import com.cinemania.cells.HeadQuarters;
 import com.cinemania.cells.LogisticFactory;
+import com.cinemania.cells.OwnableCell;
 import com.cinemania.cells.School;
 import com.cinemania.cells.ScriptCell;
 import com.cinemania.constants.AllConstants;
@@ -172,15 +178,55 @@ public final class GameContext {
 	/**
 	 * On passe le tour, on envoit les infos au serveur.
 	 */
-	public void nextTurn() {
+	public void nextTurn() {	
+		
+		//Check if we have enough money. Otherwise, we lose.
+		if (mCurrentPlayer.getAmount() < 0)
+		{
+			for(OwnableCell o :  mCurrentPlayer.getOwnableCell()){
+				o.resetOwner();
+			}
+			
+			final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+    		dialogBuilder.setCancelable(true);
+    		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.perdu, null);
+    		dialogBuilder.setView(view);
+    		
+    		//On confirme le passage de tour.
+    		dialogBuilder.setPositiveButton(R.string.btn_perdu, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+                	dialog.dismiss();
+                		
+                	Base a = Base.getSharedInstance();
+                	a.setSceneType(SceneType.MENU);
+                	a.setCurrentScene(a.getGameMenu());
+				}
+			});
+    		
+    		Base.getSharedInstance().runOnUiThread(new Runnable() {
+    			@Override
+    			public void run() {
+    				AlertDialog dialog = dialogBuilder.create();
+    				dialog.show();
+    			}
+    		});
+			
+			API.gamePassTurn(mGameIdentifier, serialize());
+			API.gameLeave(mGameIdentifier);
+			
+		}
 		
 		// Check if the player could perform this action
 		// These checks are both done on the client and the server
-		if (mCurrentPlayer == mPlayer) {
+		else if (mCurrentPlayer == mPlayer) {
 			API.gamePassTurn(mGameIdentifier, serialize());
 		}
 		
-		Base.getSharedInstance().getHUD().setCurrentPlayer(mCurrentPlayer);
+		
+		//Base.getSharedInstance().getHUD().setCurrentPlayer(mCurrentPlayer);
 	}
 	
 	/**

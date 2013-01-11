@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
+import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.resources.ResourcesManager;
 
@@ -73,6 +74,11 @@ public abstract class OwnableCell extends Cell {
 	public void setOwner(Player owner) {
 		mOwner = owner;
 		setColor(owner.getColorCase());
+	}
+	
+	public void resetOwner(){
+		this.mOwner = null;
+		this.setColor(AllConstants.BOARD_CASE_COLOR);
 	}
 	
 	public Player getOwner() {

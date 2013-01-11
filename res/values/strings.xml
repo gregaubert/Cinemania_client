@@ -38,6 +38,7 @@
 	<string name="title_profit_logistic">Logistiques gagnées</string>
 	<string name="title_profit_bonus">Bonus : </string>
 	<string name="title_author_film">Film d\'auteurs</string>
+	<string name="title_quit">Fin de partie</string>
 	<string name="txt_profit_cinema">Cinémas : </string>
 	<string name="txt_profit_movies">Films : </string>
 	<string name="txt_profit_actor">Écoles d\'acteurs : </string>
@@ -47,7 +48,9 @@
 	<string name="btn_pay">Payer</string>
 	<string name="btn_buy">Acheter</string>
 	<string name="btn_close">Fermer</string>
+	<string name="btn_perdu">Quitter</string>
 	<string name="txt_confirm_title">Voulez-vous vraiment passer votre tour?</string>
+	<string name="txt_quitter">Vous avez perdu&#8230;</string>
 	<string name="txt_dice_title">Vous avez fait un : </string>
 	<string name="btn_confirm">Oui</string>
 	<string name="btn_cancel">Annuler</string>
