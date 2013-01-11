@@ -21,7 +21,7 @@ import com.cinemania.activity.Base;
 public final class Utilities {
 	
 	/**
-     * Base URL of the Demo Server (such as http://my_host:8080/gcm-demo)
+     * Base URL of the server
      */
     public static final String SERVER_URL = "http://jorgealbaladejo.com/cinemania/app/index.php";
 
@@ -29,6 +29,8 @@ public final class Utilities {
      * Google API project id registered to use GCM.
      */
     public static final String SENDER_ID = "253409584595";
+    
+    public static final int NUMBER_OF_TRY = 5;
     
     /**
      * The device's hard ID
@@ -47,42 +49,42 @@ public final class Utilities {
 		Log.d("GAME", "Post(" + url + "): " + body);
 		byte[] bytes = body.getBytes();
 		
-		/*
-		HttpPost request = new HttpPost(url);
-		request.
-		*/
-		
+		// Post response
 		HttpURLConnection conn = null;
-		try {
-			conn = (HttpURLConnection)url.openConnection();
-			conn.setDoOutput(true);
-			conn.setUseCaches(false);
-			conn.setFixedLengthStreamingMode(bytes.length);
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-			// Post the request
-			OutputStream out = conn.getOutputStream();
-			out.write(bytes);
-			out.close();
-			// Handle the response
-			response.mCode = conn.getResponseCode();
-			if (response.mCode == 200) {
-				response.mJson = buildPostResponse(conn.getInputStream());
-				// TODO: All responses from server have this field
-				//response.mSuccessful &= response.mJson.getInt("success") == 1;
-			} else {
-				Log.e("GAME", "Wrong HTTP code response " + response.mCode);
-			}
-		} catch (Exception e) {
-			Log.e("GAME", "HTTP exception on POST", e);
-			Log.e("GAME", "URL : " + url);
-			response.mSuccessful = false;
-		} finally {
-			if (conn != null) {
-				conn.disconnect();
+		for (int i = 0; i < NUMBER_OF_TRY; i++) {
+			try {
+				conn = (HttpURLConnection)url.openConnection();
+				conn.setDoOutput(true);
+				conn.setUseCaches(false);
+				conn.setFixedLengthStreamingMode(bytes.length);
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+				// Post the request
+				OutputStream out = conn.getOutputStream();
+				out.write(bytes);
+				out.close();
+				// Handle the response
+				response.mCode = conn.getResponseCode();
+				if (response.mCode == 200) {
+					response.mJson = buildPostResponse(conn.getInputStream());
+					// TODO: All responses from server have this field
+					//response.mSuccessful &= response.mJson.getInt("success") == 1;
+					return response;
+				} else {
+					// When an error occurs, we simply retry
+					Log.v("GAME", "Wrong HTTP code response retry" + response.mCode);
+				}
+			} catch (Exception e) {
+				// When an error occurs, we simply retry
+				Log.v("GAME", "HTTP exception on POST", e);
+			} finally {
+				if (conn != null) {
+					conn.disconnect();
+				}
 			}
 		}
-		
+		response.mSuccessful = false;
+		Log.e("GAME", "Max try");
 		return response;
 	}
 

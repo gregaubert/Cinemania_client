@@ -15,10 +15,13 @@ import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
+
 import android.util.Log;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
+import com.cinemania.constants.AllConstants;
+
 import com.cinemania.network.gcm.GCMConnector;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
@@ -130,7 +133,7 @@ public class Base extends BaseGameActivity
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception {
     	// Active GCM message reception
     	GCMConnector.connect();
-    	
+    	enableVibrator();
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
     }
@@ -163,6 +166,12 @@ public class Base extends BaseGameActivity
     	} catch(Exception e){}*/
     	
     	super.onGameDestroyed();
+    }
+    
+    @Override
+    public synchronized void onResumeGame() {
+    	if(this.mEngine != null)
+    		super.onResumeGame();
     }
         
     //Creer la scene affiche e l'ecran.
@@ -240,6 +249,10 @@ public class Base extends BaseGameActivity
          }
          return false;
     }
+
+	public void vibrate(){
+		mEngine.vibrate(AllConstants.VIBRATE_TIME);
+	}
 	
 	//************GETTER************
     public Camera getCamera(){
