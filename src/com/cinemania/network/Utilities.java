@@ -70,6 +70,8 @@ public final class Utilities {
 				response.mJson = buildPostResponse(conn.getInputStream());
 				// TODO: All responses from server have this field
 				//response.mSuccessful &= response.mJson.getInt("success") == 1;
+			} else {
+				Log.d("GAME", "Wrong HTTP code response " + response.mCode);
 			}
 		} catch (Exception e) {
 			response.mSuccessful = false;
