@@ -89,8 +89,6 @@ public class BoardScene extends Scene implements Loader {
     // ===========================================================
 	@Override
 	public void Load() {	
-		
-	    ;
 	    
 	    // Check there is already an unfull game
 	    GameListResult gameList = API.availableGames();

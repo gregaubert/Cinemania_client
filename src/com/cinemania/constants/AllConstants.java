@@ -10,9 +10,9 @@ public final class AllConstants {
 
 	public static final int INITIAL_YEAR = 1930;
 
-	public static final int INITIAL_SPECTATORS_BIGMOVIE = 100;
+	public static final int INITIAL_SPECTATORS_BIGMOVIE = 70;
 
-	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 50;
+	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 40;
 
 	/**
 	 * Stats rate

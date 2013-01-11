@@ -66,15 +66,16 @@ public final class Utilities {
 			out.close();
 			// Handle the response
 			response.mCode = conn.getResponseCode();
-			//if (response.mCode == 200) {
+			if (response.mCode == 200) {
 				response.mJson = buildPostResponse(conn.getInputStream());
 				// TODO: All responses from server have this field
 				//response.mSuccessful &= response.mJson.getInt("success") == 1;
-			//} else {
-				Log.d("GAME", "Wrong HTTP code response " + response.mCode);
-			//}
+			} else {
+				Log.e("GAME", "Wrong HTTP code response " + response.mCode);
+			}
 		} catch (Exception e) {
-			Log.d("GAME", "HTTP exception on POST " + e.toString());
+			Log.e("GAME", "HTTP exception on POST", e);
+			Log.e("GAME", "URL : " + url);
 			response.mSuccessful = false;
 		} finally {
 			if (conn != null) {
