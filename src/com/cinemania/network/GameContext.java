@@ -72,7 +72,7 @@ public final class GameContext {
 		// Generate board's cells
 		for (int i = 0; i < jsonBoard.length(); i++) {
 			JSONObject jsonCell = jsonBoard.getJSONObject(i);
-			//R�cup�re l'emplacement de la case
+			//Recupere l'emplacement de la case
 			float[] position = boardScene.calculateCasePosition(i);
 			
 			Cell cell = null;
@@ -91,8 +91,6 @@ public final class GameContext {
 					JSONArray jsonRooms = jsonCell.getJSONArray("rooms");
 					Room[] rooms = new Room[jsonRooms.length()];
 					for (int j = 0; j < jsonRooms.length(); j++) {
-						// TODO: Define movie from identifier
-						jsonRooms.getInt(j);
 						rooms[j] = new Room();
 					}
 					cell = new Cinema(rooms,position[0], position[1]);
@@ -142,7 +140,7 @@ public final class GameContext {
 		try {
 			
 			JSONArray jsonPlayers = new JSONArray();
-			//Ajout des diff�rents players.
+			//Ajout des differents players.
 			for(Player p : this.mPlayers)
 				jsonPlayers.put(p.toJson());
 			
@@ -238,11 +236,6 @@ public final class GameContext {
 		return mYear + AllConstants.INITIAL_YEAR;
 	}
 	
-	// FIXME: Only for tests
-	public static String test1() {
-		return "{ \"version\": 1, \"game\": { \"id\": 123456, \"turn\": 1, \"player\": 0 }, \"board\": [ { \"type\": 1, \"level\": 2 }, { \"type\": 1, \"level\": 3 }, { \"type\": 2 }, { \"type\": 5, \"level\": 0 } ], \"players\": [ { \"id\": 12345, \"name\": \"Mok\",  \"hq\": 0, \"position\": 0, \"properties\": [ 3 ], \"money\": 1000, \"actors\": 2, \"logistics\": 10, \"scripts\": [], \"movies\": []}, { \"id\": 4321, \"name\": \"Bof\", \"hq\": 1, \"position\": 1, \"properties\": [], \"money\": 223, \"actors\": 3, \"logistics\": 4, \"scripts\": [],  \"movies\": [] } ] }";
-	}
-	
 	//Etat initial lors d'une nouvelle partie.
 	public static String initialState() {
 		try {
@@ -253,13 +246,13 @@ public final class GameContext {
 			offset = next(cellIdentifiers, offset);
 			JSONObject player1 = new JSONObject();
 			player1.put("id", -1);
-			player1.put("name", "player1");
+			player1.put("name", "Player 1");
 			player1.put("hq", offset);
 			player1.put("position", offset);
 			player1.put("properties", new JSONArray());
 			player1.put("money", AllConstants.DEFAULT_AMOUNT);
-			player1.put("actors", 12);
-			player1.put("logistics", 10);
+			player1.put("actors", AllConstants.DEFAULT_ACTORS);
+			player1.put("logistics", AllConstants.DEFAULT_LOGISTIC);
 			player1.put("lastTurn", 0);
 			player1.put("lastProfit",0);
 			player1.put("lastActors",0);
@@ -271,13 +264,13 @@ public final class GameContext {
 			offset = next(cellIdentifiers, offset);
 			JSONObject player2 = new JSONObject();
 			player2.put("id", -1);
-			player2.put("name", "player2");
+			player2.put("name", "Player 2");
 			player2.put("hq", offset);
 			player2.put("position", offset);
 			player2.put("properties", new JSONArray());
 			player2.put("money", AllConstants.DEFAULT_AMOUNT);
-			player2.put("actors", 12);
-			player2.put("logistics", 10);
+			player2.put("actors", AllConstants.DEFAULT_ACTORS);
+			player2.put("logistics", AllConstants.DEFAULT_LOGISTIC);
 			player2.put("lastTurn", 0);
 			player2.put("lastProfit",0);
 			player2.put("lastActors",0);
@@ -289,13 +282,13 @@ public final class GameContext {
 			offset = next(cellIdentifiers, offset);
 			JSONObject player3 = new JSONObject();
 			player3.put("id", -1);
-			player3.put("name", "player3");
+			player3.put("name", "Player 3");
 			player3.put("hq", offset);
 			player3.put("position", offset);
 			player3.put("properties", new JSONArray());
 			player3.put("money", AllConstants.DEFAULT_AMOUNT);
-			player3.put("actors", 12);
-			player3.put("logistics", 10);
+			player3.put("actors", AllConstants.DEFAULT_ACTORS);
+			player3.put("logistics", AllConstants.DEFAULT_LOGISTIC);
 			player3.put("lastTurn", 0);
 			player3.put("lastProfit",0);
 			player3.put("lastActors",0);
@@ -307,13 +300,13 @@ public final class GameContext {
 			offset = next(cellIdentifiers, offset);
 			JSONObject player4 = new JSONObject();
 			player4.put("id", -1);
-			player4.put("name", "player4");
+			player4.put("name", "Player 4");
 			player4.put("hq", offset);
 			player4.put("position", offset);
 			player4.put("properties", new JSONArray());
 			player4.put("money", AllConstants.DEFAULT_AMOUNT);
-			player4.put("actors", 12);
-			player4.put("logistics", 10);
+			player4.put("actors", AllConstants.DEFAULT_ACTORS);
+			player4.put("logistics", AllConstants.DEFAULT_LOGISTIC);
 			player4.put("lastTurn", 0);
 			player4.put("lastProfit",0);
 			player4.put("lastActors",0);
@@ -332,7 +325,7 @@ public final class GameContext {
 				switch (cellIdentifiers[i]) {
 					case HeadQuarters.TYPE:
 						jsonCell.put("type", HeadQuarters.TYPE);
-						jsonCell.put("level", 1);
+						jsonCell.put("level", AllConstants.DEFAULT_HQ_LEVEL);
 						break;
 					case ScriptCell.TYPE:
 						jsonCell.put("type", ScriptCell.TYPE);
@@ -346,11 +339,11 @@ public final class GameContext {
 						break;
 					case School.TYPE:
 						jsonCell.put("type", School.TYPE);
-						jsonCell.put("level", 1);
+						jsonCell.put("level", AllConstants.DEFAULT_RESOURCES_LEVEL_BF_BUY);
 						break;
 					case LogisticFactory.TYPE:
 						jsonCell.put("type", LogisticFactory.TYPE);
-						jsonCell.put("level", 1);
+						jsonCell.put("level", AllConstants.DEFAULT_RESOURCES_LEVEL_BF_BUY);
 						break;
 				}
 				jsonBoard.put(jsonCell);

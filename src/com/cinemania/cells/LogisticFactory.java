@@ -35,7 +35,7 @@ public class LogisticFactory extends Resource {
 		assert getLevel() < AllConstants.LEVEL_MAX_BUILDING;
 		assert getOwner() != null;
 		getOwner().looseMoney(AllConstants.PRICE_LOGISTIC_EXTENSION);
-		setLevel(getLevel()+1);
+		upgradeLevel();
 	}
 
 	@Override

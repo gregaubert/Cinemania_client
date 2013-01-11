@@ -38,7 +38,7 @@ public class School extends Resource {
 		assert getLevel() < AllConstants.LEVEL_MAX_BUILDING;
 		assert getOwner() != null;
 		getOwner().looseMoney(AllConstants.PRICE_SCHOOL_EXTENSION);
-		setLevel(getLevel()+1);
+		upgradeLevel();
 	}
 	
 	@Override

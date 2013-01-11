@@ -33,10 +33,16 @@ public class Cinema extends BuyableCell implements Profitable  {
 
 	public Cinema(Room[] rooms, float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseCinema, posX, posY);
+		setRooms(rooms);
+		setOnClickListener(this);
+	}
+
+	private void setRooms(Room[] rooms) {
+		mPurchasedRooms = rooms.length;
 		for (int i = 0; i < rooms.length; i++) {
 			mRooms[i] = rooms[i];
+			addLevel(i+1);
 		}
-		setOnClickListener(this);
 	}
 
 	public Cinema(float posX, float posY) {
@@ -154,7 +160,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 			 montant += m.sellingPrice();
 		}
 		montant /= owner.getNbCinema();
-			
+		montant = Math.max(montant, AllConstants.COSTS_ON_CINEMA);
 		player.payOpponent(getOwner(), montant);
 		showPayDialog(montant, R.drawable.ic_cinema, R.string.title_cinema);
 	}
