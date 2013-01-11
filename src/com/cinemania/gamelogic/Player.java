@@ -220,7 +220,7 @@ public class Player implements JSonator{
 				// FIXME: prochaines release
 				// Pour l'instant, juste les charges des salles/cinémas, tant qu'il n'y a pas de salle où l'on
 				// peut affecter des films
-				profitCinema += ((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+				profitCinema += cell.getLevel() * ((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			}
 			else if(cell instanceof School)
 			{

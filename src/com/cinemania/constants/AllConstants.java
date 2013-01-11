@@ -46,10 +46,10 @@ public final class AllConstants {
 	public static final int LEVEL_MAX_BUILDING = 3;
 	public static final int BASEVALUE_OF_SCHOOL = 1500;
 	public static final int BASEVALUE_OF_LOGISTIC = 1500;
-	public static final int BASEVALUE_OF_CINEMA = 2400;
-	public static final int PRICE_SCHOOL_EXTENSION = 2200;
-	public static final int PRICE_LOGISTIC_EXTENSION = 2200;
-	public static final int PRICE_ROOM = 3200;
+	public static final int BASEVALUE_OF_CINEMA = 2200;
+	public static final int PRICE_SCHOOL_EXTENSION = 3000;
+	public static final int PRICE_LOGISTIC_EXTENSION = 3000;
+	public static final int PRICE_ROOM = 3400;
 	public static final int MAX_ROOMS = 3;
 	public static final int LOGISTIC_VALUE = PRICE_LOGISTIC_EXTENSION / 10; // Ce que vaut un niveau logistique
 	public static final int ACTOR_VALUE = PRICE_SCHOOL_EXTENSION / 10; // Ce que vaut un niveau acteur

@@ -58,6 +58,7 @@ public class BigMovie extends Movie {
 		*/
 		
 		
+		
 		int peopleInit = (int) ((double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
 				GROWING_RATE_SPECTATORS, mYear - INITIAL_YEAR));
 		
