@@ -13,6 +13,8 @@ public final class AllConstants {
 	public static final int INITIAL_SPECTATORS_BIGMOVIE = 70;
 
 	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 40;
+	
+	public static final long VIBRATE_TIME = 200; 
 
 	/**
 	 * Stats rate
