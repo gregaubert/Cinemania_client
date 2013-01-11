@@ -165,7 +165,7 @@ public class Base extends BaseGameActivity
     	/*try{
     		GameContext.getSharedInstance().leaveGame();
     	} catch(Exception e){}*/
-    	
+    	GCMConnector.destroy();
     	super.onGameDestroyed();
     }
     
