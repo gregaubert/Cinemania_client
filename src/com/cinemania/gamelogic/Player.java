@@ -35,6 +35,7 @@ import com.cinemania.cells.HeadQuarters;
 import com.cinemania.cells.LogisticFactory;
 import com.cinemania.cells.OwnableCell;
 import com.cinemania.cells.School;
+import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.interfaces.JSonator;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
@@ -226,11 +227,13 @@ public class Player implements JSonator{
 		TextView txtCinema = (TextView) view.findViewById(R.id.txtNbCinema);
 		TextView txtActor = (TextView) view.findViewById(R.id.txtNbActor);
 		TextView txtLogistic = (TextView) view.findViewById(R.id.txtNbLogistic);
+		TextView txtBonus = (TextView) view.findViewById(R.id.txtNbBonus);
 		
 		txtMovies.setText(Integer.toString(mLastProfit));
 		txtCinema.setText(Integer.toString(profitCinema));
 		txtActor.setText(Integer.toString(profitActors));
 		txtLogistic.setText(Integer.toString(mLastLogistics));
+		txtBonus.setText(Integer.toString(AllConstants.BONUS_AMOUT));
 		
 		dialogBuilder.setPositiveButton(R.string.btn_close, new OnClickListener() {
 			@Override
@@ -259,6 +262,7 @@ public class Player implements JSonator{
 		
 		
 		receiveMoney(mLastProfit);
+		receiveMoney(AllConstants.BONUS_AMOUT);
 		mLastActors = profitActors;
 		receiveActors(mLastActors);
 		mLastLogistics = profitLogistic;

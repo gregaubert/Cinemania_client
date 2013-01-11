@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="#FFFFBB33"
         android:orientation="horizontal" >
-
+        
         <ImageView
             android:id="@+id/imgResTitle"
             android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
             android:contentDescription="@string/icon_descriptor"
             android:scaleType="center"
             android:src="@drawable/ic_cinema" />
-
+        
         <TextView
             android:id="@+id/txtResTitle"
             android:layout_width="wrap_content"
@@ -41,14 +41,12 @@
         android:id="@+id/scrollview1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-        
-		<LinearLayout
+        <LinearLayout
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:orientation="vertical"
 		    android:padding="10dp" >
-
-	        <TextView
+		    <TextView
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_gravity="center_vertical"
@@ -56,12 +54,10 @@
 	            android:text="Statistiques"
 	            android:textSize="16sp"
 	            android:textStyle="bold" />
-	
-	        <TableLayout
+			<TableLayout
 	            xmlns:android="http://schemas.android.com/apk/res/android"
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent" >
-	
 	            <TableRow
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
@@ -75,7 +71,6 @@
 	                    android:text="@string/txt_benefices"
 	                    android:textSize="16sp"
 	                    android:textStyle="normal" />
-	
 	                <TextView
 	                    android:id="@+id/txtIncome"
 	                    android:layout_width="wrap_content"
@@ -87,7 +82,6 @@
 	                    android:textStyle="normal" />
 
 	            </TableRow>
-	
 	            <TableRow
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
@@ -100,7 +94,6 @@
 	                    android:text="@string/txt_levelActuel"
 	                    android:textSize="16sp"
 	                    android:textStyle="normal" />
-	
 	                <TextView
 	                    android:id="@+id/txtLevel"
 	                    android:layout_width="wrap_content"
@@ -112,14 +105,12 @@
 	                    android:textStyle="normal" />
 
 	            </TableRow>
-	            
 	            <TableRow
 	                android:id="@+id/tableRowNextLevel"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:orientation="horizontal"
 	                android:visibility="visible" >
-	
 	                <TextView
 	                    android:layout_width="wrap_content"
 	                    android:layout_height="wrap_content"

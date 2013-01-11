@@ -214,6 +214,8 @@ public class Base extends BaseGameActivity
 	
 	private void loadScenes()
 	{
+		Log.i("Game","loadScenes");
+		
 		// load your game here, you scenes
 		mMenu = new GameMenu(); 
     	mOption = new OptionScene();
@@ -244,6 +246,8 @@ public class Base extends BaseGameActivity
                 	this.setCurrentScene(mMenu);
                 	if(mMusicLoop.isPlaying())
                 		mMusicLoop.pause();
+                	//this.mCamera.setHUD(null);
+                	this.mHUD.setCamera(null);
                     break; 
               }
          }

@@ -27,6 +27,8 @@ public final class AllConstants {
 	public static final double DECREASING_MOVIE_RATE_MAX_AM = 0.25;
 	public static final double RATE_SALE = 2.0;
 
+	public static final int BONUS_AMOUT = 1000;
+	
 	/**
 	 * Game start constant
 	 */
