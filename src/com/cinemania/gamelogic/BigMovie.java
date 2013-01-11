@@ -55,6 +55,11 @@ public class BigMovie extends Movie {
 		int peopleInit = (int) (rateMarketing
 				* (double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
 				GROWING_RATE_SPECTATORS, mYear - INITIAL_YEAR));
+		
+		double rapport = totalValue() / (MAX_PRICE_MOVIE + mMaxMarketing);
+		
+		peopleInit = (int)((double)peopleInit*(1+rapport));
+		
 		setPeopleInit(peopleInit);
 
 		double decrasingRate = DECREASING_MOVIE_RATE_MIN_BM + Math.random()
