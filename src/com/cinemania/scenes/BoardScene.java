@@ -132,8 +132,7 @@ public class BoardScene extends Scene implements Loader {
 	public void regenerateGameElements(){
 		cleanGameElements();
 		createGameElements();
-		if(GameContext.getSharedInstance().isLocalTurn())
-			Base.getSharedInstance().vibrate();
+		Base.getSharedInstance().vibrate();
 	}
 	
 	private void cleanGameElements(){
