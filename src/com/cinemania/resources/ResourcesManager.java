@@ -49,6 +49,8 @@ public class ResourcesManager {
 	public ITextureRegion mActorsLogo;
 	public ITextureRegion mLogisticsLogo;
 	
+	public ITextureRegion mBackgroundHUD;
+	
 	//Gestion du dé.
 	public ITextureRegion mDice;	
 	public ITextureRegion mNextTurn;
@@ -148,6 +150,8 @@ public class ResourcesManager {
 		mActorsLogo = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "logo_actors.png");
 	    mNextTurn = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "next_turn.png");
 	    mWaiting = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "waiting.png");
+	    
+	    mBackgroundHUD = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "hud.png");
 	    
 	    mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "dice2.png");
 	    
