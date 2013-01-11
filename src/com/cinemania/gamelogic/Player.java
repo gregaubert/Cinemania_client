@@ -212,7 +212,7 @@ public class Player implements JSonator{
 			}
 		
 		for(Movie movie : getMovies()){
-			Log.d("GAME", "(last, current,) -> prifit ;;; ("+this.getLastTurn() +", " + mGameContext.getCurrentTurn() + ")->> " + movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
+			Log.d("GAME", "(last, current,) -> profit ;;; ("+this.getLastTurn() +", " + mGameContext.getCurrentTurn() + ")->> " + movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			
 		}
