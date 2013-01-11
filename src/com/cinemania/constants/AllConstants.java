@@ -36,7 +36,7 @@ public final class AllConstants {
 	/**
 	 * Game start constant
 	 */
-	public static final int DEFAULT_AMOUNT = 10000;
+	public static final int DEFAULT_AMOUNT = 12000;
 	public static final int DEFAULT_ACTORS = 6;
 	public static final int DEFAULT_LOGISTIC = 6;
 	public static final int DEFAULT_HQ_LEVEL = 1;
@@ -44,12 +44,12 @@ public final class AllConstants {
 	public static final int DEFAULT_RESOURCES_LEVEL_AF_BUY = 1;
 	public static final int DEFAULT_BUILDING_LEVEL = 1;
 	public static final int LEVEL_MAX_BUILDING = 3;
-	public static final int BASEVALUE_OF_SCHOOL = 1500;
-	public static final int BASEVALUE_OF_LOGISTIC = 1500;
-	public static final int BASEVALUE_OF_CINEMA = 2200;
-	public static final int PRICE_SCHOOL_EXTENSION = 3000;
-	public static final int PRICE_LOGISTIC_EXTENSION = 3000;
-	public static final int PRICE_ROOM = 3400;
+	public static final int BASEVALUE_OF_SCHOOL = 1200;
+	public static final int BASEVALUE_OF_LOGISTIC = 1200;
+	public static final int BASEVALUE_OF_CINEMA = 1000;
+	public static final int PRICE_SCHOOL_EXTENSION = 2800;
+	public static final int PRICE_LOGISTIC_EXTENSION = 2800;
+	public static final int PRICE_ROOM = 2500;
 	public static final int MAX_ROOMS = 3;
 	public static final int LOGISTIC_VALUE = PRICE_LOGISTIC_EXTENSION / 10; // Ce que vaut un niveau logistique
 	public static final int ACTOR_VALUE = PRICE_SCHOOL_EXTENSION / 10; // Ce que vaut un niveau acteur
@@ -64,7 +64,7 @@ public final class AllConstants {
 	 */
 	public static final int COSTS_PER_ROOM = 50;
 	public static final int COSTS_PER_CINEMA = 200;
-	public static final int COSTS_CINEMA_TICKET = 15;
+	public static final int COSTS_CINEMA_TICKET = 10;
 
 	/**
 	 * General cost

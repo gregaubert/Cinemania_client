@@ -133,6 +133,7 @@ public class Base extends BaseGameActivity
     @Override
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception {
     	// Active GCM message reception
+    	Log.d("GAME", "PUTAIN DE MERDE ..............................................");
     	GCMConnector.connect();
     	enableVibrator();
     	initSplashScene();
