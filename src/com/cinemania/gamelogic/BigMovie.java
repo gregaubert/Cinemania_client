@@ -47,6 +47,8 @@ public class BigMovie extends Movie {
 		mProducer.looseMoney(mInitPrice);
 		mProducer.looseLogistic(mLogistic);
 		mProducer.looseActors(mActors);
+		
+		
 
 		double rateMarketing = (1 + RATE_MARKETING / 2)
 				- (mMarketing / mMaxMarketing * RATE_MARKETING);
