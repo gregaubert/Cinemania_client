@@ -43,7 +43,9 @@ public class School extends Resource {
 	
 	@Override
 	public int profit(int startTurn, int stopTurn){
-		return (stopTurn-startTurn) * getLevel() + AllConstants.BASE_SCHOOL_INCOME + nbExtensions();
+		int profit = (stopTurn-startTurn) * getLevel() + AllConstants.BASE_SCHOOL_INCOME + nbExtensions();
+		profit /= FACTOR_DIVIDE_SCHOOL;
+		return profit;
 	}
 
 	private int nbExtensions() {
