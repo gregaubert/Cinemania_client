@@ -74,6 +74,7 @@ public final class Utilities {
 				Log.d("GAME", "Wrong HTTP code response " + response.mCode);
 			}
 		} catch (Exception e) {
+			Log.d("GAME", "HTTP exception on POST " + e.toString());
 			response.mSuccessful = false;
 		} finally {
 			if (conn != null) {

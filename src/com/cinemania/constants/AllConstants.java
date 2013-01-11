@@ -13,7 +13,7 @@ public final class AllConstants {
 	public static final int INITIAL_SPECTATORS_BIGMOVIE = 100;
 
 	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 50;
-	
+
 	/**
 	 * Stats rate
 	 */
@@ -24,7 +24,7 @@ public final class AllConstants {
 	public static final double DECREASING_MOVIE_RATE_MIN_AM = 0.2;
 	public static final double DECREASING_MOVIE_RATE_MAX_AM = 0.25;
 	public static final double RATE_SALE = 2.0;
-	
+
 	/**
 	 * Game start constant
 	 */
@@ -48,14 +48,16 @@ public final class AllConstants {
 	public static final double SELLINGPRICE_RATIO = 0.25;
 	public static final int BASE_SCHOOL_INCOME = 2;
 	public static final int BASE_LOGISTIC_INCOME = 3;
-	
+
+
+
 	/**
 	 * Costs by turn depending on the cell
 	 */
 	public static final int COSTS_PER_ROOM = 50;
 	public static final int COSTS_PER_CINEMA = 200;
 	public static final int COSTS_CINEMA_TICKET = 15;
-	
+
 	/**
 	 * General cost
 	 */
@@ -69,7 +71,16 @@ public final class AllConstants {
 	public static final int COSTS_LOGISTIC_MAX = 10;
 	public static final int COSTS_MOVIE_MIN = 200;
 	public static final int COSTS_MOVIE_MAX = 1200;
-	
+
+	/** Max/Min price for a movie
+	 * 
+	 */
+	public static final int MIN_PRICE_MOVIE = COSTS_LOGISTIC_MIN * LOGISTIC_VALUE +
+	COSTS_ACTOR_MIN * ACTOR_VALUE + COSTS_MOVIE_MIN;	
+	public static final int MAX_PRICE_MOVIE = COSTS_LOGISTIC_MAX * LOGISTIC_VALUE +
+	COSTS_ACTOR_MAX * ACTOR_VALUE + COSTS_MOVIE_MAX;		
+
+
 	/**
 	 * Board generation
 	 */
@@ -87,7 +98,7 @@ public final class AllConstants {
 
 	public static final Color  BOARD_CASE_COLOR = new Color(250/255f, 252/255f, 124/255f);
 	public static final Color[][] PLAYER_COLOR = { {new Color(136/255f, 30/255f, 30/255f), new Color(30/255f, 136/255f, 30/255f), new Color(30/255f, 30/255f, 136/255f), new Color(208/255f, 208/255f, 69/255f)},
-												   {new Color(221/255f, 115/255f, 115/255f), new Color(115/255f, 221/255f, 115/255f), new Color(115/255f, 115/255f, 221/255f), new Color(223/255f, 223/255f, 131/255f)}};
+		{new Color(221/255f, 115/255f, 115/255f), new Color(115/255f, 221/255f, 115/255f), new Color(115/255f, 115/255f, 221/255f), new Color(223/255f, 223/255f, 131/255f)}};
 	public static final int[] PLAYER_COLOR_ANDROID = {R.color.player1, R.color.player2, R.color.player3, R.color.player4};
-			
+
 }
