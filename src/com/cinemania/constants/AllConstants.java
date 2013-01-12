@@ -22,6 +22,7 @@ public final class AllConstants {
 	 * Stats rate
 	 */
 	public static final double GROWING_RATE_SPECTATORS = 1.02;
+	public static final double INFLATION = 1.0055; // Inflation -> Croissance des prix et ressources
 	public static final double RATE_MARKETING = 0.2;
 	public static final double DECREASING_MOVIE_RATE_MIN_BM = 0.05;
 	public static final double DECREASING_MOVIE_RATE_MAX_BM = 0.07;
@@ -31,14 +32,14 @@ public final class AllConstants {
 	public static final int FACTOR_DIVIDE_FACTORY = 2; // Division des revenus ressources
 	public static final int FACTOR_DIVIDE_SCHOOL = 2; // Division des revenus écoles
 
-	public static final int BONUS_AMOUT = 1000;
+	public static final int BONUS_AMOUT = 2000;
 	
 	/**
 	 * Game start constant
 	 */
-	public static final int DEFAULT_AMOUNT = 12000;
-	public static final int DEFAULT_ACTORS = 6;
-	public static final int DEFAULT_LOGISTIC = 6;
+	public static final int DEFAULT_AMOUNT = 15000;
+	public static final int DEFAULT_ACTORS = 8;
+	public static final int DEFAULT_LOGISTIC = 8;
 	public static final int DEFAULT_HQ_LEVEL = 1;
 	public static final int DEFAULT_RESOURCES_LEVEL_BF_BUY = 0;
 	public static final int DEFAULT_RESOURCES_LEVEL_AF_BUY = 1;
@@ -71,23 +72,21 @@ public final class AllConstants {
 	 */
 	public static final int COSTS_ON_HQ = 750;
 	public static final int COSTS_ON_CINEMA = 200;
-	public static final int COSTS_SCRIPT_MIN = 200;
-	public static final int COSTS_SCRIPT_MAX = 600;
+	public static final int COSTS_SCRIPT_MIN = 300;
+	public static final int COSTS_SCRIPT_MAX = 1000;
 	public static final int COSTS_ACTOR_MIN = 0;
-	public static final int COSTS_ACTOR_MAX = 15;
-	public static final int COSTS_LOGISTIC_MIN = 1;
-	public static final int COSTS_LOGISTIC_MAX = 10;
-	public static final int COSTS_MOVIE_MIN = 200;
-	public static final int COSTS_MOVIE_MAX = 1200;
-	public static final int COSTS_AUTHOR_MIN = 200;
-	public static final int COSTS_AUTHOR_MAX = 400;
+	public static final int COSTS_ACTOR_MAX = 12;
+	public static final int COSTS_LOGISTIC_MIN = 4;
+	public static final int COSTS_LOGISTIC_MAX = 8;
+	public static final int COSTS_MOVIE_MIN = 1000;
+	public static final int COSTS_MOVIE_MAX = 2000;
+	public static final int COSTS_AUTHOR_MIN = 2000;
+	public static final int COSTS_AUTHOR_MAX = 3000;
 
 	/** Max/Min price for a movie
 	 * 
 	 */
-	public static final int MIN_PRICE_MOVIE = COSTS_LOGISTIC_MIN * LOGISTIC_VALUE +
-	COSTS_ACTOR_MIN * ACTOR_VALUE + COSTS_MOVIE_MIN;	
-	public static final int MAX_PRICE_MOVIE = COSTS_LOGISTIC_MAX * LOGISTIC_VALUE +
+	public static final int MAX_RELATIVE_PRICE_MOVIE = COSTS_LOGISTIC_MAX * LOGISTIC_VALUE +
 	COSTS_ACTOR_MAX * ACTOR_VALUE + COSTS_MOVIE_MAX;		
 
 
@@ -110,5 +109,16 @@ public final class AllConstants {
 	public static final Color[][] PLAYER_COLOR = { {new Color(136/255f, 30/255f, 30/255f), new Color(30/255f, 136/255f, 30/255f), new Color(30/255f, 30/255f, 136/255f), new Color(168/255f, 118/255f, 60/255f)},
 		{new Color(221/255f, 115/255f, 115/255f), new Color(115/255f, 221/255f, 115/255f), new Color(115/255f, 115/255f, 221/255f), new Color(253/255f, 177/255f, 91/255f)}};
 	public static final int[] PLAYER_COLOR_ANDROID = {R.color.player1, R.color.player2, R.color.player3, R.color.player4};
+	
+	public static int aleatory(int from, int to){
+		return (int)(Math.random() * (to-from) + from);
+	}
+	
+	public static int aleatoryAccordingInflation(int from, int to, int turn){
+		from *= (int) Math.pow(INFLATION, turn);
+		to *= (int) Math.pow(INFLATION, turn);
+		return aleatory(from, to);
+	}
+	
 
 }

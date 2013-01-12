@@ -113,8 +113,15 @@ public class HeadQuarters extends OwnableCell {
 							// TODO Marketing
 							ResourcesManager.getInstance().mSndTaDa.stop();
 							ResourcesManager.getInstance().mSndTaDa.play();
-							BigMovie movie = new BigMovie(script.getTitle(), script.getLogistics(), script.getActors(), script.getPriceProd(), GameContext.getSharedInstance().getYear(), 10);
-							movie.produceThisMovie(getOwner(), 5);
+							BigMovie movie = new BigMovie(	script.getTitle(), 
+															script.getLogistics(), 
+															script.getActors(), 
+															script.getPriceProd(), 
+															GameContext.getSharedInstance().getYear(), 
+															500); // TODO: budget marketing (JCA)
+							
+							// Correction : Ne pas oublier de setter le tour courant, sinon bénéf médiocre (JCA)
+							movie.produceThisMovie(getOwner(), GameContext.getSharedInstance().getCurrentTurn(), 0); //TODO: budget marketing (JCA)
 							getOwner().addMovie(movie);
 						}
 						dialog.dismiss();

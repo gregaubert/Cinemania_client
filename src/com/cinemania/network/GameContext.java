@@ -238,6 +238,10 @@ public final class GameContext {
 		return mYear + AllConstants.INITIAL_YEAR;
 	}
 	
+	public int getNumberOfYearSinceStart(){
+		return mYear;
+	}
+	
 	//Etat initial lors d'une nouvelle partie.
 	public static String initialState() {
 		try {

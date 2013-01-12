@@ -440,7 +440,9 @@ public class Player implements JSonator{
 	}
 	
 	public boolean getCanBuyAuthorFilm() {
-		return mCanBuyAuthorFilm;
+		// Modified by JCA : J'augmente le prix et on achète n'importe quand.
+		return true;
+		//return mCanBuyAuthorFilm;
 	}
 	
 	public void setCanBuyAuthorFilm(boolean canBuyAuthorFilm) {
