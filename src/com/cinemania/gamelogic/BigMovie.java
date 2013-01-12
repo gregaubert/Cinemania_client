@@ -49,20 +49,11 @@ public class BigMovie extends Movie {
 		mProducer.looseActors(mActors);
 		
 		setBeginingTurn(currentTurn);
-
-		double rateMarketing = (1 + RATE_MARKETING / 2)
-				- (mMarketing / mMaxMarketing * RATE_MARKETING);
-		/*int peopleInit = (int) (rateMarketing
-				* (double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
-				GROWING_RATE_SPECTATORS, mYear - INITIAL_YEAR));
-		*/
-		
-		
 		
 		int peopleInit = (int) ((double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
 				GROWING_RATE_SPECTATORS, mYear - INITIAL_YEAR));
 		
-		double rapport = totalValue() / (MAX_RELATIVE_PRICE_MOVIE + mMaxMarketing);
+		double rapport = totalValue() / (MAX_RELATIVE_PRICE_MOVIE * Math.pow(INFLATION, currentTurn));
 		
 		// People init en fonction des ressources demandées
 		peopleInit = (int)((double)peopleInit*(1+rapport));

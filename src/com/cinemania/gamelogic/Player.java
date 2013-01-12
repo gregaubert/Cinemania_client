@@ -189,7 +189,6 @@ public class Player implements JSonator{
 	
 	//When we pass our QG we can get all the profit.
 	public void encaisser(){
-		
 		ResourcesManager.getInstance().mSndCashMachine.stop();
 		ResourcesManager.getInstance().mSndCashMachine.play();
 		double lvlCinema = 0.0;
@@ -203,20 +202,19 @@ public class Player implements JSonator{
 			{
 				switch(cell.getLevel()){
 				case 0:
-					lvlCinema += 0;
+					lvlCinema += 0.0;
 					break;
 				case 1:
-					lvlCinema += 1;
+					lvlCinema += 1.0;
 					break;
 				case 2:
-					lvlCinema += 1.15;
+					lvlCinema += 1.2;
 					break;
 				case 3:
 					lvlCinema += 1.4;
 					break;				
 				}
 				
-				lvlCinema += cell.getLevel();
 				// FIXME: prochaines release
 				// Pour l'instant, juste les charges des salles/cinémas, tant qu'il n'y a pas de salle où l'on
 				// peut affecter des films
@@ -232,7 +230,6 @@ public class Player implements JSonator{
 			}
 		
 		for(Movie movie : getMovies()){
-			Log.d("GAME", "(last, current,) -> profit ;;; ("+this.getLastTurn() +", " + mGameContext.getCurrentTurn() + ")->> " + movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());			
 		}
 		
