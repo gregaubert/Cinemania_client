@@ -81,12 +81,16 @@ public abstract class Movie implements Profitable, JSonator {
 	public int profit(int startTurn, int stopTurn) {
 		int profit = 0;
 		while (startTurn++ < stopTurn){
-			profit += COSTS_CINEMA_TICKET
+			// Encaisse que depuis que le film a été produit
+			if(getBeginingTurn()<startTurn){
+				profit += COSTS_CINEMA_TICKET
 					* getPeopleInit()
 					* Math.pow(getDecreasingRate(), startTurn
 							- getBeginingTurn());
 		
-			Log.d("GAME", startTurn + "] " + mTitle + " " + COSTS_CINEMA_TICKET + "*" + getPeopleInit() + "*" + Math.pow(getDecreasingRate(), startTurn - getBeginingTurn()));
+				Log.d("GAME", startTurn + "] " + mTitle + " " + COSTS_CINEMA_TICKET + "*" + getPeopleInit() + "*" + Math.pow(getDecreasingRate(), startTurn - getBeginingTurn()) + " (" + startTurn + " " + getBeginingTurn());
+		
+			}
 		}
 		Log.d("GAME", "->"+ profit);
 		return profit;

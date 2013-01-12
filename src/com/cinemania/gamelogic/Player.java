@@ -191,7 +191,7 @@ public class Player implements JSonator{
 	public void encaisser(){
 		ResourcesManager.getInstance().mSndCashMachine.stop();
 		ResourcesManager.getInstance().mSndCashMachine.play();
-		double lvlCinema = 0.0;
+		double lvlCinema = 1.0; // Par défaut 1
 		int profitCinema = 0,
 			profitMovies = 0,
 			profitActors = 0,
@@ -202,16 +202,16 @@ public class Player implements JSonator{
 			{
 				switch(cell.getLevel()){
 				case 0:
-					lvlCinema += 0.0;
+					lvlCinema += 0.1;
 					break;
 				case 1:
-					lvlCinema += 1.0;
+					lvlCinema += 0.2;
 					break;
 				case 2:
-					lvlCinema += 1.2;
+					lvlCinema += 0.3;
 					break;
 				case 3:
-					lvlCinema += 1.4;
+					lvlCinema += 0.5;
 					break;				
 				}
 				
@@ -233,8 +233,10 @@ public class Player implements JSonator{
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());			
 		}
 		
+		Log.d("GAME", "Profit " + profitMovies + " " + lvlCinema);
+		
 		// maj profit
-		mLastProfit = (int)(lvlCinema * (double)profitMovies) + profitCinema;
+		mLastProfit = (int)(lvlCinema * profitMovies) + profitCinema;
 		mLastActors = profitActors;
 		mLastLogistics = profitLogistic;
 		

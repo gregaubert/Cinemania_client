@@ -37,9 +37,9 @@ public final class AllConstants {
 	/**
 	 * Game start constant
 	 */
-	public static final int DEFAULT_AMOUNT = 15000;
-	public static final int DEFAULT_ACTORS = 8;
-	public static final int DEFAULT_LOGISTIC = 8;
+	public static final int DEFAULT_AMOUNT = 20000;
+	public static final int DEFAULT_ACTORS = 10;
+	public static final int DEFAULT_LOGISTIC = 10;
 	public static final int DEFAULT_HQ_LEVEL = 1;
 	public static final int DEFAULT_RESOURCES_LEVEL_BF_BUY = 0;
 	public static final int DEFAULT_RESOURCES_LEVEL_AF_BUY = 1;
@@ -64,7 +64,7 @@ public final class AllConstants {
 	 * Costs by turn depending on the cell
 	 */
 	public static final int COSTS_PER_ROOM = 50;
-	public static final int COSTS_PER_CINEMA = 200;
+	public static final int COSTS_PER_CINEMA = 100;
 	public static final int COSTS_CINEMA_TICKET = 10;
 
 	/**
@@ -74,7 +74,7 @@ public final class AllConstants {
 	public static final int COSTS_ON_CINEMA = 200;
 	public static final int COSTS_SCRIPT_MIN = 1000;
 	public static final int COSTS_SCRIPT_MAX = 2000;
-	public static final int COSTS_ACTOR_MIN = 0;
+	public static final int COSTS_ACTOR_MIN = 1;
 	public static final int COSTS_ACTOR_MAX = 12;
 	public static final int COSTS_LOGISTIC_MIN = 4;
 	public static final int COSTS_LOGISTIC_MAX = 8;
@@ -120,5 +120,20 @@ public final class AllConstants {
 		return aleatory(from, to);
 	}
 	
+	public static double profitRessource(int level){
+		double lvl = 0.0;
+		switch(level){
+		case 1:
+			lvl += 1.0;
+			break;
+		case 2:
+			lvl += 1.3;
+			break;
+		case 3:
+			lvl += 1.5;
+			break;				
+		}
+		return lvl;		
+	}
 
 }

@@ -40,7 +40,7 @@ public class LogisticFactory extends Resource {
 
 	@Override
 	public int profit(int startTurn, int stopTurn){
-		int profit = (stopTurn-startTurn) * getLevel() + AllConstants.BASE_LOGISTIC_INCOME + nbExtensions();
+		int profit =(int)((stopTurn-startTurn) * profitRessource(getLevel()) * AllConstants.BASE_LOGISTIC_INCOME);
 		profit /= FACTOR_DIVIDE_FACTORY;
 		return profit;
 	}
