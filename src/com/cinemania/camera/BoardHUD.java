@@ -204,13 +204,14 @@ public class BoardHUD extends HUD implements Loader {
 		registerTouchArea(mDiceSprite);
 		registerTouchArea(mNextSprite);
 		
+		attachChild(mBackground);
+		
 		attachChild(txtYear);
 		attachChild(txtActors);
 		attachChild(txtMoney);
 		attachChild(txtScripts);
 		attachChild(txtLogistics);
-		attachChild(mBackground);
-		
+
 		attachChild(actorsSprite);
 		attachChild(moneySprite);
 		attachChild(logisticsSprite);

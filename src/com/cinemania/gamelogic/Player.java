@@ -515,5 +515,9 @@ public class Player implements JSonator{
 		}
 		return nb;
 	}
+	
+	public ArrayList<OwnableCell> getOwnableCell(){
+		return this.mProperties;
+	}
 
 }
