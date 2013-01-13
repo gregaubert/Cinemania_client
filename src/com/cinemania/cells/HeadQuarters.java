@@ -33,7 +33,7 @@ public class HeadQuarters extends OwnableCell {
 	}
 	
 	@Override
-	public void upgrade() {
+	public void upgrade(int price) {
 		assert mLevel < AllConstants.LEVEL_MAX_BUILDING;
 		mLevel++;
 		addLevel(getLevel());
@@ -171,12 +171,14 @@ public class HeadQuarters extends OwnableCell {
 	@Override
 	public void ownerOnCell() {
 		// Encaisse le double si on tombe pile dessus
-		getOwner().encaisser();
+//		getOwner().encaisser();
+		getOwner().receiveMoney(getOwner().getLastProfit());
 	}
 
 	@Override
 	public void strangerOnCell(Player player) {
-		showPayDialog(AllConstants.COSTS_ON_HQ, R.drawable.ic_hq, R.string.title_hq);
-		player.payOpponent(getOwner(), AllConstants.COSTS_ON_HQ);
+		int mustPay = (int) (AllConstants.COSTS_ON_HQ + player.getAmount() * AllConstants.PERCENT_HQ);
+		showPayDialog(mustPay, R.drawable.ic_hq, R.string.title_hq);
+		player.payOpponent(getOwner(), mustPay);
 	}
 }

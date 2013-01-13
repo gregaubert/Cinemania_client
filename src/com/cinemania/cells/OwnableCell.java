@@ -24,7 +24,7 @@ public abstract class OwnableCell extends Cell {
 		super(texture, posX, posY);
 	}
 	
-	public abstract void upgrade();
+	public abstract void upgrade(int price);
 	
 	public abstract int getLevel();
 	

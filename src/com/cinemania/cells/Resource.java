@@ -138,6 +138,8 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		txtLevel.setText(Integer.toString(getLevel()));
 		txtLevelPrice.setText(Integer.toString(priceExtension));
 		
+		final int price = priceExtension;
+		
 		if(updateAvailable()){
 			dialogBuilder.setPositiveButton(R.string.btn_level, new android.content.DialogInterface.OnClickListener() {
 				
@@ -145,7 +147,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 				public void onClick(DialogInterface dialog, int which) {
 					ResourcesManager.getInstance().mSndCashMachine.stop();
 					ResourcesManager.getInstance().mSndCashMachine.play();
-					Resource.this.upgrade();
+					Resource.this.upgrade(price);
 					dialog.dismiss();
 				}
 			});

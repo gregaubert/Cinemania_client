@@ -4,6 +4,8 @@ import org.andengine.entity.sprite.ButtonSprite;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.cinemania.activity.R;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Player;
@@ -29,16 +31,16 @@ public class LogisticFactory extends Resource {
 	@Override
 	public int totalValue() {
 		if (!this.hasOwner())
-			return BASEVALUE_OF_LOGISTIC + getLevel() * PRICE_LOGISTIC_EXTENSION;
+			return BASEVALUE_OF_LOGISTIC;
 		else
 			return (int)((BASEVALUE_OF_LOGISTIC + getLevel() * PRICE_LOGISTIC_EXTENSION) * AllConstants.RATE_SALE);
 	}
 	
 	@Override
-	public void upgrade() {
+	public void upgrade(int price) {
 		assert getLevel() < AllConstants.LEVEL_MAX_BUILDING;
 		assert getOwner() != null;
-		getOwner().looseMoney(AllConstants.PRICE_LOGISTIC_EXTENSION);
+		getOwner().looseMoney(price);
 		upgradeLevel();
 	}
 
@@ -108,6 +110,7 @@ public class LogisticFactory extends Resource {
 	@Override
 	public void ownerOnCell() {
 		assert hasOwner();
-		showOwnerDialog(R.drawable.ic_logistics, R.string.title_logistics, getOwner().getLastLogistics(), AllConstants.PRICE_LOGISTIC_EXTENSION);
+		int price = (int)(AllConstants.PRICE_LOGISTIC_EXTENSION * Math.pow(AllConstants.INFLATION, GameContext.getSharedInstance().getCurrentTurn()));
+		showOwnerDialog(R.drawable.ic_logistics, R.string.title_logistics, getOwner().getLastLogistics(), price);
 	}
 }

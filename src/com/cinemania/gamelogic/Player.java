@@ -185,6 +185,8 @@ public class Player implements JSonator{
 		SequenceEntityModifier sem = new SequenceEntityModifier(entity);
 		
 		mView.registerEntityModifier(sem);
+		
+		setCanBuyAuthorFilm(true);
 	}
 	
 	//When we pass our QG we can get all the profit.
@@ -202,16 +204,16 @@ public class Player implements JSonator{
 			{
 				switch(cell.getLevel()){
 				case 0:
-					lvlCinema += 0.2;
+					lvlCinema += 0.1;
 					break;
 				case 1:
-					lvlCinema += 0.4;
+					lvlCinema += 0.25;
 					break;
 				case 2:
-					lvlCinema += 0.6;
+					lvlCinema += 0.4;
 					break;
 				case 3:
-					lvlCinema += 1.0;
+					lvlCinema += 0.7;
 					break;				
 				}
 				
@@ -288,7 +290,6 @@ public class Player implements JSonator{
 		receiveMoney(AllConstants.BONUS_AMOUT);
 		receiveActors(mLastActors);
 		receiveLogistic(mLastLogistics);
-		setCanBuyAuthorFilm(true);
 		setLastTurn(mGameContext.getCurrentTurn());
 		
 		mGameContext.checkLooseGame();
@@ -442,8 +443,8 @@ public class Player implements JSonator{
 	
 	public boolean getCanBuyAuthorFilm() {
 		// Modified by JCA : J'augmente le prix et on achète n'importe quand.
-		return true;
-		//return mCanBuyAuthorFilm;
+//		return true;
+		return mCanBuyAuthorFilm;
 	}
 	
 	public void setCanBuyAuthorFilm(boolean canBuyAuthorFilm) {

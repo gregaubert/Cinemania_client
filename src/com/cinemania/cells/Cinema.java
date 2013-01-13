@@ -51,10 +51,10 @@ public class Cinema extends BuyableCell implements Profitable  {
 	}
 	
 	@Override
-	public void upgrade() {
+	public void upgrade(int price) {
 		assert mPurchasedRooms < AllConstants.MAX_ROOMS;
 		assert getOwner() != null;
-		getOwner().looseMoney(AllConstants.PRICE_ROOM);
+		getOwner().looseMoney(price);
 		mRooms[mPurchasedRooms++] = new Room();
 		addLevel(getLevel());
 	}
@@ -182,14 +182,17 @@ public class Cinema extends BuyableCell implements Profitable  {
 		nbFilmProduced.setText(Integer.toString(getOwner().getMovies().size()));
 		benefices.setText(Integer.toString(getOwner().getLastProfit()));
 		level.setText(Integer.toString(getLevel()));
-		levelPrice.setText(Integer.toString(AllConstants.PRICE_ROOM));
+		
+		final int price = (int)(AllConstants.PRICE_ROOM * Math.pow(AllConstants.INFLATION, GameContext.getSharedInstance().getCurrentTurn()));
+		
+		levelPrice.setText(Integer.toString(price));
 		
 		if(updateAvailable()){
 			dialogBuilder.setPositiveButton(R.string.btn_level, new android.content.DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Cinema.this.upgrade();
+					Cinema.this.upgrade(price);
 					ResourcesManager.getInstance().mSndProjector.stop();
 					ResourcesManager.getInstance().mSndCashMachine.stop();
 					ResourcesManager.getInstance().mSndCashMachine.play();

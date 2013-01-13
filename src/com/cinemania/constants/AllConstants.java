@@ -15,22 +15,22 @@ public final class AllConstants {
 	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 40;
 	
 	public static final int NUMBER_PLAYER = 4;
-	public static final long VIBRATE_TIME_LOCAL = 400;
-	public static final long VIBRATE_TIME_OTHER = 200;
+	public static final long VIBRATE_TIME_LOCAL = 0; //400
+	public static final long VIBRATE_TIME_OTHER = 0; // 200
 
 	/**
 	 * Stats rate
 	 */
 	public static final double GROWING_RATE_SPECTATORS = 1.02;
-	public static final double INFLATION = 1.008; // Inflation -> Croissance des prix et ressources
+	public static final double INFLATION = 1.015; // Inflation -> Croissance des prix et ressources
 	public static final double RATE_MARKETING = 0.2;
 	public static final double DECREASING_MOVIE_RATE_MIN_BM = 0.05;
 	public static final double DECREASING_MOVIE_RATE_MAX_BM = 0.07;
 	public static final double DECREASING_MOVIE_RATE_MIN_AM = 0.07;
 	public static final double DECREASING_MOVIE_RATE_MAX_AM = 0.09;
 	public static final double RATE_SALE = 2.0;
-	public static final double FACTOR_DIVIDE_FACTORY = 0.25; // Division des revenus ressources
-	public static final double FACTOR_DIVIDE_SCHOOL = 0.25; // Division des revenus écoles
+	public static final double FACTOR_DIVIDE_FACTORY = 1.0; // Division des revenus ressources
+	public static final double FACTOR_DIVIDE_SCHOOL = 0.3; // Division des revenus écoles
 
 	public static final int BONUS_AMOUT = 2000;
 	
@@ -64,13 +64,14 @@ public final class AllConstants {
 	 * Costs by turn depending on the cell
 	 */
 	public static final int COSTS_PER_ROOM = 50;
-	public static final int COSTS_PER_CINEMA = 100;
+	public static final int COSTS_PER_CINEMA = 200;
 	public static final int COSTS_CINEMA_TICKET = 10;
 
 	/**
 	 * General cost
 	 */
-	public static final int COSTS_ON_HQ = 750;
+	public static final int COSTS_ON_HQ = 500;
+	public static final double PERCENT_HQ = 0.05; 
 	public static final int COSTS_ON_CINEMA = 200;
 	public static final int COSTS_SCRIPT_MIN = 1000;
 	public static final int COSTS_SCRIPT_MAX = 2000;
@@ -117,6 +118,7 @@ public final class AllConstants {
 	public static int aleatoryAccordingInflation(int from, int to, int turn){
 		from *= (int) Math.pow(INFLATION, turn);
 		to *= (int) Math.pow(INFLATION, turn);
+		android.util.Log.d("GAME", "from " + from + " to " + to);
 		return aleatory(from, to);
 	}
 	

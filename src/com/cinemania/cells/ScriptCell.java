@@ -86,6 +86,8 @@ public class ScriptCell extends Cell {
 				}
 			});
 		}
+
+		GameContext.getSharedInstance().getPlayer().setCanBuyAuthorFilm(false);
 	}
 
 	@Override
