@@ -185,14 +185,15 @@ public class Player implements JSonator{
 		SequenceEntityModifier sem = new SequenceEntityModifier(entity);
 		
 		mView.registerEntityModifier(sem);
+		
+		setCanBuyAuthorFilm(true);
 	}
 	
 	//When we pass our QG we can get all the profit.
 	public void encaisser(){
-		
 		ResourcesManager.getInstance().mSndCashMachine.stop();
 		ResourcesManager.getInstance().mSndCashMachine.play();
-		double lvlCinema = 0.0;
+		double lvlCinema = 1.0; // Par défaut 1
 		int profitCinema = 0,
 			profitMovies = 0,
 			profitActors = 0,
@@ -203,20 +204,19 @@ public class Player implements JSonator{
 			{
 				switch(cell.getLevel()){
 				case 0:
-					lvlCinema += 0;
+					lvlCinema += 0.1;
 					break;
 				case 1:
-					lvlCinema += 1;
+					lvlCinema += 0.25;
 					break;
 				case 2:
-					lvlCinema += 1.15;
+					lvlCinema += 0.4;
 					break;
 				case 3:
-					lvlCinema += 1.4;
+					lvlCinema += 0.7;
 					break;				
 				}
 				
-				lvlCinema += cell.getLevel();
 				// FIXME: prochaines release
 				// Pour l'instant, juste les charges des salles/cinémas, tant qu'il n'y a pas de salle où l'on
 				// peut affecter des films
@@ -232,12 +232,13 @@ public class Player implements JSonator{
 			}
 		
 		for(Movie movie : getMovies()){
-			Log.d("GAME", "(last, current,) -> profit ;;; ("+this.getLastTurn() +", " + mGameContext.getCurrentTurn() + ")->> " + movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn()));
 			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());			
 		}
 		
+		Log.d("GAME", "Profit " + profitMovies + " " + lvlCinema);
+		
 		// maj profit
-		mLastProfit = (int)(lvlCinema * (double)profitMovies) + profitCinema;
+		mLastProfit = (int)(lvlCinema * profitMovies) + profitCinema;
 		mLastActors = profitActors;
 		mLastLogistics = profitLogistic;
 		
@@ -289,8 +290,9 @@ public class Player implements JSonator{
 		receiveMoney(AllConstants.BONUS_AMOUT);
 		receiveActors(mLastActors);
 		receiveLogistic(mLastLogistics);
-		setCanBuyAuthorFilm(true);
 		setLastTurn(mGameContext.getCurrentTurn());
+		
+		mGameContext.checkLooseGame();
 	}
 	
 	public void payOpponent(Player opponent, int amount){
@@ -440,6 +442,8 @@ public class Player implements JSonator{
 	}
 	
 	public boolean getCanBuyAuthorFilm() {
+		// Modified by JCA : J'augmente le prix et on achète n'importe quand.
+//		return true;
 		return mCanBuyAuthorFilm;
 	}
 	

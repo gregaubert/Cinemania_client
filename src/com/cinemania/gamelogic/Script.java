@@ -128,11 +128,20 @@ public class Script implements JSonator{
 		else
 			movieName = new MovieName(GameContext.getSharedInstance().getYear(), "Film d'exemple");
 		
+		/*
 		Script script = new Script(movieName.mName, movieName.mYear, 
 				(int)(Math.random() * (AllConstants.COSTS_SCRIPT_MAX-AllConstants.COSTS_SCRIPT_MIN) + AllConstants.COSTS_SCRIPT_MIN),
 				(int)(Math.random() * (AllConstants.COSTS_MOVIE_MAX-AllConstants.COSTS_MOVIE_MIN) + AllConstants.COSTS_MOVIE_MIN),
 				(int)(Math.random() * (AllConstants.COSTS_ACTOR_MAX-AllConstants.COSTS_ACTOR_MIN) + AllConstants.COSTS_ACTOR_MIN),
 				(int)(Math.random() * (AllConstants.COSTS_LOGISTIC_MAX-AllConstants.COSTS_LOGISTIC_MIN) + AllConstants.COSTS_LOGISTIC_MIN));
+		*/
+		// Prix en fonction de l'inflation du jeu :
+		Script script = new Script(movieName.mName, movieName.mYear, 
+				AllConstants.aleatoryAccordingInflation(AllConstants.COSTS_SCRIPT_MIN, AllConstants.COSTS_SCRIPT_MAX, GameContext.getSharedInstance().getCurrentTurn()),
+				AllConstants.aleatoryAccordingInflation(AllConstants.COSTS_MOVIE_MIN, AllConstants.COSTS_MOVIE_MAX, GameContext.getSharedInstance().getCurrentTurn()),
+				AllConstants.aleatoryAccordingInflation(AllConstants.COSTS_ACTOR_MIN, AllConstants.COSTS_ACTOR_MAX, GameContext.getSharedInstance().getCurrentTurn()),
+				AllConstants.aleatoryAccordingInflation(AllConstants.COSTS_LOGISTIC_MIN, AllConstants.COSTS_LOGISTIC_MAX, GameContext.getSharedInstance().getCurrentTurn()));
+		
 		script.setSummary(movieName.mSummary);
 		return script;
 	}

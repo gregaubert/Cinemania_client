@@ -26,25 +26,29 @@ public class School extends Resource {
 	public School(int level, float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseActors, level, posX, posY);
 		setOnClickListener(this);
+		setBaseValue(AllConstants.BASEVALUE_OF_SCHOOL);
 	}
 
 	@Override
 	public int totalValue() {
-		return BASEVALUE_OF_SCHOOL * (getLevel() + 1) + nbExtensions() * PRICE_SCHOOL_EXTENSION;
+		if (!this.hasOwner())
+			return BASEVALUE_OF_SCHOOL;
+		else
+			return (int)((BASEVALUE_OF_SCHOOL + getLevel() * PRICE_SCHOOL_EXTENSION) * AllConstants.RATE_SALE);
 	}
 	
 	@Override
-	public void upgrade() {
+	public void upgrade(int price) {
 		assert getLevel() < AllConstants.LEVEL_MAX_BUILDING;
 		assert getOwner() != null;
-		getOwner().looseMoney(AllConstants.PRICE_SCHOOL_EXTENSION);
+		getOwner().looseMoney(price);
 		upgradeLevel();
 	}
 	
 	@Override
 	public int profit(int startTurn, int stopTurn){
-		int profit = (stopTurn-startTurn) * getLevel() + AllConstants.BASE_SCHOOL_INCOME + nbExtensions();
-		profit /= FACTOR_DIVIDE_SCHOOL;
+		int profit =(int)((stopTurn-startTurn) * profitRessource(getLevel()) * AllConstants.BASE_SCHOOL_INCOME);
+		profit *= FACTOR_DIVIDE_SCHOOL;
 		return profit;
 	}
 
@@ -124,7 +128,8 @@ public class School extends Resource {
 	@Override
 	public void ownerOnCell() {
 		assert hasOwner();
-		showOwnerDialog(R.drawable.ic_actors, R.string.title_actors, getOwner().getLastActors(), AllConstants.PRICE_SCHOOL_EXTENSION);
+		int price = (int)(AllConstants.PRICE_SCHOOL_EXTENSION * Math.pow(AllConstants.INFLATION, GameContext.getSharedInstance().getCurrentTurn()));
+		showOwnerDialog(R.drawable.ic_actors, R.string.title_actors, getOwner().getLastActors(), price);
 	}
 
 	@Override

@@ -40,29 +40,20 @@ public class BigMovie extends Movie {
 		//FIXME Rajouter le producteur, pour lorsqu'il y aura une collaboration pour la production de film seulement
 	}
 
-	public void produceThisMovie(Player player, int budgetMarketing) {
+	public void produceThisMovie(Player player, int currentTurn, int budgetMarketing) {
 		mProducer = player;
-		mMarketing = budgetMarketing;
+		mMarketing = 5;
 		
 		mProducer.looseMoney(mInitPrice);
 		mProducer.looseLogistic(mLogistic);
 		mProducer.looseActors(mActors);
 		
-		
-
-		double rateMarketing = (1 + RATE_MARKETING / 2)
-				- (mMarketing / mMaxMarketing * RATE_MARKETING);
-		/*int peopleInit = (int) (rateMarketing
-				* (double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
-				GROWING_RATE_SPECTATORS, mYear - INITIAL_YEAR));
-		*/
-		
-		
+		setBeginingTurn(currentTurn);
 		
 		int peopleInit = (int) ((double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
 				GROWING_RATE_SPECTATORS, mYear - INITIAL_YEAR));
 		
-		double rapport = totalValue() / (MAX_PRICE_MOVIE + mMaxMarketing);
+		double rapport = totalValue() / (MAX_RELATIVE_PRICE_MOVIE * Math.pow(INFLATION, currentTurn));
 		
 		// People init en fonction des ressources demandées
 		peopleInit = (int)((double)peopleInit*(1+rapport));

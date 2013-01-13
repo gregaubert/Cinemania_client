@@ -22,6 +22,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 	
 	public Resource(float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseResource, posX, posY);
+		setBaseValue(AllConstants.BASEVALUE_OF_CINEMA);
 	}
 	
 	public Resource(ITextureRegion texture, int level, float posX, float posY) {
@@ -63,14 +64,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		super.buy(p);
 	}
 	
-	@Override
-	public int totalValue() {
-		int baseValue = getBaseValue();
-		if (this.hasOwner())
-			return (int) ((double) baseValue * AllConstants.RATE_SALE);
-
-		return baseValue;
-	}
+	public abstract int totalValue();
 	
 	public void showBuyDialog(final Player player, int titleIcon, int titre, int type, int income){
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
@@ -144,6 +138,8 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		txtLevel.setText(Integer.toString(getLevel()));
 		txtLevelPrice.setText(Integer.toString(priceExtension));
 		
+		final int price = priceExtension;
+		
 		if(updateAvailable()){
 			dialogBuilder.setPositiveButton(R.string.btn_level, new android.content.DialogInterface.OnClickListener() {
 				
@@ -151,7 +147,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 				public void onClick(DialogInterface dialog, int which) {
 					ResourcesManager.getInstance().mSndCashMachine.stop();
 					ResourcesManager.getInstance().mSndCashMachine.play();
-					Resource.this.upgrade();
+					Resource.this.upgrade(price);
 					dialog.dismiss();
 				}
 			});

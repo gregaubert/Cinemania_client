@@ -36,7 +36,10 @@ public class ScriptCell extends Cell {
 	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,	float pTouchAreaLocalY) {
 		if(GameContext.getSharedInstance().getPlayer().getCanBuyAuthorFilm()){
 			final Script script = Script.pickAScript();
-			final int price = (int)(Math.random() * (AllConstants.COSTS_AUTHOR_MAX-AllConstants.COSTS_AUTHOR_MIN) + AllConstants.COSTS_AUTHOR_MIN);
+			final int price = AllConstants.aleatoryAccordingInflation(	AllConstants.COSTS_AUTHOR_MIN, 
+																		AllConstants.COSTS_AUTHOR_MAX, 
+																		GameContext.getSharedInstance().getCurrentTurn());
+			
 			
 			final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
 			dialogBuilder.setCancelable(true);
@@ -59,7 +62,7 @@ public class ScriptCell extends Cell {
 					ResourcesManager.getInstance().mSndCashMachine.stop();
 					ResourcesManager.getInstance().mSndCashMachine.play();
 					GameContext.getSharedInstance().getPlayer().looseMoney(price);
-					GameContext.getSharedInstance().getPlayer().addMovie(new AuthorMovie(script.getTitle(), script.getYear(), price));
+					GameContext.getSharedInstance().getPlayer().addMovie(new AuthorMovie(script.getTitle(), script.getYear(), price, GameContext.getSharedInstance().getCurrentTurn()));
 					GameContext.getSharedInstance().getPlayer().setCanBuyAuthorFilm(false);
 					dialog.dismiss();
 				}
@@ -83,6 +86,8 @@ public class ScriptCell extends Cell {
 				}
 			});
 		}
+
+		GameContext.getSharedInstance().getPlayer().setCanBuyAuthorFilm(false);
 	}
 
 	@Override

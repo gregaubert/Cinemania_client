@@ -26,7 +26,7 @@ public abstract class OwnableCell extends Cell {
 	
 	public abstract void resetLevel();
 	
-	public abstract void upgrade();
+	public abstract void upgrade(int price);
 	
 	public abstract int getLevel();
 	

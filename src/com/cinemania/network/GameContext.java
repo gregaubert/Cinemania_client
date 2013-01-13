@@ -180,48 +180,9 @@ public final class GameContext {
 	 */
 	public void nextTurn() {	
 		
-		//Check if we have enough money. Otherwise, we lose.
-		if (mCurrentPlayer.getAmount() < 0)
-		{
-			for(OwnableCell o :  mCurrentPlayer.getOwnableCell()){
-				o.resetOwner();
-			}
-			
-			final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
-    		dialogBuilder.setCancelable(true);
-    		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.perdu, null);
-    		dialogBuilder.setView(view);
-    		
-    		//On confirme le passage de tour.
-    		dialogBuilder.setPositiveButton(R.string.btn_perdu, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					
-                	dialog.dismiss();
-                		
-                	Base a = Base.getSharedInstance();
-                	a.setSceneType(SceneType.MENU);
-                	a.setCurrentScene(a.getGameMenu());
-				}
-			});
-    		
-    		Base.getSharedInstance().runOnUiThread(new Runnable() {
-    			@Override
-    			public void run() {
-    				AlertDialog dialog = dialogBuilder.create();
-    				dialog.show();
-    			}
-    		});
-			
-			API.gamePassTurn(mGameIdentifier, serialize());
-			API.gameLeave(mGameIdentifier);
-			
-		}
-		
 		// Check if the player could perform this action
 		// These checks are both done on the client and the server
-		else if (mCurrentPlayer == mPlayer) {
+		if (mCurrentPlayer == mPlayer) {
 			API.gamePassTurn(mGameIdentifier, serialize());
 		}
 		
@@ -282,6 +243,10 @@ public final class GameContext {
 
 	public int getYear() {
 		return mYear + AllConstants.INITIAL_YEAR;
+	}
+	
+	public int getNumberOfYearSinceStart(){
+		return mYear;
 	}
 	
 	//Etat initial lors d'une nouvelle partie.
@@ -461,5 +426,45 @@ public final class GameContext {
 	
 	public void leaveGame(){
 		API.gameLeave(mGameIdentifier);
+	}
+	
+	public void checkLooseGame(){
+		if (mCurrentPlayer.getAmount() < 0)
+		{
+			for(OwnableCell o :  mCurrentPlayer.getOwnableCell()){
+				o.resetOwner();
+			}
+			
+			final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+    		dialogBuilder.setCancelable(true);
+    		View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.perdu, null);
+    		dialogBuilder.setView(view);
+    		
+    		//On confirme le passage de tour.
+    		dialogBuilder.setPositiveButton(R.string.btn_perdu, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+                	dialog.dismiss();
+                		
+                	Base a = Base.getSharedInstance();
+                	a.setSceneType(SceneType.MENU);
+                	a.setCurrentScene(a.getGameMenu());
+				}
+			});
+    		
+    		Base.getSharedInstance().runOnUiThread(new Runnable() {
+    			@Override
+    			public void run() {
+    				AlertDialog dialog = dialogBuilder.create();
+    				dialog.show();
+    			}
+    		});
+			
+			API.gamePassTurn(mGameIdentifier, serialize());
+			API.gameLeave(mGameIdentifier);
+			
+		}
 	}
 }
