@@ -21,7 +21,7 @@ public final class AllConstants {
 	/**
 	 * Stats rate
 	 */
-	public static final double GROWING_RATE_SPECTATORS = 1.02;
+	public static final double GROWING_RATE_SPECTATORS = 1.01;
 	public static final double INFLATION = 1.015; // Inflation -> Croissance des prix et ressources
 	public static final double RATE_MARKETING = 0.2;
 	public static final double DECREASING_MOVIE_RATE_MIN_BM = 0.05;
@@ -70,8 +70,8 @@ public final class AllConstants {
 	/**
 	 * General cost
 	 */
-	public static final int COSTS_ON_HQ = 500;
-	public static final double PERCENT_HQ = 0.05; 
+	public static final int COSTS_ON_HQ = 200;
+	public static final double PERCENT_HQ = 0.1;  // Pourcent de nos bénéfices pour le concurrent
 	public static final int COSTS_ON_CINEMA = 200;
 	public static final int COSTS_SCRIPT_MIN = 1000;
 	public static final int COSTS_SCRIPT_MAX = 2000;

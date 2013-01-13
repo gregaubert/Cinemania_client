@@ -161,6 +161,7 @@ public class Cinema extends BuyableCell implements Profitable  {
 		}
 		montant /= owner.getNbCinema();
 		montant = Math.max(montant, AllConstants.COSTS_ON_CINEMA);
+		montant *= getLevel();
 		player.payOpponent(getOwner(), montant);
 		showPayDialog(montant, R.drawable.ic_cinema, R.string.title_cinema);
 	}
