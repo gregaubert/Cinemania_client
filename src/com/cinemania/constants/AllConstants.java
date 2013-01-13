@@ -22,15 +22,15 @@ public final class AllConstants {
 	 * Stats rate
 	 */
 	public static final double GROWING_RATE_SPECTATORS = 1.02;
-	public static final double INFLATION = 1.0055; // Inflation -> Croissance des prix et ressources
+	public static final double INFLATION = 1.03; // Inflation -> Croissance des prix et ressources
 	public static final double RATE_MARKETING = 0.2;
 	public static final double DECREASING_MOVIE_RATE_MIN_BM = 0.05;
 	public static final double DECREASING_MOVIE_RATE_MAX_BM = 0.07;
 	public static final double DECREASING_MOVIE_RATE_MIN_AM = 0.07;
 	public static final double DECREASING_MOVIE_RATE_MAX_AM = 0.09;
 	public static final double RATE_SALE = 2.0;
-	public static final int FACTOR_DIVIDE_FACTORY = 2; // Division des revenus ressources
-	public static final int FACTOR_DIVIDE_SCHOOL = 2; // Division des revenus écoles
+	public static final double FACTOR_DIVIDE_FACTORY = 0.25; // Division des revenus ressources
+	public static final double FACTOR_DIVIDE_SCHOOL = 0.25; // Division des revenus écoles
 
 	public static final int BONUS_AMOUT = 2000;
 	
@@ -39,17 +39,17 @@ public final class AllConstants {
 	 */
 	public static final int DEFAULT_AMOUNT = 20000;
 	public static final int DEFAULT_ACTORS = 10;
-	public static final int DEFAULT_LOGISTIC = 10;
+	public static final int DEFAULT_LOGISTIC = 20;
 	public static final int DEFAULT_HQ_LEVEL = 1;
 	public static final int DEFAULT_RESOURCES_LEVEL_BF_BUY = 0;
 	public static final int DEFAULT_RESOURCES_LEVEL_AF_BUY = 1;
 	public static final int DEFAULT_BUILDING_LEVEL = 1;
 	public static final int LEVEL_MAX_BUILDING = 3;
-	public static final int BASEVALUE_OF_SCHOOL = 1200;
+	public static final int BASEVALUE_OF_SCHOOL = 2000;
 	public static final int BASEVALUE_OF_LOGISTIC = 1200;
-	public static final int BASEVALUE_OF_CINEMA = 1000;
-	public static final int PRICE_SCHOOL_EXTENSION = 2800;
-	public static final int PRICE_LOGISTIC_EXTENSION = 2800;
+	public static final int BASEVALUE_OF_CINEMA = 2000;
+	public static final int PRICE_SCHOOL_EXTENSION = 2500;
+	public static final int PRICE_LOGISTIC_EXTENSION = 2000;
 	public static final int PRICE_ROOM = 2500;
 	public static final int MAX_ROOMS = 3;
 	public static final int LOGISTIC_VALUE = PRICE_LOGISTIC_EXTENSION / 10; // Ce que vaut un niveau logistique
@@ -76,8 +76,8 @@ public final class AllConstants {
 	public static final int COSTS_SCRIPT_MAX = 2000;
 	public static final int COSTS_ACTOR_MIN = 1;
 	public static final int COSTS_ACTOR_MAX = 12;
-	public static final int COSTS_LOGISTIC_MIN = 4;
-	public static final int COSTS_LOGISTIC_MAX = 8;
+	public static final int COSTS_LOGISTIC_MIN = 15;
+	public static final int COSTS_LOGISTIC_MAX = 30;
 	public static final int COSTS_MOVIE_MIN = 6000; // Rapporte entre 10000 et 20000
 	public static final int COSTS_MOVIE_MAX = 16000;
 	public static final int COSTS_AUTHOR_MIN = 4000; // Rapporte entre 5000 et 10000
@@ -127,10 +127,10 @@ public final class AllConstants {
 			lvl += 1.0;
 			break;
 		case 2:
-			lvl += 1.3;
+			lvl += 1.5;
 			break;
 		case 3:
-			lvl += 1.5;
+			lvl += 2.0;
 			break;				
 		}
 		return lvl;		

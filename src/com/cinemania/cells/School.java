@@ -26,11 +26,15 @@ public class School extends Resource {
 	public School(int level, float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseActors, level, posX, posY);
 		setOnClickListener(this);
+		setBaseValue(AllConstants.BASEVALUE_OF_SCHOOL);
 	}
 
 	@Override
 	public int totalValue() {
-		return BASEVALUE_OF_SCHOOL * (getLevel() + 1) + nbExtensions() * PRICE_SCHOOL_EXTENSION;
+		if (!this.hasOwner())
+			return BASEVALUE_OF_SCHOOL + getLevel() * PRICE_SCHOOL_EXTENSION;
+		else
+			return (int)((BASEVALUE_OF_SCHOOL + getLevel() * PRICE_SCHOOL_EXTENSION) * AllConstants.RATE_SALE);
 	}
 	
 	@Override
@@ -44,7 +48,7 @@ public class School extends Resource {
 	@Override
 	public int profit(int startTurn, int stopTurn){
 		int profit =(int)((stopTurn-startTurn) * profitRessource(getLevel()) * AllConstants.BASE_SCHOOL_INCOME);
-		profit /= FACTOR_DIVIDE_SCHOOL;
+		profit *= FACTOR_DIVIDE_SCHOOL;
 		return profit;
 	}
 

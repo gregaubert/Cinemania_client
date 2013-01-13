@@ -22,6 +22,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 	
 	public Resource(float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseResource, posX, posY);
+		setBaseValue(AllConstants.BASEVALUE_OF_CINEMA);
 	}
 	
 	public Resource(ITextureRegion texture, int level, float posX, float posY) {
@@ -63,14 +64,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		super.buy(p);
 	}
 	
-	@Override
-	public int totalValue() {
-		int baseValue = getBaseValue();
-		if (this.hasOwner())
-			return (int) ((double) baseValue * AllConstants.RATE_SALE);
-
-		return baseValue;
-	}
+	public abstract int totalValue();
 	
 	public void showBuyDialog(final Player player, int titleIcon, int titre, int type, int income){
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());

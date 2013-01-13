@@ -23,11 +23,15 @@ public class LogisticFactory extends Resource {
 	public LogisticFactory(int level, float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseLogistics, level, posX, posY);
 		setOnClickListener(this);
+		setBaseValue(AllConstants.BASEVALUE_OF_LOGISTIC);
 	}
 
 	@Override
 	public int totalValue() {
-		return BASEVALUE_OF_LOGISTIC * (getLevel() + 1) + nbExtensions() * PRICE_LOGISTIC_EXTENSION;
+		if (!this.hasOwner())
+			return BASEVALUE_OF_LOGISTIC + getLevel() * PRICE_LOGISTIC_EXTENSION;
+		else
+			return (int)((BASEVALUE_OF_LOGISTIC + getLevel() * PRICE_LOGISTIC_EXTENSION) * AllConstants.RATE_SALE);
 	}
 	
 	@Override
@@ -41,7 +45,7 @@ public class LogisticFactory extends Resource {
 	@Override
 	public int profit(int startTurn, int stopTurn){
 		int profit =(int)((stopTurn-startTurn) * profitRessource(getLevel()) * AllConstants.BASE_LOGISTIC_INCOME);
-		profit /= FACTOR_DIVIDE_FACTORY;
+		profit *= FACTOR_DIVIDE_FACTORY;
 		return profit;
 	}
 
