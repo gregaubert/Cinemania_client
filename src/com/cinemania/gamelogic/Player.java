@@ -202,16 +202,16 @@ public class Player implements JSonator{
 			{
 				switch(cell.getLevel()){
 				case 0:
-					lvlCinema += 0.1;
-					break;
-				case 1:
 					lvlCinema += 0.2;
 					break;
+				case 1:
+					lvlCinema += 0.4;
+					break;
 				case 2:
-					lvlCinema += 0.3;
+					lvlCinema += 0.6;
 					break;
 				case 3:
-					lvlCinema += 0.5;
+					lvlCinema += 1.0;
 					break;				
 				}
 				
@@ -290,6 +290,8 @@ public class Player implements JSonator{
 		receiveLogistic(mLastLogistics);
 		setCanBuyAuthorFilm(true);
 		setLastTurn(mGameContext.getCurrentTurn());
+		
+		mGameContext.checkLooseGame();
 	}
 	
 	public void payOpponent(Player opponent, int amount){

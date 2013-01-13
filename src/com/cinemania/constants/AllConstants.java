@@ -22,7 +22,7 @@ public final class AllConstants {
 	 * Stats rate
 	 */
 	public static final double GROWING_RATE_SPECTATORS = 1.02;
-	public static final double INFLATION = 1.03; // Inflation -> Croissance des prix et ressources
+	public static final double INFLATION = 1.008; // Inflation -> Croissance des prix et ressources
 	public static final double RATE_MARKETING = 0.2;
 	public static final double DECREASING_MOVIE_RATE_MIN_BM = 0.05;
 	public static final double DECREASING_MOVIE_RATE_MAX_BM = 0.07;
