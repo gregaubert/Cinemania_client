@@ -106,4 +106,9 @@ public class LogisticFactory extends Resource {
 		assert hasOwner();
 		showOwnerDialog(R.drawable.ic_logistics, R.string.title_logistics, getOwner().getLastLogistics(), AllConstants.PRICE_LOGISTIC_EXTENSION);
 	}
+
+	@Override
+	public void resetLevel() {
+		this.setLevel(0);
+	}
 }

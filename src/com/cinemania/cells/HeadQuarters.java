@@ -172,4 +172,9 @@ public class HeadQuarters extends OwnableCell {
 		showPayDialog(AllConstants.COSTS_ON_HQ, R.drawable.ic_hq, R.string.title_hq);
 		player.payOpponent(getOwner(), AllConstants.COSTS_ON_HQ);
 	}
+
+	@Override
+	public void resetLevel() {
+		this.setLevel(0);
+	}
 }

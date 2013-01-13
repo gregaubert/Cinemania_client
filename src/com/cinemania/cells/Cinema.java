@@ -245,4 +245,9 @@ public class Cinema extends BuyableCell implements Profitable  {
 		
 		return jsonCell;
 	}
+
+	@Override
+	public void resetLevel() {
+		mPurchasedRooms = 1;
+	}
 }

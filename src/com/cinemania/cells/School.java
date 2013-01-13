@@ -126,4 +126,9 @@ public class School extends Resource {
 		assert hasOwner();
 		showOwnerDialog(R.drawable.ic_actors, R.string.title_actors, getOwner().getLastActors(), AllConstants.PRICE_SCHOOL_EXTENSION);
 	}
+
+	@Override
+	public void resetLevel() {
+		this.setLevel(0);
+	}
 }

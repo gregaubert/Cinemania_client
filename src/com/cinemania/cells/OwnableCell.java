@@ -24,6 +24,8 @@ public abstract class OwnableCell extends Cell {
 		super(texture, posX, posY);
 	}
 	
+	public abstract void resetLevel();
+	
 	public abstract void upgrade();
 	
 	public abstract int getLevel();
@@ -79,6 +81,7 @@ public abstract class OwnableCell extends Cell {
 	public void resetOwner(){
 		this.mOwner = null;
 		this.setColor(AllConstants.BOARD_CASE_COLOR);
+		this.resetLevel();
 	}
 	
 	public Player getOwner() {
