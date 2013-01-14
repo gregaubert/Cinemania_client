@@ -15,8 +15,8 @@ public final class AllConstants {
 	public static final int INITIAL_SPECTATORS_AUTHORMOVIE = 40;
 	
 	public static final int NUMBER_PLAYER = 4;
-	public static final long VIBRATE_TIME_LOCAL = 0; //400
-	public static final long VIBRATE_TIME_OTHER = 0; // 200
+	public static final long VIBRATE_TIME_LOCAL = 400;
+	public static final long VIBRATE_TIME_OTHER = 200;
 
 	/**
 	 * Stats rate
@@ -31,7 +31,7 @@ public final class AllConstants {
 	public static final double RATE_SALE = 2.0;
 	public static final double FACTOR_DIVIDE_FACTORY = 1.0; // Division des revenus ressources
 	public static final double FACTOR_DIVIDE_SCHOOL = 0.3; // Division des revenus écoles
-
+	public static final double FACTOR_ON_THE_HQ = 0.1;
 	public static final int BONUS_AMOUT = 2000;
 	
 	/**
@@ -52,9 +52,9 @@ public final class AllConstants {
 	public static final int PRICE_LOGISTIC_EXTENSION = 2000;
 	public static final int PRICE_ROOM = 2500;
 	public static final int MAX_ROOMS = 3;
-	public static final int LOGISTIC_VALUE = PRICE_LOGISTIC_EXTENSION / 10; // Ce que vaut un niveau logistique
-	public static final int ACTOR_VALUE = PRICE_SCHOOL_EXTENSION / 10; // Ce que vaut un niveau acteur
-	public static final double SELLINGPRICE_RATIO = 0.25;
+	public static final int LOGISTIC_VALUE = PRICE_LOGISTIC_EXTENSION / 100; // Ce que vaut un niveau logistique
+	public static final int ACTOR_VALUE = PRICE_SCHOOL_EXTENSION / 100; // Ce que vaut un niveau acteur
+	public static final double SELLINGPRICE_RATIO = 0.10;
 	public static final int BASE_SCHOOL_INCOME = 1;
 	public static final int BASE_LOGISTIC_INCOME = 1;
 
@@ -72,7 +72,7 @@ public final class AllConstants {
 	 */
 	public static final int COSTS_ON_HQ = 200;
 	public static final double PERCENT_HQ = 0.1;  // Pourcent de nos bénéfices pour le concurrent
-	public static final int COSTS_ON_CINEMA = 200;
+	public static final int COSTS_ON_CINEMA = 500;
 	public static final int COSTS_SCRIPT_MIN = 1000;
 	public static final int COSTS_SCRIPT_MAX = 2000;
 	public static final int COSTS_ACTOR_MIN = 1;

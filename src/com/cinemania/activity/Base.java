@@ -20,9 +20,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.cinemania.camera.BoardHUD;
-import com.cinemania.constants.AllConstants;
-import com.cinemania.network.GameContext;
-
 import com.cinemania.network.gcm.GCMConnector;
 import com.cinemania.resources.ResourcesManager;
 import com.cinemania.scenes.BoardScene;
@@ -254,11 +251,8 @@ public class Base extends BaseGameActivity
          return false;
     }
 
-	public void vibrate(){
-		if(GameContext.getSharedInstance().isLocalTurn())
-			mEngine.vibrate(AllConstants.VIBRATE_TIME_LOCAL);
-		else
-			mEngine.vibrate(AllConstants.VIBRATE_TIME_OTHER);
+	public void vibrate(long time){
+		mEngine.vibrate(time);
 	}
 	
 	//************GETTER************

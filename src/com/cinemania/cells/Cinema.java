@@ -159,9 +159,9 @@ public class Cinema extends BuyableCell implements Profitable  {
 		for(Movie m : movies){
 			 montant += m.sellingPrice();
 		}
-		montant /= owner.getNbCinema();
-		montant = Math.max(montant, AllConstants.COSTS_ON_CINEMA);
+		montant /= owner.getNbCinema();	
 		montant *= getLevel();
+		montant = Math.max(montant, AllConstants.COSTS_ON_CINEMA);
 		player.payOpponent(getOwner(), montant);
 		showPayDialog(montant, R.drawable.ic_cinema, R.string.title_cinema);
 	}

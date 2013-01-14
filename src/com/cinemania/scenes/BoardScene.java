@@ -1,7 +1,5 @@
 package com.cinemania.scenes;
 
-import static com.cinemania.constants.AllConstants.BOARD_SIZE;
-
 import org.andengine.engine.camera.ZoomCamera;
 import org.andengine.entity.Entity;
 import org.andengine.entity.scene.Scene;
@@ -18,6 +16,7 @@ import android.widget.TextView;
 import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
 import com.cinemania.camera.CameraManager;
+import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.network.GameContext;
 import com.cinemania.network.api.API;
@@ -39,7 +38,7 @@ public class BoardScene extends Scene implements Loader {
 
 	private GameContext mGameContext;
 
-	private final int side = (int) BOARD_SIZE / 4;
+	private final int side = (int) AllConstants.BOARD_SIZE / 4;
 	private final float caseSize = 80f;
 
 	private float offsetWidth = (Base.CAMERA_WIDTH * 2-(side+1)*caseSize)/2;
@@ -135,7 +134,12 @@ public class BoardScene extends Scene implements Loader {
 	public void regenerateGameElements(){
 		cleanGameElements();
 		createGameElements();
-		Base.getSharedInstance().vibrate();
+		if(GameContext.getSharedInstance().isLocalTurn()){
+			Base.getSharedInstance().vibrate(AllConstants.VIBRATE_TIME_LOCAL);
+			GameContext.getSharedInstance().getPlayer().setCanBuyAuthorFilm(true);
+		}
+		else
+			Base.getSharedInstance().vibrate(AllConstants.VIBRATE_TIME_OTHER);
 	}
 	
 	private void cleanGameElements(){
