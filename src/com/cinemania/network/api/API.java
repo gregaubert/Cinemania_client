@@ -7,12 +7,8 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.cinemania.network.GameContext;
 import com.cinemania.network.Utilities;
-import com.cinemania.network.gcm.GCMUtilities;
-import com.cinemania.network.gcm.ServerUtilities;
 
 public final class API {
 	

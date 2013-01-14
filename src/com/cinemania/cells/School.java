@@ -134,6 +134,6 @@ public class School extends Resource {
 
 	@Override
 	public void resetLevel() {
-		this.setLevel(0);
+		this.setLevel(1);
 	}
 }

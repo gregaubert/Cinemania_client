@@ -75,11 +75,13 @@ public class BoardHUD extends HUD implements Loader {
 	
 	public void hideWaitingForPlayers(){
 		mDiceSprite.setVisible(true);
+		mNextSprite.setVisible(false);
 		mWaiting.setVisible(false);
 	}
 	
 	public void showWaitingForPlayer(){
 		mDiceSprite.setVisible(false);
+		mNextSprite.setVisible(false);
 		mWaiting.setVisible(true);
 	}
 	
@@ -111,6 +113,8 @@ public class BoardHUD extends HUD implements Loader {
 		txtActors 		= new Text(335, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
 		txtLogistics 	= new Text(435, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
 		txtScripts  	= new Text(535, 8, mResourcesManager.mResourcesFont, "-0123456789", mActivity.getVertexBufferObjectManager());
+		
+		txtCurrentPlayer = null;
 		
 		Sprite moneySprite =  new Sprite(170, 5, 32, 32, mResourcesManager.mMoneyLogo, mActivity.getVertexBufferObjectManager());
 		Sprite actorsSprite = new Sprite(300, 5, 32, 32, mResourcesManager.mActorsLogo, mActivity.getVertexBufferObjectManager());

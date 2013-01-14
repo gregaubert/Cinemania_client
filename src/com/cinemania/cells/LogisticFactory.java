@@ -4,8 +4,6 @@ import org.andengine.entity.sprite.ButtonSprite;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-
 import com.cinemania.activity.R;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Player;
@@ -116,6 +114,6 @@ public class LogisticFactory extends Resource {
 
 	@Override
 	public void resetLevel() {
-		this.setLevel(0);
+		this.setLevel(1);
 	}
 }

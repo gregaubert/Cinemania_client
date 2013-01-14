@@ -3,12 +3,11 @@ package com.cinemania.network;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutionException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +18,7 @@ import android.util.Log;
 import com.cinemania.activity.Base;
 
 public final class Utilities {
-	
+
 	/**
      * Base URL of the server
      */
@@ -47,6 +46,22 @@ public final class Utilities {
 		
 		// Post builded request to the specified server's URL
 		Log.d("GAME", "Post(" + url + "): " + body);
+		
+		
+		SendData task = new SendData(body);
+		task.execute(url);
+		try {
+			return task.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.mSuccessful = false;
+		return response;
+		/*
 		byte[] bytes = body.getBytes();
 		
 		// Post response
@@ -72,11 +87,11 @@ public final class Utilities {
 					return response;
 				} else {
 					// When an error occurs, we simply retry
-					Log.v("GAME", "Wrong HTTP code response retry" + response.mCode);
+					Log.e("GAME", "Wrong HTTP code response retry" + response.mCode);
 				}
 			} catch (Exception e) {
 				// When an error occurs, we simply retry
-				Log.v("GAME", "HTTP exception on POST", e);
+				Log.e("GAME", "HTTP exception on POST", e);
 			} finally {
 				if (conn != null) {
 					conn.disconnect();
@@ -85,7 +100,7 @@ public final class Utilities {
 		}
 		response.mSuccessful = false;
 		Log.e("GAME", "Max try");
-		return response;
+		return response;*/
 	}
 
 	private static String buildPostBody(Map<String, String> params) {
@@ -106,7 +121,7 @@ public final class Utilities {
 		return bodyBuilder.toString();
 	}
 	
-	private static JSONObject buildPostResponse(InputStream in) throws IOException, JSONException {
+	public static JSONObject buildPostResponse(InputStream in) throws IOException, JSONException {
 		InputStreamReader reader = new InputStreamReader(in);
 		StringBuilder builder = new StringBuilder();
 		char[] buffer = new char[1024];
@@ -125,18 +140,30 @@ public final class Utilities {
 		private int mCode;
 		private boolean mSuccessful;
 		
-		private Response() {}
+		Response() {}
 		
 		public JSONObject getJson() {
 			return mJson;
+		}
+		
+		public void setJSON(JSONObject aJson){
+			this.mJson = aJson;
 		}
 		
 		public int getCode() {
 			return mCode;
 		}
 		
+		public void setCode(int aCode){
+			this.mCode = aCode;
+		}
+		
 		public boolean successful() {
 			return mSuccessful;
+		}
+		
+		public void setSuccessful(boolean aSucces){
+			this.mSuccessful = aSucces;
 		}
 	}
 }

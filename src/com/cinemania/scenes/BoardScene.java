@@ -115,7 +115,10 @@ public class BoardScene extends Scene implements Loader {
 
 	public void getDataFromServer() {
 		GameDataResult gameData = API.gameData(mGameIdentifier);
-    	// Extract game data
+    	
+		if(!gameData.successful())
+			return;
+		// Extract game data
 		mGameContext = GameContext.getSharedInstance();
 		try {
 			mGameContext = GameContext.getSharedInstance();

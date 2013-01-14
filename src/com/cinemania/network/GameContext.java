@@ -431,9 +431,13 @@ public final class GameContext {
 	public void checkLooseGame(){
 		if (mCurrentPlayer.getAmount() < 0)
 		{
+			
 			for(OwnableCell o :  mCurrentPlayer.getOwnableCell()){
 				o.resetOwner();
 			}
+			
+			API.gamePassTurn(mGameIdentifier, serialize());
+			API.gameLeave(mGameIdentifier);
 			
 			final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
     		dialogBuilder.setCancelable(true);
@@ -461,10 +465,6 @@ public final class GameContext {
     				dialog.show();
     			}
     		});
-			
-			API.gamePassTurn(mGameIdentifier, serialize());
-			API.gameLeave(mGameIdentifier);
-			
 		}
 	}
 }

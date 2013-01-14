@@ -184,6 +184,6 @@ public class HeadQuarters extends OwnableCell {
 
 	@Override
 	public void resetLevel() {
-		this.setLevel(0);
+		this.setLevel(1);
 	}
 }
