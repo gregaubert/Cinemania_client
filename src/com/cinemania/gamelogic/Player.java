@@ -185,8 +185,6 @@ public class Player implements JSonator{
 		SequenceEntityModifier sem = new SequenceEntityModifier(entity);
 		
 		mView.registerEntityModifier(sem);
-		
-		setCanBuyAuthorFilm(true);
 	}
 	
 	//When we pass our QG we can get all the profit.

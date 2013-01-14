@@ -63,7 +63,6 @@ public class ScriptCell extends Cell {
 					ResourcesManager.getInstance().mSndCashMachine.play();
 					GameContext.getSharedInstance().getPlayer().looseMoney(price);
 					GameContext.getSharedInstance().getPlayer().addMovie(new AuthorMovie(script.getTitle(), script.getYear(), price, GameContext.getSharedInstance().getCurrentTurn()));
-					GameContext.getSharedInstance().getPlayer().setCanBuyAuthorFilm(false);
 					dialog.dismiss();
 				}
 			});
