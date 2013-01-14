@@ -170,9 +170,8 @@ public class HeadQuarters extends OwnableCell {
 
 	@Override
 	public void ownerOnCell() {
-		// Encaisse le double si on tombe pile dessus
-//		getOwner().encaisser();
-		getOwner().receiveMoney(getOwner().getLastProfit());
+		// BONUS si on tombe sur le QG
+		getOwner().receiveMoney((int)(getOwner().getLastProfit()*AllConstants.FACTOR_ON_THE_HQ));
 	}
 
 	@Override
