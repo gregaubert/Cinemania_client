@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.cinemania.activity.Base;
 import com.cinemania.activity.R;
+import com.cinemania.constants.AllConstants;
+import com.cinemania.gamelogic.AuthorMovie;
 import com.cinemania.gamelogic.Player;
 import com.cinemania.gamelogic.Script;
 import com.cinemania.network.GameContext;
@@ -31,10 +33,60 @@ public class ScriptCell extends Cell {
 	}
 
 	@Override
-	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,
-			float pTouchAreaLocalY) {
-		//TODO Supprimer l'action sur le onClick, ne devrait pas y en avoir.
-		onTheCell(GameContext.getSharedInstance().getCurrentPlayer());
+	public void onClick(ButtonSprite pButtonSprite, float pTouchAreaLocalX,	float pTouchAreaLocalY) {
+		if(GameContext.getSharedInstance().getPlayer().getCanBuyAuthorFilm()){
+			final Script script = Script.pickAScript();
+			final int price = AllConstants.aleatoryAccordingInflation(	AllConstants.COSTS_AUTHOR_MIN, 
+																		AllConstants.COSTS_AUTHOR_MAX, 
+																		GameContext.getSharedInstance().getCurrentTurn());
+			
+			
+			final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
+			dialogBuilder.setCancelable(true);
+			final View view = Base.getSharedInstance().getLayoutInflater().inflate(R.layout.author_film, null);
+			dialogBuilder.setView(view);
+			
+			
+			final TextView authorTitle = (TextView) view.findViewById(R.id.authorTitle);
+			final TextView authorYear = (TextView) view.findViewById(R.id.authorYear);
+			final TextView authorPrice = (TextView) view.findViewById(R.id.authorPrice);
+			
+			authorTitle.setText(script.getTitle());
+			authorYear.setText(Integer.toString(script.getYear()));
+			authorPrice.setText(Integer.toString(price));
+			
+			dialogBuilder.setPositiveButton(R.string.btn_buy, new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					ResourcesManager.getInstance().mSndCashMachine.stop();
+					ResourcesManager.getInstance().mSndCashMachine.play();
+					GameContext.getSharedInstance().getPlayer().looseMoney(price);
+					GameContext.getSharedInstance().getPlayer().addMovie(new AuthorMovie(script.getTitle(), script.getYear(), price, GameContext.getSharedInstance().getCurrentTurn()));
+					dialog.dismiss();
+				}
+			});
+			dialogBuilder.setNegativeButton(R.string.btn_close, new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			 
+			Base.getSharedInstance().runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					AlertDialog dialog = dialogBuilder.create();
+					dialog.show();
+					if(GameContext.getSharedInstance().getPlayer().getAmount() < price)
+						dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+				}
+			});
+		}
+
+		GameContext.getSharedInstance().getPlayer().setCanBuyAuthorFilm(false);
 	}
 
 	@Override

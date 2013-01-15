@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.util.Log;
  
 import com.cinemania.activity.Base;
@@ -12,13 +11,9 @@ import com.cinemania.camera.BoardHUD;
 import com.google.android.gcm.GCMRegistrar;
 import com.cinemania.network.Utilities;
 import com.cinemania.network.api.API;
-import com.cinemania.network.api.API.GameDataResult;
-import com.cinemania.network.api.API.GameIdentifierResult;
 import com.cinemania.network.gcm.GCMUtilities;
  
 public class GCMConnector {
-         
-    private static AsyncTask mRegisterTask = null;
      
     private static Base mActivity = Base.getSharedInstance();
      
@@ -55,11 +50,7 @@ public class GCMConnector {
     }
      
     // TODO: This one is never referenced
-    public void destroy() {
-        if (mRegisterTask != null) {
-            mRegisterTask.cancel(true);
-        }
-         
+    public static void destroy() {
         try{
             mActivity.unregisterReceiver(mHandleMessageReceiver);
         }
@@ -76,14 +67,14 @@ public class GCMConnector {
             String action = intent.getExtras().getString(GCMUtilities.MESSAGE);
             
 	            
-            if (action.equals("PASS_TURN")){
+            if (action.equals("PASS_TURN") || action.equals("PLAYER_JOINED")){
             	Base.getSharedInstance().runOnUpdateThread(new Runnable(){
             		
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						Base.getSharedInstance().getGame().getDataFromServer();
-		            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).hideWaitingForPlayers();
+						Base.getSharedInstance().getGame().regenerateGameElements();
+		            	((BoardHUD)Base.getSharedInstance().getCamera().getHUD()).update();
 					}
 	            	
 	            });

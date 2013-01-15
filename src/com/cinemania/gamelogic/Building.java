@@ -5,7 +5,7 @@ import com.cinemania.cells.Cell;
 import static com.cinemania.constants.AllConstants.*;
 
 public abstract class Building {
-  private int level =  DEFAULT_LEVEL;
+  private int level =  DEFAULT_BUILDING_LEVEL;
 
   private Cell theCase;
 

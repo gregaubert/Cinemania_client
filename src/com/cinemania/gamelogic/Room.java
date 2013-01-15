@@ -20,7 +20,7 @@ public class Room implements Profitable, JSonator {
 
 	  @Override
 	  public int profit(int startTurn, int stopTurn) {
-		  return movie.profit(startTurn, stopTurn) - COSTS_PER_ROOM;
+		  return 0; //movie.profit(startTurn, stopTurn) - COSTS_PER_ROOM;
 	  }
 
 	  public Movie getMovie() {
@@ -33,8 +33,7 @@ public class Room implements Profitable, JSonator {
 
 	@Override
 	public JSONObject toJson() throws JSONException {
-		// TODO Auto-generated method stub
-		return null;
+		return new JSONObject().put("dummy", 0);
 	}
 }
 

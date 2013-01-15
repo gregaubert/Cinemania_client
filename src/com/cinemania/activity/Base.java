@@ -15,6 +15,7 @@ import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.util.GLState;
 import org.andengine.ui.activity.BaseGameActivity;
+
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -129,8 +130,9 @@ public class Base extends BaseGameActivity
     @Override
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws Exception {
     	// Active GCM message reception
+    	Log.d("GAME", "PUTAIN DE MERDE ..............................................");
     	GCMConnector.connect();
-    	
+    	enableVibrator();
     	initSplashScene();
         pOnCreateSceneCallback.onCreateSceneFinished(this.mCurrentScene);
     }
@@ -153,6 +155,22 @@ public class Base extends BaseGameActivity
     	}));
     	  
     	pOnPopulateSceneCallback.onPopulateSceneFinished();
+    }
+    
+    // TODO cannot make this actually execute when the game closes!!!
+    @Override
+    public synchronized void onGameDestroyed(){
+    	/*try{
+    		GameContext.getSharedInstance().leaveGame();
+    	} catch(Exception e){}*/
+    	GCMConnector.destroy();
+    	super.onGameDestroyed();
+    }
+    
+    @Override
+    public synchronized void onResumeGame() {
+    	if(this.mEngine != null)
+    		super.onResumeGame();
     }
         
     //Creer la scene affiche e l'ecran.
@@ -195,6 +213,8 @@ public class Base extends BaseGameActivity
 	
 	private void loadScenes()
 	{
+		Log.i("Game","loadScenes");
+		
 		// load your game here, you scenes
 		mMenu = new GameMenu(); 
     	mOption = new OptionScene();
@@ -230,6 +250,10 @@ public class Base extends BaseGameActivity
          }
          return false;
     }
+
+	public void vibrate(long time){
+		mEngine.vibrate(time);
+	}
 	
 	//************GETTER************
     public Camera getCamera(){

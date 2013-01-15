@@ -19,6 +19,7 @@ import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.util.debug.Debug;
 
+import com.cinemania.activity.Base;
 import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.Script;
 
@@ -48,6 +49,8 @@ public class ResourcesManager {
 	public ITextureRegion mActorsLogo;
 	public ITextureRegion mLogisticsLogo;
 	
+	public ITextureRegion mBackgroundHUD;
+	
 	//Gestion du dé.
 	public ITextureRegion mDice;	
 	public ITextureRegion mNextTurn;
@@ -63,6 +66,7 @@ public class ResourcesManager {
 	public Font mMenuFont;
 	public Font mYearFont;
 	public Font mResourcesFont;
+	public Font[] mResourcesFontTab = new Font[AllConstants.NUMBER_PLAYER];
 	public Font mWindowsFont;
 	
 	//**************************** SOUND ****************************
@@ -130,6 +134,12 @@ public class ResourcesManager {
 		//mResourcesFont = FontFactory.create(engine.getFontManager(),engine.getTextureManager(), 256, 256,Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24, Color.BLACK);
 		mResourcesFont.load();
 		
+		for(int i = 0; i < AllConstants.NUMBER_PLAYER; i++)
+		{
+			mResourcesFontTab[i] = FontFactory.createFromAsset(engine.getFontManager(), new BitmapTextureAtlas(engine.getTextureManager(),256,256), context.getAssets(), "fonts/veteran typewriter.ttf", 24, true, Base.getSharedInstance().getResources().getColor(AllConstants.PLAYER_COLOR_ANDROID[i]));
+			mResourcesFontTab[i].load();
+		}
+		
 		// Gestion des textures
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		BuildableBitmapTextureAtlas HUDBitmapTextureAtlas = new BuildableBitmapTextureAtlas(engine.getTextureManager(), 512, 512);
@@ -141,7 +151,9 @@ public class ResourcesManager {
 	    mNextTurn = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "next_turn.png");
 	    mWaiting = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "waiting.png");
 	    
-	    mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "dice.png");
+	    mBackgroundHUD = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "hud.png");
+	    
+	    mDice = BitmapTextureAtlasTextureRegionFactory.createFromAsset(HUDBitmapTextureAtlas, context, "dice2.png");
 	    
 		try {
 			HUDBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
@@ -212,9 +224,9 @@ public class ResourcesManager {
         	mSndShufflingCards = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "shuffling_cards.ogg");
         	mSndTaDa = SoundFactory.createSoundFromAsset(engine.getSoundManager(), context, "ta_da.ogg");
         	mSndTaDa.setVolume(0.25f);
-        	mMusicLoop = MusicFactory.createMusicFromAsset(engine.getMusicManager(), context, "western_spaghetti.ogg");
+        	mMusicLoop = MusicFactory.createMusicFromAsset(engine.getMusicManager(), context, "le_jeu.ogg");
+    		mMusicLoop.setVolume(0.4f);
         	mMusicLoop.setLooping(true);
-    		mMusicLoop.setVolume(0.6f);
         } catch (final IOException e) {
         	Debug.e(e);
         }

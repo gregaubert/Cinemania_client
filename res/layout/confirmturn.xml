@@ -28,7 +28,7 @@
                 android:background="#FFFFBB33"
                 android:contentDescription="@string/icon_descriptor"
                 android:scaleType="center"
-                android:src="@drawable/ic_cinema" />
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/txtTitle"

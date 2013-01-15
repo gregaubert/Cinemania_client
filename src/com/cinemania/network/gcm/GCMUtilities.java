@@ -15,9 +15,6 @@
  */
 package com.cinemania.network.gcm;
 
-import android.provider.Settings.Secure;
-import com.cinemania.activity.Base;
-
 /**
  * Helper class providing methods and constants common to other classes in the
  * app.

@@ -18,22 +18,28 @@ import com.cinemania.constants.AllConstants;
 
 public abstract class Resource extends BuyableCell implements Profitable {
 
-	private int mLevel;
+	private int mLevel = AllConstants.DEFAULT_RESOURCES_LEVEL_BF_BUY;
 	
 	public Resource(float posX, float posY) {
 		super(ResourcesManager.getInstance().mCaseResource, posX, posY);
-		this.setLevel(0);
+		setBaseValue(AllConstants.BASEVALUE_OF_CINEMA);
 	}
 	
 	public Resource(ITextureRegion texture, int level, float posX, float posY) {
 		super(texture, posX, posY);
-		this.setLevel(level);
+		setLevel(level);
 	}
 	
 	protected void setLevel(int level){
 		mLevel = level;
-		if(hasOwner())
-			addLevel(mLevel);
+		for(int i = 0; i < mLevel; i++)
+			addLevel(i+1);
+	}
+	
+	protected void upgradeLevel(){
+		assert getLevel() < AllConstants.LEVEL_MAX_BUILDING;
+		assert getOwner() != null;
+		addLevel(++mLevel);
 	}
 
 	@Override
@@ -52,18 +58,13 @@ public abstract class Resource extends BuyableCell implements Profitable {
 			getOwner().removeProperty(this);
 			getOwner().receiveMoney(totalValue());
 		}
-		addLevel(mLevel);
+		else{
+			setLevel(AllConstants.DEFAULT_RESOURCES_LEVEL_AF_BUY);
+		}
 		super.buy(p);
 	}
 	
-	@Override
-	public int totalValue() {
-		int baseValue = getBaseValue();
-		if (this.hasOwner())
-			return (int) ((double) baseValue * AllConstants.RATE_SALE);
-
-		return baseValue;
-	}
+	public abstract int totalValue();
 	
 	public void showBuyDialog(final Player player, int titleIcon, int titre, int type, int income){
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
@@ -137,6 +138,8 @@ public abstract class Resource extends BuyableCell implements Profitable {
 		txtLevel.setText(Integer.toString(getLevel()));
 		txtLevelPrice.setText(Integer.toString(priceExtension));
 		
+		final int price = priceExtension;
+		
 		if(updateAvailable()){
 			dialogBuilder.setPositiveButton(R.string.btn_level, new android.content.DialogInterface.OnClickListener() {
 				
@@ -144,7 +147,7 @@ public abstract class Resource extends BuyableCell implements Profitable {
 				public void onClick(DialogInterface dialog, int which) {
 					ResourcesManager.getInstance().mSndCashMachine.stop();
 					ResourcesManager.getInstance().mSndCashMachine.play();
-					Resource.this.upgrade();
+					Resource.this.upgrade(price);
 					dialog.dismiss();
 				}
 			});

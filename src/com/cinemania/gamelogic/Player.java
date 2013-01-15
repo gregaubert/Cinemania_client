@@ -35,6 +35,7 @@ import com.cinemania.cells.HeadQuarters;
 import com.cinemania.cells.LogisticFactory;
 import com.cinemania.cells.OwnableCell;
 import com.cinemania.cells.School;
+import com.cinemania.constants.AllConstants;
 import com.cinemania.gamelogic.interfaces.JSonator;
 import com.cinemania.network.GameContext;
 import com.cinemania.resources.ResourcesManager;
@@ -57,7 +58,8 @@ public class Player implements JSonator{
 	private int mMoney;
 	private int mActors;
 	private int mLogistics;
-	private Sprite mView;	
+	private boolean mCanBuyAuthorFilm;
+	private Sprite mView;
 	
 	//Last time when we visite the QG
 	private int mLastTurn;
@@ -68,7 +70,7 @@ public class Player implements JSonator{
 	
 	private GameContext mGameContext;
 	
-	public Player(String identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, int lastActors, int lastLogistics, HeadQuarters headQuarters, Cell currentPosition) {
+	public Player(String identifier, int order, String name, int money, int actors, int logistics, int lastTurn, int lastProfit, int lastActors, int lastLogistics, boolean canBuyAuthorFilm, HeadQuarters headQuarters, Cell currentPosition) {
 		mIdentifier = identifier;
 		mOrder = order;
 		mName = name;
@@ -82,10 +84,14 @@ public class Player implements JSonator{
 		mLastProfit = lastProfit;
 		mLastActors = lastActors;
 		mLastLogistics = lastLogistics;
+		mCanBuyAuthorFilm = canBuyAuthorFilm;
 		mHeadQuarters = headQuarters;
 		mCurrentPosition = currentPosition;
-		mView = new Sprite(mCurrentPosition.getX()+bordure, mCurrentPosition.getY()+bordure, ResourcesManager.getInstance().mPlayer, Base.getSharedInstance().getVertexBufferObjectManager());
-		mView.setSize(mView.getWidth()-2*bordure, mView.getHeight() - 2*bordure);
+		mView = new Sprite(mCurrentPosition.getX() + bordure + mOrder * OFFSET, 
+							mCurrentPosition.getY() + bordure, 
+							ResourcesManager.getInstance().mPlayer, 
+							Base.getSharedInstance().getVertexBufferObjectManager());
+		mView.setSize(mView.getWidth()- 2 * bordure, mView.getHeight() - 2 * bordure);
 		mView.setColor(this.mColorPawn);
 		
 		this.mGameContext = GameContext.getSharedInstance();
@@ -102,6 +108,7 @@ public class Player implements JSonator{
 				player.getInt("lastProfit"),
 				player.getInt("lastActors"),
 				player.getInt("lastLogistics"),
+				player.getBoolean("canBuyAuthorFilm"),
 				headQuarters,
 				currentPosition);
 		
@@ -139,7 +146,11 @@ public class Player implements JSonator{
 			Cell temp = mGameContext.nextCellOf(mCurrentPosition);
 			//Cell temp = mGameContext.getCase((38+i)%40);
 			//Movement from case to case. The pawn use an offset
-			MoveModifier mm = new MoveModifier(0.2f, mCurrentPosition.getX()+bordure+mOrder*OFFSET, temp.getX()+bordure+mOrder*OFFSET, mCurrentPosition.getY()+bordure, temp.getY()+bordure);
+			MoveModifier mm = new MoveModifier(0.2f, 
+												mCurrentPosition.getX() + bordure + mOrder * OFFSET, 
+												temp.getX() + bordure + mOrder * OFFSET, 
+												mCurrentPosition.getY() + bordure, 
+												temp.getY()+bordure);
 		    mm.setAutoUnregisterWhenFinished(true);
 		    
 		    entity[i] = mm;
@@ -178,12 +189,10 @@ public class Player implements JSonator{
 	
 	//When we pass our QG we can get all the profit.
 	public void encaisser(){
-		
 		ResourcesManager.getInstance().mSndCashMachine.stop();
 		ResourcesManager.getInstance().mSndCashMachine.play();
-		
-		int lvlCinema = 0,
-			profitCinema = 0,
+		double lvlCinema = 1.0; // Par défaut 1
+		int profitCinema = 0,
 			profitMovies = 0,
 			profitActors = 0,
 			profitLogistic = 0;
@@ -191,8 +200,25 @@ public class Player implements JSonator{
 		for(OwnableCell cell : mProperties)
 			if(cell instanceof Cinema)
 			{
-				lvlCinema += cell.getLevel();
-				profitCinema += ((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+				switch(cell.getLevel()){
+				case 0:
+					lvlCinema += 0.1;
+					break;
+				case 1:
+					lvlCinema += 0.25;
+					break;
+				case 2:
+					lvlCinema += 0.4;
+					break;
+				case 3:
+					lvlCinema += 0.7;
+					break;				
+				}
+				
+				// FIXME: prochaines release
+				// Pour l'instant, juste les charges des salles/cinémas, tant qu'il n'y a pas de salle où l'on
+				// peut affecter des films
+				profitCinema += cell.getLevel() * ((Cinema)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			}
 			else if(cell instanceof School)
 			{
@@ -203,8 +229,16 @@ public class Player implements JSonator{
 				profitLogistic += ((LogisticFactory)cell).profit(this.getLastTurn(), mGameContext.getCurrentTurn());
 			}
 		
-		for(Movie movie : getMovies())
-			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());
+		for(Movie movie : getMovies()){
+			profitMovies += movie.profit(this.getLastTurn(), mGameContext.getCurrentTurn());			
+		}
+		
+		Log.d("GAME", "Profit " + profitMovies + " " + lvlCinema);
+		
+		// maj profit
+		mLastProfit = (int)(lvlCinema * profitMovies) + profitCinema;
+		mLastActors = profitActors;
+		mLastLogistics = profitLogistic;
 		
 		//Affiche une boîte de dialogue avec les gains.
 		final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Base.getSharedInstance());
@@ -216,13 +250,15 @@ public class Player implements JSonator{
 		TextView txtCinema = (TextView) view.findViewById(R.id.txtNbCinema);
 		TextView txtActor = (TextView) view.findViewById(R.id.txtNbActor);
 		TextView txtLogistic = (TextView) view.findViewById(R.id.txtNbLogistic);
+		TextView txtBonus = (TextView) view.findViewById(R.id.txtNbBonus);
 		
-		txtMovies.setText(Integer.toString(lvlCinema * profitMovies));
+		txtMovies.setText(Integer.toString((int)(lvlCinema * (double)profitMovies)));
 		txtCinema.setText(Integer.toString(profitCinema));
-		txtActor.setText(Integer.toString(profitActors));
+		txtActor.setText(Integer.toString(mLastActors));
 		txtLogistic.setText(Integer.toString(mLastLogistics));
+		txtBonus.setText(Integer.toString(AllConstants.BONUS_AMOUT));
 		
-		dialogBuilder.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+		dialogBuilder.setPositiveButton(R.string.btn_close, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -238,13 +274,23 @@ public class Player implements JSonator{
 			}
 		});
 		
-		mLastProfit = lvlCinema * profitMovies + profitCinema;
+		Base.getSharedInstance().runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				AlertDialog dialog = dialogBuilder.create();
+				dialog.show();
+			}
+		});
+		
+		
 		receiveMoney(mLastProfit);
-		mLastActors = profitActors;
+		receiveMoney(AllConstants.BONUS_AMOUT);
 		receiveActors(mLastActors);
-		mLastLogistics = profitLogistic;
 		receiveLogistic(mLastLogistics);
 		setLastTurn(mGameContext.getCurrentTurn());
+		
+		mGameContext.checkLooseGame();
 	}
 	
 	public void payOpponent(Player opponent, int amount){
@@ -256,6 +302,10 @@ public class Player implements JSonator{
 		return this.mView;
 	}
 
+	public int getOrder(){
+		return this.mOrder;
+	}
+	
 	public String getName(){
 		return this.mName;
 	}
@@ -389,6 +439,16 @@ public class Player implements JSonator{
 		return mScripts.size();
 	}
 	
+	public boolean getCanBuyAuthorFilm() {
+		// Modified by JCA : J'augmente le prix et on achète n'importe quand.
+//		return true;
+		return mCanBuyAuthorFilm;
+	}
+	
+	public void setCanBuyAuthorFilm(boolean canBuyAuthorFilm) {
+		mCanBuyAuthorFilm = canBuyAuthorFilm;
+	}
+	
 	public void addScript(Script script){
 		mScripts.add(script);
 
@@ -433,6 +493,7 @@ public class Player implements JSonator{
 		player.put("lastProfit", getLastProfit());
 		player.put("lastActors", getLastActors());
 		player.put("lastLogistics", getLastLogistics());
+		player.put("canBuyAuthorFilm", getCanBuyAuthorFilm());
 		
 		JSONArray scripts = new JSONArray();
 		for(Script s : getScripts())
@@ -456,6 +517,10 @@ public class Player implements JSonator{
 				nb++;
 		}
 		return nb;
+	}
+	
+	public ArrayList<OwnableCell> getOwnableCell(){
+		return this.mProperties;
 	}
 
 }

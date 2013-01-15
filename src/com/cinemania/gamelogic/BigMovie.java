@@ -37,24 +37,30 @@ public class BigMovie extends Movie {
 		mYear = movie.getInt("year");
 		mMarketing = movie.getInt("marketing");
 		mMaxMarketing = movie.getInt("maxmarketing");
-		//FIXME Rajouter le producteur
+		//FIXME Rajouter le producteur, pour lorsqu'il y aura une collaboration pour la production de film seulement
 	}
 
-	public void produceThisMovie(Player player, int budgetMarketing) {
+	public void produceThisMovie(Player player, int currentTurn, int budgetMarketing) {
 		mProducer = player;
-		mMarketing = budgetMarketing;
+		mMarketing = 5;
 		
 		mProducer.looseMoney(mInitPrice);
 		mProducer.looseLogistic(mLogistic);
 		mProducer.looseActors(mActors);
-
-		double rateMarketing = (1 + RATE_MARKETING / 2)
-				- (mMarketing / mMaxMarketing * RATE_MARKETING);
-		int peopleInit = (int) (rateMarketing
-				* (double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
+		
+		setBeginingTurn(currentTurn);
+		
+		int peopleInit = (int) ((double) INITIAL_SPECTATORS_BIGMOVIE * Math.pow(
 				GROWING_RATE_SPECTATORS, mYear - INITIAL_YEAR));
+		
+		double rapport = totalValue() / (MAX_RELATIVE_PRICE_MOVIE * Math.pow(INFLATION, currentTurn));
+		
+		// People init en fonction des ressources demandées
+		peopleInit = (int)((double)peopleInit*(1+rapport));
+		
 		setPeopleInit(peopleInit);
 
+		// Tx de décroissance aléatoire
 		double decrasingRate = DECREASING_MOVIE_RATE_MIN_BM + Math.random()
 				* (DECREASING_MOVIE_RATE_MAX_BM - DECREASING_MOVIE_RATE_MIN_BM);
 		setDecreasingRate(1 - decrasingRate);
@@ -82,7 +88,7 @@ public class BigMovie extends Movie {
 		movie.put("year", mYear);
 		movie.put("marketing", mMarketing);
 		movie.put("maxmarketing", mMaxMarketing);
-		movie.put("producer", mProducer.getId());
+		//movie.put("producer", mProducer.getId());		// TODO Rajouter le producteur lorsqu'il y aura la collaboration pour les films
 		return movie;
 	}
 

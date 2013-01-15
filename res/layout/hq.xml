@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF" xmlns:app="http://schemas.android.com/tools">
-
+
     <LinearLayout
         android:id="@+id/baseLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="10dp" >
 
         <LinearLayout
             android:id="@+id/layoutTitle"
@@ -51,7 +51,7 @@
             android:ellipsize="end"
             android:maxWidth="350dp"
             android:singleLine="true"
-            android:text="Prochaine production :"
+            android:text="@string/txt_next_production"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -61,8 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:paddingBottom="10dp" >
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,7 +69,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1" >
-
+
                 <TextView
                     android:id="@+id/scriptTitle"
                     android:layout_width="wrap_content"
@@ -82,7 +81,7 @@
                     android:text="@string/layout_title"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
+
                 <LinearLayout
                     android:id="@+id/innerLayout"
                     android:layout_width="wrap_content"
@@ -98,7 +97,7 @@
                         android:text="@string/txt_parenthese_gauche"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
+
                     <TextView
                         android:id="@+id/scriptYear"
                         android:layout_width="wrap_content"
@@ -107,7 +106,7 @@
                         android:text="1930"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
+
                     <TextView
                         android:id="@+id/TextView05"
                         android:layout_width="fill_parent"
@@ -129,7 +128,7 @@
                         android:contentDescription="@string/icon_descriptor"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_money" />
-
+
                     <TextView
                         android:id="@+id/scriptPriceProd"
                         android:layout_width="wrap_content"
@@ -142,7 +141,7 @@
 
                 </LinearLayout>
             </LinearLayout>
-
+
             <TextView
                 android:id="@+id/scriptRealisationTitle"
                 android:layout_width="wrap_content"
@@ -150,7 +149,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="Production : "
+                android:text="@string/txt_production"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -163,7 +162,7 @@
                 android:text="5 acteurs"
                 android:textSize="16sp"
                 android:textStyle="normal" />
-
+
             <TextView
                 android:id="@+id/scriptReaLogistics"
                 android:layout_width="wrap_content"
@@ -180,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
-                android:text="345.-"
+                android:text="486.-"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
